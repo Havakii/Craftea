@@ -27,6 +27,9 @@ extension View {
     func mainTextBold() -> some View {
         return self.font(.custom("Inter_24pt-SemiBold", size: 16))
     }
+    func categoryText() -> some View {
+        return self.font(.custom("Manrope-ExtraBold", size: 12))
+    }
 }
 
 
