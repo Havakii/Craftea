@@ -24,7 +24,7 @@ class User: Identifiable {
     //TO-DO
     //prendre de questionnaire en compte
     
-    init(name: String, surname: String, mail: String, pseudo: String, password: String, location: String? = nil, score: Double = 5, favoriteEquipment: [Equipment?], favoritesHobby: [Hobbies?], equipment: [Equipment?]) {
+    init(name: String, surname: String, mail: String, pseudo: String, password: String, location: String? = nil, score: Double = 5, favoriteEquipment: [Equipment?] = [], favoritesHobby: [Hobbies?] = [], equipment: [Equipment?] = []) {
         self.name = name
         self.surname = surname
         self.mail = mail

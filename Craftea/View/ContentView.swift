@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Découvrir", systemImage: "sparkles") {
-                DecouvrirView()
+                //DecouvrirView()
             }
             Tab("Materiel", systemImage: "pencil.and.ruler.fill") {
                 //MaterielView()

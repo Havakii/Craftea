@@ -10,26 +10,26 @@ import Foundation
 
 struct Hobbies: Identifiable {
     let id: UUID
-    var name: hobbyName
+    var name: HobbyName
     var description: String
     var image: String
-    var level: level
-    var category: category
+    var level: Level
+    var category: Category
     var equipementNeeded: [BaseEquipment]
     var technicalBasis: [Technique]
 }
 
-enum hobbyName: String, CaseIterable {
+enum HobbyName: String, CaseIterable {
     case crochet = "Crochet"
 }
 
-enum level : String, CaseIterable {
+enum Level : String, CaseIterable {
     case easy = "Facile"
     case medium = "Moyen"
     case hard = "Difficile"
 }
 
-enum category : String, CaseIterable {
+enum Category : String, CaseIterable {
     case textile = "Textile"
     case penture = "Peinture"
     case dessin = "Dessin"
