@@ -8,25 +8,41 @@
 import SwiftUI
 
 struct HorizontalHobbyView: View {
+    var hobby: Hobby
+    
     var body: some View {
         NavigationLink(destination:LoisirDetailView()){
             ZStack{
                 Color.almostWhite
                 HStack(alignment:.top){
                     VStack(alignment:.leading, spacing: 4){
-                        Text("catégorie")
+                        Text(hobby.category.rawValue)
                             .textCase(.uppercase)
                             .categoryText().foregroundColor(.secondaryOrange)
-                        Text("Titre")
+                        Text(hobby.name.rawValue)
                             .mainTextBold().foregroundColor(.textPrimary)
                         //TODO : add the level
-                        Text("description")
-                            .secondaryText().foregroundColor(.textSecondary)
+                        HStack{
+                            switch hobby.level{
+                            case .easy : Circle().fill(Color.green).frame(width: 8)
+                            case .medium:
+                                Circle().fill(Color.orange).frame(width: 8)
+                            case .hard:
+                                Circle().fill(Color.red).frame(width: 8)
+                            }
+                            Text(hobby.level.rawValue).foregroundColor(.textPrimary)
+                        }.padding(.leading, 8).padding(.vertical, 4).padding(.trailing, 12)
+                            .glassEffect(.regular).padding(.bottom, 4)
+                        
+                        Text(hobby.description)
+                            .secondaryText().foregroundColor(.textSecondary).multilineTextAlignment(.leading)
                     }
                     Spacer()
-                    Image(systemName: "xmark")
+                    Image(hobby.image)
+                        .resizable()
+                        .scaledToFit()
                         .frame(width: 147, height: 128)
-                        .border(Color.secondary, width: 4)
+                        .border(Color.secondary, width: 1) //remove when we have actual images
                         .cornerRadius(8)
                 }.padding(8)
             }.frame(height: 144)
@@ -37,5 +53,5 @@ struct HorizontalHobbyView: View {
 }
 
 #Preview {
-    HorizontalHobbyView()
+    HorizontalHobbyView(hobby: hobbies[0])
 }

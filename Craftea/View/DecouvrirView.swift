@@ -46,6 +46,7 @@ struct DecouvrirView: View {
                                     Button(action: {
                                         withAnimation {
                                             isExpanded.toggle()
+                                            
                                         }
                                     }) {
                                         Image(systemName: "slider.vertical.3")
@@ -115,10 +116,8 @@ struct DecouvrirView: View {
                             //TODO : add horizontal hobbies random
                             ScrollView(.vertical, showsIndicators: false) {
                                 VStack(spacing: 12) {
-                                    ForEach(0..<10) { _ in
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color.primaryPurpule.opacity(0.2))
-                                            .frame(height: 120)
+                                    ForEach(hobbies) { hobby in
+                                        HorizontalHobbyView(hobby: hobby)
                                     }
                                 }
                             }
@@ -164,6 +163,5 @@ struct DecouvrirView: View {
 }
 
 #Preview {
-    let userTest = User(name: "Lora-Line", surname: "Faure", mail: "Lora-Line@gmail.com", pseudo: "Lora-Line", password: "123456")
-    DecouvrirView(user: userTest)
+    DecouvrirView(user: users[0])
 }

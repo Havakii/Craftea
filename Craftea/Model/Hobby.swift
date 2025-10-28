@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct Hobbies: Identifiable {
-    let id: UUID
+struct Hobby: Identifiable {
+    let id = UUID()
     var name: HobbyName
     var description: String
     var image: String
@@ -43,14 +43,14 @@ enum Category : String, CaseIterable {
 }
 
 struct BaseEquipment: Identifiable {
-    let id: UUID
+    let id = UUID()
     var name: String
     var description: String
     var image: String
 }
 
 struct Technique: Identifiable {
-    let id: UUID
+    let id = UUID()
     var name: String
     var description: String?
     var image: String?
