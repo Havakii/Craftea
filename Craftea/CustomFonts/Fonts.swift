@@ -31,6 +31,9 @@ extension View {
     func categoryText() -> some View {
         return self.font(.custom("Manrope-ExtraBold", size: 12))
     }
+    func buttonLabel() -> some View {
+        return self.font(.custom("Manrope-SemiBold", size: 14))
+    }
 }
 
 

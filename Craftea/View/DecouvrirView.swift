@@ -62,16 +62,23 @@ struct DecouvrirView: View {
                                     if isExpanded {
                                         ScrollView(.horizontal, showsIndicators: false) {
                                             HStack(spacing: 8) {
-                                                //TODO : add my filters
 
-                                                ForEach(Level.AllCases(), id: \.self) { level in
+                                                ForEach(Level.allCases, id: \.self) { level in
                                                     Button {
-
+                                                        withAnimation {
+                                                            if selectedFilters.contains(level) {
+                                                                selectedFilters.removeAll { $0 == level }
+                                                            } else {
+                                                                selectedFilters.append(level)
+                                                            }
+                                                            
+                                                            //generateItem() //TODO
+                                                        }
                                                     } label: {
-                                                        Text(level.rawValue)
+                                                        Text(level.rawValue).buttonLabel()
                                                             .padding(.vertical, 8)
                                                             .padding(.horizontal, 12)
-                                                            .glassEffect(selectedFilters.contains(level) ? .regular.tint(.primaryPurpule).interactive() :
+                                                            .glassEffect(selectedFilters.contains(level) ? .regular.tint(.primaryPurpule.opacity(0.6)).interactive() :
                                                                     .regular.interactive())
                                                             .foregroundStyle(selectedFilters.contains(level) ? .white : .textPrimary)
                                                     }
