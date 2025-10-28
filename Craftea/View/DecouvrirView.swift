@@ -42,7 +42,7 @@ struct DecouvrirView: View {
                         //Bare de filtre
                             GlassEffectContainer(spacing: 12.0) {
                                 HStack() {
-                                    //Toggle button (glass)
+                                    //Toggle button
                                     Button(action: {
                                         withAnimation {
                                             isExpanded.toggle()
@@ -102,10 +102,8 @@ struct DecouvrirView: View {
                             //TODO : add vertical hobbies list of recommadations
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 12) {
-                                    ForEach(0..<10) { _ in
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(Color.primaryPurpule.opacity(0.2))
-                                            .frame(width: 160, height: 120)
+                                    ForEach(hobbies) { hobby in //use an other tab of recomanded hobbies
+                                        VerticalHobbyView(hobby: hobby)
                                     }
                                 }
                             }

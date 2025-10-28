@@ -21,7 +21,6 @@ struct HorizontalHobbyView: View {
                             .categoryText().foregroundColor(.secondaryOrange)
                         Text(hobby.name.rawValue)
                             .mainTextBold().foregroundColor(.textPrimary)
-                        //TODO : add the level
                         HStack{
                             switch hobby.level{
                             case .easy : Circle().fill(Color.green).frame(width: 8)
@@ -30,9 +29,9 @@ struct HorizontalHobbyView: View {
                             case .hard:
                                 Circle().fill(Color.red).frame(width: 8)
                             }
-                            Text(hobby.level.rawValue).foregroundColor(.textPrimary)
+                            Text(hobby.level.rawValue).tertiaryTitle().foregroundColor(.textPrimary)
                         }.padding(.leading, 8).padding(.vertical, 4).padding(.trailing, 12)
-                            .glassEffect(.regular).padding(.bottom, 4)
+                            .glassEffect(in: .rect(cornerRadius:8)).padding(.bottom, 4)
                         
                         Text(hobby.description)
                             .secondaryText().foregroundColor(.textSecondary).multilineTextAlignment(.leading)
