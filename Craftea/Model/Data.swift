@@ -12,5 +12,7 @@ var users: [User] = [
 ]
 
 var hobbies: [Hobby] = [
-    Hobby(name: .crochet, description: "Créer vêtements et accessoires en maille", image: "", level: .medium, category: .textile, equipementNeeded: [],technicalBasis: [])
+    Hobby(name: .crochet, description: "Créer vêtements et accessoires en maille", image: "", level: .medium, category: .textile, equipementNeeded: [],technicalBasis: []),
+    Hobby(name: .PeintureAcrylique, description: "Créer des œuvres colorées et texturées", image: "", level: .easy, category: .penture, equipementNeeded: [],technicalBasis: []),
+    Hobby(name: .Modélisation3D, description: "Créer des œuvres sur tablette ou PC", image: "", level: .hard, category: .numérique, equipementNeeded: [], technicalBasis:[])
 ]

@@ -21,6 +21,9 @@ struct Hobby: Identifiable {
 
 enum HobbyName: String, CaseIterable {
     case crochet = "Crochet"
+    case PeintureAcrylique = "Peinture acrylique"
+    case Modélisation3D = "Modélisation 3D"
+    
 }
 
 enum Level : String, CaseIterable {
