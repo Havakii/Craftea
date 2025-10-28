@@ -20,11 +20,28 @@ struct Hobby: Identifiable {
 }
 
 enum HobbyName: String, CaseIterable {
-    case crochet = "Crochet"
     case PeintureAcrylique = "Peinture acrylique"
-    case Modélisation3D = "Modélisation 3D"
-    
+    case Aquarelle = "Aquarelle"
+    case Dessin = "Dessin au crayon"
+    case PeintureGalet = "Peinture sur galet"
+    case Broderie = "Broderie"
+    case Crochet = "Crochet"
+    case Couture = "Couture à la main"
+    case Poterie = "Poterie"
+    case Bougies = "Bougies artisanales"
+    case Savons = "Savons maison"
+    case Scrapbooking = "Scrapbooking"
+    case Origami = "Origami"
+    case Bijoux = "Création de bijoux"
+    case Macrame = "Macramé"
+    case DessinNumerique = "Dessin numérique"
+    case Modelisation3D = "Modélisation 3D"
+    case Photomontage = "Photomontage"
+    case EcritureCreative = "Écriture créative"
+    case Calligraphie = "Calligraphie"
+    case JournalCreatif = "Journal créatif"
 }
+
 
 enum Level : String, CaseIterable {
     case easy = "Facile"
@@ -34,15 +51,15 @@ enum Level : String, CaseIterable {
 
 enum Category : String, CaseIterable {
     case textile = "Textile"
-    case penture = "Peinture"
+    case peinture = "Peinture"
     case dessin = "Dessin"
     case modelage = "Modelage"
     case diy = "DIY"
     case papeterie = "Papeterie"
     case papier = "Papier"
     case accessoires = "Accessoires"
-    case numérique = "Numérique"
-    case écriture = "Écriture"   
+    case numerique = "Numérique"
+    case ecriture = "Écriture"   
 }
 
 struct BaseEquipment: Identifiable {

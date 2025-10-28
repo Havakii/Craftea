@@ -13,9 +13,10 @@ struct DecouvrirView: View {
     @State private var hasScrolled: Bool = false
     @State private var isExpanded: Bool = true
     @State var selectedFilters: [Level] = []
+    @State var viewModel = HobbyViewModel()
     
     var filteredData: [Hobby] {
-        hobbies.filter { hobby in
+        viewModel.hobbies.filter { hobby in
             // Text filtering: if search is empty, accept all; otherwise check hobbby name
             let matchesSearch: Bool = searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             ? true
@@ -47,7 +48,7 @@ struct DecouvrirView: View {
                                         Text("Bonjour \(user.name) !")
                                             .mainTitle()
                                             .foregroundStyle(Color.primaryPurpule)
-                                        Text("Sois creatif aujourd'hui")
+                                        Text("Sois créatif aujourd'hui")
                                             .secondaryTitle()
                                             .foregroundStyle(Color.textSecondary)
                                     }
@@ -150,25 +151,28 @@ struct DecouvrirView: View {
                             .mainTitle()
                             .foregroundStyle(Color.textPrimary)
                         //TODO : add horizontal hobbies random
-                        ScrollView(.vertical, showsIndicators: false) {
+                        
                             VStack(spacing: 12) {
-                                ForEach(filteredData) { hobby in
+                                ForEach(filteredData) { hobby in //use an other tab of popullar hobbies
                                     HorizontalHobbyView(hobby: hobby)
                                 }
-                            }
+                            
                         }
                         // Loisirs Populaires
-                        Text("Tout les loisirs")
+                        Text("Tous les loisirs")
                             .mainTitle()
                             .foregroundStyle(Color.textPrimary)
-                        //TODO : add all hobbies
-                        
+                        VStack(spacing: 12) {
+                            ForEach(filteredData) { hobby in
+                                HorizontalHobbyView(hobby: hobby)
+                            }
+                        }
                     }.padding(.horizontal, 24)
                 }.onScrollGeometryChange(for: CGFloat.self) { proxy in
                     proxy.contentOffset.y
                 } action: { y, _  in
                     withAnimation(.easeInOut) {
-                        hasScrolled = y > 5 // ICI : règle le seuil comme tu veux
+                        hasScrolled = y > 5
                     }
                 }
             }
