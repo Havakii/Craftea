@@ -39,7 +39,7 @@ struct VerticalHobbyView: View {
                     }
 
                     VStack(alignment:.leading, spacing: 4){
-                        
+                        //niveau
                         HStack{
                             switch hobby.level{
                             case .easy : Circle().fill(Color.green).frame(width: 8)
@@ -48,11 +48,25 @@ struct VerticalHobbyView: View {
                             case .hard:
                                 Circle().fill(Color.red).frame(width: 8)
                             }
-                            Text(hobby.level.rawValue)
-                                .tertiaryTitle()
-                                .foregroundColor(.textPrimary)
+                            Text(hobby.level.rawValue).tertiaryTitle().foregroundColor(.textPrimary)
                         }.padding(.leading, 8).padding(.vertical, 4).padding(.trailing, 12)
-                            .glassEffect(in: .rect(cornerRadius:8)).padding(.bottom, 4)
+                            .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.gray.opacity(0.03))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray, lineWidth: 4)
+                                    .blur(radius: 4)
+                                    .offset(x: 2, y: 2)
+                                    .mask(RoundedRectangle(cornerRadius: 8).fill(LinearGradient(gradient: Gradient(colors: [.gray.opacity(0.25), .gray.opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.secondaryOrange.opacity(0.03), lineWidth: 8)
+                                    .blur(radius: 4)
+                                    .offset(x: -2, y: -2)
+                                    .mask(RoundedRectangle(cornerRadius: 8).fill(LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)))
+                            ))
                         
                         Text(hobby.name.rawValue)
                             .mainTextBold().foregroundColor(.textPrimary)
