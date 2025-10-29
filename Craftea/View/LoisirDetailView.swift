@@ -92,7 +92,6 @@ struct LoisirDetailView: View {
                         .secondaryTitle()
                         .foregroundColor(.textPrimary)
                 }.padding(.horizontal, 24)
-                
             }.ignoresSafeArea(edges: .top)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

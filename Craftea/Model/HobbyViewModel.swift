@@ -38,23 +38,7 @@ class HobbyViewModel {
     //var searchobjectController = SearchobjectController()
     
     init() {
-        hobbies = [
-            /*Hobby(
-                name: .PeintureAcrylique,
-                description: "Créer des œuvres colorées et texturées",
-                image: "",
-                level: .easy,
-                category: .peinture,
-                equipementNeeded: [
-                    BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: ""),
-                    BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: ""),
-                    BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: "")
-                ],
-                technicalBasis: [
-                    Technique(name: "Aplat", description: "Couche uniforme de couleur", image: nil),
-                    Technique(name: "Empâtement", description: "Appliquer la peinture en relief", image: nil)
-                ]
-            ),*/
+        hobbies = [   //La liste de tout nos hobbies
             
              Hobby(
              name: .PeintureAcrylique,
@@ -86,16 +70,16 @@ class HobbyViewModel {
              Technique(name: "Lavis", description: "Peinture très diluée", image: nil),
              Technique(name: "Dégradé", description: "Fondu de couleurs", image: nil)
              ]
-             ),/*
+             ),/* //ils sont commenté pour pas surchercher l'api de requettes (limite 50par heure (c'est pour ca que je veux telecharger les iamges en local ))
              Hobby(
              name: .Dessin,
              description: "Explorer le trait et les ombres",
-             image: "https://source.unsplash.com/featured/?sketching",
+             image: "",
              level: .easy,
              category: .dessin,
              equipementNeeded: [
-             BaseEquipment(name: "Crayons graphite", description: "Différentes duretés (HB, 2B, 4B)", image: "https://source.unsplash.com/featured/?graphite%20pencils"),
-             BaseEquipment(name: "Fusain", description: "Pour ombrages profonds", image: "https://source.unsplash.com/featured/?charcoal%20drawing")
+             BaseEquipment(name: "Crayons graphite", description: "Différentes duretés (HB, 2B, 4B)", image: ""),
+             BaseEquipment(name: "Fusain", description: "Pour ombrages profonds", image: "")
              ],
              technicalBasis: [
              Technique(name: "Hachures", description: "Technique pour ombrer", image: nil),
@@ -105,12 +89,12 @@ class HobbyViewModel {
              Hobby(
              name: .PeintureGalet,
              description: "Décorer des pierres uniques et naturelles",
-             image: "https://source.unsplash.com/featured/?rock%20painting",
+             image: "",
              level: .easy,
              category: .peinture,
              equipementNeeded: [
-             BaseEquipment(name: "Galets", description: "Pierres lisses lavées", image: "https://source.unsplash.com/featured/?pebbles"),
-             BaseEquipment(name: "Peinture acrylique", description: "Peinture pour surfaces", image: "https://source.unsplash.com/featured/?acrylic%20paint")
+             BaseEquipment(name: "Galets", description: "Pierres lisses lavées", image: ""),
+             BaseEquipment(name: "Peinture acrylique", description: "Peinture pour surfaces", image: "")
              ],
              technicalBasis: [
              Technique(name: "Mini motifs", description: "Peintures petites échelles", image: nil)
@@ -119,12 +103,12 @@ class HobbyViewModel {
              Hobby(
              name: .Broderie,
              description: "Décorer le tissu avec des fils colorés",
-             image: "https://source.unsplash.com/featured/?embroidery",
+                image: "",
              level: .medium,
              category: .textile,
              equipementNeeded: [
-             BaseEquipment(name: "Aiguilles à broder", description: "Aiguilles adaptées", image: "https://source.unsplash.com/featured/?embroidery%20needle"),
-             BaseEquipment(name: "Tambour à broder", description: "Maintient le tissu tendu", image: "https://source.unsplash.com/featured/?embroidery%20hoop")
+             BaseEquipment(name: "Aiguilles à broder", description: "Aiguilles adaptées", image: ""),
+             BaseEquipment(name: "Tambour à broder", description: "Maintient le tissu tendu", image: "")
              ],
              technicalBasis: [
              Technique(name: "Point de tige", description: "Point décoratif simple", image: nil),
@@ -134,12 +118,12 @@ class HobbyViewModel {
              Hobby(
              name: .Crochet,
              description: "Créer vêtements et accessoires en maille",
-             image: "https://source.unsplash.com/featured/?crochet",
+                image: "",
              level: .medium,
              category: .textile,
              equipementNeeded: [
-             BaseEquipment(name: "Crochet", description: "Crochet adapté à la laine", image: "https://source.unsplash.com/featured/?crochet%20hook"),
-             BaseEquipment(name: "Laine", description: "Fil adapté (catégorie 4 recommandé)", image: "https://source.unsplash.com/featured/?yarn")
+             BaseEquipment(name: "Crochet", description: "Crochet adapté à la laine", image: ""),
+             BaseEquipment(name: "Laine", description: "Fil adapté (catégorie 4 recommandé)", image: "")
              ],
              technicalBasis: [
              Technique(name: "Maille serrée", description: "Point de base", image: nil),
@@ -149,12 +133,12 @@ class HobbyViewModel {
              Hobby(
              name: .Couture,
              description: "Fabriquer ou réparer ses propres vêtements",
-             image: "https://source.unsplash.com/featured/?sewing",
+                image: "",
              level: .hard,
              category: .textile,
              equipementNeeded: [
-             BaseEquipment(name: "Machine à coudre", description: "Machine pour coudre rapidement", image: "https://source.unsplash.com/featured/?sewing%20machine"),
-             BaseEquipment(name: "Tissus", description: "Tissus variés", image: "https://source.unsplash.com/featured/?fabric")
+             BaseEquipment(name: "Machine à coudre", description: "Machine pour coudre rapidement", image: ""),
+             BaseEquipment(name: "Tissus", description: "Tissus variés", image: "")
              ],
              technicalBasis: [
              Technique(name: "Assemblage", description: "Couture des pièces ensemble", image: nil),
@@ -164,12 +148,12 @@ class HobbyViewModel {
              Hobby(
              name: .Poterie,
              description: "Façonner objets décoratifs à la main",
-             image: "https://source.unsplash.com/featured/?pottery",
+                image: "",
              level: .medium,
              category: .modelage,
              equipementNeeded: [
-             BaseEquipment(name: "Argile", description: "Pâte à modeler", image: "https://source.unsplash.com/featured/?clay"),
-             BaseEquipment(name: "Tour ou outils de modelage", description: "Outils pour former", image: "https://source.unsplash.com/featured/?pottery%20tools")
+             BaseEquipment(name: "Argile", description: "Pâte à modeler", image: ""),
+             BaseEquipment(name: "Tour ou outils de modelage", description: "Outils pour former", image: "")
              ],
              technicalBasis: [
              Technique(name: "Modelage main", description: "Façonner sans tour", image: nil),
@@ -179,12 +163,12 @@ class HobbyViewModel {
              Hobby(
              name: .Bougies,
              description: "Créer des bougies parfumées personnalisées",
-             image: "https://source.unsplash.com/featured/?candle%20making",
+                image: "",
              level: .easy,
              category: .diy,
              equipementNeeded: [
-             BaseEquipment(name: "Cire", description: "Cire paraffine ou soja", image: "https://source.unsplash.com/featured/?candle%20wax"),
-             BaseEquipment(name: "Mèches", description: "Mèches adaptées", image: "https://source.unsplash.com/featured/?candle%20wick")
+             BaseEquipment(name: "Cire", description: "Cire paraffine ou soja", image: ""),
+             BaseEquipment(name: "Mèches", description: "Mèches adaptées", image: "")
              ],
              technicalBasis: [
              Technique(name: "Fusion", description: "Faire fondre la cire", image: nil)
@@ -193,12 +177,12 @@ class HobbyViewModel {
              Hobby(
              name: .Savons,
              description: "Fabriquer des savons naturels et uniques",
-             image: "https://source.unsplash.com/featured/?soap%20making",
+                image: "",
              level: .medium,
              category: .diy,
              equipementNeeded: [
-             BaseEquipment(name: "Bases de savon", description: "Base melt & pour ou saponification", image: "https://source.unsplash.com/featured/?soap%20base"),
-             BaseEquipment(name: "Moules", description: "Moules silicone", image: "https://source.unsplash.com/featured/?soap%20mold")
+             BaseEquipment(name: "Bases de savon", description: "Base melt & pour ou saponification", image: ""),
+             BaseEquipment(name: "Moules", description: "Moules silicone", image: "")
              ],
              technicalBasis: [
              Technique(name: "Saponification", description: "Transformation des corps gras", image: nil)
@@ -207,12 +191,12 @@ class HobbyViewModel {
              Hobby(
              name: .Scrapbooking,
              description: "Mettre en scène ses souvenirs créatifs",
-             image: "https://source.unsplash.com/featured/?scrapbooking",
+                image: "",
              level: .easy,
              category: .papeterie,
              equipementNeeded: [
-             BaseEquipment(name: "Papiers décoratifs", description: "Feuilles imprimées", image: "https://source.unsplash.com/featured/?decorative%20paper"),
-             BaseEquipment(name: "Ciseaux et colle", description: "Outils de découpe et collage", image: "https://source.unsplash.com/featured/?scissors%20glue")
+             BaseEquipment(name: "Papiers décoratifs", description: "Feuilles imprimées", image: ""),
+             BaseEquipment(name: "Ciseaux et colle", description: "Outils de découpe et collage", image: "")
              ],
              technicalBasis: [
              Technique(name: "Mise en page", description: "Composer la page", image: nil)
@@ -221,11 +205,11 @@ class HobbyViewModel {
              Hobby(
              name: .Origami,
              description: "Plier le papier pour créer des formes",
-             image: "https://source.unsplash.com/featured/?origami",
+                image: "",
              level: .easy,
              category: .papier,
              equipementNeeded: [
-             BaseEquipment(name: "Papier origami", description: "Feuilles prédécoupées", image: "https://source.unsplash.com/featured/?origami%20paper")
+             BaseEquipment(name: "Papier origami", description: "Feuilles prédécoupées", image: "")
              ],
              technicalBasis: [
              Technique(name: "Pliage de base", description: "Valley fold, mountain fold", image: nil)
@@ -234,12 +218,12 @@ class HobbyViewModel {
              Hobby(
              name: .Bijoux,
              description: "Assembler perles et matériaux pour s’exprimer",
-             image: "https://source.unsplash.com/featured/?jewelry%20making",
+                image: "",
              level: .medium,
              category: .accessoires,
              equipementNeeded: [
-             BaseEquipment(name: "Perles", description: "Perles de différentes tailles", image: "https://source.unsplash.com/featured/?beads"),
-             BaseEquipment(name: "Fil et outils", description: "Fil, pinces, fermoirs", image: "https://source.unsplash.com/featured/?jewelry%20tools")
+             BaseEquipment(name: "Perles", description: "Perles de différentes tailles", image: ""),
+             BaseEquipment(name: "Fil et outils", description: "Fil, pinces, fermoirs", image: "")
              ],
              technicalBasis: [
              Technique(name: "Montage", description: "Assembler éléments", image: nil)
@@ -248,12 +232,12 @@ class HobbyViewModel {
              Hobby(
              name: .Macrame,
              description: "Tisser des nœuds pour objets décoratifs",
-             image: "https://source.unsplash.com/featured/?macrame",
+                image: "",
              level: .easy,
              category: .textile,
              equipementNeeded: [
-             BaseEquipment(name: "Corde", description: "Corde coton ou jute", image: "https://source.unsplash.com/featured/?cotton%20cord"),
-             BaseEquipment(name: "Support", description: "Bâton ou anneau pour suspendre", image: "https://source.unsplash.com/featured/?wooden%20dowel")
+             BaseEquipment(name: "Corde", description: "Corde coton ou jute", image: ""),
+             BaseEquipment(name: "Support", description: "Bâton ou anneau pour suspendre", image: "")
              ],
              technicalBasis: [
              Technique(name: "Nœuds de base", description: "Noeud plat, demi-noeud", image: nil)
@@ -262,12 +246,12 @@ class HobbyViewModel {
              Hobby(
              name: .DessinNumerique,
              description: "Créer des œuvres sur tablette ou PC",
-             image: "https://source.unsplash.com/featured/?digital%20art",
+                image: "",
              level: .medium,
              category: .numerique,
              equipementNeeded: [
-             BaseEquipment(name: "Tablette graphique", description: "Tablette + stylet", image: "https://source.unsplash.com/featured/?graphics%20tablet"),
-             BaseEquipment(name: "Logiciel de dessin", description: "Procreate, Photoshop, etc.", image: "https://source.unsplash.com/featured/?drawing%20software")
+             BaseEquipment(name: "Tablette graphique", description: "Tablette + stylet", image: ""),
+             BaseEquipment(name: "Logiciel de dessin", description: "Procreate, Photoshop, etc.", image: "")
              ],
              technicalBasis: [
              Technique(name: "Calques", description: "Organisation des éléments", image: nil)
@@ -276,12 +260,12 @@ class HobbyViewModel {
              Hobby(
              name: .Modelisation3D,
              description: "Concevoir et façonner des objets virtuels",
-             image: "https://source.unsplash.com/featured/?3D%20modeling",
+                image: "",
              level: .hard,
              category: .numerique,
              equipementNeeded: [
-             BaseEquipment(name: "Logiciel 3D", description: "Blender, Maya, etc.", image: "https://source.unsplash.com/featured/?3D%20software"),
-             BaseEquipment(name: "Ordinateur puissant", description: "GPU/CPU adapté", image: "https://source.unsplash.com/featured/?powerful%20computer")
+             BaseEquipment(name: "Logiciel 3D", description: "Blender, Maya, etc.", image: ""),
+             BaseEquipment(name: "Ordinateur puissant", description: "GPU/CPU adapté", image: "")
              ],
              technicalBasis: [
              Technique(name: "Modélisation", description: "Mesh modelling, sculpt", image: nil)
@@ -290,12 +274,12 @@ class HobbyViewModel {
              Hobby(
              name: .Photomontage,
              description: "Transformer ou sublimer des images existantes",
-             image: "https://source.unsplash.com/featured/?photo%20editing",
+                image: "",
              level: .medium,
              category: .numerique,
              equipementNeeded: [
-             BaseEquipment(name: "Appareil photo / smartphone", description: "Pour prendre photos", image: "https://source.unsplash.com/featured/?camera"),
-             BaseEquipment(name: "Logiciel de retouche", description: "Photoshop, Affinity", image: "https://source.unsplash.com/featured/?photo%20editor")
+             BaseEquipment(name: "Appareil photo / smartphone", description: "Pour prendre photos", image: ""),
+             BaseEquipment(name: "Logiciel de retouche", description: "Photoshop, Affinity", image: "")
              ],
              technicalBasis: [
              Technique(name: "Masques et calques", description: "Assembler images", image: nil)
@@ -304,12 +288,12 @@ class HobbyViewModel {
              Hobby(
              name: .EcritureCreative,
              description: "Inventer des histoires et jouer avec les mots",
-             image: "https://source.unsplash.com/featured/?creative%20writing",
+                image: "",
              level: .easy,
              category: .ecriture,
              equipementNeeded: [
-             BaseEquipment(name: "Cahier", description: "Carnet pour notes", image: "https://source.unsplash.com/featured/?notebook"),
-             BaseEquipment(name: "Stylo", description: "Stylo confortable", image: "https://source.unsplash.com/featured/?pen")
+             BaseEquipment(name: "Cahier", description: "Carnet pour notes", image: ""),
+             BaseEquipment(name: "Stylo", description: "Stylo confortable", image: "")
              ],
              technicalBasis: [
              Technique(name: "Structure narrative", description: "Début, milieu, fin", image: nil)
@@ -318,12 +302,12 @@ class HobbyViewModel {
              Hobby(
              name: .Calligraphie,
              description: "Dessiner de belles lettres décoratives",
-             image: "https://source.unsplash.com/featured/?calligraphy",
+                image: "",
              level: .medium,
              category: .ecriture,
              equipementNeeded: [
-             BaseEquipment(name: "Plumes / feutres", description: "Outils pour lettering", image: "https://source.unsplash.com/featured/?calligraphy%20pen"),
-             BaseEquipment(name: "Papier lisse", description: "Papier adapté", image: "https://source.unsplash.com/featured/?smooth%20paper")
+             BaseEquipment(name: "Plumes / feutres", description: "Outils pour lettering", image: ""),
+             BaseEquipment(name: "Papier lisse", description: "Papier adapté", image: "")
              ],
              technicalBasis: [
              Technique(name: "Contrôle du trait", description: "Pression et inclinaison", image: nil)
@@ -332,12 +316,12 @@ class HobbyViewModel {
              Hobby(
              name: .JournalCreatif,
              description: "Organiser ses idées avec créativité visuelle",
-             image: "https://source.unsplash.com/featured/?bullet%20journal",
+                image: "",
              level: .easy,
              category: .papeterie,
              equipementNeeded: [
-             BaseEquipment(name: "Bullet journal", description: "Carnet à point", image: "https://source.unsplash.com/featured/?bullet%20journal%20notebook"),
-             BaseEquipment(name: "Stickers et feutres", description: "Décorations", image: "https://source.unsplash.com/featured/?stickers%20markers")
+             BaseEquipment(name: "Bullet journal", description: "Carnet à point", image: ""),
+             BaseEquipment(name: "Stickers et feutres", description: "Décorations", image: "")
              ],
              technicalBasis: [
              Technique(name: "Layouts", description: "Mise en page fonctionnelle", image: nil)
@@ -345,10 +329,8 @@ class HobbyViewModel {
              )*/
         ]
         
-        // Lancement asynchrone pour remplir les URL d'images (hobbies + équipements + techniques)
-        
         Task {
-            await loadHobbyCoverImages()
+            await loadHobbyCoverImages() // a supprimer si on telecharge les images de hobby nous meme
         }
     }
     
@@ -373,7 +355,7 @@ class HobbyViewModel {
         }
     }
     func loadDetailImages(for: Hobby) async {
-        /*.onAppear {
+        /*.onAppear {  // a utiliser au dans la page ou on veut afficher les images
          Task {
          await viewModel.loadDetailImages(for: hobby)
          }
