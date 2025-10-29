@@ -1,21 +1,20 @@
 //
-//  QuestionsView.swift
+//  Questions2View.swift
 //  Craftea
 //
-//  Created by Hava Bakrieva on 27/10/2025.
+//  Created by Apprenant 83 on 29/10/2025.
 //
 
 import SwiftUI
-
-let options = [
-    "Peinture, dessin, tout ce qui tache un peu les doigts",
-    "Couture, tricot, crochet, le royaume du fil et des aiguilles",
-    "Bricolage, DIY déco, objets récup",
-    "Écriture, scrapbooking, journaling, les loisirs poétiques",
-    "Musique, photo, vidéo, les loisirs créatifs version numérique"
+let options2 = [
+    "Tous les jours (impossible de m’arrêter)",
+    "Plusieurs fois par semaine",
+    "De temps en temps, quand j’ai l’inspiration",
+    "Rarement, mais j’aimerais m’y remettre",
+    "Jamais… mais j’aimerais bien commencer !"
 ]
 
-struct QuestionsView: View {
+struct Questions2View: View {
     @State private var selectedOption: Int? = nil
     var body: some View {
         ZStack {
@@ -34,9 +33,9 @@ struct QuestionsView: View {
                     .padding()
                 
                 
-                ForEach(0..<options.count, id: \.self) { index in
+                ForEach(0..<options2.count, id: \.self) { index in
                     HStack {
-                        Text(options[index])
+                        Text(options2[index])
                         Spacer()
                         Image(systemName: selectedOption == index ? "largecircle.fill.circle" : "circle")
                     }
@@ -53,7 +52,7 @@ struct QuestionsView: View {
                     print("Suivant")
                 }) {
                     HStack{
-                        NavigationLink(destination:Questions2View()){
+                        NavigationLink(destination:QuestionsView()){
                             Text("Suivant")
                                 .font(.custom("Manrope-Bold", size: 20))
                         }
@@ -74,5 +73,5 @@ struct QuestionsView: View {
     }
 
 #Preview {
-    QuestionsView()
+    Questions2View()
 }

@@ -10,9 +10,22 @@
 		95B8C2B02EAF6ECC00BAA9DC /* Craftea.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Craftea.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		A38C9AF02EB0F506008F7FC3 /* Exceptions for "Craftea" folder in "Craftea" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 95B8C2AF2EAF6ECC00BAA9DC /* Craftea */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		95B8C2B22EAF6ECC00BAA9DC /* Craftea */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A38C9AF02EB0F506008F7FC3 /* Exceptions for "Craftea" folder in "Craftea" target */,
+			);
 			path = Craftea;
 			sourceTree = "<group>";
 		};
