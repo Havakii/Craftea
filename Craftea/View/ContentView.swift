@@ -11,16 +11,16 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Découvrir", systemImage: "sparkles") {
-                //DecouvrirView()
+                DecouvrirView(user: users[0])
             }
             Tab("Materiel", systemImage: "pencil.and.ruler.fill") {
                 //MaterielView()
             }
             Tab("Discutions", systemImage: "bubble.left.and.text.bubble.right.fill") {
-                //MessageView()
+                MessageView()
             }
             Tab("Profil", systemImage: "person") {
-                //ProfilView()
+                ProfilView()
             }
         }.tint(Color.primaryPurpule)
     }
