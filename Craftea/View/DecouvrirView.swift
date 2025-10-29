@@ -48,8 +48,8 @@ struct DecouvrirView: View {
                                 Text("Bonjour \(user.name) !")
                                     .mainTitle()
                                     .foregroundStyle(Color.primaryPurpule)
-                                Text("Sois créatif aujourd'hui")
-                                    .secondaryTitle()
+                                Text("Débloque ta créativité sans limites !")
+                                    .tertiaryTitle()
                                     .foregroundStyle(Color.textSecondary)
                             }
                             Spacer()
@@ -91,7 +91,7 @@ struct DecouvrirView: View {
                             }
                             .buttonStyle(.glass)
                             .zIndex(10)
-                            .padding(.leading)
+                            .padding(.leading, 24)
                             
                             if isExpanded {
                                 ScrollView(.horizontal, showsIndicators: false) {
@@ -130,31 +130,34 @@ struct DecouvrirView: View {
                     
                     
                     ScrollView(.vertical, showsIndicators: false){
-                        VStack(alignment: .leading, spacing: 24){
+                        VStack(alignment: .leading, spacing: 16){
                             
                             
                             // Loisir Recommandées
                             Text("Loisirs recommandés")
                                 .mainTitle()
                                 .foregroundStyle(Color.textPrimary)
+                                .padding(.horizontal, 24)
                             
                             ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 12) {
+                                HStack(spacing: 16) {
                                     let recommendedFiltered = filteredData.filter { hobby in user.recommandations.contains(where: { $0.name == hobby.name }) }
                                     ForEach(recommendedFiltered) { hobby in
                                         VerticalHobbyView(hobby: hobby)
                                     }
-                                }
+                                }.padding(.horizontal, 24)
                             }
                             // Loisirs Populaires
                             Text("Loisirs populaires")
                                 .mainTitle()
                                 .foregroundStyle(Color.textPrimary)
+                                .padding(.horizontal, 24)
                             
-                            VStack(spacing: 12) {
+                            VStack(spacing: 16) {
                                 ForEach(filteredData) { hobby in
                                     if hobby.popular {
                                         HorizontalHobbyView(hobby: hobby)
+                                            .padding(.horizontal, 24)
                                     }
                                 }
                                 
@@ -163,12 +166,14 @@ struct DecouvrirView: View {
                             Text("Tous les loisirs")
                                 .mainTitle()
                                 .foregroundStyle(Color.textPrimary)
+                                .padding(.horizontal, 24)
                             VStack(spacing: 12) {
                                 ForEach(filteredData) { hobby in
                                     HorizontalHobbyView(hobby: hobby)
+                                        .padding(.horizontal, 24)
                                 }
                             }
-                        }.padding(.horizontal, 24)
+                        }
                     }.onScrollGeometryChange(for: CGFloat.self) { proxy in
                         proxy.contentOffset.y
                     } action: { y, _  in
