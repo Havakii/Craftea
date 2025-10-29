@@ -149,11 +149,12 @@ struct DecouvrirView: View {
                             Text("Loisirs populaires")
                                 .mainTitle()
                                 .foregroundStyle(Color.textPrimary)
-                            //TODO : add horizontal hobbies random
                             
                             VStack(spacing: 12) {
-                                ForEach(filteredData) { hobby in //use an other tab of popullar hobbies
-                                    HorizontalHobbyView(hobby: hobby)
+                                ForEach(filteredData) { hobby in
+                                    if hobby.popular {
+                                        HorizontalHobbyView(hobby: hobby)
+                                    }
                                 }
                                 
                             }

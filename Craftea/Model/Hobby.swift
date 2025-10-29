@@ -17,6 +17,7 @@ struct Hobby: Identifiable {
     var category: Category
     var equipementNeeded: [BaseEquipment]
     var technicalBasis: [Technique]
+    var popular: Bool 
 }
 
 enum HobbyName: String, CaseIterable {

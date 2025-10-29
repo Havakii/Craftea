@@ -12,6 +12,6 @@ var otherUser: [User] = [
     User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456",favoritesHobby: hobbiesUser)]
 
 var hobbiesUser: [Hobby] = [
-    Hobby(name: .Crochet, description: "Créer vêtements et accessoires en maille", image: "", level: .medium, category: .textile, equipementNeeded: [],technicalBasis: []),
-    Hobby(name: .PeintureAcrylique , description: "Peindre des natures mortes",image: "",level: .medium, category: .peinture, equipementNeeded: [],technicalBasis: [])
+    Hobby(name: .Crochet, description: "Créer vêtements et accessoires en maille", image: "", level: .medium, category: .textile, equipementNeeded: [],technicalBasis: [], popular: true),
+    Hobby(name: .PeintureAcrylique , description: "Peindre des natures mortes",image: "",level: .medium, category: .peinture, equipementNeeded: [],technicalBasis: [], popular: true)
 ]
