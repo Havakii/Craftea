@@ -140,7 +140,8 @@ struct DecouvrirView: View {
                             
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 12) {
-                                    ForEach(filteredData) { hobby in //use an other tab of recomanded hobbies
+                                    let recommendedFiltered = filteredData.filter { hobby in user.recommandations.contains(where: { $0.name == hobby.name }) }
+                                    ForEach(recommendedFiltered) { hobby in
                                         VerticalHobbyView(hobby: hobby)
                                     }
                                 }
@@ -186,3 +187,4 @@ struct DecouvrirView: View {
 #Preview {
     DecouvrirView().environment(users[0])
 }
+
