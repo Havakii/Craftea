@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct MaterielVue: View {
+struct MaterielView: View {
     @State private var searchText = ""
     @State private var condition: String = "Occasion"
     @State private var showingFilter = false
+    @State private var navigateToAjout = false
     
     struct Materiel: Identifiable {
         let id = UUID()
@@ -19,166 +20,154 @@ struct MaterielVue: View {
         let description: String
     }
     
-    let materiels: [Materiel] = [
-        Materiel(nom: "Lot de pelotes de laine", image: "pelotes", description: "Je donne un lot de pelote de laine."),
-        Materiel(nom: "Cuir coloré", image: "cuir", description: "Cherche personne qui donne du cuir de couleur."),
-        Materiel(nom: "Tissu à motif", image: "tissu", description: "Bonjour, je donne des tissus à motifs variés."),
-        Materiel(nom: "Bobine de fil", image: "fil", description: "Ne me servant plus de ces bobines, je cherche quelqu'un à qui je pourrais en faire don."),
-        Materiel(nom: "Laine rose", image: "laine_rose", description: "Je n'utilise plus cette laine et j'aimerais en faire don."),
-        Materiel(nom: "Crochet 9mm", image: "crochet", description: "Ces crochets ne me sont plus utiles, en ayant acheté d'autres j'aimerais donner ceux-ci.")
+    // Données pour Occasion
+    let materielsOccasion: [Materiel] = [
+        Materiel(nom: "Lot de pelotes de laine", image: "", description: "Je donne un lot de pelotes de laine."),
+        Materiel(nom: "Cuir coloré", image: "", description: "Cherche personne qui donne du cuir de couleur."),
+        Materiel(nom: "Tissu à motif", image: "", description: "Bonjour, je donne des tissus à motifs variés."),
+        Materiel(nom: "Bobine de fil", image: "", description: "Je cherche quelqu’un à qui offrir mes bobines."),
+        Materiel(nom: "Laine rose", image: "", description: "Je n’utilise plus cette laine, je la donne."),
+        Materiel(nom: "Crochet 10mm", image: "", description: "Crochets inutilisés, parfaits pour débuter.")
+    ]
+    
+    // Données pour Neuf
+    let materielsNeuf: [Materiel] = [
+        Materiel(nom: "Carnet de dessin", image: "", description: "Lot de carnets de dessin."),
+        Materiel(nom: "Crayons", image: "", description: "Crayons de couleurs tons rouges."),
+        Materiel(nom: "Palette d’aquarelle", image: "", description: "Palette parfaite pour débuter."),
+        Materiel(nom: "Lot de pinceaux", image: "", description: "Différentes tailles pour vos créations.")
     ]
     
     var filteredMateriels: [Materiel] {
-        let searchFiltered = searchText.isEmpty ? materiels :
-            materiels.filter { $0.nom.localizedCaseInsensitiveContains(searchText) }
-        
-        return searchFiltered
+        let list = condition == "Occasion" ? materielsOccasion : materielsNeuf
+        return searchText.isEmpty ? list :
+        list.filter { $0.nom.localizedCaseInsensitiveContains(searchText) }
     }
     
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: 15),
+        GridItem(.flexible(), spacing: 15)
     ]
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.gray)
-                    TextField("Rechercher un matériel", text: $searchText)
-                        .textFieldStyle(PlainTextFieldStyle())
-                }
-                .padding(10)
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
+            ZStack {
+                Color("Background")
+                    .ignoresSafeArea()
                 
-                HStack {
-                Button(action: {
-                           showingFilter.toggle()
-                       }) {
-                           Image(systemName: "line.3.horizontal.decrease.circle")
-                               .font(.title3)
-                               .foregroundColor(.purple)
-                               .padding(10)
-                               .background(Color(.systemGray6))
-                               .clipShape(Circle())
-                       }
-                       .sheet(isPresented: $showingFilter) {
-                           VStack {
-                               Text("Filtres disponibles")
-                                   .font(.headline)
-                                   .padding()
-                               Text("")
-                                   .multilineTextAlignment(.center)
-                                   .padding()
-                               Button("Fermer") {
-                                   showingFilter = false
-                               }
-                               .padding()
-                           }
-                           .presentationDetents([.fraction(0.3)])
-                       }
-                   }
-                .padding(.horizontal)
-                .padding(.top)
-                
-                HStack(spacing: 0) {
-                    Button(action: { condition = "Occasion" }) {
-                        Text("Occasion")
-                            .foregroundColor(condition == "Occasion" ? .black : .gray)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
-                            .background(condition == "Occasion" ? Color.white : Color.clear)
+                VStack(spacing: 0) {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                        TextField("Rechercher un matériel", text: $searchText)
+                            .textFieldStyle(PlainTextFieldStyle())
                     }
+                    .padding(10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(12)
+                    .padding(.horizontal)
+                    .padding(.top)
                     
-                    NavigationLink(destination: MaterielNeufVue()) {
-                        Text("Neuf")
-                            .foregroundColor(condition == "Neuf" ? .black : .gray)
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
-                            .background(condition == "Neuf" ? Color.white : Color.clear)
-                    }
-                }
-                .background(
-                    RoundedRectangle(cornerRadius: 20)
-                        .fill(Color(.systemGray5))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color(.systemGray4), lineWidth: 1)
-                )
-                .padding(.horizontal)
-                .padding(.top, 16)
-                
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 16) {
-                        ForEach(filteredMateriels) { materiel in
-                            VStack (spacing: 2) {
-                                Image(materiel.image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(height: 80)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                                    .padding(.top, 8)
-                                
-                                Spacer()
-                                
-                                Text(materiel.nom)
-                                    .font(.headline)
-                                    .multilineTextAlignment(.center)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                    .padding(.horizontal, 8)
-                                
-                                Text(materiel.description)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                                    .multilineTextAlignment(.center)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                    .padding(.horizontal, 8)
-                                    .padding(.bottom, 8)
-                            }
-                            .frame(height: 180)
-                            .frame(maxWidth: .infinity)
-                            .background(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(.systemGray6))
-                                    .shadow(radius: 2)
-                            )
-                            .padding(4)
+                    HStack {
+                        Button(action: { showingFilter.toggle() }) {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                                .font(.title3)
+                                .foregroundColor(.primaryPurpule)
+                                .padding(10)
+                                .background(Color(.systemGray6))
+                                .clipShape(Circle())
                         }
+                        .sheet(isPresented: $showingFilter) {
+                            VStack {
+                                Text("Filtres disponibles")
+                                    .font(.headline)
+                                    .padding()
+                                Button("Fermer") { showingFilter = false }
+                                    .padding()
+                            }
+                            .presentationDetents([.fraction(0.3)])
+                        }
+                        Spacer()
                     }
-                    .padding()
-                }
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        print("Publier un article")
-                    }) {
-                        Text("Publier un article")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 12)
-                            .background(Color.purple)
-                            .cornerRadius(12)
+                    .padding(.horizontal)
+                    .padding(.top)
+                    
+                    SegmentedToggle(selection: $condition)
+                        .padding(.top, 16)
+                    
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 15) {
+                            ForEach(filteredMateriels) { materiel in
+                                NavigationLink(destination: MaterielDetailView(materiel: materiel)) {
+                                    VStack(spacing: 4) {
+                                        Image(materiel.image.isEmpty ? "placeholder" : materiel.image)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(height: 100)
+                                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                                            .padding(.top, 8)
+                                        
+                                        Spacer()
+                                        
+                                        Text(materiel.nom)
+                                            .font(.headline)
+                                            .multilineTextAlignment(.center)
+                                            .lineLimit(1)
+                                            .padding(.horizontal, 8)
+                                        
+                                        Text(materiel.description)
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                            .multilineTextAlignment(.center)
+                                            .lineLimit(1)
+                                            .padding(.horizontal, 8)
+                                            .padding(.bottom, 8)
+                                    }
+                                    .frame(height: 180)
+                                    .frame(maxWidth: .infinity)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 20)
+                                            .fill(Color.white)
+                                            .shadow(radius: 2)
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.top, 12)
+                        .padding(.bottom, condition == "Occasion" ? 120 : 20)
                     }
-                    .frame(width: 160)
                 }
-                .padding(.horizontal)
-                .padding(.bottom, 16)
+                
+                if condition == "Occasion" {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Button(action: { navigateToAjout = true }) {
+                                Text("Publier un article")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 8)
+                                    .padding(.horizontal, 12)
+                                    .background(Color.primaryPurpule.opacity(0.6))
+                                    .cornerRadius(12)
+                            }
+                            .frame(width: 160)
+                        }
+                        .padding()
+                    }
+                }
             }
-            .background(Color("beigeFond"))
+            .navigationDestination(isPresented: $navigateToAjout) {
+                AjoutMaterielView()
+            }
         }
     }
 }
 
 #Preview {
-    MaterielVue()
+    MaterielView()
 }
-
 
