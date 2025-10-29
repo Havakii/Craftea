@@ -69,21 +69,20 @@ struct HorizontalHobbyView: View {
                             .secondaryText().foregroundColor(.textSecondary).multilineTextAlignment(.leading)
                     }
                     Spacer()
-                    AsyncImage(url: URL(string: hobby.image)) { image in
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                        } placeholder: {
-                                            ProgressView()
-                                        }
-                                        .frame(width: 147, height: 128)
-                                        .clipShape(RoundedRectangle(cornerRadius: 8))
-//                    Image(hobby.image)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 147, height: 128)
-//                        .border(Color.secondary, width: 1) //remove when we have actual images
-//                        .cornerRadius(8)
+//                    AsyncImage(url: URL(string: hobby.image)) { image in
+//                                            image
+//                                                .resizable()
+//                                                .scaledToFill()
+//                                        } placeholder: {
+//                                            ProgressView()
+//                                        }
+//                                        .frame(width: 147, height: 128)
+//                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                    Image(hobby.image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 147, height: 128)
+                        .cornerRadius(8)
                 }.padding(8)
             }.frame(height: 144)
                 .cornerRadius(16)

@@ -14,7 +14,7 @@ struct ContentView: View {
                 DecouvrirView(user: users[0])
             }
             Tab("Materiel", systemImage: "pencil.and.ruler.fill") {
-                //MaterielView()
+                MaterielView()
             }
             Tab("Discutions", systemImage: "bubble.left.and.text.bubble.right.fill") {
                 MessageView()

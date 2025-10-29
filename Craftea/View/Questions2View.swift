@@ -18,7 +18,8 @@ struct Questions2View: View {
     @State private var selectedOption: Int? = nil
     var body: some View {
         ZStack {
-            Color("primaryPurpule")
+            LinearGradient(gradient:Gradient(colors: [Color(red: 224 / 255, green: 182 / 255, blue: 252 / 255), Color(red: 156 / 255, green: 123 / 255, blue: 245 / 255)]), startPoint: .topLeading, endPoint: .bottom)
+            //Color("primaryPurpule")
             .ignoresSafeArea()
             VStack{
                 Text("Trouve un loisir qui te correspond !")
