@@ -1,20 +1,20 @@
 //
-//  Questions2View.swift
+//  Questions3View.swift
 //  Craftea
 //
 //  Created by Apprenant 83 on 29/10/2025.
 //
 
 import SwiftUI
-let options2 = [
-    "Tous les jours (impossible de m’arrêter)",
-    "Plusieurs fois par semaine",
-    "De temps en temps, quand j’ai l’inspiration",
-    "Rarement, mais j’aimerais m’y remettre",
-    "Jamais… mais j’aimerais bien commencer !"
+let options3 = [
+    "Au feeling, selon mes envies du moment",
+    "En voyant des idées sur TikTok / Insta / Pinterest",
+    "Parce qu’un(e) ami(e) m’en parle",
+    "En fonction du matériel que j’ai déjà",
+    "Selon le temps et le budget que j’ai"
 ]
 
-struct Questions2View: View {
+struct Questions3View: View {
     @State private var selectedOption: Int? = nil
     var body: some View {
         ZStack {
@@ -28,14 +28,14 @@ struct Questions2View: View {
                     .frame(width: 300)
 
                 
-                Text("À quelle fréquence tu pratiques tes loisirs créatifs ?")
+                Text("Comment tu choisis un nouveau loisir à tester ?")
                     .font(.custom("Manrope-Bold", size: 17))
                     .padding()
                 
                 
-                ForEach(0..<options2.count, id: \.self) { index in
+                ForEach(0..<options3.count, id: \.self) { index in
                     HStack {
-                        Text(options2[index])
+                        Text(options3[index])
                         Spacer()
                         Image(systemName: selectedOption == index ? "largecircle.fill.circle" : "circle")
                     }
@@ -52,7 +52,7 @@ struct Questions2View: View {
                     print("Suivant")
                 }) {
                     HStack{
-                        NavigationLink(destination:Questions3View()){
+                        NavigationLink(destination:QuestionsView()){
                             Text("Suivant")
                                 .font(.custom("Manrope-Bold", size: 20))
                         }
@@ -71,7 +71,6 @@ struct Questions2View: View {
     }
         
     }
-
 #Preview {
-    Questions2View()
+    Questions3View()
 }
