@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoisirDetailView: View {
+    //@State var user : User
+    @Environment(User.self) private var user
     var hobby: Hobby
     @State var viewModel = HobbyViewModel()
     @State private var revealDetails = true
@@ -79,39 +81,44 @@ struct LoisirDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         
                         //Materiel
-                        DisclosureGroup(isExpanded: $revealDetails) {
-                            ForEach(hobby.equipementNeeded){ item in
-                                HStack(alignment: .top) {
-                                    //Image(item.image)
-                                    AsyncImage(url: URL(string: item.image)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 60, height: 60)
-                                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    } placeholder: {
-                                        ProgressView()
-                                            .frame(width: 60, height: 60)
+                        DisclosureGroup(
+                            isExpanded: $revealDetails,
+                            content: {
+                                ForEach(hobby.equipementNeeded, id: \.id) { item in
+                                    HStack(alignment: .top) {
+                                        AsyncImage(url: URL(string: item.image)) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 60, height: 60)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        } placeholder: {
+                                            ProgressView()
+                                                .frame(width: 60, height: 60)
+                                        }
+                                        VStack(alignment: .leading){
+                                            Text(item.name)
+                                                .mainText(bold: true)
+                                                
+                                            Text(item.description)
+                                                .secondaryText()
+                                                
+                                        }
+                                        Spacer()
                                     }
-                                    VStack(alignment: .leading){
-                                        Text(item.name)
-                                            .mainTextBold()
-                                            .foregroundColor(.textPrimary)
-                                        Text(item.description)
-                                            .secondaryText()
-                                            .foregroundColor(.textSecondary)
-                                    }
-                                    Spacer()
-                                }.padding(8)
+                                    .padding(8)
                                     .background(Color.almostWhite)
                                     .cornerRadius(16)
-                                    .shadow(color:.gray.opacity(0.1), radius:4, x:0, y:2)
+                                    .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
+                                }
+                            },
+                            label: {
+                                Text("Materiel de base")
+                                    .secondaryTitle()
+                                    .foregroundColor(.textPrimary)
                             }
-                        } label: {
-                            Text("Materiel de base")
-                                .secondaryTitle()
-                                .foregroundColor(.textPrimary)
-                        }.padding(.horizontal, 24)
+                        )
+                        .padding(.horizontal, 24)
                         
                         //Techniques
                         Text("Techniques de base")
@@ -134,14 +141,22 @@ struct LoisirDetailView: View {
                                                 .frame(height: 182)
                                         }
                                     }
-                                    Text(item.description ?? "")
-                                        .mainText()
-                                        .multilineTextAlignment(.leading)
+                                    VStack(alignment: .leading){
+                                        Text("But :").mainText(bold: true)
+                                        Text(item.but)
+                                            .mainText()
+                                            .multilineTextAlignment(.leading)
+                                            .padding(.bottom, 8)
+                                        Text("Technique :").mainText(bold: true)
+                                        Text(item.description)
+                                            .mainText()
+                                            .multilineTextAlignment(.leading)
+                                    }
                                 }
                             }label: {
                                 Text(item.name)
-                                    .mainTextBold()
-                                    .foregroundColor(.textPrimary)
+                                    .mainText(bold: true).foregroundStyle(Color(.textPrimary))
+                                    
                                 
                             }.padding(16)
                                 .background(Color.almostWhite)
@@ -152,9 +167,17 @@ struct LoisirDetailView: View {
                     }
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                            Button("Favorite", systemImage: "heart") {
-                                
-                            }.tint(Color.primaryPurpule)
+                            Button(action: {
+                                if user.favoritesHobby.contains(where: { $0.id == hobby.id }) {
+                                    user.favoritesHobby.removeAll(where: { $0.id == hobby.id })
+                                } else {
+                                    user.favoritesHobby.append(hobby)
+                                }
+                                print(user.favoritesHobby)
+                            }) {
+                                Label("Favorite", systemImage: user.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")
+                            }
+                            .tint(Color.primaryPurpule)
                         }
                     }
                 }
@@ -177,5 +200,6 @@ struct LoisirDetailView: View {
 
 #Preview {
     let viewModel = HobbyViewModel()
-    LoisirDetailView(hobby: viewModel.hobbies[0])
+    LoisirDetailView(hobby: viewModel.hobbies[0]).environment(users[0])
 }
+

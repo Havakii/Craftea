@@ -72,6 +72,8 @@ struct BaseEquipment: Identifiable {
 struct Technique: Identifiable {
     let id = UUID()
     var name: String
-    var description: String?
+    var but: String
+    var description: String
     var image: String?
 }
+

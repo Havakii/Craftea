@@ -18,16 +18,6 @@ struct VerticalHobbyView: View {
                 VStack(alignment:.leading){
                     
                     ZStack(alignment:.topLeading){
-                        //                        AsyncImage(url: URL(string: hobby.image)) { image in
-                        //                                                image
-                        //                                                    .resizable()
-                        //                                                    .scaledToFill()
-                        //                                            } placeholder: {
-                        //                                                ProgressView()
-                        //                                            }
-                        //                                            .frame(width: 147, height: 128)
-                        //                                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                        
                         
                         Image(hobby.image)
                             .resizable()
@@ -80,7 +70,7 @@ struct VerticalHobbyView: View {
                                     ))
                         
                         Text(hobby.name.rawValue)
-                            .mainTextBold().foregroundColor(.textPrimary)
+                            .mainText(bold: true).foregroundStyle(Color.textPrimary).multilineTextAlignment(.leading)
                         
                         Text(hobby.description)
                             .secondaryText().foregroundColor(.textSecondary).multilineTextAlignment(.leading)

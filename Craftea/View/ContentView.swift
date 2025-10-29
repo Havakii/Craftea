@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab("Découvrir", systemImage: "sparkles") {
-                DecouvrirView(user: users[0])
+                DecouvrirView()
             }
             Tab("Materiel", systemImage: "pencil.and.ruler.fill") {
                 MaterielView()
@@ -27,5 +27,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView().environment(users[0])
 }

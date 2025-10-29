@@ -35,7 +35,6 @@ class HobbyViewModel {
     private let unsplash = UnsplashService(accessKey: "5bOGmrInQ06GBsAQMMD4OE8hN9S0J9QU9Y_ShBlgE6U")
     
     var hobbies: [Hobby] = []
-    //var searchobjectController = SearchobjectController()
     
     init() {
         hobbies = [   //La liste de tout nos hobbies
@@ -55,11 +54,11 @@ class HobbyViewModel {
              BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Aplat", description: "Couche uniforme de couleur", image: ""),
-             Technique(name: "Empâtement", description: "Appliquer la peinture en relief", image: ""),
-             Technique(name: "Glacis", description: "Superpositions transparentes", image: nil),
-             Technique(name: "Brossage à sec", description: "Effets texturés légers", image: nil),
-             Technique(name: "Sous-couche", description: "Bloquer les grandes masses", image: nil)
+             Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: ""),
+             Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: ""),
+             Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: nil),
+             Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: nil),
+             Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
              ]
              ),
              Hobby(
@@ -76,11 +75,11 @@ class HobbyViewModel {
              BaseEquipment(name: "Ruban adhésif", description: "Fixer le papier et éviter les gondolages", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Lavis", description: "Peinture très diluée", image: nil),
-             Technique(name: "Dégradé", description: "Fondu de couleurs", image: nil),
-             Technique(name: "Mouillé sur mouillé", description: "Effets diffus et fondus", image: nil),
-             Technique(name: "Mouillé sur sec", description: "Traits précis et nets", image: nil),
-             Technique(name: "Réserves", description: "Garder des blancs avec liquide de masquage", image: nil)
+             Technique(name: "Lavis", but: "Poser une teinte légère et homogène.", description: "Mouille ton pinceau, dilue fortement la couleur et applique-la en aplat régulier sur papier incliné. Éponge les surplus pour éviter les auréoles.", image: nil),
+             Technique(name: "Dégradé", but: "Passer progressivement d’une couleur à une autre.", description: "Pose deux couleurs voisines sur papier humide, puis travaille la zone de jonction en allers-retours doux pour fondre les teintes.", image: nil),
+             Technique(name: "Mouillé sur mouillé", but: "Obtenir des transitions douces et des bords flous.", description: "Humidifie le papier, charge ton pinceau et dépose la couleur sur la zone humide. Laisse les pigments se diffuser naturellement.", image: nil),
+             Technique(name: "Mouillé sur sec", but: "Tracer des formes nettes et contrôlées.", description: "Attends que le papier soit complètement sec, puis peins avec peu d’eau pour garder des contours nets et précis.", image: nil),
+             Technique(name: "Réserves", but: "Préserver des zones blanches intactes.", description: "Applique du liquide de masquage sur les zones à protéger. Peins librement autour, laisse sécher, puis retire le masque délicatement.", image: nil)
              ]
              ),
              Hobby(
@@ -97,10 +96,10 @@ class HobbyViewModel {
              BaseEquipment(name: "Bloc dessin", description: "Papier lisse ou grain fin", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Hachures", description: "Technique pour ombrer", image: nil),
-             Technique(name: "Contour", description: "Tracer le contour et proportions", image: nil),
-             Technique(name: "Perspective", description: "Points de fuite et lignes de construction", image: nil),
-             Technique(name: "Valeurs", description: "Echelle du clair-obscur", image: nil)
+             Technique(name: "Hachures", but: "Créer des ombres et des textures par lignes.", description: "Trace des séries de lignes parallèles régulières, puis croise-les pour foncer. Varie l’espacement et la pression pour moduler la valeur.", image: nil),
+             Technique(name: "Contour", but: "Définir la silhouette et les proportions justes.", description: "Esquisse légèrement les formes principales, vérifie les alignements et corrige avant d’appuyer sur les lignes finales.", image: nil),
+             Technique(name: "Perspective", but: "Donner une impression d’espace crédible.", description: "Place l’horizon, fixe un ou plusieurs points de fuite et trace les lignes de construction en respectant la convergence.", image: nil),
+             Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
              ]
              ),
              Hobby(
@@ -116,9 +115,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Feutres acryliques", description: "Détails fins", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Mini motifs", description: "Peintures petites échelles", image: nil),
-             Technique(name: "Pochoir", description: "Motifs réguliers", image: nil),
-             Technique(name: "Pointillisme", description: "Décor par points", image: nil)
+             Technique(name: "Mini motifs", but: "Décorer le galet avec des motifs nets et réguliers.", description: "Utilise un pinceau fin ou un feutre acrylique, trace les repères au crayon, puis peins les motifs par couches fines en laissant sécher entre passes.", image: nil),
+             Technique(name: "Pochoir", but: "Reproduire un motif proprement et rapidement.", description: "Fixe le pochoir sur le galet, tamponne la peinture avec peu de charge et retire-le verticalement pour éviter les bavures.", image: nil),
+             Technique(name: "Pointillisme", but: "Créer des motifs et dégradés par points.", description: "Charge un outil à embout rond et dépose des points réguliers. Resserre l’espacement pour foncer et espace pour éclaircir.", image: nil)
              ]
              ),
              Hobby(
@@ -135,10 +134,10 @@ class HobbyViewModel {
              BaseEquipment(name: "Mètre ruban", description: "Mesurer les dimensions", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Maille serrée", description: "Point de base", image: nil),
-             Technique(name: "Bride", description: "Point plus haut", image: nil),
-             Technique(name: "Anneau magique", description: "Démarrage circulaire", image: nil),
-             Technique(name: "Augmentations / diminutions", description: "Former le volume", image: nil)
+             Technique(name: "Maille serrée", but: "Obtenir un tissu dense et régulier.", description: "Fais un nœud coulant, pique dans la maille, ramène le fil et termine la maille serrée en gardant une tension constante.", image: nil),
+             Technique(name: "Bride", but: "Gagner en hauteur rapidement.", description: "Fais un jeté, pique, ramène le fil puis écoule les boucles par étapes pour former la bride.", image: nil),
+             Technique(name: "Anneau magique", but: "Démarrer un ouvrage circulaire sans trou central.", description: "Enroule le fil autour des doigts, crochète le nombre de mailles dans l’anneau, puis serre le cercle en tirant sur le fil libre.", image: nil),
+             Technique(name: "Augmentations / diminutions", but: "Modeler la forme de l’ouvrage.", description: "Réalise deux mailles dans la même maille pour augmenter, ou saute/écoule ensemble des mailles pour diminuer selon le patron.", image: nil)
              ]
              ),
              Hobby(
@@ -155,10 +154,10 @@ class HobbyViewModel {
              BaseEquipment(name: "Découd-vite", description: "Corriger les erreurs", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Assemblage", description: "Couture des pièces ensemble", image: nil),
-             Technique(name: "Finitions", description: "Ourlets, surpiqûres", image: nil),
-             Technique(name: "Patronage", description: "Tracer et ajuster les patrons", image: nil),
-             Technique(name: "Surfilage", description: "Finition des bords", image: nil)
+             Technique(name: "Assemblage", but: "Relier proprement les pièces du vêtement.", description: "Épingle les bords endroit contre endroit, pique à la machine en suivant la marge, puis ouvre ou surfile les coutures.", image: nil),
+             Technique(name: "Finitions", but: "Stabiliser et embellir les bords.", description: "Replie l’ourlet au fer, pique à la bonne distance et ajoute une surpiqûre régulière pour renforcer.", image: nil),
+             Technique(name: "Patronage", but: "Obtenir des pièces ajustées à la taille.", description: "Prends les mesures, reporte-les sur le patron, ajoute les marges de couture et coupe avec précision.", image: nil),
+             Technique(name: "Surfilage", but: "Empêcher l’effilochage des tissus.", description: "Passe les bords à la surjeteuse ou au point zigzag en gardant une tension régulière.", image: nil)
              ]
              ),
              Hobby(
@@ -175,10 +174,10 @@ class HobbyViewModel {
              BaseEquipment(name: "Éponge", description: "Lisser les surfaces", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Modelage main", description: "Façonner sans tour", image: nil),
-             Technique(name: "Cuisson", description: "Cuire l'argile au four", image: nil),
-             Technique(name: "Colombin", description: "Montage en boudins", image: nil),
-             Technique(name: "Plaque", description: "Montage par plaques", image: nil)
+             Technique(name: "Modelage main", but: "Former des volumes de base sans tour.", description: "Malaxe l’argile, façonne des boulettes ou boudins et assemble en lissant les jointures avec barbotine.", image: nil),
+             Technique(name: "Cuisson", but: "Solidifier et vitrifier la pièce.", description: "Laisse sécher la pièce, enfourne selon la courbe recommandée et respecte les paliers de température.", image: nil),
+             Technique(name: "Colombin", but: "Monter des parois avec des boudins réguliers.", description: "Roule des boudins, superpose-les en spirale, puis lisse l’intérieur et l’extérieur pour souder.", image: nil),
+             Technique(name: "Plaque", but: "Construire des formes géométriques nettes.", description: "Étale des plaques à épaisseur régulière, coupe aux gabarits, puis assemble à la barbotine en renforçant les angles.", image: nil)
              ]
              ),
              Hobby(
@@ -195,9 +194,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Récipients", description: "Verres ou moules", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Fusion", description: "Faire fondre la cire", image: nil),
-             Technique(name: "Coulée en contenant", description: "Bougies en pot", image: nil),
-             Technique(name: "Démoulage", description: "Sortir la bougie du moule", image: nil)
+             Technique(name: "Fusion", but: "Obtenir une cire à la bonne température.", description: "Chauffe la cire au bain-marie, surveille au thermomètre et retire-la avant le point de fumée.", image: nil),
+             Technique(name: "Coulée en contenant", but: "Remplir proprement les récipients.", description: "Fixe la mèche, verse la cire à la température de coulée, recentre la mèche et laisse refroidir lentement.", image: nil),
+             Technique(name: "Démoulage", but: "Obtenir une pièce nette sans fissures.", description: "Attends la solidification complète, démoule en pressant légèrement et ébarbe les bavures.", image: nil)
              ]
              ),
              
@@ -214,10 +213,10 @@ class HobbyViewModel {
              BaseEquipment(name: "Ciseaux broderie", description: "Pointes fines", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Point de tige", description: "Point décoratif simple", image: nil),
-             Technique(name: "Point de croix", description: "Motifs en x", image: nil),
-             Technique(name: "Point arrière", description: "Lignes continues", image: nil),
-             Technique(name: "Point de nœud", description: "Petits reliefs", image: nil)
+             Technique(name: "Point de tige", but: "Tracer des lignes décoratives fluides.", description: "Pique l’aiguille à intervalle régulier en suivant le motif, recouvrant légèrement les points pour un trait continu.", image: nil),
+             Technique(name: "Point de croix", but: "Réunir des croix régulières pour un motif.", description: "Forme des croix en deux points diagonaux croisés, en respectant la tension du fil.", image: nil),
+             Technique(name: "Point arrière", but: "Délimiter contours avec un trait net.", description: "Fais des petits points en revenant en arrière pour une ligne pleine et régulière.", image: nil),
+             Technique(name: "Point de nœud", but: "Créer des petits reliefs décoratifs.", description: "Enroule le fil autour de l’aiguille puis pique près du point d’entrée en tirant doucement pour former un nœud.", image: nil)
              ]
              ),
              Hobby(
@@ -234,9 +233,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Gants et lunettes", description: "Sécurité", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Saponification", description: "Transformation des corps gras", image: nil),
-             Technique(name: "Trace", description: "Point de prise du mélange", image: nil),
-             Technique(name: "Marbrage", description: "Effets de motifs", image: nil)
+             Technique(name: "Saponification", but: "Transformer les corps gras en savon.", description: "Mélange la soude et les huiles en respectant les proportions, chauffe doucement et laisse la réaction chimique s’effectuer.", image: nil),
+             Technique(name: "Trace", but: "Atteindre la consistance idéale du mélange.", description: "Mélange jusqu’à ce que le liquide épaississe et laisse des traces visibles en surface sans se dissiper.", image: nil),
+             Technique(name: "Marbrage", but: "Créer des motifs décoratifs dans le savon.", description: "Verse des couches de couleurs différentes et utilise un outil pour tracer des formes avant solidification.", image: nil)
              ]
              ),
              Hobby(
@@ -253,9 +252,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Coins photo", description: "Fixation non permanente", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Mise en page", description: "Composer la page", image: nil),
-             Technique(name: "Matting", description: "Couches de papier autour des photos", image: nil),
-             Technique(name: "Embossage", description: "Relief à chaud", image: nil)
+             Technique(name: "Mise en page", but: "Organiser visuellement textes et images.", description: "Place photos et papiers en test, ajuste l’équilibre, puis colle en respectant marges et alignements.", image: nil),
+             Technique(name: "Matting", but: "Mettre en valeur les photos par encadrements.", description: "Découpe des passe-partout, superpose-les sous la photo et colle en centrant.", image: nil),
+             Technique(name: "Embossage", but: "Créer un relief net et durable.", description: "Tamponne à l’encre, saupoudre la poudre à embosser, retire l’excédent puis chauffe jusqu’à fusion.", image: nil)
              ]
              ),
              Hobby(
@@ -270,9 +269,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Papier kami", description: "Fin et robuste", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Pliage de base", description: "Valley fold, mountain fold", image: nil),
-             Technique(name: "Base de l'oiseau", description: "Pli fondamental", image: nil),
-             Technique(name: "Base de la grenouille", description: "Pli fondamental", image: nil)
+             Technique(name: "Pliage de base", but: "Réaliser des plis nets et précis.", description: "Marque le pli avec un plioir, plie selon vallée ou montagne et aligne soigneusement les bords.", image: nil),
+             Technique(name: "Base de l'oiseau", but: "Préparer la structure pour des modèles d’oiseaux.", description: "Suis la séquence: base carrée, plis en pétale et enfoncements selon le diagramme jusqu’à obtenir la base.", image: nil),
+             Technique(name: "Base de la grenouille", but: "Obtenir la base nécessaire aux modèles de grenouille.", description: "À partir d’un carré, réalise la base préliminaire puis les enfoncements pour former la base de grenouille.", image: nil)
              ]
              ),
              Hobby(
@@ -289,9 +288,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Tapis de perlage", description: "Éviter que les perles roulent", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Montage", description: "Assembler éléments", image: nil),
-             Technique(name: "Boucles et anneaux", description: "Former des attaches", image: nil),
-             Technique(name: "Tissage de perles", description: "Points peyote, brick", image: nil)
+             Technique(name: "Montage", but: "Construire des bijoux solides et propres.", description: "Enfile les perles, forme des boucles régulières avec la pince et ferme les anneaux sans les vriller.", image: nil),
+             Technique(name: "Boucles et anneaux", but: "Créer des attaches symétriques et robustes.", description: "Coupe à la bonne longueur, forme une boucle avec la pince ronde et referme bord à bord.", image: nil),
+             Technique(name: "Tissage de perles", but: "Obtenir un motif régulier et serré.", description: "Suis le schéma, tends le fil de manière constante et sécurise chaque rang par un demi-nœud discret.", image: nil)
              ]
              ),
              Hobby(
@@ -307,9 +306,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Ciseaux", description: "Coupe propre", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Nœuds de base", description: "Noeud plat, demi-noeud", image: nil),
-             Technique(name: "Noeud torsadé", description: "Variante du demi-noeud", image: nil),
-             Technique(name: "Noeud d'alouette", description: "Fixer les cordes", image: nil)
+             Technique(name: "Nœuds de base", but: "Former des motifs stables en macramé.", description: "Monte les cordes, alterne nœud plat et demi-noeud en gardant une tension égale pour un rendu régulier.", image: nil),
+             Technique(name: "Noeud torsadé", but: "Créer une corde torsadée uniforme.", description: "Répète des demi-nœuds du même côté pour former une torsade régulière.", image: nil),
+             Technique(name: "Noeud d'alouette", but: "Fixer solidement les brins au support.", description: "Plie la corde en deux, passe la boucle autour du support et ramène les brins dans la boucle en serrant.", image: nil)
              ]
              ),
              Hobby(
@@ -325,9 +324,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Brosses numériques", description: "Packs de pinceaux", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Calques", description: "Organisation des éléments", image: nil),
-             Technique(name: "Rendu", description: "Lumière et matières", image: nil),
-             Technique(name: "Raccourcis clavier", description: "Flux de travail efficace", image: nil)
+             Technique(name: "Calques", but: "Travailler non destructivement par couches.", description: "Crée des calques séparés, nomme-les et utilise des masques pour isoler les modifications.", image: nil),
+             Technique(name: "Rendu", but: "Simuler lumière et matériaux crédibles.", description: "Pose une lumière principale, ajoute ombres et reflets en respectant les volumes et la matière.", image: nil),
+             Technique(name: "Raccourcis clavier", but: "Accélérer le flux de travail.", description: "Assigne les outils clés aux raccourcis et pratique leur enchaînement pour limiter les interruptions.", image: nil)
              ]
              ),
              Hobby(
@@ -343,9 +342,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Bibliothèques de textures", description: "Matériaux réalistes", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Modélisation", description: "Mesh modelling, sculpt", image: nil),
-             Technique(name: "UV mapping", description: "Dépliage des textures", image: nil),
-             Technique(name: "Subdivision / retopologie", description: "Optimisation du maillage", image: nil)
+             Technique(name: "Modélisation", but: "Construire une géométrie propre et optimisée.", description: "Bloque les volumes, ajoute des boucles de soutien et nettoie les normales en gardant une topologie régulière.", image: nil),
+             Technique(name: "UV mapping", but: "Déplier la surface pour texturer sans distorsion.", description: "Place des seams logiques, déplie, puis minimise l’étirement et emballe les îlots efficacement.", image: nil),
+             Technique(name: "Subdivision / retopologie", but: "Lisser et optimiser pour l’animation ou le rendu.", description: "Applique subdivision avec parcimonie, puis refais une topologie propre en quads pour conserver les formes.", image: nil)
              ]
              ),
              Hobby(
@@ -361,9 +360,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Banques d'images", description: "Ressources libres de droits", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Masques et calques", description: "Assembler images", image: nil),
-             Technique(name: "Détourage", description: "Sélections avancées", image: nil),
-             Technique(name: "Corrections colorimétriques", description: "Courbes, niveaux", image: nil)
+             Technique(name: "Masques et calques", but: "Combiner des images proprement.", description: "Crée des masques de fusion, peins en noir/blanc pour révéler/cacher et ajuste l’opacité des calques.", image: nil),
+             Technique(name: "Détourage", but: "Isoler précisément un sujet.", description: "Utilise sélection d’objet, plume ou canaux, puis affine les bords avec le masque de sélection.", image: nil),
+             Technique(name: "Corrections colorimétriques", but: "Équilibrer couleurs et contrastes.", description: "Ajuste niveaux/courbes sur calques d’ajustement et compare avant/après pour éviter la dérive.", image: nil)
              ]
              ),
              Hobby(
@@ -379,9 +378,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Applications de notes", description: "Organisation des idées", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Structure narrative", description: "Début, milieu, fin", image: nil),
-             Technique(name: "Brainstorming", description: "Générer des idées", image: nil),
-             Technique(name: "Plan détaillé", description: "Structure chapitre par chapitre", image: nil)
+             Technique(name: "Structure narrative", but: "Construire un récit clair et captivant.", description: "Définis le protagoniste, l’objectif, le conflit et l’arc en 3 actes avant d’écrire.", image: nil),
+             Technique(name: "Brainstorming", but: "Explorer un large éventail d’idées.", description: "Note tout sans juger pendant un temps limité, puis regroupe par thèmes et sélectionne.", image: nil),
+             Technique(name: "Plan détaillé", but: "Guider l’écriture avec une feuille de route.", description: "Découpe en chapitres/scènes, liste objectifs, conflits et transitions pour chacun.", image: nil)
              ]
              ),
              Hobby(
@@ -397,9 +396,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Guide-lignes", description: "Maintenir l'angle et la hauteur", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Contrôle du trait", description: "Pression et inclinaison", image: nil),
-             Technique(name: "Ductus", description: "Ordre et sens des traits", image: nil),
-             Technique(name: "Variations de pression", description: "Pleins et déliés", image: nil)
+             Technique(name: "Contrôle du trait", but: "Obtenir des pleins et déliés maîtrisés.", description: "Maintiens un angle constant, appuie sur les descentes et allège sur les montées en suivant les ductus.", image: nil),
+             Technique(name: "Ductus", but: "Tracer chaque lettre dans le bon ordre.", description: "Suis les flèches de construction, respecte le sens des traits et la vitesse constante.", image: nil),
+             Technique(name: "Variations de pression", but: "Amplifier le contraste des lettres.", description: "Augmente la pression sur les traits descendants et relâche sur les ascendantes pour accentuer le rythme.", image: nil)
              ]
              ),
              Hobby(
@@ -415,9 +414,9 @@ class HobbyViewModel {
              BaseEquipment(name: "Stickers / washi tape", description: "Décoration rapide", image: "")
              ],
              technicalBasis: [
-             Technique(name: "Layouts", description: "Mise en page fonctionnelle", image: nil),
-             Technique(name: "Habitudes et trackers", description: "Suivi visuel", image: nil),
-             Technique(name: "Lettrage", description: "Titres et rubriques stylisées", image: nil)
+             Technique(name: "Layouts", but: "Structurer les pages pour plus d’efficacité.", description: "Dessine des grilles, place titres et sections, et vérifie lisibilité et hiérarchie visuelle.", image: nil),
+             Technique(name: "Habitudes et trackers", but: "Suivre ses routines facilement.", description: "Choisis un format (tableau, calendrier), définis des codes couleur et coche quotidiennement.", image: nil),
+             Technique(name: "Lettrage", but: "Créer des titres lisibles et décoratifs.", description: "Esquisse au crayon, encre avec feutres adaptés et ajoute ombres/lumières pour le style.", image: nil)
              ]
              )
         ]

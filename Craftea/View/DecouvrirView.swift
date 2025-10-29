@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct DecouvrirView: View {
-    @State var user : User
+    //@State var user : User
+    @Environment(User.self) private var user
+    
     @State var searchText: String = ""
     @State private var hasScrolled: Bool = false
     @State private var isExpanded: Bool = true
@@ -181,5 +183,5 @@ struct DecouvrirView: View {
 }
 
 #Preview {
-    DecouvrirView(user: users[0])
+    DecouvrirView().environment(users[0])
 }
