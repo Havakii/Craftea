@@ -16,7 +16,7 @@ public struct MessageCardView: View {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(Color.almostWhite)
                     .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
-                    .frame(width: 380, height: 100)
+                    .frame(width: 370, height: 100)
                 
                 HStack {
                     Image("placeholder")
@@ -106,7 +106,7 @@ public struct MessageCardView: View {
                             .foregroundStyle(.textSecondary)
                     }.padding(8)
                     
-                }.padding(5)
+                }.padding(7)
                     .frame(width: 380)
                 
                 
