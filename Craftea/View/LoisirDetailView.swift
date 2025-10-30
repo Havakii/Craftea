@@ -8,96 +8,184 @@
 import SwiftUI
 
 struct LoisirDetailView: View {
+    //@State var user : User
+    @Environment(User.self) private var user
     var hobby: Hobby
     @State var viewModel = HobbyViewModel()
-
+    @State private var revealDetails = true
+    @State private var hasScrolled: Bool = false
+    
+    
     var body: some View {
         ZStack(alignment: .topLeading) {
             Color.background.ignoresSafeArea()
-            
             VStack{
-                AsyncImage(url: URL(string: hobby.image)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(height: 250)
-                                            .clipShape(UnevenRoundedRectangle(
-                                                topLeadingRadius: 0,
-                                                bottomLeadingRadius: 32,
-                                                bottomTrailingRadius: 32,
-                                                topTrailingRadius: 0
-                                            ))
-                                    } placeholder: {
-                                        ProgressView().padding(.vertical, 100)
-                                    }
+                VStack{
                     
-                HStack{
-                    VStack(alignment: .leading){
-                        Text(hobby.name.rawValue)
-                            .mainTitle()
-                            .foregroundColor(.textPrimary)
-                        Text(hobby.description)
-                            .secondaryText()
-                            .foregroundColor(.textSecondary)
-                    }
-                    Spacer()
-                    HStack{
-                        switch hobby.level{
-                        case .easy : Circle().fill(Color.green).frame(width: 8)
-                        case .medium:
-                            Circle().fill(Color.orange).frame(width: 8)
-                        case .hard:
-                            Circle().fill(Color.red).frame(width: 8)
-                        }
-                        Text(hobby.level.rawValue).tertiaryTitle().foregroundColor(.textPrimary)
-                    }.padding(.leading, 8).padding(.vertical, 4).padding(.trailing, 12)
-                        .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.gray.opacity(0.03))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.gray, lineWidth: 4)
-                                .blur(radius: 4)
-                                .offset(x: 2, y: 2)
-                                .mask(RoundedRectangle(cornerRadius: 8).fill(LinearGradient(gradient: Gradient(colors: [.gray.opacity(0.25), .gray.opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)))
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.secondaryOrange.opacity(0.03), lineWidth: 8)
-                                .blur(radius: 4)
-                                .offset(x: -2, y: -2)
-                                .mask(RoundedRectangle(cornerRadius: 8).fill(LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)))
+                    Image(hobby.image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: hasScrolled ? 120 : 250)
+                        .overlay(LinearGradient(colors: [.black.opacity(0.1), .clear], startPoint: .bottom, endPoint: .center))
+                        .clipShape(UnevenRoundedRectangle(
+                            topLeadingRadius: 0,
+                            bottomLeadingRadius: 32,
+                            bottomTrailingRadius: 32,
+                            topTrailingRadius: 0
                         ))
-                }.padding(.horizontal, 24)
-                    .padding(.bottom)
-                
-                DisclosureGroup {
-                    ForEach(hobby.equipementNeeded){ item in
-                        HStack {
-                            Image(item.image)
-                            VStack(alignment: .leading){
-                                Text(item.name)
-                                    .mainTextBold()
-                                    .foregroundColor(.textPrimary)
-                                Text(item.description)
-                                    .secondaryText()
-                                    .foregroundColor(.textSecondary)
-                            }
-                            Spacer()
-                        }.padding(8)
-                            .background(Color.almostWhite)
-                    }
-                } label: {
-                    Text("Materiel de base")
-                        .secondaryTitle()
-                        .foregroundColor(.textPrimary)
-                }.padding(.horizontal, 24)
-            }.ignoresSafeArea(edges: .top)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Favorite", systemImage: "heart") {
                         
-                    }.tint(Color.primaryPurpule)
+                        .ignoresSafeArea()
+                    
+                    HStack{
+                        VStack(alignment: .leading){
+                            Text(hobby.name.rawValue)
+                                .mainTitle()
+                                .foregroundColor(.textPrimary)
+                            Text(hobby.description)
+                                .secondaryText()
+                                .foregroundColor(.textSecondary)
+                        }
+                        Spacer()
+                        HStack{
+                            switch hobby.level{
+                            case .easy : Circle().fill(Color.green).frame(width: 8)
+                            case .medium:
+                                Circle().fill(Color.orange).frame(width: 8)
+                            case .hard:
+                                Circle().fill(Color.red).frame(width: 8)
+                            }
+                            Text(hobby.level.rawValue).tertiaryTitle().foregroundColor(.textPrimary)
+                        }.padding(.leading, 8).padding(.vertical, 4).padding(.trailing, 12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .fill(Color.gray.opacity(0.03))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray, lineWidth: 4)
+                                            .blur(radius: 4)
+                                            .offset(x: 2, y: 2)
+                                            .mask(RoundedRectangle(cornerRadius: 8).fill(LinearGradient(gradient: Gradient(colors: [.gray.opacity(0.25), .gray.opacity(0.2)]), startPoint: .topLeading, endPoint: .bottomTrailing)))
+                                    )
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.secondaryOrange.opacity(0.03), lineWidth: 8)
+                                            .blur(radius: 4)
+                                            .offset(x: -2, y: -2)
+                                            .mask(RoundedRectangle(cornerRadius: 8).fill(LinearGradient(gradient: Gradient(colors: [.clear, .black]), startPoint: .topLeading, endPoint: .bottomTrailing)))
+                                    ))
+                    }.padding(.horizontal, 24)
+                        .padding(.bottom)
+                }.ignoresSafeArea(edges: .top)
+                    .padding(.bottom, -60)
+                ScrollView(.vertical, showsIndicators: false){
+                    VStack(alignment: .leading, spacing: 16) {
+                        
+                        //Materiel
+                        DisclosureGroup(
+                            isExpanded: $revealDetails,
+                            content: {
+                                ForEach(hobby.equipementNeeded, id: \.id) { item in
+                                    HStack(alignment: .top) {
+                                        AsyncImage(url: URL(string: item.image)) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 60, height: 60)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        } placeholder: {
+                                            ProgressView()
+                                                .frame(width: 60, height: 60)
+                                        }
+                                        VStack(alignment: .leading){
+                                            Text(item.name)
+                                                .mainText(bold: true)
+                                                
+                                            Text(item.description)
+                                                .secondaryText()
+                                                
+                                        }
+                                        Spacer()
+                                    }
+                                    .padding(8)
+                                    .background(Color.almostWhite)
+                                    .cornerRadius(16)
+                                    .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
+                                }
+                            },
+                            label: {
+                                Text("Materiel de base")
+                                    .secondaryTitle()
+                                    .foregroundColor(.textPrimary)
+                            }
+                        )
+                        .padding(.horizontal, 24)
+                        
+                        //Techniques
+                        Text("Techniques de base")
+                            .secondaryTitle()
+                            .foregroundColor(.textPrimary)
+                            .padding(.horizontal, 24)
+                        ForEach(hobby.technicalBasis){ item in
+                            DisclosureGroup{
+                                VStack{
+                                    //Image(item.image ?? "")
+                                    if item.image != nil {
+                                        AsyncImage(url: URL(string: item.image!)) { image in
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(height: 182)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                        } placeholder: {
+                                            ProgressView()
+                                                .frame(height: 182)
+                                        }
+                                    }
+                                    VStack(alignment: .leading){
+                                        Text("But :").mainText(bold: true)
+                                        Text(item.but)
+                                            .mainText()
+                                            .multilineTextAlignment(.leading)
+                                            .padding(.bottom, 8)
+                                        Text("Technique :").mainText(bold: true)
+                                        Text(item.description)
+                                            .mainText()
+                                            .multilineTextAlignment(.leading)
+                                    }
+                                }
+                            }label: {
+                                Text(item.name)
+                                    .mainText(bold: true).foregroundStyle(Color(.textPrimary))
+                                    
+                                
+                            }.padding(16)
+                                .background(Color.almostWhite)
+                                .cornerRadius(16)
+                                .padding(.horizontal, 24)
+                        }.shadow(color:.gray.opacity(0.1), radius:4, x:0, y:2)
+                        
+                    }
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button(action: {
+                                if user.favoritesHobby.contains(where: { $0.id == hobby.id }) {
+                                    user.favoritesHobby.removeAll(where: { $0.id == hobby.id })
+                                } else {
+                                    user.favoritesHobby.append(hobby)
+                                }
+                                print(user.favoritesHobby)
+                            }) {
+                                Label("Favorite", systemImage: user.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")
+                            }
+                            .tint(Color.primaryPurpule)
+                        }
+                    }
+                }
+            }.onScrollGeometryChange(for: CGFloat.self) { proxy in
+                proxy.contentOffset.y
+            } action: { y, _  in
+                withAnimation(.easeInOut) {
+                    hasScrolled = y > 5
                 }
             }
         }
@@ -112,5 +200,6 @@ struct LoisirDetailView: View {
 
 #Preview {
     let viewModel = HobbyViewModel()
-    LoisirDetailView(hobby: viewModel.hobbies[0])
+    LoisirDetailView(hobby: viewModel.hobbies[0]).environment(users[0])
 }
+

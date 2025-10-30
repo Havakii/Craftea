@@ -23,6 +23,7 @@ struct Questions2View: View {
             key: "intensity"
         )]
     var body: some View {
+
         let question = questions[currentIndex]
         NavigationStack {
             ZStack {

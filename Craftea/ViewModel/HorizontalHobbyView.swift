@@ -20,18 +20,7 @@ struct HorizontalHobbyView: View {
                             .textCase(.uppercase)
                             .categoryText().foregroundColor(.secondaryOrange)
                         Text(hobby.name.rawValue)
-                            .mainTextBold().foregroundColor(.textPrimary)
-                        /*HStack{
-                            switch hobby.level{
-                            case .easy : Circle().fill(Color.green).frame(width: 8)
-                            case .medium:
-                                Circle().fill(Color.orange).frame(width: 8)
-                            case .hard:
-                                Circle().fill(Color.red).frame(width: 8)
-                            }
-                            Text(hobby.level.rawValue).tertiaryTitle().foregroundColor(.textPrimary)
-                        }.padding(.leading, 8).padding(.vertical, 4).padding(.trailing, 12)
-                            .glassEffect(in: .rect(cornerRadius:8)).padding(.bottom, 4)*/
+                            .mainText(bold: true).foregroundStyle(Color.textPrimary)
                         
                         //niveau
         
@@ -69,21 +58,11 @@ struct HorizontalHobbyView: View {
                             .secondaryText().foregroundColor(.textSecondary).multilineTextAlignment(.leading)
                     }
                     Spacer()
-                    AsyncImage(url: URL(string: hobby.image)) { image in
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                        } placeholder: {
-                                            ProgressView()
-                                        }
-                                        .frame(width: 147, height: 128)
-                                        .clipShape(RoundedRectangle(cornerRadius: 8))
-//                    Image(hobby.image)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 147, height: 128)
-//                        .border(Color.secondary, width: 1) //remove when we have actual images
-//                        .cornerRadius(8)
+                    Image(hobby.image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 147, height: 128)
+                        .cornerRadius(8)
                 }.padding(8)
             }.frame(height: 144)
                 .cornerRadius(16)

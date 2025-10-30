@@ -17,6 +17,7 @@ struct Hobby: Identifiable {
     var category: Category
     var equipementNeeded: [BaseEquipment]
     var technicalBasis: [Technique]
+    var popular: Bool 
 }
 
 enum HobbyName: String, CaseIterable {
@@ -72,6 +73,8 @@ struct BaseEquipment: Identifiable {
 struct Technique: Identifiable {
     let id = UUID()
     var name: String
-    var description: String?
+    var but: String
+    var description: String
     var image: String?
 }
+

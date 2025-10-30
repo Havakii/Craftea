@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct CrafteaApp: App {
+    @State var userSession = users[0]
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environment(userSession)
         }
     }
 }

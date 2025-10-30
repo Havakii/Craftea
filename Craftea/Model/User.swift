@@ -19,12 +19,11 @@ class User: Identifiable {
     var location: String?
     var score: Double
     var favoriteEquipment: [Equipment?]
-    var favoritesHobby: [Hobby?]
+    var favoritesHobby: [Hobby]
     var equipment: [Equipment?]
-    //TO-DO
-    //prendre de questionnaire en compte
+    var recommandations: [Hobby]
     
-    init(name: String, surname: String, mail: String, pseudo: String, password: String, location: String? = nil, score: Double = 5, favoriteEquipment: [Equipment?] = [], favoritesHobby: [Hobby?] = [], equipment: [Equipment?] = []) {
+    init(name: String, surname: String, mail: String, pseudo: String, password: String, location: String? = nil, score: Double = 5, favoriteEquipment: [Equipment?] = [], favoritesHobby: [Hobby] = [], equipment: [Equipment?] = [], recommandations: [Hobby] = []) {
         self.name = name
         self.surname = surname
         self.mail = mail
@@ -35,6 +34,7 @@ class User: Identifiable {
         self.favoriteEquipment = favoriteEquipment
         self.favoritesHobby = favoritesHobby
         self.equipment = equipment
+        self.recommandations = recommandations
     }
 }
 
