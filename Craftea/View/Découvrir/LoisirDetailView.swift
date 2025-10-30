@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LoisirDetailView: View {
-    //@State var user : User
     @Environment(User.self) private var user
     var hobby: Hobby
     @Environment(HobbyViewModel.self) var viewModel
@@ -140,6 +139,7 @@ struct LoisirDetailView: View {
                                                 .scaledToFill()
                                                 .frame(height: 182)
                                                 .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                .padding(.top, 8)
                                         } placeholder: {
                                             ProgressView()
                                                 .frame(height: 182)
@@ -194,12 +194,6 @@ struct LoisirDetailView: View {
                 }
             }
         }
-//        .onAppear {
-//            Task {
-//                await viewModel.loadDetailImages(for: hobby)
-//            }
-//        }
-        
     }
 }
 

@@ -113,8 +113,6 @@ struct DecouvrirView: View {
                                                     } else {
                                                         selectedFilters.append(level)
                                                     }
-                                                    
-                                                    //generateItem() //TODO
                                                 }
                                             } label: {
                                                 Text(level.rawValue).buttonLabel()

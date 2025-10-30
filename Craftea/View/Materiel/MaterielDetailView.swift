@@ -8,13 +8,13 @@ import SwiftUI
 
 struct MaterielDetailView: View {
     
-    let materiel: MaterielView.Materiel
+    let materiel: Materiel
     let typeMateriel: String = "Don"
     @Environment(\.dismiss) private var dismiss
     @State private var isLiked = false
     
     var body: some View {
-        ZStack {
+        /*ZStack {
             Color("Background")
                 .ignoresSafeArea()
             LinearGradient(
@@ -184,26 +184,26 @@ struct MaterielDetailView: View {
                     }
                 }
             }
-        }
+        }*/
     }
 }
 
-#Preview {
-    NavigationStack {
-        MaterielDetailView(
-            materiel: MaterielView.Materiel(
-                nom: "Lot de pelotes de laine",
-                image: "",
-                description: "Je donne un lot de pelotes de laine, parfait pour le tricot ou le crochet. Couleurs variées, bon état.",
-                vendeurPseudo: "Bastien42",
-                vendeurImage: "",
-                vendeurNote: 4.8,
-                localisation: "Lyon",
-                vendeurTexte: nil,
-                prix: nil,
-                typeMateriel: "Don"
-            )
-        )
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        MaterielDetailView(
+//            materiel: MaterielView.Materiel(
+//                nom: "Lot de pelotes de laine",
+//                image: "",
+//                description: "Je donne un lot de pelotes de laine, parfait pour le tricot ou le crochet. Couleurs variées, bon état.",
+//                vendeurPseudo: "Bastien42",
+//                vendeurImage: "",
+//                vendeurNote: 4.8,
+//                localisation: "Lyon",
+//                vendeurTexte: nil,
+//                prix: nil,
+//                typeMateriel: "Don"
+//            )
+//        )
+//    }
+//}
 

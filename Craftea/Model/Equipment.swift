@@ -8,25 +8,59 @@
 import Foundation
 
 
-struct Equipment: Identifiable {
-    let id: UUID
-    var name: String
-    var description: String
-    var image: String
-    var type: EquipmentType?
-    var price: Double?
-    var location: String?
-    var seller: User?
-    var category: EquipmentCategory?
-}
-
 enum EquipmentCategory: String, CaseIterable {
     case don = "Don"
     case pret = "Prêt"
     case echange = "Échange"
 }
 
-enum EquipmentType: String, CaseIterable {
-    case occasion = "Occasion"
-    case neuf = "Neuf"
+struct Materiel: Identifiable {
+    let id = UUID()
+    let nom: String
+    var image: String
+    let description: String
+    let vendeur: User
+    let typeMateriel: EquipmentCategory
 }
+
+struct MaterielPro: Identifiable {
+    let id = UUID()
+    let nom: String
+    var image: String
+    let description: String
+    let vendeur: String
+    let prix: String
+}
+
+private let unsplash = UnsplashService(accessKey: "5bOGmrInQ06GBsAQMMD4OE8hN9S0J9QU9Y_ShBlgE6U")
+func loadCoverImages() async {
+    for i in materielsOccasion.indices {
+        
+        let materielName = materielsOccasion[i].nom
+        let materiel = materielsOccasion[i]
+        
+        if materiel.image.isEmpty {
+            if let url =  await unsplash.fetchImageURL(for: materielName) {
+                await MainActor.run {
+                    materielsOccasion[i].image = url
+                }
+            }
+        }
+    }
+}
+func loadCoverImagesPro() async {
+    for i in materielsNeuf.indices {
+        
+        let materielName = materielsNeuf[i].nom
+        let materiel = materielsNeuf[i]
+        
+        if materiel.image.isEmpty {
+            if let url =  await unsplash.fetchImageURL(for: materielName) {
+                await MainActor.run {
+                    materielsNeuf[i].image = url
+                }
+            }
+        }
+    }
+}
+     
