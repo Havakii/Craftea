@@ -9,6 +9,8 @@ import SwiftUI
 public struct MessageDetailView: View {
     @State private var newMessage: String = ""
     @State private var conversation: Conversation
+    @State private var showSecurityMessage = true
+    @State private var isReserved = false
     
     init(conversation: Conversation) {
         _conversation = State(initialValue: conversation)
@@ -25,6 +27,9 @@ public struct MessageDetailView: View {
             .ignoresSafeArea()
             
             VStack {
+                MessageDonCardView(isReserved: $isReserved)
+               
+                    
                 ScrollView {
                     VStack {
                         ForEach(conversation.messages) { message in
@@ -50,6 +55,30 @@ public struct MessageDetailView: View {
                 }
                 
                 VStack {
+                    if isReserved {
+                        Text("Le produit est réservé.")
+                            .font(.subheadline)
+                            .foregroundColor(.primaryPurpule)
+                            .padding()
+                    }
+                    if showSecurityMessage {
+                           HStack(alignment: .top) {
+                               Text("⚠️️ Pour votre sécurité, ne partagez pas d’adresse exacte ni d’informations personnelles. Privilégiez les lieux publics pour vos échanges.")
+                                   .font(.footnote)
+                                   .padding(7)
+                               Spacer()
+                               Button(action: {
+                                   withAnimation {
+                                       showSecurityMessage = false
+                                   }
+                               }) {
+                                   Image(systemName: "xmark.circle")
+                                       .foregroundColor(.gray)
+                                       .padding(.vertical, 8)
+                               }
+                               .padding(.trailing, 4)
+                           }
+                       }
                     TextField("Écrire un message...", text: $newMessage, axis: .vertical)
                         .lineLimit(...3)
                         .padding()
@@ -65,7 +94,12 @@ public struct MessageDetailView: View {
                                 .padding()
                         }
                         Spacer()
-                        Button(action: sendMessage) {
+                        Button(action: {
+                                    sendMessage()
+                                    withAnimation {
+                                        showSecurityMessage = false
+                                    }
+                                }){
                             Text("Envoyer")
                                 .foregroundColor(newMessage.isEmpty ? .gray : .primaryPurpule)
                                 .padding(.horizontal, 8)

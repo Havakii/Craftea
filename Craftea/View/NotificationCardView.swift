@@ -27,7 +27,7 @@ public struct NotificationCardView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Ton article a été ajouté en favoris par ")
-                            .font(.title2)
+                            .font(.title3)
                             .fontWeight(Font.Weight.light)
                       
                         Spacer()
@@ -39,6 +39,8 @@ public struct NotificationCardView: View {
                         .fontWeight(Font.Weight.light)
                         .foregroundStyle(.textSecondary)
                 }.padding(8)
+                
+                
                 
             }.padding(7)
                 .frame(width: 380)

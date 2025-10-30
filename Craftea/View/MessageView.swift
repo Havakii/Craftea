@@ -11,7 +11,7 @@ public struct MessageView: View {
     //    @State private var selectedTab = "Message"
     public var body: some View {
         
-        var conversations: [Conversation] = mockConversations
+        let conversations: [Conversation] = mockConversations
         NavigationStack {
             
             ZStack {
