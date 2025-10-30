@@ -11,7 +11,7 @@ struct LoisirDetailView: View {
     //@State var user : User
     @Environment(User.self) private var user
     var hobby: Hobby
-    @State var viewModel = HobbyViewModel()
+    @Environment(HobbyViewModel.self) var viewModel
     @State private var revealDetails = true
     @State private var hasScrolled: Bool = false
     
@@ -76,7 +76,7 @@ struct LoisirDetailView: View {
                     }.padding(.horizontal, 24)
                         .padding(.bottom)
                 }.ignoresSafeArea(edges: .top)
-                    .padding(.bottom, -60)
+                    .padding(.bottom, -120)
                 ScrollView(.vertical, showsIndicators: false){
                     VStack(alignment: .leading, spacing: 16) {
                         
@@ -194,17 +194,17 @@ struct LoisirDetailView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                await viewModel.loadDetailImages(for: hobby)
-            }
-        }
+//        .onAppear {
+//            Task {
+//                await viewModel.loadDetailImages(for: hobby)
+//            }
+//        }
         
     }
 }
 
 #Preview {
     let viewModel = HobbyViewModel()
-    LoisirDetailView(hobby: viewModel.hobbies[0]).environment(users[0])
+    LoisirDetailView(hobby: viewModel.hobbies[0]).environment(users[0]).environment(HobbyViewModel())
 }
 

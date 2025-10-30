@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(HobbyViewModel.self) var viewModel
+    
     var body: some View {
         TabView {
             Tab("Découvrir", systemImage: "sparkles") {
@@ -23,9 +25,14 @@ struct ContentView: View {
                 ProfilView()
             }
         }.tint(Color.primaryPurpule)
+            .onAppear {
+                Task {
+                    await viewModel.loadDetailImages()
+                }
+            }
     }
 }
 
 #Preview {
-    ContentView().environment(users[0])
+    ContentView().environment(users[0]).environment(HobbyViewModel())
 }

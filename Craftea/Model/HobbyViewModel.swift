@@ -32,8 +32,8 @@ extension UIImage {
 
 @Observable
 class HobbyViewModel {
-    //private let unsplash = UnsplashService(accessKey: "5bOGmrInQ06GBsAQMMD4OE8hN9S0J9QU9Y_ShBlgE6U")
-    private let unsplash = UnsplashService(accessKey: "")
+    private let unsplash = UnsplashService(accessKey: "5bOGmrInQ06GBsAQMMD4OE8hN9S0J9QU9Y_ShBlgE6U")
+    //private let unsplash = UnsplashService(accessKey: "")
     var hobbies: [Hobby] = []
     
     init() {
@@ -442,7 +442,7 @@ class HobbyViewModel {
 //            }
 //        }
 //    }
-    func loadDetailImages(for: Hobby) async {
+    func loadDetailImages() async {
         /*.onAppear {  // a utiliser au dans la page ou on veut afficher les images
          Task {
          await viewModel.loadDetailImages(for: hobby)

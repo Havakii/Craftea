@@ -15,7 +15,7 @@ struct DecouvrirView: View {
     @State private var hasScrolled: Bool = false
     @State private var isExpanded: Bool = true
     @State var selectedFilters: [Level] = []
-    @State var viewModel = HobbyViewModel()
+    @Environment(HobbyViewModel.self) var viewModel
     
     var filteredData: [Hobby] {
         viewModel.hobbies.filter { hobby in
@@ -198,6 +198,6 @@ struct DecouvrirView: View {
 }
 
 #Preview {
-    DecouvrirView().environment(users[0])
+    DecouvrirView().environment(users[0]).environment(HobbyViewModel())
 }
 
