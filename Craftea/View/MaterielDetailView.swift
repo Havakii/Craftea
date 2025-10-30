@@ -7,6 +7,7 @@
 import SwiftUI
 
 struct MaterielDetailView: View {
+    
     let materiel: MaterielView.Materiel
     let typeMateriel: String = "Don"
     @Environment(\.dismiss) private var dismiss

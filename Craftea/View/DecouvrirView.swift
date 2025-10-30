@@ -67,6 +67,14 @@ struct DecouvrirView: View {
                                 .textInputAutocapitalization(.never)
                                 .disableAutocorrection(true)
                                 .foregroundStyle(Color.textPrimary)
+                            Button(action: {
+                                }) {
+                                    Image(systemName: "mic.fill")
+                                        .foregroundColor(.gray)
+                                        .padding(6)
+                                        .background(Color.white.opacity(0.8))
+                                        .clipShape(Circle())
+                                }
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 12)
