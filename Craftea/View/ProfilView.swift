@@ -31,7 +31,7 @@ struct ProfilView: View {
                         .padding(5)
                     ScrollView (.horizontal) {
                         HStack {
-                            ForEach(otherUser[0].favoritesHobby as! [Hobby]) { hobby in VerticalHobbyView(hobby: hobby)}
+                            ForEach(otherUser[0].favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
                                 .padding(.trailing ,20)}
                         .padding(20)
                     }
@@ -42,7 +42,7 @@ struct ProfilView: View {
                         .padding(5)
                     ScrollView (.horizontal) {
                         HStack {
-                            ForEach(otherUser[0].favoritesHobby as! [Hobby]) { hobby in VerticalHobbyView(hobby: hobby)                        }
+                            ForEach(otherUser[0].favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)                        }
                                 .padding(.trailing ,20)
                         }
                         .padding(20)

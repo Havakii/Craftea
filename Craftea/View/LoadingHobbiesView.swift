@@ -20,7 +20,7 @@ struct LoadingHobbiesView: View {
                         .font(.custom("Manrope-Bold", size: 20))
                         .multilineTextAlignment(.center)
                     
-                    NavigationLink(destination: DecouvrirView(user: users[0]), isActive: $navigate) {
+                    NavigationLink(destination: DecouvrirView(), isActive: $navigate) {
                         EmptyView()
                     }
 

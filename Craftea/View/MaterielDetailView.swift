@@ -65,7 +65,7 @@ struct MaterielDetailView: View {
                             
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(pseudo)
-                                    .mainTextBold()
+                                    .mainText(bold: true)
                                 
                                 Text(String(format: "%.1f ★", note))
                                     .secondaryText()
