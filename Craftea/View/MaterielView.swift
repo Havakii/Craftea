@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MaterielView: View {
     @State private var searchText = ""
+    var searchTextfromDetailView: String = ""
     @State private var condition: String = "Occasion"
     @State private var showingFilter = true
     @State private var showAjoutMateriel = false
@@ -242,6 +243,11 @@ struct MaterielView: View {
             .navigationDestination(isPresented: $showAjoutMateriel) {
                 AjoutMaterielView()
             }
+            .onAppear {
+                if !searchTextfromDetailView.isEmpty {
+                    searchText = searchTextfromDetailView
+                }
+            }
         }
     }
 }
@@ -249,6 +255,4 @@ struct MaterielView: View {
 #Preview {
     MaterielView()
 }
-
-
 

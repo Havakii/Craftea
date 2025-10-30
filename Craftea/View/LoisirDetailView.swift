@@ -85,31 +85,35 @@ struct LoisirDetailView: View {
                             isExpanded: $revealDetails,
                             content: {
                                 ForEach(hobby.equipementNeeded, id: \.id) { item in
-                                    HStack(alignment: .top) {
-                                        AsyncImage(url: URL(string: item.image)) { image in
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 60, height: 60)
-                                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                                        } placeholder: {
-                                            ProgressView()
-                                                .frame(width: 60, height: 60)
-                                        }
-                                        VStack(alignment: .leading){
-                                            Text(item.name)
-                                                .mainText(bold: true)
+                                    NavigationLink(destination: MaterielView(searchTextfromDetailView: item.name)){
+                                        HStack(alignment: .top) {
+                                            AsyncImage(url: URL(string: item.image)) { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 60, height: 60)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                            } placeholder: {
+                                                ProgressView()
+                                                    .frame(width: 60, height: 60)
+                                            }
+                                            VStack(alignment: .leading){
+                                                Text(item.name)
+                                                    .mainText(bold: true).foregroundColor(.textPrimary)
                                                 
-                                            Text(item.description)
-                                                .secondaryText()
                                                 
+                                                Text(item.description)
+                                                    .secondaryText().foregroundColor(.textSecondary)
+                                                
+                                            }
+                                            Spacer()
                                         }
-                                        Spacer()
+                                        .padding(8)
+                                        .background(Color.almostWhite)
+                                        .cornerRadius(16)
+                                        .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
+                                        
                                     }
-                                    .padding(8)
-                                    .background(Color.almostWhite)
-                                    .cornerRadius(16)
-                                    .shadow(color: .gray.opacity(0.1), radius: 4, x: 0, y: 2)
                                 }
                             },
                             label: {
@@ -142,12 +146,12 @@ struct LoisirDetailView: View {
                                         }
                                     }
                                     VStack(alignment: .leading){
-                                        Text("But :").mainText(bold: true)
+                                        Text("But :").mainText(bold: true).padding(.bottom, 2)
                                         Text(item.but)
                                             .mainText()
                                             .multilineTextAlignment(.leading)
                                             .padding(.bottom, 8)
-                                        Text("Technique :").mainText(bold: true)
+                                        Text("Technique :").mainText(bold: true).padding(.bottom, 2)
                                         Text(item.description)
                                             .mainText()
                                             .multilineTextAlignment(.leading)
@@ -170,10 +174,11 @@ struct LoisirDetailView: View {
                             Button(action: {
                                 if user.favoritesHobby.contains(where: { $0.id == hobby.id }) {
                                     user.favoritesHobby.removeAll(where: { $0.id == hobby.id })
+                                    user.score -= 10
                                 } else {
                                     user.favoritesHobby.append(hobby)
+                                    user.score += 10
                                 }
-                                print(user.favoritesHobby)
                             }) {
                                 Label("Favorite", systemImage: user.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")
                             }
