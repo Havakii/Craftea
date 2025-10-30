@@ -1,26 +1,26 @@
 //
-//  QuestionsView.swift
+//  Questions4View.swift
 //  Craftea
 //
-//  Created by Hava Bakrieva on 27/10/2025.
+//  Created by Apprenant 83 on 29/10/2025.
 //
+
 import SwiftUI
 
-struct QuestionsView: View {
+struct Questions4View: View {
     @State private var currentIndex = 0
     @State private var selectedOption: Int? = nil
     let questions: [Question] = [
         Question(
-        text: "Quand tu penses loisir créatif, tu penses plutôt à...",
-        options: [
-            "Peinture, dessin, tout ce qui tache un peu les doigts",
-            "Couture, tricot, crochet, le royaume du fil et des aiguilles",
-            "Bricolage, DIY déco, objets récup",
-            "Écriture, scrapbooking, journaling, les loisirs poétiques",
-            "Musique, photo, vidéo, les loisirs créatifs version numérique"
-        ],
-        key: "category"
-    )]
+            text: "Quand il s’agit de matériel, tu es plutôt…",
+            options: [
+                "Team récup’ et système D",
+                "Je prends le strict nécessaire",
+                "J’investis dans du bon matos",
+                "J’adore collectionner les fournitures, même si je ne les utilise pas toujours"
+            ],
+            key: "budget"
+        )]
     var body: some View {
         let question = questions[currentIndex]
         NavigationStack {
@@ -40,7 +40,7 @@ struct QuestionsView: View {
                         .font(.custom("Manrope-Bold", size: 20))
                         .padding(.top, 40)
                     
-                    ProgressView(value: 1.0 / 7.0)
+                    ProgressView(value: 4.0 / 7.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: Color("secondaryOrange")))
                         .frame(width: 300)
                     
@@ -59,6 +59,7 @@ struct QuestionsView: View {
                             Image(systemName: selectedOption == index ? "largecircle.fill.circle" : "circle")
                                 .foregroundColor(selectedOption == index ? Color("secondaryOrange") : .gray)
                                 .padding(.trailing, 10)
+
                         }
                         .padding()
                         .frame(width: 350, height: 70)
@@ -67,7 +68,7 @@ struct QuestionsView: View {
                         .onTapGesture { selectedOption = index }
                     }
                     
-                    NavigationLink(destination: Questions2View()) {
+                    NavigationLink(destination: Questions5View()) {
                         HStack {
                             Text("Suivant")
                                 .font(.custom("Manrope-Bold", size: 20))
@@ -87,6 +88,5 @@ struct QuestionsView: View {
 }
 
 #Preview {
-    QuestionsView()
+    Questions4View()
 }
-
