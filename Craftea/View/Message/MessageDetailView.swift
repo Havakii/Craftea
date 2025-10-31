@@ -11,117 +11,158 @@ public struct MessageDetailView: View {
     @State private var conversation: Conversation
     @State private var showSecurityMessage = true
     @State private var isReserved = false
+    @State private var showMessage = true
+    @State private var hasConfirmed = false
     
     init(conversation: Conversation) {
         _conversation = State(initialValue: conversation)
     }
     
     public var body: some View {
-        ZStack {
-            Color.background.ignoresSafeArea()
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
-                startPoint: .topLeading,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            VStack {
-                MessageDonCardView(isReserved: $isReserved)
-                
-                
-                ScrollView {
-                    VStack {
-                        ForEach(conversation.messages) { message in
-                            HStack {
-                                if message.sender.name == conversation.participants.first?.name {
-                                    Spacer()
-                                    Text(message.content)
-                                        .padding(10)
-                                        .background(Color.primaryPurpule.opacity(0.2))
-                                        .cornerRadius(10)
-                                } else {
-                                    Text(message.content)
-                                        .padding(10)
-                                        .background(Color.secondaryOrange.opacity(0.1))
-                                        .cornerRadius(10)
-                                    Spacer()
-                                }
-                            }
-                            .padding(.horizontal)
-                            .padding(.vertical, 4)
-                        }
-                    }
-                }
+        NavigationStack {
+            ZStack {
+                Color.background.ignoresSafeArea()
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
                 
                 VStack {
-                    if isReserved {
-                        Text("Le produit est réservé.")
-                            .font(.subheadline)
-                            .foregroundColor(.primaryPurpule)
-                            .padding()
+                    MessageDonCardView(isReserved: $isReserved)
+                    
+                    
+                    ScrollView {
+                        VStack {
+                            ForEach(conversation.messages) { message in
+                                HStack {
+                                    if message.sender.name == conversation.participants.first?.name {
+                                        Spacer()
+                                        Text(message.content)
+                                            .padding(10)
+                                            .background(Color.primaryPurpule.opacity(0.2))
+                                            .cornerRadius(10)
+                                    } else {
+                                        Text(message.content)
+                                            .padding(10)
+                                            .background(Color.secondaryOrange.opacity(0.1))
+                                            .cornerRadius(10)
+                                        Spacer()
+                                    }
+                                }
+                                .padding(.horizontal)
+                                .padding(.vertical, 4)
+                            }
+                        }
                     }
-                    if showSecurityMessage {
-                        HStack(alignment: .top) {
-                            Text("⚠️️ Pour votre sécurité, ne partagez pas d’adresse exacte ni d’informations personnelles. Privilégiez les lieux publics pour vos échanges.")
-                                .font(.footnote)
-                                .padding(7)
+                    
+                    VStack {
+                        if isReserved && !hasConfirmed {
+                               ButtonComponent(
+                                   text: "Confirmer la réception",
+                                   style: .outlined,
+                                   size: .large
+                               ) {
+                                   withAnimation {
+                                       hasConfirmed = true
+                                   }
+                               }
+
+                           } else if isReserved && hasConfirmed {
+                               VStack(spacing: 16) {
+                                   Text("Parfait ! Vous avez bien confirmé la réception.")
+                                       .font(.subheadline)
+                                       .foregroundColor(.primaryPurpule)
+                                       .multilineTextAlignment(.center)
+                                       .padding(.bottom, 8)
+
+                                   HStack(spacing: 16) {
+                                       NavigationLink(destination: NoteView()) {
+                                           ButtonComponent(
+                                               text: "Évaluer",
+                                               style: .filled,
+                                               size: .small,
+                                               action: {}
+                                           )
+                                       }
+
+                                       NavigationLink(destination: AjoutMaterielView()) {
+                                           ButtonComponent(
+                                               text: "Publier un nouvel article",
+                                               style: .outlined,
+                                               size: .small,
+                                               action: {}
+                                           )
+                                       }
+                                   }
+                               }
+                               .padding(.top)
+                               .transition(.opacity)
+                           }
+                        if showSecurityMessage {
+                            HStack(alignment: .top) {
+                                Text("⚠️️ Pour votre sécurité, ne partagez pas d’adresse exacte ni d’informations personnelles. Privilégiez les lieux publics pour vos échanges.")
+                                    .font(.footnote)
+                                    .padding(7)
+                                Spacer()
+                                Button(action: {
+                                    withAnimation {
+                                        showSecurityMessage = false
+                                    }
+                                }) {
+                                    Image(systemName: "xmark.circle")
+                                        .foregroundColor(.gray)
+                                        .padding(.vertical, 8)
+                                }
+                                .padding(.trailing, 4)
+                            }
+                        }
+                        TextField("Écrire un message...", text: $newMessage, axis: .vertical)
+                            .lineLimit(...3)
+                            .padding()
+                            .background(Color.almostWhite)
+                        
+                        HStack {
+                            Button(action: {
+                                //TODO: addMedia button + check
+                            }) {
+                                Image(systemName: "photo.badge.plus")
+                                    .font(.title2)
+                                    .foregroundColor(.gray)
+                                    .padding()
+                            }
                             Spacer()
                             Button(action: {
+                                sendMessage()
                                 withAnimation {
                                     showSecurityMessage = false
                                 }
-                            }) {
-                                Image(systemName: "xmark.circle")
-                                    .foregroundColor(.gray)
-                                    .padding(.vertical, 8)
+                            }){
+                                Text("Envoyer")
+                                    .foregroundColor(newMessage.isEmpty ? .gray : .primaryPurpule)
+                                    .padding(.horizontal, 8)
                             }
-                            .padding(.trailing, 4)
                         }
+                        
                     }
-                    TextField("Écrire un message...", text: $newMessage, axis: .vertical)
-                        .lineLimit(...3)
-                        .padding()
-                        .background(Color.almostWhite)
-                    
-                    HStack {
-                        Button(action: {
-                            //TODO: addMedia button + check
-                        }) {
-                            Image(systemName: "photo.badge.plus")
-                                .font(.title2)
-                                .foregroundColor(.gray)
-                                .padding()
-                        }
-                        Spacer()
-                        Button(action: {
-                            sendMessage()
-                            withAnimation {
-                                showSecurityMessage = false
-                            }
-                        }){
-                            Text("Envoyer")
-                                .foregroundColor(newMessage.isEmpty ? .gray : .primaryPurpule)
-                                .padding(.horizontal, 8)
-                        }
-                    }
-                    
+                    .padding()
                 }
-                .padding()
-            }
-            .navigationTitle("Conversation")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button (action: {}) {
-                        Image(systemName: "flag.fill")
-                                    .font(.system(size: 20, weight: .semibold))
-                                    .foregroundColor(Color("primaryPurpule"))
+                .navigationTitle("Conversation")
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button (action: {}) {
+                            Image(systemName: "flag.fill")
+                                .font(.system(size: 20, weight: .semibold))
+                                .foregroundColor(Color("primaryPurpule"))
+                        }
+                        
                     }
-                    
-                }
-            }.padding()
-        }.toolbar(.hidden, for: .tabBar) 
-    }
+                }.padding()
+            }.toolbar(.hidden, for: .tabBar)
+        }
+        }
+
     
     
     private func sendMessage() {
