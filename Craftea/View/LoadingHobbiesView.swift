@@ -9,18 +9,29 @@ import SwiftUI
 
 struct LoadingHobbiesView: View {
     @State private var isLoading = false
-    @State private var navigate = false
+    @State private var navigate = false // To trigger NavigationLink programmatically
+
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ZStack {
-                LinearGradient(gradient:Gradient(colors: [Color(red: 224 / 255, green: 182 / 255, blue: 252 / 255), Color(red: 156 / 255, green: 123 / 255, blue: 245 / 255)]), startPoint: .topLeading, endPoint: .bottom)
-                    .ignoresSafeArea()
-                VStack{
-                    Text("Merci pour tes réponses ! Nous te préparons des loisirs adaptés ! ")
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color(red: 224 / 255, green: 182 / 255, blue: 252 / 255),
+                        Color(red: 156 / 255, green: 123 / 255, blue: 245 / 255)
+                    ]),
+                    startPoint: .topLeading,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+
+                VStack(spacing: 40) {
+                    Text("Merci pour tes réponses ! Nous te préparons des loisirs adaptés !")
                         .font(.custom("Manrope-Bold", size: 20))
                         .multilineTextAlignment(.center)
-                    
-                    NavigationLink(destination: DecouvrirView(), isActive: $navigate) {
+                        .padding(.horizontal)
+
+                    // Hidden navigation link triggered programmatically
+                    NavigationLink(destination: DecouvrirView().environment(users[0]), isActive: $navigate) {
                         EmptyView()
                     }
 
@@ -29,26 +40,26 @@ struct LoadingHobbiesView: View {
                         .stroke(Color("secondaryOrange"), lineWidth: 7)
                         .frame(width: 100, height: 100)
                         .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
-                        .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: isLoading)
-                        .onAppear {
-                            isLoading = true
-                            // Simulate loading delay
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                navigate = true
-                            }
-                        }
+                        .animation(
+                            Animation.linear(duration: 1)
+                                .repeatForever(autoreverses: false),
+                            value: isLoading
+                        )
+                }
+                .onAppear {
+                    isLoading = true
 
+                    // Automatically navigate after a short delay (e.g., 2.5 seconds)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                        navigate = true
+                    }
+                }
             }
-            .onAppear {
-             isLoading = true
-            }
-                  
-            }
-        }
-
         }
     }
+}
 
 #Preview {
     LoadingHobbiesView()
 }
+

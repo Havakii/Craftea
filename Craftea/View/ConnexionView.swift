@@ -7,17 +7,26 @@
 
 import SwiftUI
 
+let usersData = [
+    User(name: "Lora-Line", surname: "Faure", mail: "Lora-Line@gmail.com", pseudo: "Lora-Line", password: "123456")
+]
+
 struct ConnexionView: View {
+    @Environment(User.self) var user
     @State private var mail: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
+    @State private var isConnected: Bool = false
+    @State private var showAlert: Bool = false
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("Background")
                     .ignoresSafeArea()
+                
                 VStack(spacing: 30) {
+                   
                     VStack {
                         Image("CrafteaLogo")
                             .resizable()
@@ -31,16 +40,17 @@ struct ConnexionView: View {
                             .padding(.bottom, 20)
                     }
                     
+                    
                     VStack(spacing: 20) {
                         TextField("Mail", text: $mail)
                             .keyboardType(.emailAddress)
+                            .autocapitalization(.none)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.5))
                             )
                         
-                        // Mot de passe
                         HStack {
                             if isPasswordVisible {
                                 TextField("Mot de passe", text: $password)
@@ -58,37 +68,54 @@ struct ConnexionView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
                                 .stroke(Color.gray.opacity(0.5))
-                        ).background(Color.white)
+                        )
+                        .background(Color.white)
                     }
                     
-                    HStack(spacing: 10) {
+                  
+                    HStack {
+                        Spacer()
                         Text("Mot de passe oublié ?")
                             .font(.custom("Inter_24pt-Regular", size: 15))
                             .underline()
-                    }  .padding(.leading, 200)
+                    }
                     
                     
                     Button(action: {
-                        print("Inscription effectuée")
+                        if let _ = usersData.first(where: {
+                            $0.mail.lowercased() == mail.lowercased() && $0.password == password
+                        }) {
+                           
+                            isConnected = true
+                        } else {
+                            
+                            showAlert = true
+                        }
                     }) {
-                        HStack{
+                        HStack {
                             Text("Me connecter")
                                 .font(.custom("Manrope-Bold", size: 20))
                                 .foregroundColor(.white)
                             Image(systemName: "arrow.up.right")
-                                .fontWeight(.bold)
                                 .foregroundColor(.white)
-                            
-                        }   .padding()
-                            .frame(width: 300, height: 50)
-                            .background(Color("primaryPurpule"))
-                            .cornerRadius(10)
-                        
-                        
-                        
+                        }
+                        .padding()
+                        .frame(width: 300, height: 50)
+                        .background(Color("primaryPurpule"))
+                        .cornerRadius(10)
                     }
+                    .alert("Identifiants incorrects", isPresented: $showAlert) {
+                        Button("OK", role: .cancel) {}
+                    }
+                    
+                    // Navigation après connexion réussie
+                    NavigationLink(destination: DecouvrirView().environment(users[0]), isActive: $isConnected) {
+                        EmptyView()
+                    }
+                    
                     Spacer()
                     
+                   
                     HStack {
                         Text("Tu n'as pas de compte ?")
                             .font(.custom("Inter_24pt-Regular", size: 15))
@@ -97,16 +124,15 @@ struct ConnexionView: View {
                                 .font(.custom("Manrope-Bold", size: 15))
                         }
                     }
-
                     
                 }.padding()
             }
-            
-            
         }
     }
 }
 
 #Preview {
     ConnexionView()
+        .environment(users[0])
 }
+
