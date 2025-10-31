@@ -140,9 +140,11 @@ struct LoisirDetailView: View {
                                                 .frame(height: 182)
                                                 .clipShape(RoundedRectangle(cornerRadius: 8))
                                                 .padding(.top, 8)
+                                                .allowsHitTesting(false)
                                         } placeholder: {
                                             ProgressView()
                                                 .frame(height: 182)
+                                                .allowsHitTesting(false)
                                         }
                                     }
                                     VStack(alignment: .leading){
@@ -159,8 +161,10 @@ struct LoisirDetailView: View {
                                 }
                             }label: {
                                 Text(item.name)
-                                    .mainText(bold: true).foregroundStyle(Color(.textPrimary))
-                                    
+                                    .mainText(bold: true)
+                                    .foregroundStyle(Color(.textPrimary))
+                                    .contentShape(Rectangle())
+
                                 
                             }.padding(16)
                                 .background(Color.almostWhite)

@@ -8,7 +8,7 @@
 import Foundation
 
 var users: [User] = [
-    User(name: "Lora-Line", surname: "Faure", mail: "Lora-Line@gmail.com", pseudo: "Lora-Line", password: "123456", recommandations: [Hobby(
+    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456", recommandations: [Hobby(
         name: .PeintureAcrylique,
         description: "Créer des œuvres colorées et texturées",
         image: "acrylique",
@@ -71,7 +71,7 @@ var users: [User] = [
         Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
         ], popular: true
         )]),
-    User(name: "Ethan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",favoritesHobby: []),
+    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",favoritesHobby: []),
     User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456",favoritesHobby: []),
     User(name: "Pierre",surname: "Thomas",mail: "Pierre@gmail.com",pseudo: "Pierre",password: "123456",favoritesHobby: []),
     User(name: "Marc",surname: "Sellier",mail: "Marc@gmail.com",pseudo: "Marc",password: "123456",favoritesHobby: []),
@@ -150,4 +150,16 @@ var materielsNeuf: [MaterielPro] = [
     MaterielPro(nom: "Chevalet de table", image: "", description: "Chevalet pliable en bois", vendeur: "StudioGear", prix: "18,90 €"),
     MaterielPro(nom: "Nettoyant pinceaux", image: "", description: "Savon spécial pinceaux 85g", vendeur: "BrushWorks", prix: "3,90 €")
     
+]
+
+let homePhrases: [String] = [
+    "Débloque ta créativité sans limites !",
+    "Crée, partage, inspire.",
+    "Laisse parler tes mains.",
+    "Transforme une envie en projet.",
+    "Trouve ton prochain coup de cœur créatif.",
+    "Partage ton matos, multiplie les idées.",
+    "Ose expérimenter, ose t'amuser.",
+    "Chaque création commence par un essai.",
+    "Fais de ta curiosité une création."
 ]

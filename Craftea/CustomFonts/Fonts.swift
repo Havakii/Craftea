@@ -25,9 +25,6 @@ extension View {
     func secondaryText(color: Color = Color.textSecondary) -> some View {
         return self.font(.custom("Inter24pt-Regular", size: 14))
     }
-//    func mainTextBold(color: Color = .textPrimary) -> some View {
-//        return self.font(.custom("Inter24pt-SemiBold", size: 16))
-//    }
     func categoryText(color: Color = Color.secondaryOrange) -> some View {
         return self.font(.custom("Manrope-ExtraBold", size: 12))
     }

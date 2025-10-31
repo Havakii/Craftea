@@ -48,7 +48,7 @@ struct DecouvrirView: View {
                                 Text("Bonjour \(user.name) !")
                                     .mainTitle()
                                     .foregroundStyle(Color.primaryPurpule)
-                                Text("Débloque ta créativité sans limites !")
+                                Text(homePhrases.randomElement()!)
                                     .tertiaryTitle()
                                     .foregroundStyle(Color.textSecondary)
                             }
@@ -168,7 +168,7 @@ struct DecouvrirView: View {
                                 }
                                 
                             }
-                            // Loisirs Populaires
+                            // tout les loisirs
                             Text("Tous les loisirs")
                                 .mainTitle()
                                 .foregroundStyle(Color.textPrimary)
