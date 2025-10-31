@@ -51,6 +51,7 @@ struct ConnexionView: View {
                                     .stroke(Color.gray.opacity(0.5))
                             )
                         
+                        // Mot de passe
                         HStack {
                             if isPasswordVisible {
                                 TextField("Mot de passe", text: $password)
@@ -75,9 +76,12 @@ struct ConnexionView: View {
                   
                     HStack {
                         Spacer()
-                        Text("Mot de passe oublié ?")
-                            .font(.custom("Inter_24pt-Regular", size: 15))
-                            .underline()
+                        Button("Mot de passe oublié ?") {
+                        }
+                        .font(.custom("Inter_24pt-Regular", size: 15))
+                        .foregroundColor(.black)
+                        .underline()
+
                     }
                     
                     
@@ -109,7 +113,7 @@ struct ConnexionView: View {
                     }
                     
                     // Navigation après connexion réussie
-                    NavigationLink(destination: DecouvrirView().environment(users[0]), isActive: $isConnected) {
+                    NavigationLink(destination: DecouvrirView().environment(users[0]).environment(HobbyViewModel()), isActive: $isConnected) {
                         EmptyView()
                     }
                     
@@ -122,6 +126,7 @@ struct ConnexionView: View {
                         NavigationLink(destination: InscriptionView()) {
                             Text("S'inscrire")
                                 .font(.custom("Manrope-Bold", size: 15))
+                                .foregroundColor(.black)
                         }
                     }
                     

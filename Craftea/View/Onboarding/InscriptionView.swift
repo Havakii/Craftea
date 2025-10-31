@@ -12,7 +12,7 @@ let users2Data = [
 ]
 
 struct InscriptionView: View {
-    @State var users: [User] = users2Data
+    @Environment(User.self) var user
     @State private var nom: String = ""
     @State private var name: String = ""
     @State private var pseudo: String = ""
@@ -22,6 +22,8 @@ struct InscriptionView: View {
     @State private var isPasswordVisible: Bool = false
     @State private var isPassword2Visible: Bool = false
     @State private var showMessage: Bool = false
+    @State private var acceptedTerms = false
+
     
     
     func isPasswordValid() -> Bool {
@@ -29,7 +31,7 @@ struct InscriptionView: View {
         }
     
     func isPassword2Valid() -> Bool {
-            return password.count >= 6 && password.count <= 15
+            return password2.count >= 6 && password2.count <= 15
         }
     
     var body: some View {
@@ -135,13 +137,16 @@ struct InscriptionView: View {
                                 .padding(.horizontal, 20)
                         }
                     }
-                    
+                     //Accepte
                     HStack(spacing: 10) {
-                        Image(systemName: "square")
-                            .foregroundColor(.purple)
-                        Text("J'ai lu et j'accepte les conditions d'utilisation")
-                            .font(.custom("Inter_24pt-Regular", size: 15))
-                            .underline()
+                        Button(action: { acceptedTerms.toggle() }) {
+                            Image(systemName: acceptedTerms ? "checkmark.square" : "square")
+                                .foregroundColor(.purple)
+                            Text("J'ai lu et j'accepte les conditions d'utilisation")
+                                .font(.custom("Inter_24pt-Regular", size: 15))
+                                .foregroundColor(.black)
+                                .underline()
+                        }
                     }
                     
                     
@@ -169,6 +174,7 @@ struct InscriptionView: View {
                         NavigationLink(destination: ConnexionView()) {
                             Text("Se connecter")
                                 .font(.custom("Manrope-Bold", size: 15))
+                                .foregroundColor(.black)
 
                         }
                     }

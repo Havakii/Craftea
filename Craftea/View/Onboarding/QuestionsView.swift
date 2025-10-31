@@ -7,22 +7,27 @@
 import SwiftUI
 
 struct QuestionsView: View {
+    @Environment(User.self) private var user
     @State private var currentIndex = 0
     @State private var selectedOption: Int? = nil
+
     let questions: [Question] = [
         Question(
-        text: "Quand tu penses loisir créatif, tu penses plutôt à...",
-        options: [
-            "Peinture, dessin, tout ce qui tache un peu les doigts",
-            "Couture, tricot, crochet, le royaume du fil et des aiguilles",
-            "Bricolage, DIY déco, objets récup",
-            "Écriture, scrapbooking, journaling, les loisirs poétiques",
-            "Musique, photo, vidéo, les loisirs créatifs version numérique"
-        ],
-        key: "category"
-    )]
+            text: "Quand tu penses loisir créatif, tu penses plutôt à...",
+            options: [
+                "Peinture, dessin, tout ce qui tache un peu les doigts",
+                "Couture, tricot, crochet, le royaume du fil et des aiguilles",
+                "Bricolage, DIY déco, objets récup",
+                "Écriture, scrapbooking, journaling, les loisirs poétiques",
+                "Musique, photo, vidéo, les loisirs créatifs version numérique"
+            ],
+            key: "category"
+        )
+    ]
+
     var body: some View {
         let question = questions[currentIndex]
+
         NavigationStack {
             ZStack {
                 LinearGradient(
@@ -34,21 +39,21 @@ struct QuestionsView: View {
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
-                
+
                 VStack(spacing: 20) {
                     Text("Trouve un loisir qui te correspond !")
                         .font(.custom("Manrope-Bold", size: 20))
                         .padding(.top, 40)
-                    
+
                     ProgressView(value: 1.0 / 7.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: Color("secondaryOrange")))
                         .frame(width: 300)
-                    
+
                     Text(question.text)
                         .font(.custom("Manrope-Bold", size: 17))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
-                    
+
                     ForEach(question.options.indices, id: \.self) { index in
                         HStack {
                             Text(question.options[index])
@@ -66,7 +71,7 @@ struct QuestionsView: View {
                         .cornerRadius(10)
                         .onTapGesture { selectedOption = index }
                     }
-                    
+
                     NavigationLink(destination: Questions2View()) {
                         HStack {
                             Text("Suivant")
@@ -82,11 +87,14 @@ struct QuestionsView: View {
                     }
                 }
             }
+            .toolbar(.hidden, for: .tabBar)
         }
     }
 }
 
 #Preview {
     QuestionsView()
+        .environment(users[0])
 }
+
 
