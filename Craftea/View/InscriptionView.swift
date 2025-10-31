@@ -7,7 +7,12 @@
 
 import SwiftUI
 
+let users2Data = [
+    User(name: "Lora-Line", surname: "Faure", mail: "Lora-Line@gmail.com", pseudo: "Lora-Line", password: "123456")
+]
+
 struct InscriptionView: View {
+    @State var users: [User] = users2Data
     @State private var nom: String = ""
     @State private var name: String = ""
     @State private var pseudo: String = ""
@@ -16,6 +21,16 @@ struct InscriptionView: View {
     @State private var password2: String = ""
     @State private var isPasswordVisible: Bool = false
     @State private var isPassword2Visible: Bool = false
+    @State private var showMessage: Bool = false
+    
+    
+    func isPasswordValid() -> Bool {
+            return password.count >= 6 && password.count <= 15
+        }
+    
+    func isPassword2Valid() -> Bool {
+            return password.count >= 6 && password.count <= 15
+        }
     
     var body: some View {
         NavigationStack {
@@ -85,6 +100,14 @@ struct InscriptionView: View {
                                     .stroke(Color.gray.opacity(0.5))
                             ).background(Color.white)
                         
+                        
+                        if !isPasswordValid() && !password.isEmpty {
+                            Text("⚠️ Le mot de passe doit contenir entre 6 et 15 caractères.")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(.red)
+                                .padding(.horizontal, 20)
+                        }
+                        
                         // Confirmation du mot de passe
                         HStack {
                             if isPassword2Visible {
@@ -103,6 +126,14 @@ struct InscriptionView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.5))
                             ).background(Color.white)
+                        
+                        
+                        if !isPassword2Valid() && !password2.isEmpty {
+                            Text("⚠️ Le mot de passe doit contenir entre 6 et 15 caractères.")
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(.red)
+                                .padding(.horizontal, 20)
+                        }
                     }
                     
                     HStack(spacing: 10) {
@@ -115,7 +146,7 @@ struct InscriptionView: View {
                     
                     
                     Button(action: {
-                        print("Inscription effectuée")
+                        showMessage = true
                     }) {
                         HStack{
                             Image(systemName: "checkmark.circle")
@@ -149,5 +180,5 @@ struct InscriptionView: View {
 }
 
 #Preview {
-    InscriptionView()
+    InscriptionView().environment(users[0])
 }
