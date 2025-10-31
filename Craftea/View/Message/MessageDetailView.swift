@@ -120,7 +120,7 @@ public struct MessageDetailView: View {
                     
                 }
             }.padding()
-        }
+        }.toolbar(.hidden, for: .tabBar) 
     }
     
     
