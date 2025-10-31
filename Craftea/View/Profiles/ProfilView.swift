@@ -7,6 +7,8 @@
 import SwiftUI
 
 struct ProfilView: View {
+    //@State var user : User
+    @Environment(User.self) private var user
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
     
@@ -23,7 +25,7 @@ struct ProfilView: View {
                         .resizable()
                         .frame(width: 100,height: 100)
                     HStack{
-                        Text("\(otherUser[0].name)").mainTitle()
+                        Text("\(user.name)").mainTitle()
                         HStack {
                             Image(systemName: "star.fill")
                                 .foregroundColor(.yellow)
@@ -39,18 +41,32 @@ struct ProfilView: View {
                         .padding(5)
                     ScrollView (.horizontal) {
                         HStack {
-                            ForEach(otherUser[0].favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
+                            ForEach(user.favoritesHobby) { hobby in VerticalHobbyView(hobby: hobby)}
                             .padding(.trailing ,20)}
                         .padding(20)
                     }
                     Spacer()
                 }
                 VStack(alignment: .leading) {
+                    Text("Mes Favoris").mainTitle()
+                        .padding(5)
+                    ScrollView (.horizontal) {
+                        HStack {
+                            ForEach(user.favoritesHobby) { hobby in VerticalHobbyView(hobby: hobby)}
+                                .padding(.trailing ,20)
+                        }
+                        .padding(20)
+                        
+                    }
+                    Spacer()
+                }
+                
+    VStack(alignment: .leading) {
                     Text("Mes Articles de Troc").mainTitle()
                         .padding(5)
                     ScrollView (.horizontal) {
                         HStack {
-                            ForEach(otherUser[0].favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)                        }
+                            ForEach(user.favoritesHobby) { hobby in VerticalHobbyView(hobby: hobby)                        }
                                 .padding(.trailing ,20)
                         }
                         .padding(20)
@@ -67,5 +83,5 @@ struct ProfilView: View {
     }
 }
 #Preview {
-    ProfilView()
+    ProfilView().environment(users[0]).environment(HobbyViewModel())
 }

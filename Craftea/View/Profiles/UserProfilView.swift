@@ -15,9 +15,6 @@ struct UserProfilView: View {
                         showingAlert = true
                     })
                     { ProfilSignalButton()}
-                        .alert("Important message", isPresented: $showingAlert) {
-                            Button("OK", role: .cancel) { }
-                        }
                         .padding(.leading,300)
                         .padding(.top, 50)
                     Image(systemName:"person.fill")
