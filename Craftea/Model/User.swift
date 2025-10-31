@@ -18,12 +18,12 @@ class User: Identifiable {
     var password: String
     var location: String?
     var score: Double
-    var favoriteEquipment: [Equipment?]
+    var favoriteEquipment: [Materiel]
     var favoritesHobby: [Hobby]
-    var equipment: [Equipment?]
+    var equipment: [Materiel?]
     var recommandations: [Hobby]
     
-    init(name: String, surname: String, mail: String, pseudo: String, password: String, location: String? = nil, score: Double = 5, favoriteEquipment: [Equipment?] = [], favoritesHobby: [Hobby] = [], equipment: [Equipment?] = [], recommandations: [Hobby] = []) {
+    init(name: String, surname: String, mail: String, pseudo: String, password: String, location: String? = nil, score: Double = 5, favoriteEquipment: [Materiel] = [], favoritesHobby: [Hobby] = [], equipment: [Materiel] = [], recommandations: [Hobby] = []) {
         self.name = name
         self.surname = surname
         self.mail = mail

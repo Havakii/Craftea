@@ -15,7 +15,7 @@ struct DecouvrirView: View {
     @State private var hasScrolled: Bool = false
     @State private var isExpanded: Bool = true
     @State var selectedFilters: [Level] = []
-    @State var viewModel = HobbyViewModel()
+    @Environment(HobbyViewModel.self) var viewModel
     
     var filteredData: [Hobby] {
         viewModel.hobbies.filter { hobby in
@@ -67,6 +67,14 @@ struct DecouvrirView: View {
                                 .textInputAutocapitalization(.never)
                                 .disableAutocorrection(true)
                                 .foregroundStyle(Color.textPrimary)
+                            Button(action: {
+                                }) {
+                                    Image(systemName: "mic.fill")
+                                        .foregroundColor(.gray)
+                                        .padding(6)
+                                        .background(Color.white.opacity(0.8))
+                                        .clipShape(Circle())
+                                }
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 12)
@@ -105,8 +113,6 @@ struct DecouvrirView: View {
                                                     } else {
                                                         selectedFilters.append(level)
                                                     }
-                                                    
-                                                    //generateItem() //TODO
                                                 }
                                             } label: {
                                                 Text(level.rawValue).buttonLabel()
@@ -190,6 +196,6 @@ struct DecouvrirView: View {
 }
 
 #Preview {
-    DecouvrirView().environment(users[0])
+    DecouvrirView().environment(users[0]).environment(HobbyViewModel())
 }
 

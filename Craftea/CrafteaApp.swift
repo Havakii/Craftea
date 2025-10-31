@@ -10,10 +10,11 @@ import SwiftUI
 @main
 struct CrafteaApp: App {
     @State var userSession = users[0]
+    @State var viewModel = HobbyViewModel()
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(userSession)
+            ContentView().environment(userSession).environment(viewModel)
         }
     }
 }
