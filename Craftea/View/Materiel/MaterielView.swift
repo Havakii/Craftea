@@ -4,7 +4,6 @@
 //
 //  Created by Hava Bakrieva on 27/10/2025.
 //
-
 import SwiftUI
 
 struct MaterielView: View {
@@ -14,64 +13,50 @@ struct MaterielView: View {
     @State private var showingFilter = true
     @State private var showAjoutMateriel = false
     @State private var selectedFilters: [EquipmentCategory] = []
-  
+    @State private var selectedPriceFilter: PriceRange = .all
+    
     var filteredMateriels: [Materiel] {
-        // Choose the source list based on the current condition
         let list: [Materiel] = materielsOccasion
-
-        // Normalize search text once
+        
         let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasSearch = !trimmedSearch.isEmpty
-
-        // Base filtering for search (applies to both lists)
+        
         var result = list.filter { materiel in
             let matchesSearch: Bool = hasSearch ? materiel.nom.localizedCaseInsensitiveContains(trimmedSearch) : true
             return matchesSearch
         }
-
-        // Additional filtering by category only for Occasion
+        
         if condition == "Occasion", !selectedFilters.isEmpty {
             result = result.filter { materiel in
                 selectedFilters.contains(materiel.typeMateriel)
             }
         }
-
+        
         return result
     }
     
     var filteredMaterielsNeuf: [MaterielPro] {
-        // Source list for Neuf
         let list: [MaterielPro] = materielsNeuf
-
-        // Normalize search text once
+        
         let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasSearch = !trimmedSearch.isEmpty
-
-        // Base filtering for search (applies to Neuf list)
-        let result = list.filter { materiel in
+        
+        var result = list.filter { materiel in
             let matchesSearch: Bool = hasSearch ? materiel.nom.localizedCaseInsensitiveContains(trimmedSearch) : true
             return matchesSearch
         }
-
+        
+        if selectedPriceFilter != .all {
+            result = result.filter { materiel in
+                if let prix = Double(materiel.prix) {
+                    return selectedPriceFilter.contains(prix)
+                } else {
+                    return false
+                }
+            }
+        }
         return result
     }
-    
-//    var filteredMateriels: [Materiel] {
-//        //let list = condition == "Occasion" ? materielsOccasion : materielsNeuf
-//        var filtered = searchText.isEmpty ? materielsOccasion :
-//        materielsOccasion.filter { $0.nom.localizedCaseInsensitiveContains(searchText) }
-//        
-//        if condition == "Occasion", !selectedFilters.isEmpty {
-//            filtered = filtered.filter { materiel in
-//                //if let type = materiel.typeMateriel {
-//                    return selectedFilters.contains(type.rawValue)
-//                //}
-//                //return false
-//            }
-//        }
-//        return filtered
-//    }
-    
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -108,65 +93,108 @@ struct MaterielView: View {
                     .padding(.horizontal)
                     
                     if condition == "Occasion" {
-                        //Filtre
                         
-                         GlassEffectContainer(spacing: 12.0) {
-                         HStack {
-                         Button(action: {
-                         withAnimation {
-                         showingFilter.toggle()
-                         }
-                         }) {
-                         Image(systemName: "slider.vertical.3")
-                         .font(.system(size: 20, weight: .semibold))
-                         .foregroundStyle(Color.primaryPurpule)
-                         }
-                         .buttonStyle(.glass)
-                         .zIndex(10)
-                         .padding(.leading, 24)
-                         
-                         if showingFilter {
-                         ScrollView(.horizontal, showsIndicators: false) {
-                         HStack(spacing: 12) {
-                         ForEach(EquipmentCategory.allCases, id: \.self) { type in
-                         Button {
-                         withAnimation {
-                         if selectedFilters.contains(type) {
-                         selectedFilters.removeAll { $0 == type }
-                         } else {
-                         selectedFilters.append(type)
-                         }
-                         }
-                         } label: {
-                         Text(type.rawValue)
-                         .buttonLabel()
-                         .padding(.vertical, 8)
-                         .padding(.horizontal, 12)
-                         .glassEffect(selectedFilters.contains(type) ?
-                         .regular.tint(.primaryPurpule.opacity(0.6)).interactive() :
-                         .regular.interactive())
-                         .foregroundStyle(selectedFilters.contains(type) ? .white : .textPrimary)
-                         }
-                         }
-                         }
-                         .padding(.trailing, 24)
-                         }
-                         }
-                         Spacer()
-                         }
-                         }
-                         .padding(.top, 20)
-                         .padding(.bottom, 16)
-                         }
-                         
-                         SegmentedToggle(selection: $condition)
-                         
-    
-                    // Les cartes de materiel
+                        
+                        GlassEffectContainer(spacing: 12.0) {
+                            HStack {
+                                Button(action: {
+                                    withAnimation {
+                                        showingFilter.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: "slider.vertical.3")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundStyle(Color.primaryPurpule)
+                                }
+                                .buttonStyle(.glass)
+                                .zIndex(10)
+                                .padding(.leading, 24)
+                                
+                                if showingFilter {
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 12) {
+                                            ForEach(EquipmentCategory.allCases, id: \.self) { type in
+                                                Button {
+                                                    withAnimation {
+                                                        if selectedFilters.contains(type) {
+                                                            selectedFilters.removeAll { $0 == type }
+                                                        } else {
+                                                            selectedFilters.append(type)
+                                                        }
+                                                    }
+                                                } label: {
+                                                    Text(type.rawValue)
+                                                        .buttonLabel()
+                                                        .padding(.vertical, 8)
+                                                        .padding(.horizontal, 12)
+                                                        .glassEffect(selectedFilters.contains(type) ?
+                                                            .regular.tint(.primaryPurpule.opacity(0.6)).interactive() :
+                                                                .regular.interactive())
+                                                        .foregroundStyle(selectedFilters.contains(type) ? .white : .textPrimary)
+                                                }
+                                            }
+                                        }
+                                        .padding(.trailing, 24)
+                                    }
+                                }
+                                Spacer()
+                            }
+                        }
+                        .padding(.top, 20)
+                        .padding(.bottom, 16)
+                    } else {
+                        GlassEffectContainer(spacing: 12.0) {
+                            HStack {
+                                Button(action: {
+                                    withAnimation {
+                                        showingFilter.toggle()
+                                    }
+                                }) {
+                                    Image(systemName: "slider.vertical.3")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundStyle(Color.primaryPurpule)
+                                }
+                                .buttonStyle(.glass)
+                                .zIndex(10)
+                                .padding(.leading, 24)
+                                
+                                if showingFilter {
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 12) {
+                                            ForEach(PriceRange.allCases) { range in
+                                                Button {
+                                                    withAnimation {
+                                                        selectedPriceFilter = range
+                                                    }
+                                                } label: {
+                                                    Text(range.rawValue)
+                                                        .buttonLabel()
+                                                        .padding(.vertical, 8)
+                                                        .padding(.horizontal, 12)
+                                                        .glassEffect(selectedPriceFilter == range ?
+                                                            .regular.tint(.primaryPurpule.opacity(0.6)).interactive() :
+                                                                .regular.interactive())
+                                                        .foregroundStyle(selectedPriceFilter == range ? .white : .textPrimary)
+                                                }
+                                            }
+                                        }
+                                        .padding(.trailing, 24)
+                                    }
+                                }
+                                
+                                Spacer()
+                            }
+                        }
+                        .padding(.top, 20)
+                        .padding(.bottom, 16)
+                    }
+                    
+                    SegmentedToggle(selection: $condition)
+                    
+                    
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             if condition == "Occasion" {
-                                //Si on affiche le materiel d'occasion
                                 ForEach(filteredMateriels) { materiel in
                                     NavigationLink(destination: MaterielOccasionView(materiel: materiel)) {
                                         //l'image a modifier en asycimage
@@ -182,11 +210,6 @@ struct MaterielView: View {
                                                     ProgressView()
                                                         .frame(width: 148.5,height: 139)
                                                 }
-//                                                Image(materiel.image)
-//                                                    .resizable()
-//                                                    .scaledToFit()
-//                                                    .frame(height: 139)
-//                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
                                                 Text(materiel.typeMateriel.rawValue)
                                                     .font(.caption)
                                                     .fontWeight(.semibold)
@@ -223,10 +246,8 @@ struct MaterielView: View {
                                     }
                                 }
                             } else {
-                                //Si on affiche le materiel neuf
                                 ForEach(filteredMaterielsNeuf) { materiel in
                                     NavigationLink(destination: MaterielNeufView(materiel: materiel, )) {
-                                        //l'image
                                         VStack(alignment: .leading) {
                                             ZStack(alignment: .topTrailing) {
                                                 AsyncImage(url: URL(string: materiel.image)) { image in
@@ -239,12 +260,6 @@ struct MaterielView: View {
                                                     ProgressView()
                                                         .frame(width: 148.5,height: 139)
                                                 }
-//                                                Image(materiel.image)
-//                                                    .resizable()
-//                                                    .scaledToFit()
-//                                                    .frame(height: 120)
-//                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                                                
                                             }
                                             VStack(alignment: .leading, spacing: 2) {
                                                 Text(materiel.nom)
@@ -293,7 +308,7 @@ struct MaterielView: View {
                                 .padding(.vertical, 4)
                                 .padding(.horizontal, 8)
                             }.buttonStyle(.glassProminent).tint(Color.primaryPurpule.opacity(0.6))
-                            .frame(width: 160)
+                                .frame(width: 160)
                         }
                         .padding()
                     }
@@ -307,7 +322,7 @@ struct MaterielView: View {
                     searchText = searchTextfromDetailView
                 }
                 Task {
-                await loadCoverImages()
+                    await loadCoverImages()
                     await loadCoverImagesPro()
                 }
             }
