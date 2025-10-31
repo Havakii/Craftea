@@ -28,8 +28,8 @@ public struct MessageDetailView: View {
             
             VStack {
                 MessageDonCardView(isReserved: $isReserved)
-               
-                    
+                
+                
                 ScrollView {
                     VStack {
                         ForEach(conversation.messages) { message in
@@ -62,23 +62,23 @@ public struct MessageDetailView: View {
                             .padding()
                     }
                     if showSecurityMessage {
-                           HStack(alignment: .top) {
-                               Text("⚠️️ Pour votre sécurité, ne partagez pas d’adresse exacte ni d’informations personnelles. Privilégiez les lieux publics pour vos échanges.")
-                                   .font(.footnote)
-                                   .padding(7)
-                               Spacer()
-                               Button(action: {
-                                   withAnimation {
-                                       showSecurityMessage = false
-                                   }
-                               }) {
-                                   Image(systemName: "xmark.circle")
-                                       .foregroundColor(.gray)
-                                       .padding(.vertical, 8)
-                               }
-                               .padding(.trailing, 4)
-                           }
-                       }
+                        HStack(alignment: .top) {
+                            Text("⚠️️ Pour votre sécurité, ne partagez pas d’adresse exacte ni d’informations personnelles. Privilégiez les lieux publics pour vos échanges.")
+                                .font(.footnote)
+                                .padding(7)
+                            Spacer()
+                            Button(action: {
+                                withAnimation {
+                                    showSecurityMessage = false
+                                }
+                            }) {
+                                Image(systemName: "xmark.circle")
+                                    .foregroundColor(.gray)
+                                    .padding(.vertical, 8)
+                            }
+                            .padding(.trailing, 4)
+                        }
+                    }
                     TextField("Écrire un message...", text: $newMessage, axis: .vertical)
                         .lineLimit(...3)
                         .padding()
@@ -95,11 +95,11 @@ public struct MessageDetailView: View {
                         }
                         Spacer()
                         Button(action: {
-                                    sendMessage()
-                                    withAnimation {
-                                        showSecurityMessage = false
-                                    }
-                                }){
+                            sendMessage()
+                            withAnimation {
+                                showSecurityMessage = false
+                            }
+                        }){
                             Text("Envoyer")
                                 .foregroundColor(newMessage.isEmpty ? .gray : .primaryPurpule)
                                 .padding(.horizontal, 8)
@@ -110,6 +110,16 @@ public struct MessageDetailView: View {
                 .padding()
             }
             .navigationTitle("Conversation")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button (action: {}) {
+                        Image(systemName: "flag.fill")
+                                    .font(.system(size: 20, weight: .semibold))
+                                    .foregroundColor(Color("primaryPurpule"))
+                    }
+                    
+                }
+            }.padding()
         }
     }
     
