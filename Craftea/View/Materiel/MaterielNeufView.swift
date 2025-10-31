@@ -14,23 +14,11 @@ struct MaterielNeufView: View {
     
     var body: some View {
         ZStack {
-            Color("Background")
-                .ignoresSafeArea()
-//            LinearGradient(
-//                gradient: Gradient(colors: [.clear, .purple.opacity(0.1)]),
-//                startPoint: .topLeading,
-//                endPoint: .bottom
-//            )
-//            .ignoresSafeArea()
+            Color.background.ignoresSafeArea()
+            LinearGradient(gradient:Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]), startPoint: .topLeading, endPoint: .bottom).ignoresSafeArea()
             VStack() {
                 ScrollView() {
                     VStack(spacing: 24) {
-//                        Image(materiel.image.isEmpty ? "placeholder" : materiel.image)
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(height: 300)
-//                            .clipShape(RoundedRectangle(cornerRadius: 16))
-//                            .shadow(radius: 4)
                         AsyncImage(url: URL(string: materiel.image)) { image in
                             image
                                 .resizable()
@@ -47,7 +35,7 @@ struct MaterielNeufView: View {
                             Text(materiel.nom)
                                 .secondaryTitle()
                                 .multilineTextAlignment(.leading)
-                                
+                            
                             
                             Spacer()
                             
@@ -58,11 +46,11 @@ struct MaterielNeufView: View {
                                 .padding(.vertical, 6)
                                 .background(
                                     ZStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(.ultraThinMaterial)
-                                        .fill(Color.white.opacity(0.9))
-                                        .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-                                }
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(.ultraThinMaterial)
+                                            .fill(Color.white.opacity(0.9))
+                                            .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
+                                    }
                                 )
                                 .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
                         }
@@ -73,7 +61,7 @@ struct MaterielNeufView: View {
                                 .mainText(bold: true)
                             Spacer()
                         }
-                    
+                        
                         HStack{
                             Text(materiel.description)
                                 .mainText()
@@ -82,53 +70,53 @@ struct MaterielNeufView: View {
                                 .lineSpacing(4)
                             Spacer()
                         }
-                }
-                    .padding(.horizontal, 24)
-            }
-            Button(action: {}) {
-                HStack {
-                    Text("Aller sur le site du vendeur")
-                        .buttonLabel()
-                        .foregroundColor(.white)
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                }
-                .padding()
-                .background(
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(.ultraThinMaterial)
-                            .fill(Color.primaryPurpule.opacity(0.8))
-                            .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
                     }
-                )
-                .padding(.horizontal)
-                .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
-                .padding(.bottom, 8)
+                    .padding(.horizontal, 24)
+                }
+                Button(action: {}) {
+                    HStack {
+                        Text("Aller sur le site du vendeur")
+                            .buttonLabel()
+                            .foregroundColor(.white)
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                    }
+                    .padding()
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(.ultraThinMaterial)
+                                .fill(Color.primaryPurpule.opacity(0.8))
+                                .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
+                        }
+                    )
+                    .padding(.horizontal)
+                    .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
+                    .padding(.bottom, 8)
+                }
+            }
+            
+            
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: { dismiss() }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.primaryPurpule)
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { isLiked.toggle() }) {
+                        Image(systemName: isLiked ? "heart.fill" : "heart")
+                            .foregroundColor(.primaryPurpule)
+                    }
+                }
             }
         }
-            
-        
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: { dismiss() }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.primaryPurpule)
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: { isLiked.toggle() }) {
-                    Image(systemName: isLiked ? "heart.fill" : "heart")
-                        .foregroundColor(.primaryPurpule)
-                }
-            }
-                    }
-                }
-            }
-        
+    }
+    
     
 }
 

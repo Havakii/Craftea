@@ -23,14 +23,12 @@ struct AjoutMaterielView: View {
     
     var body: some View {
         ZStack {
-            Color("Background")
-                .ignoresSafeArea()
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, .purple.opacity(0.1)]),
-                startPoint: .topLeading,
-                endPoint: .bottom
-            )
+            Color.background.ignoresSafeArea()
+            LinearGradient(gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
+                           startPoint: .topLeading,
+                           endPoint: .bottom)
             .ignoresSafeArea()
+            
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     
@@ -78,13 +76,11 @@ struct AjoutMaterielView: View {
                     .sheet(isPresented: $showingImagePicker) {
                         ImagePicker(image: $image, sourceType: pickerSourceType)
                     }
-                    .padding()
                     .frame(maxWidth: .infinity)
                     
                     Text("Titre de ton annonce")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                        .padding(.horizontal)
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -92,15 +88,13 @@ struct AjoutMaterielView: View {
                             .frame(height: 50)
                         
                         TextField("ex : Pinceau-plat", text: $titreAnnonce)
-                            .padding(.horizontal)
+                            .padding(.horizontal, 12)
                             .mainText()
                     }
-                    .padding(.horizontal)
                     
                     Text("Description")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                        .padding(.horizontal)
                     
                     ZStack(alignment: .topLeading) {
                         RoundedRectangle(cornerRadius: 10)
@@ -115,18 +109,16 @@ struct AjoutMaterielView: View {
                         }
                         
                         TextEditor(text: $descriptionAnnonce)
-                            .padding(.horizontal, 8)
+                            .padding(.horizontal, 12)
                             .padding(.top, 8)
                             .frame(height: 120)
                             .scrollContentBackground(.hidden)
                             .font(.system(size: 16))
                     }
-                    .padding(.horizontal)
                     
                     Text("Type d'annonce")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                        .padding(.horizontal)
                     
                     HStack {
                         ForEach(typesAnnonce, id: \.self) { type in
@@ -149,12 +141,10 @@ struct AjoutMaterielView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
-                    .padding(.horizontal)
                     
                     Text("Lieu")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                        .padding(.horizontal)
                     
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -162,10 +152,9 @@ struct AjoutMaterielView: View {
                             .frame(height: 50)
                         
                         TextField("ex : Paris", text: $lieu)
-                            .padding(.horizontal)
+                            .padding(.horizontal, 12)
                             .mainText()
                     }
-                    .padding(.horizontal)
                     
                     NavigationLink(destination: MaterielView()) {
                         HStack {
@@ -194,9 +183,9 @@ struct AjoutMaterielView: View {
                     
                     Spacer()
                 }
+                .padding(.horizontal, 24)
                 .padding(.bottom, 20)
             }
-            
             .navigationBarBackButtonHidden(true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -204,13 +193,16 @@ struct AjoutMaterielView: View {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.primaryPurpule)
                             .font(.title3)
+                        
+                            .navigationBarHidden(true)
                     }
                 }
             }
         }
-            .navigationBarTitleDisplayMode(.inline)
-        }
+        .navigationBarTitleDisplayMode(.inline)
+        .scrollIndicators(.hidden)
     }
+}
 
 #Preview {
     NavigationStack {
