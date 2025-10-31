@@ -7,38 +7,46 @@
 import SwiftUI
 
 struct ProfilView: View {
-    @State private var showingAlert = false
+    @State private var image: UIImage? = nil
+    @State private var showingImagePicker = false
+    
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    Button(action: {
-                showingAlert = true
+                    NavigationLink(destination: SettingsView(), label: {
+                        ProfilSettingButton()
                     })
-                    { ProfilSignalButton()}
-                    .alert("Important message", isPresented: $showingAlert) {
-                        Button("OK", role: .cancel) { }
-                    }
-                    .padding(.leading,(250))
+                    .padding(.leading,300)
+                    .padding(.top, 50)
                     Image(systemName:"person.fill")
                         .resizable()
                         .frame(width: 100,height: 100)
-                    Text("\(otherUser[0].name)").mainTitle()}
-                .padding(.top,60)
-                
+                    HStack{
+                        Text("\(otherUser[0].name)").mainTitle()
+                        HStack {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                            Text("5")
+                        }
+                    }
+                    .padding(.top)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                }
                 VStack(alignment: .leading) {
-                    Text("Ses Loisirs").mainTitle()
+                    Text("Mes Loisirs").mainTitle()
                         .padding(5)
                     ScrollView (.horizontal) {
                         HStack {
                             ForEach(otherUser[0].favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
-                                .padding(.trailing ,20)}
+                            .padding(.trailing ,20)}
                         .padding(20)
                     }
                     Spacer()
                 }
                 VStack(alignment: .leading) {
-                    Text("Ses Articles de Troc").mainTitle()
+                    Text("Mes Articles de Troc").mainTitle()
                         .padding(5)
                     ScrollView (.horizontal) {
                         HStack {
