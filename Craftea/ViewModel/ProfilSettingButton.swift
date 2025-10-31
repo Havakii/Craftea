@@ -1,15 +1,15 @@
 //
-//  ProfilSignalButton.swift
+//  ProfilSettingButton.swift
 //  Craftea
 //
-//  Created by Andréa  on 29/10/2025.
+//  Created by Andréa  on 30/10/2025.
 //
 
 import SwiftUI
 
-struct ProfilSignalButton: View {
+struct ProfilSettingButton: View {
     var body: some View {
-        Image(systemName: "flag.fill")
+        Image(systemName: "gearshape.fill")
                 .font(.system(size: 20))
                 .foregroundColor(Color("primaryPurpule"))
                 .padding(15)
@@ -20,5 +20,5 @@ struct ProfilSignalButton: View {
 }
 
 #Preview {
-    ProfilSignalButton()
+    ProfilSettingButton()
 }
