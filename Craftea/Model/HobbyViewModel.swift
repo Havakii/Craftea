@@ -61,6 +61,7 @@ class HobbyViewModel {
              Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
              ], popular: true
              ),
+
              Hobby(
              name: .Aquarelle,
              description: "Peindre avec légèreté et transparence",

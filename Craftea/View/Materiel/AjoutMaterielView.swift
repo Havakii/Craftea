@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AjoutMaterielView: View {
-    @Environment(\.dismiss) private var dismiss
     @State private var titreAnnonce: String = ""
     @State private var descriptionAnnonce: String = ""
     @State private var lieu: String = ""
@@ -186,18 +185,9 @@ struct AjoutMaterielView: View {
                 .padding(.horizontal, 24)
                 .padding(.bottom, 20)
             }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: { dismiss() }) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.primaryPurpule)
-                            .font(.title3)
-                        
-                            .navigationBarHidden(true)
-                    }
-                }
-            }
+
+            .toolbar(.hidden, for: .tabBar)
+
         }
         .navigationBarTitleDisplayMode(.inline)
         .scrollIndicators(.hidden)

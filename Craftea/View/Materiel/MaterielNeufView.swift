@@ -23,7 +23,7 @@ struct MaterielNeufView: View {
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .frame(height: 300)
+                                .frame(width: 345,height: 345)
                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                 .shadow(radius: 4)
                         } placeholder: {
@@ -75,7 +75,7 @@ struct MaterielNeufView: View {
                 }
                 Button(action: {}) {
                     HStack {
-                        Text("Aller sur le site du vendeur")
+                        Text("Aller sur le site de \(materiel.vendeur)")
                             .buttonLabel()
                             .foregroundColor(.white)
                         Image(systemName: "chevron.right")
@@ -100,6 +100,7 @@ struct MaterielNeufView: View {
             
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar) 
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {

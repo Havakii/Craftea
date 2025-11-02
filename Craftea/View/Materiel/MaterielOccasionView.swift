@@ -14,6 +14,7 @@ struct MaterielOccasionView: View {
     
     var body: some View {
         ZStack {
+            Color.background.ignoresSafeArea()
             LinearGradient(
                 gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
                 startPoint: .topLeading,
@@ -29,14 +30,13 @@ struct MaterielOccasionView: View {
                             switch phase {
                             case .empty:
                                 ProgressView()
-                                    .frame(height: 300)
+                                    .frame(width: 345,height: 345)
                                     .frame(maxWidth: .infinity)
                             case .success(let image):
                                 image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(height: 300)
-                                    .frame(maxWidth: .infinity)
+                                    .frame(width: 345,height: 345)
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
                                     .shadow(radius: 4)
                             case .failure(_):
@@ -157,6 +157,7 @@ struct MaterielOccasionView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
+            .toolbar(.hidden, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct LoisirDetailView: View {
     @Environment(User.self) private var user
@@ -86,16 +87,26 @@ struct LoisirDetailView: View {
                                 ForEach(hobby.equipementNeeded, id: \.id) { item in
                                     NavigationLink(destination: MaterielView(searchTextfromDetailView: item.name)){
                                         HStack(alignment: .top) {
-                                            AsyncImage(url: URL(string: item.image)) { image in
-                                                image
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(width: 60, height: 60)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                                            } placeholder: {
-                                                ProgressView()
-                                                    .frame(width: 60, height: 60)
-                                            }
+                                            KFImage(URL(string: item.image))
+                                                //.placeholder: { ProgressView() }
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 60, height: 60)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+
+
+//                                            AsyncImage(url: URL(string: item.image)) { image in
+//                                                image
+//                                                    .resizable()
+//                                                    .scaledToFill()
+//                                                    .frame(width: 60, height: 60)
+//                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+//
+//
+//                                            } placeholder: {
+//                                                ProgressView()
+//                                                    .frame(width: 60, height: 60)
+//                                            }
                                             VStack(alignment: .leading){
                                                 Text(item.name)
                                                     .mainText(bold: true).foregroundColor(.textPrimary)
