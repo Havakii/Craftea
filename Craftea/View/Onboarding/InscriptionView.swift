@@ -7,12 +7,9 @@
 
 import SwiftUI
 
-let Data2 = [
-    User(name: "Lora-Line", surname: "Faure", mail: "Lora-Line@gmail.com", pseudo: "Lora-Line", password: "123456")
-]
 
 struct InscriptionView: View {
-    @Environment(User.self) var user
+    @Environment(Session.self) private var session
     @State private var nom: String = ""
     @State private var name: String = ""
     @State private var pseudo: String = ""
@@ -152,6 +149,11 @@ struct InscriptionView: View {
                     
                     Button(action: {
                         showMessage = true
+                        let newUser = User(name: nom, surname: name, mail: mail, pseudo: pseudo, password: password)
+                        users.append(newUser)
+                        session.currentUser = newUser // pas ça mais pas eu le temps de trouver le bon
+                        //users.last(where: $0.id == newUser.id) // Pas sur que ca soit correct
+                        session.welcome = session.homePhrases.randomElement() ?? ":)"
                     }) {
                         HStack{
                             Image(systemName: "checkmark.circle")
@@ -186,5 +188,5 @@ struct InscriptionView: View {
 }
 
 #Preview {
-    InscriptionView().environment(users[0])
+    InscriptionView().environment(Session(currentUser: users[0]))
 }

@@ -9,7 +9,8 @@ import SwiftUI
 import Kingfisher
 
 struct LoisirDetailView: View {
-    @Environment(User.self) private var user
+    @Environment(Session.self) private var session
+    //@Environment(User.self) private var user
     var hobby: Hobby
     @Environment(HobbyViewModel.self) var viewModel
     @State private var revealDetails = true
@@ -187,15 +188,15 @@ struct LoisirDetailView: View {
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
                             Button(action: {
-                                if user.favoritesHobby.contains(where: { $0.id == hobby.id }) {
-                                    user.favoritesHobby.removeAll(where: { $0.id == hobby.id })
-                                    user.score -= 10
+                                if session.currentUser.favoritesHobby.contains(where: { $0.id == hobby.id }) {
+                                    session.currentUser.favoritesHobby.removeAll(where: { $0.id == hobby.id })
+                                    session.currentUser.score -= 10
                                 } else {
-                                    user.favoritesHobby.append(hobby)
-                                    user.score += 10
+                                    session.currentUser.favoritesHobby.append(hobby)
+                                    session.currentUser.score += 10
                                 }
                             }) {
-                                Label("Favorite", systemImage: user.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")
+                                Label("Favorite", systemImage: session.currentUser.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")
                             }
                             .tint(Color.primaryPurpule)
                         }
@@ -214,6 +215,8 @@ struct LoisirDetailView: View {
 
 #Preview {
     let viewModel = HobbyViewModel()
-    LoisirDetailView(hobby: viewModel.hobbies[0]).environment(users[0]).environment(HobbyViewModel())
+    LoisirDetailView(hobby: viewModel.hobbies[0])
+        .environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
 }
 

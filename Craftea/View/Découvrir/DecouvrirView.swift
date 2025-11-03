@@ -8,15 +8,14 @@
 import SwiftUI
 
 struct DecouvrirView: View {
-    @Environment(User.self) private var user
-    @Environment(welcomeSentence.self) var welcome
+    @Environment(Session.self) private var session
+    //@Environment(welcomeSentence.self) var welcome
     @Environment(HobbyViewModel.self) var viewModel
 
     @State var searchText: String = ""
     @State private var hasScrolled: Bool = false
     @State private var isExpanded: Bool = true
     @State var selectedFilters: [Level] = []
-    @State private var sessionWelcome: String? = nil
     
     
     var filteredData: [Hobby] {
@@ -47,10 +46,10 @@ struct DecouvrirView: View {
                         
                         HStack(){
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Bonjour \(user.name) !")
+                                Text("Bonjour \(session.currentUser.name) !")
                                     .mainTitle()
                                     .foregroundStyle(Color.primaryPurpule)
-                                Text(sessionWelcome ?? "")
+                                Text(session.welcome)
                                     .tertiaryTitle()
                                     .foregroundStyle(Color.textSecondary)
                             }
@@ -149,7 +148,7 @@ struct DecouvrirView: View {
                             
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 16) {
-                                    let recommendedFiltered = filteredData.filter { hobby in user.recommandations.contains(where: { $0.name == hobby.name }) }
+                                    let recommendedFiltered = filteredData.filter { hobby in session.currentUser.recommandations.contains(where: { $0.name == hobby.name }) }
                                     ForEach(recommendedFiltered) { hobby in
                                         VerticalHobbyView(hobby: hobby)
                                     }
@@ -190,7 +189,6 @@ struct DecouvrirView: View {
                         }
                     }
                 }
-                .onAppear { if sessionWelcome == nil { sessionWelcome = welcome.homePhrases.randomElement() } }
             }
             .scrollIndicators(.hidden)
             
@@ -199,6 +197,9 @@ struct DecouvrirView: View {
 }
 
 #Preview {
-    DecouvrirView().environment(users[0]).environment(HobbyViewModel()).environment(welcomeSentence())
+    DecouvrirView()
+        .environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
+        //.environment(welcomeSentence())
 }
 

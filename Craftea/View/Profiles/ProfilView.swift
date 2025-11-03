@@ -7,7 +7,8 @@
 import SwiftUI
 
 struct ProfilView: View {
-    @Environment(User.self) private var user
+
+    @Environment(Session.self) private var session
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
     
@@ -15,14 +16,16 @@ struct ProfilView: View {
         NavigationStack {
             ScrollView {
                 VStack {
+
                     Spacer(minLength: 100)
                     ProfileProgressView(
                         progress: 0.75, // 75% rempli
                         image: Image("user1")
                     )
                     HStack {
-                        Text("\(user.name)").mainTitle()
+                        Text("\(session.currentUser.name)").mainTitle()
                         ScoreTag()
+
                     }
                     .padding(.top)
                     .padding(.horizontal, 8)
@@ -34,12 +37,14 @@ struct ProfilView: View {
                         .padding(.horizontal, 15)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(user.favoritesHobby) { hobby in
+
+                            ForEach(session.currentUser.favoritesHobby) { hobby in
                                 VerticalHobbyView(hobby: hobby)
                             }
                             .padding(.trailing, 20)
                         }
                         .padding(.horizontal, 20)
+
                     }
                 }
                 // Section Favoris
@@ -48,10 +53,12 @@ struct ProfilView: View {
                         .padding(.horizontal, 15)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(user.favoriteEquipment) { materiel in
+
+                            ForEach(session.currentUser.favoriteEquipment) { materiel in
                                 MaterielCard(materiel: materiel)
                             }
                             .padding(.trailing, 20)
+
                         }
                         .padding(.horizontal, 20)
                     }
@@ -62,7 +69,8 @@ struct ProfilView: View {
                         .padding(.horizontal, 15)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(user.favoriteEquipment) { materiel in
+
+                            ForEach(session.currentUser.favoriteEquipment) { materiel in
                                 MaterielCard(materiel: materiel)
                             }
                             .padding(.trailing, 20)
@@ -103,6 +111,6 @@ struct ProfilView: View {
 
 #Preview {
     ProfilView()
-        .environment(users[0])
+        .environment(Session(currentUser: users[0]))
         .environment(HobbyViewModel())
 }

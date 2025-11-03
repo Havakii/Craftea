@@ -7,11 +7,8 @@
 
 import SwiftUI
 
-let Data = [
-    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456")
-]
-
 struct ConnexionView: View {
+    @Environment(Session.self) private var session
     @State private var mail: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
@@ -82,7 +79,9 @@ struct ConnexionView: View {
                     }
 
                     // 🔹 Bouton de connexion
-                    Button(action: login) {
+                    NavigationLink(
+                        destination: ContentView(), isActive: $isConnected) {
+                            Button(action: login) {
                         HStack {
                             Text("Me connecter")
                                 .font(.custom("Manrope-Bold", size: 20))
@@ -99,15 +98,18 @@ struct ConnexionView: View {
                         Button("OK", role: .cancel) {}
                     }
 
-                    // 🔹 Navigation après connexion réussie
-                    if connectedUser != nil {
-                        NavigationLink(
-                            destination: DecouvrirView().environment(users[0]).environment(HobbyViewModel()).environment(welcomeSentence()),
-                            isActive: $isConnected
-                        ) {
-                            EmptyView()
-                        }
                     }
+                    // 🔹 Navigation après connexion réussie
+//                    if let user = connectedUser {
+//                        NavigationLink(
+//                            destination: DecouvrirView()
+//                                .environment(user)
+//                                .environment(HobbyViewModel()),
+//                            isActive: $isConnected
+//                        ) {
+//                            EmptyView()
+//                        }
+//                    }
 
                     Spacer()
 
@@ -123,17 +125,19 @@ struct ConnexionView: View {
                     }
                 }
                 .padding()
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
 
     // Fonction de login
     func login() {
-        if let user = Data.first(where: {
+
+        if let userFound = users.first(where: {
             $0.mail.lowercased() == mail.lowercased() &&
             $0.password == password
         }) {
-            connectedUser = user
+            session.currentUser = userFound
+            session.welcome = session.homePhrases.randomElement() ?? ":)"
             isConnected = true
         } else {
             showAlert = true
@@ -142,5 +146,5 @@ struct ConnexionView: View {
 }
 
 #Preview {
-    ConnexionView()
+    ConnexionView().environment(Session(currentUser: users[0])).environment(HobbyViewModel())
 }

@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Environment(User.self) private var user
+    @Environment(Session.self) private var session
     @State private var nom: String = ""
     @State private var name: String = ""
     @State private var pseudo: String = ""
@@ -40,6 +40,7 @@ struct SettingsView: View {
                                 .background(Circle().fill(Color.primaryPurpule))
                         }
                     }
+
                     .padding(.trailing)
                     
                     // Image de profil
@@ -48,6 +49,7 @@ struct SettingsView: View {
                             .fill(Color.primaryPurpule.opacity(0.2))
                             .frame(width: 200, height: 200)
                         VStack(spacing: 8) {
+
                             if let image = image {
                                 Image(uiImage: image)
                                     .resizable()
@@ -90,11 +92,11 @@ struct SettingsView: View {
                     
                     // Textfield setting
                     Group {
-                        settingsField(title: "Nom", placeholder: user.surname, text: $nom)
-                        settingsField(title: "Prénom", placeholder: user.name, text: $name)
-                        settingsField(title: "Pseudo", placeholder: user.pseudo, text: $pseudo)
-                        settingsField(title: "Email", placeholder: user.mail, text: $mail)
-                        
+                        settingsField(title: "Nom", placeholder: session.currentUser.surname, text: $nom)
+                        settingsField(title: "Prénom", placeholder: session.currentUser.name, text: $name)
+                        settingsField(title: "Pseudo", placeholder: session.currentUser.pseudo, text: $pseudo)
+                        settingsField(title: "Email", placeholder: session.currentUser.mail, text: $mail)
+
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Mot de passe")
                                 .font(.subheadline)
@@ -102,9 +104,9 @@ struct SettingsView: View {
                             
                             HStack {
                                 if isPasswordVisible {
-                                    TextField(user.password, text: $password)
+                                    TextField(session.currentUser.password, text: $password)
                                 } else {
-                                    SecureField(user.password, text: $password)
+                                    SecureField(session.currentUser.password, text: $password)
                                 }
                                 Button(action: {
                                     withAnimation { isPasswordVisible.toggle() }
@@ -121,24 +123,86 @@ struct SettingsView: View {
                             )
                         }
                     }
-                    
-                    // Bouton déconnexion
-                    HStack {
-                        Spacer()
-                        Button {
-                            // Action déconnexion
-                        } label: {
-                            Image(systemName: "power")
-                                .foregroundColor(.white)
-                                .padding(15)
-                                .background(Circle().fill(Color.red))
-                                .shadow(radius: 2)
-                        }
-                        .padding(.top, 10)
+
+
+                    VStack {
+                        Text("Nom")
+                            .padding(.trailing, 300)
+                        TextField("Nom", text: $nom)
+                            .padding(15)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.5))
+                            ).background(Color.white)
                     }
+                    //Prénom Section
+                    VStack {
+                        Text("Prénom")
+                            .padding(.trailing, 280)
+                        TextField("Prénom", text: $name)
+                            .padding(15)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.5))
+                            ).background(Color.white)
+                    }
+                    //Pseudo Section
+                    VStack {
+                        Text("Pseudo")
+                            .padding(.trailing, 280)
+                        TextField("Pseudo", text: $pseudo)
+                            .padding(15)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.5))
+                            ).background(Color.white)
+                    }
+                    //Email Section
+                    VStack {
+                        Text("Email")
+                            .padding(.trailing, 300)
+                        TextField("Email", text: $mail)
+                            .padding(15)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray.opacity(0.5))
+                            ).background(Color.white)
+                    }
+                    // Mot de passe
+                    Text("Mot de passe")
+                        .padding(.trailing, 230)
+                    HStack {
+                        if isPasswordVisible {
+                            TextField("Mot de passe", text: $password)
+                        } else {
+                            SecureField("Mot de passe", text: $password)
+                        }
+                        Button(action: {
+                            withAnimation { isPasswordVisible.toggle() }
+                        }) {
+                            Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .padding(15)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.gray.opacity(0.5))
+                    ).background(Color.white)
+                    Spacer()
+                    // Bouton déconnexion
+
+
+                    .padding(.bottom,30)
                 }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 10)
+                .padding(24)
+            }.toolbar(.hidden, for: .tabBar)
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationLink(destination: ConnexionView()){Image(systemName: "power")
+                    }.buttonStyle(.glassProminent)
+                        .tint(.red)
+                }
             }
         }
     }
@@ -161,5 +225,5 @@ private func settingsField(title: String, placeholder: String, text: Binding<Str
 }
 
 #Preview {
-    SettingsView().environment(users[0])
+    SettingsView().environment(Session(currentUser: users[0]))
 }

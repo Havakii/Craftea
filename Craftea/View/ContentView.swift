@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(HobbyViewModel.self) var viewModel
-    @Environment(welcomeSentence.self) var welcome
+    @Environment(Session.self) var currentUser
     var body: some View {
         TabView {
             Tab("Découvrir", systemImage: "sparkles") {
@@ -25,6 +25,7 @@ struct ContentView: View {
                 ProfilView()
             }
         }.tint(Color.primaryPurpule)
+            .navigationBarBackButtonHidden(true)
             .onAppear {
                 Task {
                     await viewModel.loadDetailImages()
@@ -34,5 +35,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView().environment(users[0]).environment(HobbyViewModel()).environment(welcomeSentence())
+    ContentView()
+        .environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
 }
