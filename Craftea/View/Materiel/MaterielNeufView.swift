@@ -10,59 +10,63 @@ import SwiftUI
 struct MaterielNeufView: View {
     let materiel: MaterielPro
     @Environment(\.dismiss) private var dismiss
-    @State private var isLiked = false
-    
+    @Environment(User.self) private var user
+
+    var isLiked: Bool {
+        user.favoriteEquipment.contains(where: { $0.id == materiel.id })
+    }
+
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
-            LinearGradient(gradient:Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]), startPoint: .topLeading, endPoint: .bottom).ignoresSafeArea()
-            VStack() {
-                ScrollView() {
+            LinearGradient(
+                gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
+                startPoint: .topLeading,
+                endPoint: .bottom
+            ).ignoresSafeArea()
+
+            VStack {
+                ScrollView {
                     VStack(spacing: 24) {
                         AsyncImage(url: URL(string: materiel.image)) { image in
                             image
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 345,height: 345)
+                                .frame(width: 345, height: 345)
                                 .clipShape(RoundedRectangle(cornerRadius: 16))
                                 .shadow(radius: 4)
                         } placeholder: {
                             ProgressView()
-                                .frame(width: 300,height: 300)
+                                .frame(width: 300, height: 300)
                         }
-                        
-                        HStack() {
+
+                        HStack {
                             Text(materiel.nom)
                                 .secondaryTitle()
                                 .multilineTextAlignment(.leading)
-                            
-                            
+
                             Spacer()
-                            
+
                             Text(materiel.prix)
                                 .categoryText()
                                 .foregroundColor(.primaryPurpule)
                                 .padding(.horizontal, 14)
                                 .padding(.vertical, 6)
                                 .background(
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(.ultraThinMaterial)
-                                            .fill(Color.white.opacity(0.9))
-                                            .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-                                    }
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.white.opacity(0.9))
+                                        .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
                                 )
                                 .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
                         }
-                        
-                        HStack{
+
+                        HStack {
                             Text("Vendeur :").mainText(bold: true)
-                            Text(materiel.vendeur)
-                                .mainText(bold: true)
+                            Text(materiel.vendeur).mainText(bold: true)
                             Spacer()
                         }
-                        
-                        HStack{
+
+                        HStack {
                             Text(materiel.description)
                                 .mainText()
                                 .foregroundColor(.black)
@@ -73,7 +77,9 @@ struct MaterielNeufView: View {
                     }
                     .padding(.horizontal, 24)
                 }
-                Button(action: {}) {
+
+                Button(action: {
+                }) {
                     HStack {
                         Text("Aller sur le site de \(materiel.vendeur)")
                             .buttonLabel()
@@ -84,23 +90,19 @@ struct MaterielNeufView: View {
                     }
                     .padding()
                     .background(
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(.ultraThinMaterial)
-                                .fill(Color.primaryPurpule.opacity(0.8))
-                                .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-                        }
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.primaryPurpule.opacity(0.8))
+                            .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
                     )
                     .padding(.horizontal)
                     .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
                     .padding(.bottom, 8)
                 }
             }
-            
-            
+
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
-            .toolbar(.hidden, for: .tabBar) 
+            .toolbar(.hidden, for: .tabBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: { dismiss() }) {
@@ -108,8 +110,15 @@ struct MaterielNeufView: View {
                             .foregroundColor(.primaryPurpule)
                     }
                 }
+
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { isLiked.toggle() }) {
+                    Button(action: {
+                        if isLiked {
+                            user.favoriteEquipmentPro.removeAll(where: { $0.id == materiel.id })
+                        } else {
+                            user.favoriteEquipmentPro.append(materiel)
+                        }
+                    }) {
                         Image(systemName: isLiked ? "heart.fill" : "heart")
                             .foregroundColor(.primaryPurpule)
                     }
@@ -117,11 +126,10 @@ struct MaterielNeufView: View {
             }
         }
     }
-    
-    
 }
-
 
 #Preview {
     MaterielNeufView(materiel: materielsNeuf[0])
+        .environment(users[0])
 }
+
