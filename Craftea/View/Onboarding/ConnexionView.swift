@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let usersData = [
+let Data = [
     User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456")
 ]
 
@@ -100,11 +100,9 @@ struct ConnexionView: View {
                     }
 
                     // 🔹 Navigation après connexion réussie
-                    if let user = connectedUser {
+                    if connectedUser != nil {
                         NavigationLink(
-                            destination: DecouvrirView()
-                                .environment(user)
-                                .environment(HobbyViewModel()),
+                            destination: DecouvrirView().environment(users[0]).environment(HobbyViewModel()).environment(welcomeSentence()),
                             isActive: $isConnected
                         ) {
                             EmptyView()
@@ -131,7 +129,7 @@ struct ConnexionView: View {
 
     // Fonction de login
     func login() {
-        if let user = usersData.first(where: {
+        if let user = Data.first(where: {
             $0.mail.lowercased() == mail.lowercased() &&
             $0.password == password
         }) {

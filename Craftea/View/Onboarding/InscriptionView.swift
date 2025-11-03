@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let users2Data = [
+let Data2 = [
     User(name: "Lora-Line", surname: "Faure", mail: "Lora-Line@gmail.com", pseudo: "Lora-Line", password: "123456")
 ]
 
