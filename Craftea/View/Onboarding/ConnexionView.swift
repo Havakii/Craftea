@@ -8,50 +8,49 @@
 import SwiftUI
 
 let usersData = [
-    User(name: "Lora-Line", surname: "Faure", mail: "Lora-Line@gmail.com", pseudo: "Lora-Line", password: "123456")
+    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456")
 ]
 
 struct ConnexionView: View {
-    @Environment(User.self) var user
     @State private var mail: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
     @State private var isConnected: Bool = false
     @State private var showAlert: Bool = false
-    
+    @State private var connectedUser: User? = nil
+
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("Background")
                     .ignoresSafeArea()
-                
+
                 VStack(spacing: 30) {
-                   
+
+                    // Logo + texte d'accueil
                     VStack {
                         Image("CrafteaLogo")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
-                        
+
                         Text("C'EST COOL DE TE REVOIR !")
                             .font(.custom("Manrope-Bold", size: 36))
                             .fontWeight(.bold)
                             .padding(.bottom, 20)
                     }
-                    
-                    
+
+                    // Champs de connexion
                     VStack(spacing: 20) {
                         TextField("Mail", text: $mail)
                             .keyboardType(.emailAddress)
-                            .autocapitalization(.none)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.5))
                             )
-                        
-                        // Mot de passe
+
                         HStack {
                             if isPasswordVisible {
                                 TextField("Mot de passe", text: $password)
@@ -72,30 +71,18 @@ struct ConnexionView: View {
                         )
                         .background(Color.white)
                     }
-                    
-                  
+
+                    // Mot de passe oublié
                     HStack {
                         Spacer()
-                        Button("Mot de passe oublié ?") {
-                        }
-                        .font(.custom("Inter_24pt-Regular", size: 15))
-                        .foregroundColor(.black)
-                        .underline()
-
+                        Button("Mot de passe oublié ?") { }
+                            .font(.custom("Inter_24pt-Regular", size: 15))
+                            .foregroundColor(.black)
+                            .underline()
                     }
-                    
-                    
-                    Button(action: {
-                        if let _ = usersData.first(where: {
-                            $0.mail.lowercased() == mail.lowercased() && $0.password == password
-                        }) {
-                           
-                            isConnected = true
-                        } else {
-                            
-                            showAlert = true
-                        }
-                    }) {
+
+                    // 🔹 Bouton de connexion
+                    Button(action: login) {
                         HStack {
                             Text("Me connecter")
                                 .font(.custom("Manrope-Bold", size: 20))
@@ -111,15 +98,22 @@ struct ConnexionView: View {
                     .alert("Identifiants incorrects", isPresented: $showAlert) {
                         Button("OK", role: .cancel) {}
                     }
-                    
-                    // Navigation après connexion réussie
-                    NavigationLink(destination: DecouvrirView().environment(users[0]).environment(HobbyViewModel()), isActive: $isConnected) {
-                        EmptyView()
+
+                    // 🔹 Navigation après connexion réussie
+                    if let user = connectedUser {
+                        NavigationLink(
+                            destination: DecouvrirView()
+                                .environment(user)
+                                .environment(HobbyViewModel()),
+                            isActive: $isConnected
+                        ) {
+                            EmptyView()
+                        }
                     }
-                    
+
                     Spacer()
-                    
-                   
+
+                    // Lien vers inscription
                     HStack {
                         Text("Tu n'as pas de compte ?")
                             .font(.custom("Inter_24pt-Regular", size: 15))
@@ -129,15 +123,26 @@ struct ConnexionView: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    
-                }.padding()
+                }
+                .padding()
             }
+        }
+    }
+
+    // Fonction de login
+    func login() {
+        if let user = usersData.first(where: {
+            $0.mail.lowercased() == mail.lowercased() &&
+            $0.password == password
+        }) {
+            connectedUser = user
+            isConnected = true
+        } else {
+            showAlert = true
         }
     }
 }
 
 #Preview {
     ConnexionView()
-        .environment(users[0])
 }
-
