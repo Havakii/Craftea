@@ -25,7 +25,8 @@ struct ButtonComponent: View {
     var color: Color = .primaryPurpule
     var textColor: Color = .white
     var cornerRadius: CGFloat = 8
-    var action: () -> Void
+    var action: (() -> Void)?
+    var useButton: Bool = true
 
     var body: some View {
         let (width, height, fontSize): (CGFloat, CGFloat, CGFloat) = {
@@ -37,22 +38,29 @@ struct ButtonComponent: View {
             }
         }()
 
-        Button(action: action) {
-            Text(text)
-                .font(.system(size: fontSize, weight: .semibold))
-                .frame(width: width, height: height)
-                .foregroundColor(style == .filled ? textColor : color)
-                .background(
-                    style == .filled ? color : Color.clear
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: cornerRadius)
-                        .stroke(color, lineWidth: style == .outlined ? 2 : 0)
-                )
-                .cornerRadius(cornerRadius)
+        let label = Text(text)
+            .font(.system(size: fontSize, weight: .semibold))
+            .frame(width: width, height: height)
+            .foregroundColor(style == .filled ? textColor : color)
+            .background(
+                style == .filled ? color : Color.clear
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(color, lineWidth: style == .outlined ? 2 : 0)
+            )
+            .cornerRadius(cornerRadius)
+
+        if useButton {
+            Button(action: { action?() }) {
+                label
+            }
+        } else {
+            label
         }
     }
 }
+
 
 #Preview {
     VStack(spacing: 20) {

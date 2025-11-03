@@ -83,7 +83,7 @@ public struct MessageDetailView: View {
                                                text: "Évaluer",
                                                style: .filled,
                                                size: .small,
-                                               action: {}
+                                               useButton: false
                                            )
                                        }
 
@@ -92,7 +92,7 @@ public struct MessageDetailView: View {
                                                text: "Publier un nouvel article",
                                                style: .outlined,
                                                size: .small,
-                                               action: {}
+                                               useButton: false
                                            )
                                        }
                                    }
