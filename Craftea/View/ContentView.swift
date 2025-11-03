@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(HobbyViewModel.self) var viewModel
-    @Environment(Session.self) var currentUser
+    @Environment(Session.self) var sessions
+    @Environment(ConversationStore.self) var conversationStore
     var body: some View {
         TabView {
             Tab("Découvrir", systemImage: "sparkles") {
@@ -38,4 +39,5 @@ struct ContentView: View {
     ContentView()
         .environment(Session(currentUser: users[0]))
         .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }

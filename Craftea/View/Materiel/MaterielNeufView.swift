@@ -10,10 +10,10 @@ import SwiftUI
 struct MaterielNeufView: View {
     let materiel: MaterielPro
     @Environment(\.dismiss) private var dismiss
-    @Environment(User.self) private var user
+    @Environment(Session.self) private var session
 
     var isLiked: Bool {
-        user.favoriteEquipment.contains(where: { $0.id == materiel.id })
+        session.currentUser.favoriteEquipment.contains(where: { $0.id == materiel.id })
     }
 
     var body: some View {
@@ -114,9 +114,9 @@ struct MaterielNeufView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         if isLiked {
-                            user.favoriteEquipmentPro.removeAll(where: { $0.id == materiel.id })
+                            session.currentUser.favoriteEquipmentPro.removeAll(where: { $0.id == materiel.id })
                         } else {
-                            user.favoriteEquipmentPro.append(materiel)
+                            session.currentUser.favoriteEquipmentPro.append(materiel)
                         }
                     }) {
                         Image(systemName: isLiked ? "heart.fill" : "heart")
@@ -130,6 +130,6 @@ struct MaterielNeufView: View {
 
 #Preview {
     MaterielNeufView(materiel: materielsNeuf[0])
-        .environment(users[0])
+        .environment(Session(currentUser: users[0]))
 }
 

@@ -15,8 +15,8 @@ struct MaterielView: View {
     @State private var showAjoutMateriel = false
     @State private var selectedFilters: [EquipmentCategory] = []
     @State private var selectedPriceFilter: PriceRange = .all
-    @Environment(User.self) private var currentUser
     @Environment(ConversationStore.self) private var conversationStore
+    @Environment(Session.self) var currentUser
 
     var filteredMateriels: [Materiel] {
         let list: [Materiel] = materielsOccasion
@@ -346,7 +346,7 @@ struct MaterielView: View {
 }
 
 #Preview {
-    MaterielView() .environment(users[0])
+    MaterielView() .environment(Session(currentUser: users[0]))
         .environment(ConversationStore())
 }
 

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DecouvrirView: View {
     @Environment(Session.self) private var session
-    //@Environment(welcomeSentence.self) var welcome
     @Environment(HobbyViewModel.self) var viewModel
 
     @State var searchText: String = ""

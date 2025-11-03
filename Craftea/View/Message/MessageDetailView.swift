@@ -9,7 +9,7 @@ import SwiftUI
 public struct MessageDetailView: View {
     @State private var newMessage: String = ""
     @Bindable var conversation: Conversation
-    @Environment(User.self) private var currentUser
+    @Environment(Session.self) private var session
     @State private var showSecurityMessage = true
     @State private var isReserved = false
     @State private var showMessage = true
@@ -18,7 +18,7 @@ public struct MessageDetailView: View {
     
     
     public var body: some View {
-        let otherUser = conversation.participants.first { $0.id != currentUser.id } ?? conversation.participants.first!
+        let otherUser = conversation.participants.first { $0.id != session.currentUser.id } ?? conversation.participants.first!
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
@@ -183,7 +183,8 @@ public struct MessageDetailView: View {
 
 
 #Preview {
-    MessageDetailView(conversation: mockConversations[0]).environment(users[0])
+    MessageDetailView(conversation: mockConversations[0])
+        .environment(Session(currentUser: users[0]))
 }
 
 

@@ -11,8 +11,7 @@ struct MaterielOccasionView: View {
     let materiel: Materiel
     @Environment(\.dismiss) private var dismiss
     @State private var isLiked = false
-    @Environment(User.self) private var user
-    @Environment(User.self) private var currentUser
+    @Environment(Session.self) private var session
     @Environment(ConversationStore.self) private var conversationStore
     
     var body: some View {
@@ -78,7 +77,7 @@ struct MaterielOccasionView: View {
                         .padding(.horizontal, 7)
                         
                             HStack(alignment: .center, spacing: 12) {
-                                NavigationLink(destination: UserProfilView()){ //vendeur
+                                NavigationLink(destination: UserProfilView(otherUser: materiel.vendeur)){
                                     Image(materiel.image.isEmpty ? "placeholder" : materiel.image)
                                         .resizable()
                                         .scaledToFill()
@@ -115,7 +114,7 @@ struct MaterielOccasionView: View {
                                 NavigationLink(
                                     destination: MessageDetailView(
                                         conversation: conversationStore.getOrCreateConversation(
-                                            currentUser: currentUser,
+                                            currentUser: session.currentUser,
                                             otherUser: materiel.vendeur,
                                             theme: "À propos de \(materiel.nom)"
                                         )
@@ -176,15 +175,15 @@ struct MaterielOccasionView: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        if user.favoriteEquipment.contains(where: { $0.id == materiel.id }) {
-                            user.favoriteEquipment.removeAll(where: { $0.id == materiel.id })
-                            user.score -= 5
+                        if session.currentUser.self.favoriteEquipment.contains(where: { $0.id == materiel.id }) {
+                            session.currentUser.favoriteEquipment.removeAll(where: { $0.id == materiel.id })
+                            session.currentUser.score -= 5
                         } else {
-                            user.favoriteEquipment.append(materiel)
-                            user.score += 5
+                            session.currentUser.favoriteEquipment.append(materiel)
+                            session.currentUser.score += 5
                         }
                     }) {
-                        Label("Favorite", systemImage: user.favoriteEquipment.contains(where: { $0.id == materiel.id }) ? "heart.fill" : "heart")
+                        Label("Favorite", systemImage: session.currentUser.favoriteEquipment.contains(where: { $0.id == materiel.id }) ? "heart.fill" : "heart")
                     }
                 }
             }
@@ -196,7 +195,7 @@ struct MaterielOccasionView: View {
 
 #Preview {
     MaterielOccasionView(materiel: materielsOccasion[0])
-        .environment(users[0])
+        .environment(Session(currentUser: users[0]))
         .environment(ConversationStore())
 }
 
