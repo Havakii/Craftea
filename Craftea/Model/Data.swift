@@ -8,7 +8,7 @@
 import Foundation
 
 var users: [User] = [
-    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456", recommandations: [Hobby(
+    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456",score:4.9, recommandations: [Hobby(
         name: .PeintureAcrylique,
         description: "Créer des œuvres colorées et texturées",
         image: "acrylique",
@@ -71,7 +71,7 @@ var users: [User] = [
         Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
         ], popular: true
         )]),
-    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",favoritesHobby: []),
+    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",score: 2.5,favoritesHobby: []),
     User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456",favoritesHobby: []),
     User(name: "Pierre",surname: "Thomas",mail: "Pierre@gmail.com",pseudo: "Pierre",password: "123456",favoritesHobby: []),
     User(name: "Marc",surname: "Sellier",mail: "Marc@gmail.com",pseudo: "Marc",password: "123456",favoritesHobby: []),

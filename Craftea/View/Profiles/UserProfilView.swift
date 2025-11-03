@@ -6,30 +6,21 @@
 //
 import SwiftUI
 struct UserProfilView: View {
+    @Environment(User.self) private var user
     @State private var showingAlert = false
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    Button(action: {
-                        showingAlert = true
-                    })
-                    { ProfilSignalButton()}
-                        .padding(.leading,300)
-                        .padding(.top, 50)
-                    Image(systemName:"person.fill")
-                        .resizable()
-                        .frame(width: 100,height: 100)
+                    Spacer(minLength: 100)
+                    ProfileProgressView(
+                        progress: 1.0, // 75% rempli
+                        image: Image("user2")
+                    )
                     HStack{
-                        Text("\(otherUser[1].name)").mainTitle()
-                        HStack {
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
-                            Text("5")
-                        }
+                        Text(user.pseudo).mainTitle()
+                       ScoreTag()
                     }
-                    .padding(.top)
-                    
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
                 }
@@ -38,7 +29,7 @@ struct UserProfilView: View {
                         .padding(15)
                     ScrollView (.horizontal) {
                         HStack {
-                            ForEach(otherUser[1].favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
+                            ForEach(user.favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
                                 .padding(.trailing ,20)}
                         .padding(20)
                     }
@@ -49,7 +40,7 @@ struct UserProfilView: View {
                         .padding(15)
                     ScrollView (.horizontal) {
                         HStack {
-                            ForEach(otherUser[1].favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)                        }
+                            ForEach(user.favoriteEquipment) { materiel in MaterielCard(materiel: materiel)}
                                 .padding(.trailing ,20)
                         }
                         .padding(20)
@@ -57,14 +48,17 @@ struct UserProfilView: View {
                     }
                     Spacer()
                 }
-                
-                
             }
-            .background(Color("Background"))
+            .background(LinearGradient(gradient:Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]), startPoint: .topLeading, endPoint: .bottom))
             .ignoresSafeArea()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    ProfilSignalButton()
+                }
+            }
         }
     }
 }
 #Preview {
-    UserProfilView()
+    UserProfilView().environment(users[2])
 }

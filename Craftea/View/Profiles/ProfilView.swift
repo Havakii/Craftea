@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct ProfilView: View {
-    //@State var user : User
     @Environment(User.self) private var user
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
@@ -16,72 +15,94 @@ struct ProfilView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    NavigationLink(destination: SettingsView(), label: {
-                        ProfilSettingButton()
-                    })
-                    .padding(.leading,300)
-                    .padding(.top, 50)
-                    Image(systemName:"person.fill")
-                        .resizable()
-                        .frame(width: 100,height: 100)
-                    HStack{
+                    Spacer(minLength: 100)
+                    ProfileProgressView(
+                        progress: 0.75, // 75% rempli
+                        image: Image("user1")
+                    )
+                    HStack {
                         Text("\(user.name)").mainTitle()
-                        HStack {
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
-                            Text("5")
-                        }
+                        ScoreTag()
                     }
                     .padding(.top)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
                 }
+                // Section Loisirs
                 VStack(alignment: .leading) {
                     Text("Mes Loisirs").mainTitle()
-                        .padding(5)
-                    ScrollView (.horizontal) {
+                        .padding(.horizontal, 15)
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(user.favoritesHobby) { hobby in VerticalHobbyView(hobby: hobby)}
-                            .padding(.trailing ,20)}
-                        .padding(20)
+                            ForEach(user.favoritesHobby) { hobby in
+                                VerticalHobbyView(hobby: hobby)
+                            }
+                            .padding(.trailing, 20)
+                        }
+                        .padding(.horizontal, 20)
                     }
-                    Spacer()
                 }
+                // Section Favoris
                 VStack(alignment: .leading) {
                     Text("Mes Favoris").mainTitle()
-                        .padding(5)
-                    ScrollView (.horizontal) {
+                        .padding(.horizontal, 15)
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(user.favoriteEquipment) { materiel in MaterielCard(materiel: materiel)}
-                                .padding(.trailing ,20)
+                            ForEach(user.favoriteEquipment) { materiel in
+                                MaterielCard(materiel: materiel)
+                            }
+                            .padding(.trailing, 20)
                         }
-                        .padding(20)
-                        
+                        .padding(.horizontal, 20)
                     }
-                    Spacer()
                 }
-                
-    VStack(alignment: .leading) {
+                // Section Articles de troc
+                VStack(alignment: .leading) {
                     Text("Mes Articles de Troc").mainTitle()
-                        .padding(5)
-                    ScrollView (.horizontal) {
+                        .padding(.horizontal, 15)
+                    ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(user.favoriteEquipment) { materiel in MaterielCard(materiel: materiel)}
-                                .padding(.trailing ,20)
+                            ForEach(user.favoriteEquipment) { materiel in
+                                MaterielCard(materiel: materiel)
+                            }
+                            .padding(.trailing, 20)
                         }
-                        .padding(20)
-                        
+                        .padding(.horizontal, 20)
                     }
-                    Spacer()
                 }
-                
-                
+                Spacer(minLength: 30)
             }
-            .background(Color("Background"))
+            .background(
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottom
+                )
+            )
             .ignoresSafeArea()
+            // Bouton dans la Toolbar
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 20))
+                            .foregroundColor(Color("primaryPurpule"))
+                            .padding(15)
+                            .background(
+                                Circle()
+                                    .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
+                                    .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
+                            )
+                    }
+                    .buttonStyle(PlainButtonStyle()) 
+                }
+            }
         }
     }
 }
+
 #Preview {
-    ProfilView().environment(users[0]).environment(HobbyViewModel())
+    ProfilView()
+        .environment(users[0])
+        .environment(HobbyViewModel())
 }
