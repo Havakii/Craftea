@@ -4,38 +4,41 @@
 //
 //  Created by Hava Bakrieva on 28/10/2025.
 //
+
+
+
+//
+//  MessageMockData.swift
+//  Craftea
+//
+//  Created by Hava Bakrieva on 28/10/2025.
+//
+
 import Foundation
 
+let ethan = users[0]
+let pauline = users[2]
+let nathan = users[1]
 
-let mockUser1 = User(name: "Bastien42", surname: "Smith", mail: "bastien@mail.com", pseudo: "bastien", password: "pass", score: 4.5)
-let mockUser2 = User(name: "Bob", surname: "Johnson", mail: "bob@mail.com", pseudo: "bobby", password: "pass", score: 4.0)
-let mockUser3 = User(name: "Clara", surname: "Dupont", mail: "clara@mail.com", pseudo: "claraD", password: "pass", score: 4.8)
-let mockUser4 = User(name: "David", surname: "Martin", mail: "david@mail.com", pseudo: "davidM", password: "pass", score: 3.9)
-
-
-let mockMessages1 = [
-    Message(sender: mockUser1, receiver: mockUser2, theme: "Pelotes de laine", content: "Bonjour, je suis intéressée par votre article.", timestamp: Date()),
-    Message(sender: mockUser2, receiver: mockUser1, theme: "Pelotes de laine", content: "Je peux vous le réserver.", timestamp: Date().addingTimeInterval(60)),
-    Message(sender: mockUser1, receiver: mockUser2, theme: "Pelotes de laine", content: "Super, merci !", timestamp: Date().addingTimeInterval(120))
+let ethanPaulineMessages = [
+    Message(sender: ethan, receiver: pauline, content: "Salut Pauline ! Tu bosses sur quoi en ce moment ?"),
+    Message(sender: pauline, receiver: ethan, content: "Coucou Ethan ! Je teste la broderie, c’est trop relaxant 😌"),
+    Message(sender: ethan, receiver: pauline, content: "Ah j’aimerais bien essayer aussi !"),
+    Message(sender: pauline, receiver: ethan, content: "Je te montrerai le matériel que j’utilise 👍")
 ]
 
-
-let mockMessages2 = [
-    Message(sender: mockUser3, receiver: mockUser1, theme: "Tricot", content: "Salut Bastien, ton kit est encore disponible ?", timestamp: Date()),
-    Message(sender: mockUser1, receiver: mockUser3, theme: "Tricot", content: "Oui Clara, je peux te le garder.", timestamp: Date().addingTimeInterval(60))
+let ethanNathanMessages = [
+    Message(sender: ethan, receiver: nathan, content: "Yo Nathan, tu viens à l’atelier demain ?"),
+    Message(sender: nathan, receiver: ethan, content: "Ouais bien sûr ! J’apporte la peinture 🎨"),
+    Message(sender: ethan, receiver: nathan, content: "Parfait, j’ai hâte !")
 ]
 
-
-let mockMessages3 = [
-    Message(sender: mockUser4, receiver: mockUser2, theme: "Bricolage", content: "Bonjour Bob, j’aimerais emprunter votre perceuse.", timestamp: Date()),
-    Message(sender: mockUser2, receiver: mockUser4, theme: "Bricolage", content: "Pas de problème, je vous la prête ce week-end.", timestamp: Date().addingTimeInterval(90))
+let mockConversations: [Conversation] = [
+    Conversation(participants: [ethan, pauline],
+                 messages: ethanPaulineMessages,
+                 theme: "Don de Pelotes"),
+    Conversation(participants: [ethan, nathan],
+                 messages: ethanNathanMessages,
+                 theme: "Prêt Matériel")
 ]
-
-
-let mockConversation1 = Conversation(participants: [mockUser1, mockUser2], messages: mockMessages1)
-let mockConversation2 = Conversation(participants: [mockUser1, mockUser3], messages: mockMessages2)
-let mockConversation3 = Conversation(participants: [mockUser2, mockUser4], messages: mockMessages3)
-
-
-let mockConversations = [mockConversation1, mockConversation2, mockConversation3]
 

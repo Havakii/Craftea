@@ -8,17 +8,17 @@ import SwiftUI
 
 public struct MessageDetailView: View {
     @State private var newMessage: String = ""
-    @State private var conversation: Conversation
+    @Bindable var conversation: Conversation
+    @Environment(User.self) private var currentUser
     @State private var showSecurityMessage = true
     @State private var isReserved = false
     @State private var showMessage = true
     @State private var hasConfirmed = false
     
-    init(conversation: Conversation) {
-        _conversation = State(initialValue: conversation)
-    }
+    
     
     public var body: some View {
+        let otherUser = conversation.participants.first { $0.id != currentUser.id } ?? conversation.participants.first!
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
@@ -148,7 +148,7 @@ public struct MessageDetailView: View {
                     }
                     .padding()
                 }
-                .navigationTitle("Conversation")
+                .navigationTitle(otherUser.name)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button (action: {}) {
@@ -173,9 +173,7 @@ public struct MessageDetailView: View {
         let newMsg = Message(
             sender: sender,
             receiver: receiver,
-            theme: "default",
             content: newMessage,
-            timestamp: Date()
         )
         
         conversation.messages.append(newMsg)
@@ -185,7 +183,7 @@ public struct MessageDetailView: View {
 
 
 #Preview {
-    MessageDetailView(conversation: mockConversations[0])
+    MessageDetailView(conversation: mockConversations[0]).environment(users[0])
 }
 
 

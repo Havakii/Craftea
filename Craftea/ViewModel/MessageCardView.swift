@@ -100,7 +100,7 @@ public struct MessageCardView: View {
                             
                         }
                         
-                        Text(lastMessage.theme)
+                        Text(conversation.theme)
                             .font(Font.headline)
                             .fontWeight(Font.Weight.light)
                             .foregroundStyle(.textSecondary)
@@ -115,7 +115,5 @@ public struct MessageCardView: View {
     }
 }
 
-#Preview {
-    MessageCardView(conversation: mockConversations[0])
-}
+#Preview { MessageCardView(conversation: mockConversations[0]) }
 

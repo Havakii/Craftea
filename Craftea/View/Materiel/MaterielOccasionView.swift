@@ -11,6 +11,8 @@ struct MaterielOccasionView: View {
     let materiel: Materiel
     @Environment(\.dismiss) private var dismiss
     @State private var isLiked = false
+    @Environment(User.self) private var currentUser
+    @Environment(ConversationStore.self) private var conversationStore
     
     var body: some View {
         ZStack {
@@ -113,7 +115,16 @@ struct MaterielOccasionView: View {
 
                                     Spacer()
                                 }
-                                NavigationLink(destination: MessageDetailView(conversation: mockConversation1)){ Text("Contacter")
+                                NavigationLink(
+                                    destination: MessageDetailView(
+                                        conversation: conversationStore.getOrCreateConversation(
+                                            currentUser: currentUser,
+                                            otherUser: materiel.vendeur,
+                                            theme: "À propos de \(materiel.nom)"
+                                        )
+                                    )
+                                ){
+                                    Text("Contacter")
                                         .buttonLabel()
                                         .foregroundColor(.white)
                                         .padding(.horizontal, 18)
@@ -177,9 +188,13 @@ struct MaterielOccasionView: View {
             }
         }
     }
+    
 }
+
 
 #Preview {
     MaterielOccasionView(materiel: materielsOccasion[0])
+        .environment(users[0])
+        .environment(ConversationStore())
 }
 
