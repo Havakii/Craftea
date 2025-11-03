@@ -32,6 +32,7 @@ struct MaterielPro: Identifiable {
     let prix: String
 }
 
+
 private let unsplash = UnsplashService(accessKey: "5bOGmrInQ06GBsAQMMD4OE8hN9S0J9QU9Y_ShBlgE6U")
 func loadCoverImages() async {
     for i in materielsOccasion.indices {

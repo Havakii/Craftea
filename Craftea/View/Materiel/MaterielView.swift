@@ -49,15 +49,22 @@ struct MaterielView: View {
 
         if selectedPriceFilter != .all {
             result = result.filter { materiel in
-                if let prix = Double(materiel.prix) {
+                let cleanedPrice = materiel.prix
+                    .replacingOccurrences(of: "€", with: "")
+                    .replacingOccurrences(of: ",", with: ".")
+                    .replacingOccurrences(of: " ", with: "")
+
+                if let prix = Double(cleanedPrice) {
                     return selectedPriceFilter.contains(prix)
                 } else {
                     return false
                 }
             }
         }
+
         return result
     }
+
     let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -85,8 +92,7 @@ struct MaterielView: View {
                                 .textInputAutocapitalization(.never)
                                 .disableAutocorrection(true)
                                 .foregroundStyle(Color.textPrimary)
-                            Button(action: {
-                            }) {
+                            Button(action: {}) {
                                 Image(systemName: "mic.fill")
                                     .foregroundColor(.gray)
                                     .padding(6)
@@ -102,15 +108,9 @@ struct MaterielView: View {
                     .padding(.horizontal)
 
                     if condition == "Occasion" {
-
-
                         GlassEffectContainer(spacing: 12.0) {
                             HStack {
-                                Button(action: {
-                                    withAnimation {
-                                        showingFilter.toggle()
-                                    }
-                                }) {
+                                Button(action: { withAnimation { showingFilter.toggle() } }) {
                                     Image(systemName: "slider.vertical.3")
                                         .font(.system(size: 20, weight: .semibold))
                                         .foregroundStyle(Color.primaryPurpule)
@@ -136,9 +136,9 @@ struct MaterielView: View {
                                                         .buttonLabel()
                                                         .padding(.vertical, 8)
                                                         .padding(.horizontal, 12)
-                                                        .glassEffect(selectedFilters.contains(type) ?
-                                                            .regular.tint(.primaryPurpule.opacity(0.6)).interactive() :
-                                                                .regular.interactive())
+                                                        .glassEffect(selectedFilters.contains(type)
+                                                            ? .regular.tint(.primaryPurpule.opacity(0.6)).interactive()
+                                                            : .regular.interactive())
                                                         .foregroundStyle(selectedFilters.contains(type) ? .white : .textPrimary)
                                                 }
                                             }
@@ -154,11 +154,7 @@ struct MaterielView: View {
                     } else {
                         GlassEffectContainer(spacing: 12.0) {
                             HStack {
-                                Button(action: {
-                                    withAnimation {
-                                        showingFilter.toggle()
-                                    }
-                                }) {
+                                Button(action: { withAnimation { showingFilter.toggle() } }) {
                                     Image(systemName: "slider.vertical.3")
                                         .font(.system(size: 20, weight: .semibold))
                                         .foregroundStyle(Color.primaryPurpule)
@@ -172,17 +168,15 @@ struct MaterielView: View {
                                         HStack(spacing: 12) {
                                             ForEach(PriceRange.allCases) { range in
                                                 Button {
-                                                    withAnimation {
-                                                        selectedPriceFilter = range
-                                                    }
+                                                    withAnimation { selectedPriceFilter = range }
                                                 } label: {
                                                     Text(range.rawValue)
                                                         .buttonLabel()
                                                         .padding(.vertical, 8)
                                                         .padding(.horizontal, 12)
-                                                        .glassEffect(selectedPriceFilter == range ?
-                                                            .regular.tint(.primaryPurpule.opacity(0.6)).interactive() :
-                                                                .regular.interactive())
+                                                        .glassEffect(selectedPriceFilter == range
+                                                            ? .regular.tint(.primaryPurpule.opacity(0.6)).interactive()
+                                                            : .regular.interactive())
                                                         .foregroundStyle(selectedPriceFilter == range ? .white : .textPrimary)
                                                 }
                                             }
@@ -200,43 +194,30 @@ struct MaterielView: View {
 
                     SegmentedToggle(selection: $condition)
 
-
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             if condition == "Occasion" {
                                 ForEach(filteredMateriels) { materiel in
                                     NavigationLink(destination: MaterielOccasionView(materiel: materiel)) {
-
                                         VStack(alignment: .leading) {
                                             ZStack(alignment: .topTrailing) {
                                                 KFImage(URL(string: materiel.image))
-                                                //.placeholder: { ProgressView() }
                                                     .resizable()
                                                     .scaledToFill()
                                                     .frame(width: 148.5, height: 139)
                                                     .clipShape(RoundedRectangle(cornerRadius: 8))
 
-                                                //                                                AsyncImage(url: URL(string: materiel.image)) { image in
-                                                //                                                    image
-                                                //                                                        .resizable()
-                                                //                                                        .scaledToFill()
-                                                //                                                        .frame(width: 148.5, height: 139)
-                                                //                                                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                                                //                                                } placeholder: {
-                                                //                                                    ProgressView()
-                                                //                                                        .frame(width: 148.5,height: 139)
-                                                //                                                }
                                                 Text(materiel.typeMateriel.rawValue)
                                                     .font(.caption)
                                                     .fontWeight(.semibold)
                                                     .foregroundColor(Color(red: 119/255, green: 87/255, blue: 208/255))
                                                     .padding(.horizontal, 10)
                                                     .padding(.vertical, 6)
-                                                    .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3))
-                                                                 ,in : RoundedRectangle(cornerRadius: 8))
+                                                    .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3)),
+                                                                 in: RoundedRectangle(cornerRadius: 8))
                                                     .offset(x: -4, y: 4)
-
                                             }
+
                                             VStack(alignment: .leading, spacing: 2) {
                                                 Text(materiel.nom)
                                                     .tertiaryTitle()
@@ -251,27 +232,21 @@ struct MaterielView: View {
                                                     .padding(.horizontal, 8)
                                                     .padding(.bottom, 8)
                                             }
-                                        }.padding(8)
-                                            .frame(width: 164.5 ,height: 216)
-
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 16)
-                                                    .fill(Color.almostWhite)
-                                                    .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
-                                            )
+                                        }
+                                        .padding(8)
+                                        .frame(width: 164.5, height: 216)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .fill(Color.almostWhite)
+                                                .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
+                                        )
                                     }
                                 }
                             } else {
                                 ForEach(filteredMaterielsNeuf) { materiel in
-                                    NavigationLink(destination: MaterielNeufView(materiel: materiel, )) {
+                                    NavigationLink(destination: MaterielNeufView(materiel: materiel)) {
                                         VStack(alignment: .leading) {
                                             ZStack(alignment: .topTrailing) {
-//                                                KFImage(URL(string: materiel.image))
-//                                                    .resizable()
-//                                                    .scaledToFill()
-//                                                    .frame(width: 148.5, height: 139)
-//                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-
                                                 AsyncImage(url: URL(string: materiel.image)) { image in
                                                     image
                                                         .resizable()
@@ -280,9 +255,20 @@ struct MaterielView: View {
                                                         .clipShape(RoundedRectangle(cornerRadius: 8))
                                                 } placeholder: {
                                                     ProgressView()
-                                                        .frame(width: 148.5,height: 139)
+                                                        .frame(width: 148.5, height: 139)
                                                 }
+
+                                                Text("\(materiel.prix)")
+                                                    .font(.caption)
+                                                    .fontWeight(.semibold)
+                                                    .foregroundColor(Color(red: 119/255, green: 87/255, blue: 208/255))
+                                                    .padding(.horizontal, 10)
+                                                    .padding(.vertical, 6)
+                                                    .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3)),
+                                                                 in: RoundedRectangle(cornerRadius: 8))
+                                                    .offset(x: -4, y: 4)
                                             }
+
                                             VStack(alignment: .leading, spacing: 2) {
                                                 Text(materiel.nom)
                                                     .tertiaryTitle()
@@ -297,22 +283,23 @@ struct MaterielView: View {
                                                     .padding(.horizontal, 8)
                                                     .padding(.bottom, 8)
                                             }
-                                        }.padding(8)
-                                            .frame(width: 164.5 ,height: 216)
-                                            .background(
-                                                RoundedRectangle(cornerRadius: 16)
-                                                    .fill(Color.almostWhite)
-                                                    .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
-                                            )
+                                        }
+                                        .padding(8)
+                                        .frame(width: 164.5, height: 216)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 16)
+                                                .fill(Color.almostWhite)
+                                                .shadow(color: .gray.opacity(0.2), radius: 4, x: 0, y: 2)
+                                        )
                                     }
                                 }
                             }
-
                         }
                         .padding(.horizontal, 24)
                         .padding(.vertical)
                     }
                 }
+
                 if condition == "Occasion" {
                     VStack {
                         Spacer()
@@ -331,8 +318,10 @@ struct MaterielView: View {
                                 }
                                 .padding(.vertical, 4)
                                 .padding(.horizontal, 8)
-                            }.buttonStyle(.glassProminent).tint(Color.primaryPurpule.opacity(0.6))
-                                .frame(width: 160)
+                            }
+                            .buttonStyle(.glassProminent)
+                            .tint(Color.primaryPurpule.opacity(0.6))
+                            .frame(width: 160)
                         }
                         .padding()
                     }
@@ -357,3 +346,5 @@ struct MaterielView: View {
 #Preview {
     MaterielView()
 }
+
+

@@ -11,6 +11,8 @@ struct MaterielOccasionView: View {
     let materiel: Materiel
     @Environment(\.dismiss) private var dismiss
     @State private var isLiked = false
+    @Environment(User.self) private var user
+
     
     var body: some View {
         ZStack {
@@ -25,7 +27,6 @@ struct MaterielOccasionView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     VStack(spacing: 24) {
-                        // Image avec card
                         AsyncImage(url: URL(string: materiel.image)) { phase in
                             switch phase {
                             case .empty:
@@ -50,7 +51,6 @@ struct MaterielOccasionView: View {
                             }
                         }
                         
-                        // Nom et catégorie
                         HStack(alignment: .center, spacing: 8) {
                             Text(materiel.nom)
                                 .secondaryTitle()
@@ -76,8 +76,6 @@ struct MaterielOccasionView: View {
                         }
                         .padding(.horizontal, 7)
                         
-                        // Vendeur et bouton Contacter
-
                             HStack(alignment: .center, spacing: 12) {
                                 NavigationLink(destination: UserProfilView()){ //vendeur
                                     Image(materiel.image.isEmpty ? "placeholder" : materiel.image)
@@ -133,7 +131,6 @@ struct MaterielOccasionView: View {
                         .padding(.horizontal, 7)
                         .padding(.top, -8)
                         
-                        // Localisation
                         HStack(spacing: 6) {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.primaryPurpule)
@@ -144,7 +141,6 @@ struct MaterielOccasionView: View {
                         }
                         .padding(.horizontal, 7)
                         
-                        // Description
                         HStack {
                             Text(materiel.description)
                                 .mainText()
@@ -169,9 +165,16 @@ struct MaterielOccasionView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { isLiked.toggle() }) {
-                        Image(systemName: isLiked ? "heart.fill" : "heart")
-                            .foregroundColor(.primaryPurpule)
+                    Button(action: {
+                        if user.favoriteEquipment.contains(where: { $0.id == materiel.id }) {
+                            user.favoriteEquipment.removeAll(where: { $0.id == materiel.id })
+                            user.score -= 5
+                        } else {
+                            user.favoriteEquipment.append(materiel)
+                            user.score += 5
+                        }
+                    }) {
+                        Label("Favorite", systemImage: user.favoriteEquipment.contains(where: { $0.id == materiel.id }) ? "heart.fill" : "heart")
                     }
                 }
             }
@@ -181,5 +184,6 @@ struct MaterielOccasionView: View {
 
 #Preview {
     MaterielOccasionView(materiel: materielsOccasion[0])
+        .environment(users[0])
 }
 
