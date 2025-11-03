@@ -7,7 +7,6 @@
 
 
 import SwiftUI
-import UnsplashPhotoPicker
 
 fileprivate struct UnsplashSearchResult: Codable {
     struct Photo: Codable {

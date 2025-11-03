@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct DecouvrirView: View {
-    //@State var user : User
     @Environment(User.self) private var user
-    
+    @Environment(welcomeSentence.self) var welcome
+    @Environment(HobbyViewModel.self) var viewModel
+
     @State var searchText: String = ""
     @State private var hasScrolled: Bool = false
     @State private var isExpanded: Bool = true
     @State var selectedFilters: [Level] = []
-    @Environment(HobbyViewModel.self) var viewModel
+    @State private var sessionWelcome: String? = nil
+    
     
     var filteredData: [Hobby] {
         viewModel.hobbies.filter { hobby in
@@ -48,7 +50,7 @@ struct DecouvrirView: View {
                                 Text("Bonjour \(user.name) !")
                                     .mainTitle()
                                     .foregroundStyle(Color.primaryPurpule)
-                                Text(homePhrases.randomElement()!)
+                                Text(sessionWelcome ?? "")
                                     .tertiaryTitle()
                                     .foregroundStyle(Color.textSecondary)
                             }
@@ -188,6 +190,7 @@ struct DecouvrirView: View {
                         }
                     }
                 }
+                .onAppear { if sessionWelcome == nil { sessionWelcome = welcome.homePhrases.randomElement() } }
             }
             .scrollIndicators(.hidden)
             
@@ -196,6 +199,6 @@ struct DecouvrirView: View {
 }
 
 #Preview {
-    DecouvrirView().environment(users[0]).environment(HobbyViewModel())
+    DecouvrirView().environment(users[0]).environment(HobbyViewModel()).environment(welcomeSentence())
 }
 

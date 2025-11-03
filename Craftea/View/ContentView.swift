@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(HobbyViewModel.self) var viewModel
-    
+    @Environment(welcomeSentence.self) var welcome
     var body: some View {
         TabView {
             Tab("Découvrir", systemImage: "sparkles") {
@@ -34,5 +34,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView().environment(users[0]).environment(HobbyViewModel())
+    ContentView().environment(users[0]).environment(HobbyViewModel()).environment(welcomeSentence())
 }

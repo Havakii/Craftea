@@ -5,6 +5,7 @@
 //  Created by Hava Bakrieva on 27/10/2025.
 //
 import SwiftUI
+import Kingfisher
 
 struct MaterielView: View {
     @State private var searchText = ""
@@ -14,38 +15,38 @@ struct MaterielView: View {
     @State private var showAjoutMateriel = false
     @State private var selectedFilters: [EquipmentCategory] = []
     @State private var selectedPriceFilter: PriceRange = .all
-    
+
     var filteredMateriels: [Materiel] {
         let list: [Materiel] = materielsOccasion
-        
+
         let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasSearch = !trimmedSearch.isEmpty
-        
+
         var result = list.filter { materiel in
             let matchesSearch: Bool = hasSearch ? materiel.nom.localizedCaseInsensitiveContains(trimmedSearch) : true
             return matchesSearch
         }
-        
+
         if condition == "Occasion", !selectedFilters.isEmpty {
             result = result.filter { materiel in
                 selectedFilters.contains(materiel.typeMateriel)
             }
         }
-        
+
         return result
     }
-    
+
     var filteredMaterielsNeuf: [MaterielPro] {
         let list: [MaterielPro] = materielsNeuf
-        
+
         let trimmedSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let hasSearch = !trimmedSearch.isEmpty
-        
+
         var result = list.filter { materiel in
             let matchesSearch: Bool = hasSearch ? materiel.nom.localizedCaseInsensitiveContains(trimmedSearch) : true
             return matchesSearch
         }
-        
+
         if selectedPriceFilter != .all {
             result = result.filter { materiel in
                 if let prix = Double(materiel.prix) {
@@ -61,20 +62,20 @@ struct MaterielView: View {
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
     ]
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("Background").ignoresSafeArea()
+                Color.background.ignoresSafeArea()
                 LinearGradient(
                     gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
                     startPoint: .topLeading,
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
-                
+
                 VStack(spacing: 0) {
-                    
+
                     GlassEffectContainer() {
                         HStack(spacing: 8) {
                             Image(systemName: "magnifyingglass")
@@ -84,6 +85,14 @@ struct MaterielView: View {
                                 .textInputAutocapitalization(.never)
                                 .disableAutocorrection(true)
                                 .foregroundStyle(Color.textPrimary)
+                            Button(action: {
+                            }) {
+                                Image(systemName: "mic.fill")
+                                    .foregroundColor(.gray)
+                                    .padding(6)
+                                    .background(Color.white.opacity(0.8))
+                                    .clipShape(Circle())
+                            }
                         }
                         .padding(.vertical, 10)
                         .padding(.horizontal, 12)
@@ -91,10 +100,10 @@ struct MaterielView: View {
                     .glassEffect()
                     .padding(.top, 16)
                     .padding(.horizontal)
-                    
+
                     if condition == "Occasion" {
-                        
-                        
+
+
                         GlassEffectContainer(spacing: 12.0) {
                             HStack {
                                 Button(action: {
@@ -109,7 +118,7 @@ struct MaterielView: View {
                                 .buttonStyle(.glass)
                                 .zIndex(10)
                                 .padding(.leading, 24)
-                                
+
                                 if showingFilter {
                                     ScrollView(.horizontal, showsIndicators: false) {
                                         HStack(spacing: 12) {
@@ -157,7 +166,7 @@ struct MaterielView: View {
                                 .buttonStyle(.glass)
                                 .zIndex(10)
                                 .padding(.leading, 24)
-                                
+
                                 if showingFilter {
                                     ScrollView(.horizontal, showsIndicators: false) {
                                         HStack(spacing: 12) {
@@ -181,35 +190,42 @@ struct MaterielView: View {
                                         .padding(.trailing, 24)
                                     }
                                 }
-                                
+
                                 Spacer()
                             }
                         }
                         .padding(.top, 20)
                         .padding(.bottom, 16)
                     }
-                    
+
                     SegmentedToggle(selection: $condition)
-                    
-                    
+
+
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {
                             if condition == "Occasion" {
                                 ForEach(filteredMateriels) { materiel in
                                     NavigationLink(destination: MaterielOccasionView(materiel: materiel)) {
-                                        //l'image a modifier en asycimage
+
                                         VStack(alignment: .leading) {
                                             ZStack(alignment: .topTrailing) {
-                                                AsyncImage(url: URL(string: materiel.image)) { image in
-                                                    image
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                        .frame(width: 148.5, height: 139)
-                                                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                                                } placeholder: {
-                                                    ProgressView()
-                                                        .frame(width: 148.5,height: 139)
-                                                }
+                                                KFImage(URL(string: materiel.image))
+                                                //.placeholder: { ProgressView() }
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 148.5, height: 139)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+
+                                                //                                                AsyncImage(url: URL(string: materiel.image)) { image in
+                                                //                                                    image
+                                                //                                                        .resizable()
+                                                //                                                        .scaledToFill()
+                                                //                                                        .frame(width: 148.5, height: 139)
+                                                //                                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                                //                                                } placeholder: {
+                                                //                                                    ProgressView()
+                                                //                                                        .frame(width: 148.5,height: 139)
+                                                //                                                }
                                                 Text(materiel.typeMateriel.rawValue)
                                                     .font(.caption)
                                                     .fontWeight(.semibold)
@@ -219,7 +235,7 @@ struct MaterielView: View {
                                                     .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3))
                                                                  ,in : RoundedRectangle(cornerRadius: 8))
                                                     .offset(x: -4, y: 4)
-                                                
+
                                             }
                                             VStack(alignment: .leading, spacing: 2) {
                                                 Text(materiel.nom)
@@ -227,7 +243,7 @@ struct MaterielView: View {
                                                     .foregroundColor(.textPrimary)
                                                     .lineLimit(1)
                                                     .padding(.horizontal, 8)
-                                                
+
                                                 Text(materiel.description)
                                                     .secondaryText()
                                                     .foregroundColor(.textSecondary)
@@ -237,11 +253,11 @@ struct MaterielView: View {
                                             }
                                         }.padding(8)
                                             .frame(width: 164.5 ,height: 216)
-                                        
+
                                             .background(
                                                 RoundedRectangle(cornerRadius: 16)
                                                     .fill(Color.almostWhite)
-                                                    .shadow(radius: 2)
+                                                    .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
                                             )
                                     }
                                 }
@@ -250,6 +266,12 @@ struct MaterielView: View {
                                     NavigationLink(destination: MaterielNeufView(materiel: materiel, )) {
                                         VStack(alignment: .leading) {
                                             ZStack(alignment: .topTrailing) {
+//                                                KFImage(URL(string: materiel.image))
+//                                                    .resizable()
+//                                                    .scaledToFill()
+//                                                    .frame(width: 148.5, height: 139)
+//                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+
                                                 AsyncImage(url: URL(string: materiel.image)) { image in
                                                     image
                                                         .resizable()
@@ -267,7 +289,7 @@ struct MaterielView: View {
                                                     .foregroundColor(.textPrimary)
                                                     .lineLimit(1)
                                                     .padding(.horizontal, 8)
-                                                
+
                                                 Text(materiel.description)
                                                     .secondaryText()
                                                     .foregroundColor(.textSecondary)
@@ -276,17 +298,19 @@ struct MaterielView: View {
                                                     .padding(.bottom, 8)
                                             }
                                         }.padding(8)
-                                            .frame(height: 200)
+                                            .frame(width: 164.5 ,height: 216)
                                             .background(
                                                 RoundedRectangle(cornerRadius: 16)
                                                     .fill(Color.almostWhite)
-                                                    .shadow(radius: 2)
+                                                    .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
                                             )
                                     }
                                 }
                             }
-                            
-                        }.padding(.horizontal, 24).padding(.vertical)
+
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.vertical)
                     }
                 }
                 if condition == "Occasion" {
