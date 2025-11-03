@@ -9,12 +9,12 @@ import SwiftUI
 
 @main
 struct CrafteaApp: App {
-    @State var userSession = users[0]
+    @State var session = Session(currentUser: users[0]) // je ne pense pas que ce soit correcte d'avoir directement un user ici
     @State var viewModel = HobbyViewModel()
-    @State var welcome = welcomeSentence()
+    //@State var welcome = welcomeSentence()
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(userSession).environment(viewModel).environment(welcome)
+            ContentView().environment(session).environment(viewModel)
         }
     }
 }

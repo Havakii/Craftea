@@ -8,6 +8,7 @@
 
 import SwiftUI
 import UIKit
+import Observation
 
 extension UIImage {
     /// Sauvegarde l'image dans le dossier Documents avec un nom donné

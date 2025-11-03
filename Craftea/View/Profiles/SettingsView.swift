@@ -36,12 +36,12 @@ struct SettingsView: View {
                             .background(Circle().fill(Color.primaryPurpule))
                     }
                     .padding(.leading,300)
-                
+
                     ZStack {
                         Circle()
                             .fill(Color.primaryPurpule.opacity(0.2))
                             .frame(width: 250, height: 250)
-                        
+
                         VStack(spacing: 10) {
                             if let image = image {
                                 Image(uiImage: image)
@@ -83,7 +83,7 @@ struct SettingsView: View {
                         .padding()
                         .frame(maxWidth: .infinity)
                     }
-                    
+
                     VStack {
                         Text("Nom")
                             .padding(.trailing, 300)
@@ -150,19 +150,18 @@ struct SettingsView: View {
                     ).background(Color.white)
                     Spacer()
                     // Bouton déconnexion
-                    Button {
-                        // Action déconnexion
-                    } label: {
-                        Image(systemName: "power")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Circle().fill(Color.red))
-                            .shadow(radius: 2)
-                    }
-                    .padding(.leading,300)
+
+
                     .padding(.bottom,30)
                 }
-                .padding(30)
+                .padding(24)
+            }.toolbar(.hidden, for: .tabBar)
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    NavigationLink(destination: ConnexionView()){Image(systemName: "power")
+                    }.buttonStyle(.glassProminent)
+                        .tint(.red)
+                }
             }
         }
     }

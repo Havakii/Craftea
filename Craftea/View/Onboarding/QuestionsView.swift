@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct QuestionsView: View {
-    @Environment(User.self) private var user
     @State private var currentIndex = 0
     @State private var selectedOption: Int? = nil
 
@@ -94,7 +93,6 @@ struct QuestionsView: View {
 
 #Preview {
     QuestionsView()
-        .environment(users[0])
 }
 
 

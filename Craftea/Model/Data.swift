@@ -86,7 +86,8 @@ var users: [User] = [
     User(name: "Sarah", surname: "Lemoine", mail: "sarah.lemoine@gmail.com", pseudo: "SarahL", password: "123456", favoritesHobby: []),
     User(name: "Yanis", surname: "Garcia", mail: "yanis.garcia@gmail.com", pseudo: "YanisG", password: "123456", favoritesHobby: []),
     User(name: "Mila", surname: "Fabre", mail: "mila.fabre@gmail.com", pseudo: "MilaF", password: "123456", favoritesHobby: []),
-    User(name: "Noah", surname: "Chevalier", mail: "noah.chevalier@gmail.com", pseudo: "NoahC", password: "123456", favoritesHobby: [])
+    User(name: "Noah", surname: "Chevalier", mail: "noah.chevalier@gmail.com", pseudo: "NoahC", password: "123456", favoritesHobby: []),
+    User(name: "Isabelle", surname: "Coquoz", mail: "isa", pseudo: "IsaC", password: "123", favoritesHobby: []),
 
 ]
 

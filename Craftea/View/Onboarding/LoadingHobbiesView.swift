@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LoadingHobbiesView: View {
-    @Environment(User.self) var user
     @State private var isLoading = false
     @State private var navigate = false // To trigger NavigationLink programmatically
 
@@ -32,7 +31,7 @@ struct LoadingHobbiesView: View {
                         .padding(.horizontal)
 
                     // Hidden navigation link triggered programmatically
-                    NavigationLink(destination: DecouvrirView().environment(users[0]).environment(HobbyViewModel()), isActive: $navigate) {
+                    NavigationLink(destination: ContentView(), isActive: $navigate) {
                         EmptyView()
                     } .toolbar(.hidden, for: .tabBar)
 
@@ -62,6 +61,5 @@ struct LoadingHobbiesView: View {
 
 #Preview {
     LoadingHobbiesView()
-        .environment(users[0])
 }
 
