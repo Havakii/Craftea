@@ -77,55 +77,58 @@ struct MaterielOccasionView: View {
                         .padding(.horizontal, 7)
                         
                         // Vendeur et bouton Contacter
-                        HStack(alignment: .center, spacing: 12) {
-                            Image(materiel.image.isEmpty ? "placeholder" : materiel.image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.primaryPurpule.opacity(0.5), lineWidth: 2)
-                                )
-                            
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(materiel.vendeur.pseudo)
-                                    .mainText(bold: true)
-                                
-                                Text(String(format: "%.1f ★", materiel.vendeur.score))
-                                    .secondaryText()
-                                    .bold()
-                                    .foregroundColor(.orange.opacity(0.7))
-                                    .padding(.horizontal, 9)
-                                    .padding(.vertical, 2)
-                                    .background(
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 6)
-                                                .fill(.ultraThinMaterial)
-                                                .fill(Color.yellow.opacity(0.6))
-                                                .stroke(Color.white.opacity(0.2), lineWidth: 0.5)
-                                        }
-                                    )
-                            }
-                            
-                            Spacer()
-                            
-                            Button(action: {}) { // TODO lier à la page du user
-                                Text("Contacter")
-                                    .buttonLabel()
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 18)
-                                    .padding(.vertical, 10)
-                                    .background(
-                                        ZStack {
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .fill(.ultraThinMaterial)
-                                                .fill(Color.primaryPurpule.opacity(0.6))
-                                                .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-                                        }
-                                    )
-                                    .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
-                            }
+
+                            HStack(alignment: .center, spacing: 12) {
+                                NavigationLink(destination: UserProfilView()){ //vendeur
+                                    Image(materiel.image.isEmpty ? "placeholder" : materiel.image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .clipShape(Circle())
+                                        .overlay(
+                                            Circle()
+                                                .stroke(Color.primaryPurpule.opacity(0.5), lineWidth: 2)
+                                        )
+
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(materiel.vendeur.pseudo)
+                                            .mainText(bold: true)
+                                            .foregroundColor(Color.textPrimary)
+
+                                        Text(String(format: "%.1f ★", materiel.vendeur.score))
+                                            .secondaryText()
+                                            .bold()
+                                            .foregroundColor(.orange.opacity(0.7))
+                                            .padding(.horizontal, 9)
+                                            .padding(.vertical, 2)
+                                            .background(
+                                                ZStack {
+                                                    RoundedRectangle(cornerRadius: 6)
+                                                        .fill(.ultraThinMaterial)
+                                                        .fill(Color.yellow.opacity(0.6))
+                                                        .stroke(Color.white.opacity(0.2), lineWidth: 0.5)
+                                                }
+                                            )
+                                    }
+
+                                    Spacer()
+                                }
+                                NavigationLink(destination: MessageDetailView(conversation: mockConversation1)){ Text("Contacter")
+                                        .buttonLabel()
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 18)
+                                        .padding(.vertical, 10)
+                                        .background(
+                                            ZStack {
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .fill(.ultraThinMaterial)
+                                                    .fill(Color.primaryPurpule.opacity(0.6))
+                                                    .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
+                                            }
+                                        )
+                                        .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
+                                }
+
                         }
                         .padding(.horizontal, 7)
                         .padding(.top, -8)
