@@ -25,7 +25,7 @@ struct MaterielOccasionView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     VStack(spacing: 24) {
-                        // Image avec fallback card
+                        // Image avec card
                         AsyncImage(url: URL(string: materiel.image)) { phase in
                             switch phase {
                             case .empty:
