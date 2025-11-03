@@ -7,17 +7,29 @@
 
 import Foundation
 
+
+
 struct Message: Identifiable {
     let id = UUID()
     let sender: User
     let receiver: User
-    let theme: String
     let content: String
-    let timestamp: Date
 }
 
-struct Conversation: Identifiable {
-    let id = UUID()
-    let participants: [User]
-    var messages: [Message]
-}
+//@Observable
+//class Conversation: Identifiable {
+//    let id = UUID()
+//    let participants: [User]
+//    var messages: [Message]
+//    var theme: String
+//
+//    init(participants: [User], messages: [Message] = [], theme: String) {
+//        self.participants = participants
+//        self.messages = messages
+//        self.theme = theme
+//    }
+//
+//    func addMessage(_ message: Message) {
+//        messages.append(message)
+//    }
+//}

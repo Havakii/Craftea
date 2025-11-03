@@ -12,9 +12,11 @@ struct CrafteaApp: App {
     @State var userSession = users[0]
     @State var viewModel = HobbyViewModel()
     @State var welcome = welcomeSentence()
+    @State var conversations = ConversationStore()
     var body: some Scene {
         WindowGroup {
             ContentView().environment(userSession).environment(viewModel).environment(welcome)
+                .environment(conversations)
         }
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 public struct MessageView: View {
+    @Environment(ConversationStore.self) private var conversationStore
     //    @State private var selectedTab = "Message"
     public var body: some View {
         
@@ -43,4 +44,6 @@ public struct MessageView: View {
 
 #Preview {
     MessageView()
+        .environment(ConversationStore()) 
+                .environment(users[0])
 }
