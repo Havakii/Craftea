@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ScoreTag: View {
-    @Environment(User.self) private var user
+    @Environment(Session.self) private var session
     var body: some View {
         ZStack {
             HStack {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
-                Text(String(format: "%.1f", user.score))
+                Text(String(format: "%.1f", session.currentUser.score))
             }
                 .foregroundStyle(.textPrimary)
                 .font(.system(size: 16, weight: .semibold))
@@ -48,5 +48,5 @@ struct ScoreTag: View {
 }
 
 #Preview {
-    ScoreTag().environment(users[2])
+    ScoreTag().environment(Session(currentUser: users[0]))
 }
