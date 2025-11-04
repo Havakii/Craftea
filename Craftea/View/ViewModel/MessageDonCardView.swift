@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MessageDonCardView: View {
     @Binding var isReserved: Bool
+    var materiel: Materiel?
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -16,18 +17,43 @@ struct MessageDonCardView: View {
                 .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
                 .frame(width: 370, height: 100)
             HStack {
-                Image("placeholder")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 70, height: 70)
-                    .overlay(
-                        Rectangle().stroke(Color.gray, lineWidth: 1)
-                    )
-                    .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
-                    .padding(.leading)
+                AsyncImage(url: URL(string: materiel?.image ?? "placeholder")) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 70, height: 70)
+                            .padding(.leading)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 70, height: 70)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
+                            .padding(.leading)
+                    case .failure(_):
+                        Image("placeholder")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 70, height: 70)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
+                            .padding(.leading)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("Don pelotes")
+                        Text(materiel?.nom ?? "Article" )
                             .font(.default)
                             .fontWeight(Font.Weight.bold)
                       
@@ -37,7 +63,7 @@ struct MessageDonCardView: View {
                     
                     ZStack {
                         
-                        Text("Tag")
+                        Text(materiel?.typeMateriel.rawValue ?? "Tag")
                             .foregroundStyle(.primaryPurpule)
                             .font(.system(size: 16, weight: .semibold))
                             .textCase(.uppercase)

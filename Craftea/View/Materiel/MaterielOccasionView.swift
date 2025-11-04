@@ -117,7 +117,8 @@ struct MaterielOccasionView: View {
                                             currentUser: session.currentUser,
                                             otherUser: materiel.vendeur,
                                             theme: "À propos de \(materiel.nom)"
-                                        )
+                                        ),
+                                        materiel: materiel
                                     )
                                 ){
                                     Text("Contacter")

@@ -28,6 +28,7 @@ struct UserProfilView: View {
                         HStack{
                             Text(otherUser.pseudo).mainTitle()
                             ScoreTag()
+
                         }
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
