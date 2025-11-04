@@ -15,7 +15,7 @@ struct CrafteaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(session).environment(viewModel).environment(conversations)
+            ConnexionView().environment(session).environment(viewModel).environment(conversations)
         }
     }
 }
