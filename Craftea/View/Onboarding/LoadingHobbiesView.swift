@@ -32,10 +32,7 @@ struct LoadingHobbiesView: View {
 
                     // Hidden navigation link triggered programmatically
 
-                    NavigationLink(destination: ContentView()
-                        .environment(Session(currentUser: users[0]))
-                        .environment(HobbyViewModel())
-                        .environment(ConversationStore()), isActive: $navigate) {
+                    NavigationLink(destination: ContentView(), isActive: $navigate) {
                         EmptyView()
                     } .toolbar(.hidden, for: .tabBar)
 

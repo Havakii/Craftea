@@ -80,10 +80,7 @@ struct ConnexionView: View {
 
                     // 🔹 Bouton de connexion
                     NavigationLink(
-                        destination: ContentView()
-                            .environment(Session(currentUser: users[0]))
-                            .environment(HobbyViewModel())
-                            .environment(ConversationStore()), isActive: $isConnected) {
+                        destination: ContentView(), isActive: $isConnected) {
                             Button(action: login) {
                         HStack {
                             Text("Me connecter")
