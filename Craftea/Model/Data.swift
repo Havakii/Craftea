@@ -71,23 +71,23 @@ var users: [User] = [
         Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
         ], popular: true
         )]),
-    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",score: 2.5,favoritesHobby: []),
-    User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456",favoritesHobby: []),
-    User(name: "Pierre",surname: "Thomas",mail: "Pierre@gmail.com",pseudo: "Pierre",password: "123456",favoritesHobby: []),
-    User(name: "Marc",surname: "Sellier",mail: "Marc@gmail.com",pseudo: "Marc",password: "123456",favoritesHobby: []),
-    User(name: "Brendon", surname: "Urie", mail: "brendon@gmail.com", pseudo: "Brendon", password: "123456", favoritesHobby: [])
+    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",location: "Paris", score: 2.5,favoritesHobby: []),
+    User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456", location : "Lille", favoritesHobby: []),
+    User(name: "Pierre",surname: "Thomas",mail: "Pierre@gmail.com",pseudo: "Pierre",password: "123456",location: "Marseille", favoritesHobby: []),
+    User(name: "Marc",surname: "Sellier",mail: "Marc@gmail.com",pseudo: "Marc",password: "123456",location : "Toulouse", favoritesHobby: []),
+    User(name: "Brendon", surname: "Urie", mail: "brendon@gmail.com", pseudo: "Brendon", password: "123456",location: "Montpellier", favoritesHobby: [])
     ,
-    User(name: "Nora", surname: "Martin", mail: "nora.martin@gmail.com", pseudo: "Nora", password: "123456", favoritesHobby: []),
-    User(name: "Lucas", surname: "Bernard", mail: "lucas.bernard@gmail.com", pseudo: "LucasB", password: "123456", favoritesHobby: []),
-    User(name: "Emma", surname: "Rousseau", mail: "emma.rousseau@gmail.com", pseudo: "EmmaR", password: "123456", favoritesHobby: []),
-    User(name: "Hugo", surname: "Moreau", mail: "hugo.moreau@gmail.com", pseudo: "HugoM", password: "123456", favoritesHobby: []),
-    User(name: "Chloé", surname: "Dupont", mail: "chloe.dupont@gmail.com", pseudo: "ChloeD", password: "123456", favoritesHobby: []),
-    User(name: "Jules", surname: "Petit", mail: "jules.petit@gmail.com", pseudo: "JulesP", password: "123456", favoritesHobby: []),
-    User(name: "Sarah", surname: "Lemoine", mail: "sarah.lemoine@gmail.com", pseudo: "SarahL", password: "123456", favoritesHobby: []),
-    User(name: "Yanis", surname: "Garcia", mail: "yanis.garcia@gmail.com", pseudo: "YanisG", password: "123456", favoritesHobby: []),
-    User(name: "Mila", surname: "Fabre", mail: "mila.fabre@gmail.com", pseudo: "MilaF", password: "123456", favoritesHobby: []),
-    User(name: "Noah", surname: "Chevalier", mail: "noah.chevalier@gmail.com", pseudo: "NoahC", password: "123456", favoritesHobby: []),
-    User(name: "Isabelle", surname: "Coquoz", mail: "isa", pseudo: "IsaC", password: "123", favoritesHobby: []),
+    User(name: "Nora", surname: "Martin", mail: "nora.martin@gmail.com", pseudo: "Nora", password: "123456", location: "Grenoble", favoritesHobby: []),
+    User(name: "Lucas", surname: "Bernard", mail: "lucas.bernard@gmail.com", pseudo: "LucasB", password: "123456", location: "Angers", favoritesHobby: []),
+    User(name: "Emma", surname: "Rousseau", mail: "emma.rousseau@gmail.com", pseudo: "EmmaR", password: "123456",location: "Angoulême", favoritesHobby: []),
+    User(name: "Hugo", surname: "Moreau", mail: "hugo.moreau@gmail.com", pseudo: "HugoM", password: "123456", location: "Paris", favoritesHobby: []),
+    User(name: "Chloé", surname: "Dupont", mail: "chloe.dupont@gmail.com", pseudo: "ChloeD", password: "123456", location: "Biarritz", favoritesHobby: []),
+    User(name: "Jules", surname: "Petit", mail: "jules.petit@gmail.com", pseudo: "JulesP", password: "123456", location: "Tulle", favoritesHobby: []),
+    User(name: "Sarah", surname: "Lemoine", mail: "sarah.lemoine@gmail.com", pseudo: "SarahL", password: "123456", location: "Bordeaux", favoritesHobby: []),
+    User(name: "Yanis", surname: "Garcia", mail: "yanis.garcia@gmail.com", pseudo: "YanisG", password: "123456", location: "Toulouse", favoritesHobby: []),
+    User(name: "Mila", surname: "Fabre", mail: "mila.fabre@gmail.com", pseudo: "MilaF", password: "123456", location: "Lille", favoritesHobby: []),
+    User(name: "Noah", surname: "Chevalier", mail: "noah.chevalier@gmail.com", pseudo: "NoahC", password: "123456", location: "Lyon", favoritesHobby: []),
+    User(name: "Isabelle", surname: "Coquoz", mail: "isa", pseudo: "IsaC", password: "123", location: "Arras", favoritesHobby: []),
 
 ]
 

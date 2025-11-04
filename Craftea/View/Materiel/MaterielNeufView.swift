@@ -13,8 +13,8 @@ struct MaterielNeufView: View {
     @Environment(Session.self) private var session
 
     var isLiked: Bool {
-        session.currentUser.favoriteEquipment.contains(where: { $0.id == materiel.id })
-    }
+            session.currentUser.favoriteEquipment.contains(where: { $0.id == materiel.id })
+        }
 
     var body: some View {
         ZStack {
@@ -113,14 +113,15 @@ struct MaterielNeufView: View {
 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
-                        if isLiked {
+                        if session.currentUser.self.favoriteEquipmentPro.contains(where: { $0.id == materiel.id }) {
                             session.currentUser.favoriteEquipmentPro.removeAll(where: { $0.id == materiel.id })
+                            session.currentUser.score -= 5
                         } else {
                             session.currentUser.favoriteEquipmentPro.append(materiel)
+                            session.currentUser.score += 5
                         }
                     }) {
-                        Image(systemName: isLiked ? "heart.fill" : "heart")
-                            .foregroundColor(.primaryPurpule)
+                        Label("Favorite", systemImage: session.currentUser.favoriteEquipmentPro.contains(where: { $0.id == materiel.id }) ? "heart.fill" : "heart")
                     }
                 }
             }
