@@ -122,6 +122,7 @@ struct MaterielNeufView: View {
                         }
                     }) {
                         Label("Favorite", systemImage: session.currentUser.favoriteEquipmentPro.contains(where: { $0.id == materiel.id }) ? "heart.fill" : "heart")
+                            .foregroundStyle(Color.primaryPurpule)
                     }
                 }
             }
