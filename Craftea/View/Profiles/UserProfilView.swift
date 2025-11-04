@@ -6,54 +6,61 @@
 //
 import SwiftUI
 struct UserProfilView: View {
+    @Environment(Session.self) private var session
     var otherUser: User
     @State private var showingAlert = false
     var body: some View {
+        
         NavigationStack {
-            ScrollView {
-                VStack {
-                    Spacer(minLength: 100)
-                    ProfileProgressView(
-                        progress: 1.0, // 75% rempli
-                        image: Image("user2")
-                    )
-                    HStack{
-                        Text(otherUser.pseudo).mainTitle()
-                       ScoreTag()
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                }
-                VStack(alignment: .leading) {
-                    Text("Ses Loisirs").mainTitle()
-                        .padding(15)
-                    ScrollView (.horizontal) {
-                        HStack {
-                            ForEach(otherUser.favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
-                                .padding(.trailing ,20)}
-                        .padding(20)
-                    }
-                    Spacer()
-                }
-                VStack(alignment: .leading) {
-                    Text("Ses Articles de Troc").mainTitle()
-                        .padding(15)
-                    ScrollView (.horizontal) {
-                        HStack {
-                            ForEach(otherUser.favoriteEquipment) { materiel in MaterielCard(materiel: materiel)}
-                                .padding(.trailing ,20)
+        ZStack {
+            // background
+            Color.background.ignoresSafeArea()
+            LinearGradient(gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
+                           startPoint: .topLeading, endPoint: .bottom)
+                .ignoresSafeArea()
+                ScrollView {
+                    VStack {
+                        Spacer(minLength: 10)
+                        ProfileProgressView(
+                            progress: 1.0, // 75% rempli
+                            image: Image("user2")
+                        )
+                        HStack{
+                            Text(otherUser.pseudo).mainTitle()
+                            ScoreTag()
                         }
-                        .padding(20)
-                        
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
                     }
                     Spacer()
+                    VStack(alignment: .leading) {
+                        Text("Ses Loisirs").mainTitle()
+                            .padding(15)
+                        ScrollView (.horizontal) {
+                            HStack {
+                                ForEach(otherUser.favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
+                                .padding(.trailing ,20)}
+                            .padding(20)
+                        }
+                        Spacer()
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Ses Articles de Troc").mainTitle()
+                            .padding(15)
+                        ScrollView (.horizontal) {
+                            HStack {
+    MaterielCard(materiel:materielsOccasion[1])
+                            }
+                            .padding(20)
+                            
+                        }
+                        Spacer()
+                    }
                 }
-            }
-            .background(LinearGradient(gradient:Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]), startPoint: .topLeading, endPoint: .bottom))
-            .ignoresSafeArea()
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    ProfilSignalButton()
+               .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        ProfilSignalButton()
+                    }
                 }
             }
         }
@@ -61,4 +68,5 @@ struct UserProfilView: View {
 }
 #Preview {
     UserProfilView(otherUser: users[2]).environment(HobbyViewModel())
+        .environment(Session(currentUser: users[0]))
 }

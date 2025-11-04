@@ -6,28 +6,21 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MaterielCard: View {
-    
     var materiel : Materiel
     
     var body: some View {
         NavigationStack {
-            ScrollView {
                 NavigationLink(destination: MaterielOccasionView(materiel: materiel)) {
                     VStack(alignment: .leading) {
                         ZStack(alignment: .topTrailing) {
-                            AsyncImage(url: URL(string: materiel.image)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 148.5, height: 139)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                            } placeholder: {
-                                ProgressView()
-                                    .frame(width: 148.5, height: 139)
-                            }
-                            
+                            KFImage(URL(string: materiel.image))
+                                                        .resizable()
+                                                            .scaledToFill()
+                                                            .frame(width: 148.5, height: 139)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 8))
                             Text(materiel.typeMateriel.rawValue)
                                 .font(.caption)
                                 .fontWeight(.semibold)
@@ -62,7 +55,6 @@ struct MaterielCard: View {
                             .shadow(radius: 2)
                     )
                 }
-            }
         }
     }
 }
