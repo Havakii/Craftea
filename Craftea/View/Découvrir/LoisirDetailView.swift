@@ -190,10 +190,8 @@ struct LoisirDetailView: View {
                             Button(action: {
                                 if session.currentUser.favoritesHobby.contains(where: { $0.id == hobby.id }) {
                                     session.currentUser.favoritesHobby.removeAll(where: { $0.id == hobby.id })
-                                    session.currentUser.score -= 10
                                 } else {
                                     session.currentUser.favoritesHobby.append(hobby)
-                                    session.currentUser.score += 10
                                 }
                             }) {
                                 Label("Favorite", systemImage: session.currentUser.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")

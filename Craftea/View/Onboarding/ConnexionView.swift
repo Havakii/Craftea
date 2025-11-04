@@ -146,5 +146,5 @@ struct ConnexionView: View {
 }
 
 #Preview {
-    ConnexionView().environment(Session(currentUser: users[0])).environment(HobbyViewModel())
+    ConnexionView().environment(Session(currentUser: users[0])).environment(HobbyViewModel()).environment(ConversationStore())
 }

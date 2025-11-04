@@ -88,18 +88,10 @@ struct ProfilView: View {
                     // Bouton dans la Toolbar
                     .toolbar {
                         ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: SettingsView()) {
+                            NavigationLink(destination: SettingsView(user: session.currentUser)) {
                                 Image(systemName: "gearshape.fill")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(Color("primaryPurpule"))
-                                    .padding(15)
-                                    .background(
-                                        Circle()
-                                            .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
-                                            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
-                                    )
                             }
-                            .buttonStyle(PlainButtonStyle())
+                            .tint(.primaryPurpule)
                         }
                     }
                 }
