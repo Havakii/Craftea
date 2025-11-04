@@ -56,9 +56,10 @@ struct SettingsView: View {
                     .overlay( // ajouter un if pour afficher que si on a deja une image 
                         ZStack {
                             Circle()
+                                .fill(Color.white.opacity(0.6))
                                 .frame(width: 38, height: 38)
-                                .glassEffect(.clear)
-                            Image(systemName: "pencil")
+                                .glassEffect(.clear.tint(.primaryPurpule.opacity(0.4)))
+                            Image(systemName: "pencil").foregroundStyle(Color.primaryPurpule)
                         }.offset(x: 45, y:45)
 
                     )
