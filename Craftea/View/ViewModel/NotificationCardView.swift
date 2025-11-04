@@ -9,10 +9,12 @@ import SwiftUI
 
 public struct NotificationCardView: View {
     let notification: NotificationModel
-
-       public init(notification: NotificationModel) {
-           self.notification = notification
-       }
+    let onDelete: (() -> Void)?
+    
+    public init(notification: NotificationModel, onDelete: (() -> Void)? = nil) {
+        self.notification = notification
+        self.onDelete = onDelete
+    }
     public var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -34,8 +36,15 @@ public struct NotificationCardView: View {
                         Text(notification.message)
                             .font(.title3)
                             .fontWeight(Font.Weight.light)
-                      
+                        
                         Spacer()
+                        if let onDelete {
+                            Button(action: onDelete) {
+                                Image(systemName: "xmark")
+                                    .foregroundColor(.black)
+                            }
+                            .buttonStyle(.borderless)
+                        }
                         
                     }
                     
@@ -52,8 +61,8 @@ public struct NotificationCardView: View {
             
             
         }
-        }
     }
+}
 
 
 #Preview {

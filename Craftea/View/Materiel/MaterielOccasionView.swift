@@ -116,9 +116,10 @@ struct MaterielOccasionView: View {
                                         conversation: conversationStore.getOrCreateConversation(
                                             currentUser: session.currentUser,
                                             otherUser: materiel.vendeur,
-                                            theme: "À propos de \(materiel.nom)"
+                                            theme: materiel.nom,
+                                            materiel: materiel
                                         ),
-                                        materiel: materiel
+                                        
                                     )
                                 ){
                                     Text("Contacter")

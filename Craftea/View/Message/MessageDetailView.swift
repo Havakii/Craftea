@@ -14,7 +14,9 @@ public struct MessageDetailView: View {
     @State private var isReserved = false
     @State private var showMessage = true
     @State private var hasConfirmed = false
-    var materiel: Materiel?
+    var materiel: Materiel? {
+            conversation.materiel
+        }
     
     
     
@@ -79,7 +81,7 @@ public struct MessageDetailView: View {
                                        .padding(.bottom, 8)
 
                                    HStack(spacing: 16) {
-                                       NavigationLink(destination: NoteView(userNote:otherUser)) {
+                                       NavigationLink(destination: NoteView(userNote:otherUser, materiel: materiel)) {
                                            ButtonComponent(
                                                text: "Évaluer",
                                                style: .filled,
