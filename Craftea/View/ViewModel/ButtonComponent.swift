@@ -12,6 +12,7 @@ struct ButtonComponent: View {
     enum ButtonStyleType {
         case filled
         case outlined
+        case disabled
     }
 
     enum ButtonSize {
@@ -41,8 +42,10 @@ struct ButtonComponent: View {
         let label = Text(text)
             .font(.system(size: fontSize, weight: .semibold))
             .frame(width: width, height: height)
-            .foregroundColor(style == .filled ? textColor : color)
+            .foregroundColor(style == .filled || style == .disabled ? textColor : color)
             .background(
+                style == .disabled ?
+                color.opacity(0.3) :
                 style == .filled ? color : Color.clear
             )
             .overlay(

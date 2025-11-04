@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct NoteView: View {
+    var userNote: User
+    //var materiel: Materiel
     @State private var rating = 0
     @State private var text = ""
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
@@ -19,7 +22,36 @@ struct NoteView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
+
             VStack(spacing: 20) {
+                HStack(){
+                    Image("CrafteaLogo") //userNote.image
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 60, height: 60)
+                        .padding(.trailing, 16)
+                    VStack{
+                        HStack{
+                            Text(userNote.name).tertiaryTitle()
+                            Spacer()
+                        }.padding(.bottom, 1)
+                        HStack{
+                            Text("Type") //materiel.typeMateriel.rawValue
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color(red: 119/255, green: 87/255, blue: 208/255))
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 6)
+                                .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3)),
+                                             in: RoundedRectangle(cornerRadius: 8))
+                            Text("Nom de l'objet") //materiel.name
+                                .mainText().foregroundColor(.textSecondary)
+                            Spacer()
+                        }
+                    }
+                    Spacer()
+                }.padding(.horizontal, 24)
+                    .padding(.vertical, 32)
                 HStack {
                     ForEach(1...5, id: \.self) { index in
                         Image(systemName: index <= rating ? "star.fill" : "star")
@@ -46,7 +78,10 @@ struct NoteView: View {
                                             .stroke(Color.gray.opacity(0.3), lineWidth: 1)
                                     )
                                     .font(.body)
-                ButtonComponent(text: "Envoyer", style: .filled, size: .small, action: {})
+                ButtonComponent(text: "Envoyer", style: rating == 0 ? .disabled : .filled, size: .small, action: {userNote.score = (userNote.score + Double(rating))/2
+                    dismiss()
+                }).disabled(rating == 0)
+                Spacer()
             }
             .animation(.easeInOut, value: rating)
         }
@@ -67,5 +102,5 @@ struct NoteView: View {
 
 
 #Preview {
-    NoteView()
+    NoteView(userNote: users[2])
 }

@@ -78,7 +78,7 @@ public struct MessageDetailView: View {
                                        .padding(.bottom, 8)
 
                                    HStack(spacing: 16) {
-                                       NavigationLink(destination: NoteView()) {
+                                       NavigationLink(destination: NoteView(userNote:otherUser)) {
                                            ButtonComponent(
                                                text: "Évaluer",
                                                style: .filled,

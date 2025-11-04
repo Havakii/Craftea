@@ -45,5 +45,5 @@ public struct MessageView: View {
 #Preview {
     MessageView()
         .environment(ConversationStore()) 
-                .environment(users[0])
+        .environment(Session(currentUser: users[0]))
 }
