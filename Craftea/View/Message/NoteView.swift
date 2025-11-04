@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NoteView: View {
     var userNote: User
-    //var materiel: Materiel
+    var materiel: Materiel?
     @State private var rating = 0
     @State private var text = ""
     @Environment(\.dismiss) private var dismiss
@@ -22,7 +22,7 @@ struct NoteView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-
+            
             VStack(spacing: 20) {
                 HStack(){
                     Image("CrafteaLogo") //userNote.image
@@ -36,7 +36,7 @@ struct NoteView: View {
                             Spacer()
                         }.padding(.bottom, 1)
                         HStack{
-                            Text("Type") //materiel.typeMateriel.rawValue
+                            Text(materiel?.typeMateriel.rawValue ?? "Don") //materiel.typeMateriel.rawValue
                                 .font(.caption)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color(red: 119/255, green: 87/255, blue: 208/255))
@@ -44,7 +44,7 @@ struct NoteView: View {
                                 .padding(.vertical, 6)
                                 .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3)),
                                              in: RoundedRectangle(cornerRadius: 8))
-                            Text("Nom de l'objet") //materiel.name
+                            Text(materiel?.nom ?? "Don de pelotes") //materiel.name
                                 .mainText().foregroundColor(.textSecondary)
                             Spacer()
                         }
@@ -70,14 +70,14 @@ struct NoteView: View {
                 Text("Un petit commentaire ?")
                 TextEditor(text: $text)
                     .frame(width: 350, height: 200)
-                                    .padding(8)
-                                    .background(Color(.almostWhite))
-                                    .cornerRadius(12)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
-                                    )
-                                    .font(.body)
+                    .padding(8)
+                    .background(Color(.almostWhite))
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                    )
+                    .font(.body)
                 ButtonComponent(text: "Envoyer", style: rating == 0 ? .disabled : .filled, size: .small, action: {userNote.score = (userNote.score + Double(rating))/2
                     dismiss()
                 }).disabled(rating == 0)

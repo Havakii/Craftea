@@ -13,11 +13,13 @@ class Conversation: Identifiable {
     let participants: [User]
     var messages: [Message]
     var theme: String
+    var materiel: Materiel?
 
-    init(participants: [User], messages: [Message] = [], theme: String) {
+    init(participants: [User], messages: [Message] = [], theme: String, materiel: Materiel? = nil) {
         self.participants = participants
         self.messages = messages
         self.theme = theme
+        self.materiel = materiel
     }
 
     func addMessage(_ message: Message) {

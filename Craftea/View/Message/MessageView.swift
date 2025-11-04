@@ -10,21 +10,24 @@ import SwiftUI
 public struct MessageView: View {
     @Environment(ConversationStore.self) private var conversationStore
     @State private var selectedTab = "Message"
+    @State private var notifications: [NotificationModel] = mockNotifications
     
     public var body: some View {
-        let notifications: [NotificationModel] = mockNotifications 
-        let conversations: [Conversation] = mockConversations
+        let conversations = mockConversations + conversationStore.conversations
+        
         NavigationStack {
-            
             ZStack {
-                
                 Color.background.ignoresSafeArea()
-                LinearGradient(gradient:Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]), startPoint: .topLeading, endPoint: .bottom).ignoresSafeArea()
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
+                    startPoint: .topLeading,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
                 
                 ScrollView {
                     VStack {
                         SegmentedToggle(selection: $selectedTab, options: ["Message", "Notification"])
-                        
                     }
                     .padding()
                     
@@ -37,16 +40,23 @@ public struct MessageView: View {
                             }
                         } else {
                             ForEach(notifications) { notification in
-                                                               NotificationCardView(notification: notification)
-                                                           }
+                                NotificationCardView(
+                                    notification: notification,
+                                    onDelete: {
+                                        if let index = notifications.firstIndex(where: { $0.id == notification.id }) {
+                                            withAnimation {
+                                                notifications.remove(at: index)
+                                            }
+                                        }
+                                    }
+                                )
+                            }
                         }
-                       
                     }
+                    .padding(.horizontal)
                 }
             }
-            
         }
-        
     }
 }
 
