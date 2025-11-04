@@ -8,6 +8,11 @@
 import SwiftUI
 
 public struct NotificationCardView: View {
+    let notification: NotificationModel
+
+       public init(notification: NotificationModel) {
+           self.notification = notification
+       }
     public var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -15,7 +20,7 @@ public struct NotificationCardView: View {
                 .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
                 .frame(width: 370, height: 100)
             HStack {
-                Image("placeholder")
+                Image(notification.imageName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 70, height: 70)
@@ -26,7 +31,7 @@ public struct NotificationCardView: View {
                     .padding(.leading)
                 VStack(alignment: .leading) {
                     HStack {
-                        Text("Ton article a été ajouté en favoris par ")
+                        Text(notification.message)
                             .font(.title3)
                             .fontWeight(Font.Weight.light)
                       
@@ -34,7 +39,7 @@ public struct NotificationCardView: View {
                         
                     }
                     
-                    Text("Il y a 4 min")
+                    Text(notification.timeAgo)
                         .font(Font.headline)
                         .fontWeight(Font.Weight.light)
                         .foregroundStyle(.textSecondary)
@@ -52,5 +57,5 @@ public struct NotificationCardView: View {
 
 
 #Preview {
-    NotificationCardView()
+    NotificationCardView(notification: mockNotifications[0])
 }

@@ -7,6 +7,7 @@
 import SwiftUI
 struct UserProfilView: View {
     var otherUser: User
+    @Environment(Session.self) private var session
     @State private var showingAlert = false
     var body: some View {
         NavigationStack {
@@ -19,7 +20,7 @@ struct UserProfilView: View {
                     )
                     HStack{
                         Text(otherUser.pseudo).mainTitle()
-                       ScoreTag()
+                        ScoreTag()
                     }
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
@@ -30,7 +31,7 @@ struct UserProfilView: View {
                     ScrollView (.horizontal) {
                         HStack {
                             ForEach(otherUser.favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
-                                .padding(.trailing ,20)}
+                            .padding(.trailing ,20)}
                         .padding(20)
                     }
                     Spacer()
@@ -60,5 +61,5 @@ struct UserProfilView: View {
     }
 }
 #Preview {
-    UserProfilView(otherUser: users[2]).environment(HobbyViewModel())
+    UserProfilView(otherUser: users[2]).environment(HobbyViewModel()).environment(Session(currentUser: users[0]))
 }

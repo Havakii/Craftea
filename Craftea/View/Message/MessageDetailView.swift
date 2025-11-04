@@ -14,6 +14,7 @@ public struct MessageDetailView: View {
     @State private var isReserved = false
     @State private var showMessage = true
     @State private var hasConfirmed = false
+    var materiel: Materiel?
     
     
     
@@ -30,7 +31,7 @@ public struct MessageDetailView: View {
                 .ignoresSafeArea()
                 
                 VStack {
-                    MessageDonCardView(isReserved: $isReserved)
+                    MessageDonCardView(isReserved: $isReserved, materiel: materiel)
                     
                     
                     ScrollView {

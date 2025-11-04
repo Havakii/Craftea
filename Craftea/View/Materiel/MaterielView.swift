@@ -194,7 +194,7 @@ struct MaterielView: View {
                         .padding(.bottom, 16)
                     }
 
-                    SegmentedToggle(selection: $condition)
+                    SegmentedToggle(selection: $condition, options: ["Occasion", "Neuf"])
 
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 16) {

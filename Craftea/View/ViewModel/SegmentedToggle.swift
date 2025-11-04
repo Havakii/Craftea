@@ -3,7 +3,7 @@ import SwiftUI
 struct SegmentedToggle: View {
     @Namespace private var toggleNS
     @Binding var selection: String
-    let options = ["Occasion", "Neuf"]
+    let options: [String]
 
     var body: some View {
         HStack() {
