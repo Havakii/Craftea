@@ -27,8 +27,7 @@ struct UserProfilView: View {
                         )
                         HStack{
                             Text(otherUser.pseudo).mainTitle()
-                            ScoreTag()
-
+                            ScoreTag(user: users[2])
                         }
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -51,6 +50,7 @@ struct UserProfilView: View {
                         ScrollView (.horizontal) {
                             HStack {
     MaterielCard(materiel:materielsOccasion[1])
+    MaterielCardPro(materiel:materielsNeuf[0])
                             }
                             .padding(20)
                             
@@ -69,5 +69,5 @@ struct UserProfilView: View {
 }
 #Preview {
     UserProfilView(otherUser: users[2]).environment(HobbyViewModel())
-        .environment(Session(currentUser: users[0]))
+        .environment(Session(currentUser: users[2]))
 }

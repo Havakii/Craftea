@@ -11,6 +11,7 @@ struct ProfilView: View {
     @Environment(Session.self) private var session
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
+    let viewModel = HobbyViewModel()
     
     var body: some View {
         NavigationStack {
@@ -29,9 +30,7 @@ struct ProfilView: View {
                         )
                         HStack {
                             Text("\(session.currentUser.name)").mainTitle()
-                            ScoreTag()
-                            
-                        }
+                            ScoreTag(user: users[0])                        }
                         .padding(.top)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
@@ -42,7 +41,7 @@ struct ProfilView: View {
                             .padding(.horizontal, 15)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                
+                                VerticalHobbyView(hobby: viewModel.hobbies[0])
                                 ForEach(session.currentUser.favoritesHobby) { hobby in
                                     VerticalHobbyView(hobby: hobby)
                                 }
@@ -53,59 +52,61 @@ struct ProfilView: View {
                         }
                     }
                     // Section Favoris
-                    VStack(alignment: .leading) {
-                        Text("Mes Favoris").mainTitle()
-                            .padding(.horizontal, 15)
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                
-                                ForEach(session.currentUser.favoriteEquipment) { materiel in
-                                    MaterielCard(materiel: materiel)
-                                    ForEach(session.currentUser.favoriteEquipmentPro) { materiel in
-                                        MaterielCardPro(materiel: materiel)
-                                    }
-                                    .padding(.trailing, 20)
-                                    
-                                }
-                                .padding(.horizontal, 20)
-                            }
-                        }
-                        // Section Articles de troc
+                    if !session.currentUser.favoriteEquipment.isEmpty || !session.currentUser.favoriteEquipmentPro.isEmpty {
                         VStack(alignment: .leading) {
-                            Text("Mes Articles de Troc").mainTitle()
+                            Text("Mes Favoris").mainTitle()
                                 .padding(.horizontal, 15)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
-                                    MaterielCard(materiel:materielsOccasion[2])
+                                    
+                                    ForEach(session.currentUser.favoriteEquipment) { materiel in
+                                        MaterielCard(materiel: materiel)
+                                        ForEach(session.currentUser.favoriteEquipmentPro) { materiel in
+                                            MaterielCardPro(materiel: materiel)
+                                        }
+                                        .padding(.trailing, 20)
+                                        
                                     }
-                                    .padding(.trailing, 20)
+                                    .padding(.horizontal, 20)
                                 }
-                                .padding(.horizontal, 20)
                             }
                         }
-                        Spacer(minLength: 30)
                     }
-                    // Bouton dans la Toolbar
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            NavigationLink(destination: SettingsView()) {
-                                Image(systemName: "gearshape.fill")
-                                    .font(.system(size: 20))
-                                    .foregroundColor(Color("primaryPurpule"))
-                                    .padding(15)
-                                    .background(
-                                        Circle()
-                                            .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
-                                            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
-                                    )
+                    // Section Articles de troc
+                    VStack(alignment: .leading) {
+                        Text("Mes Articles de Troc").mainTitle()
+                            .padding(.horizontal, 15)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                MaterielCard(materiel:materielsOccasion[2])
                             }
-                            .buttonStyle(PlainButtonStyle())
+                            .padding(.trailing, 20)
                         }
+                        .padding(.horizontal, 20)
+                    }
+                    Spacer(minLength: 30)
+                }
+                // Bouton dans la Toolbar
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        NavigationLink(destination: SettingsView()) {
+                            Image(systemName: "gearshape.fill")
+                                .font(.system(size: 20))
+                                .foregroundColor(Color("primaryPurpule"))
+                                .padding(15)
+                                .background(
+                                    Circle()
+                                        .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
+                                        .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
+                                )
+                        }
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
         }
     }
+}
 #Preview {
     ProfilView()
         .environment(Session(currentUser: users[0]))

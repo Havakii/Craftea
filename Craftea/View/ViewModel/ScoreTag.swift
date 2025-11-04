@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ScoreTag: View {
     @Environment(Session.self) private var session
+    var user: User
     var body: some View {
         ZStack {
             HStack {
@@ -48,5 +49,5 @@ struct ScoreTag: View {
 }
 
 #Preview {
-    ScoreTag().environment(Session(currentUser: users[0]))
+    ScoreTag(user: users[0]).environment(Session(currentUser: users[0]))
 }
