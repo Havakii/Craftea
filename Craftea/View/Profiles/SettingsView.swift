@@ -1,55 +1,36 @@
-//
-//  SettingsView.swift
-//  Craftea
-//
-//  Created by Hava Bakrieva on 27/10/2025.
-//
 import SwiftUI
+import SwiftData
 
 struct SettingsView: View {
-    @Environment(Session.self) private var session
-    @State private var nom: String = ""
-    @State private var name: String = ""
-    @State private var pseudo: String = ""
-    @State private var mail: String = ""
-    @State private var password: String = ""
+
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+
+    @Bindable var user: User
+
     @State private var isPasswordVisible: Bool = false
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
     @State private var pickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var showingActionSheet = false
-    
+
     var body: some View {
         ZStack {
             // background
             Color.background.ignoresSafeArea()
             LinearGradient(gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
                            startPoint: .topLeading, endPoint: .bottom)
-                .ignoresSafeArea()
-            
+            .ignoresSafeArea()
+
             ScrollView {
                 VStack(spacing: 16) {
-                    HStack {
-                        Spacer()
-                        Button {
-                            // Action validation
-                        } label: {
-                            Image(systemName: "checkmark")
-                                .foregroundColor(.white)
-                                .padding(15)
-                                .background(Circle().fill(Color.primaryPurpule))
-                        }
-                    }
 
-                    .padding(.trailing)
-                    
                     // Image de profil
                     ZStack {
                         Circle()
                             .fill(Color.primaryPurpule.opacity(0.2))
-                            .frame(width: 200, height: 200)
-                        VStack(spacing: 8) {
-
+                            .frame(width: 130, height: 130)
+                        VStack() {
                             if let image = image {
                                 Image(uiImage: image)
                                     .resizable()
@@ -63,12 +44,25 @@ struct SettingsView: View {
                                     .scaledToFit()
                                     .frame(width: 28, height: 28)
                                     .foregroundColor(.primaryPurpule)
-                                Text("Ajouter une image")
-                                    .tertiaryTitle()
+                                Text("Ajouter")
+                                    .buttonLabel()
+                                    .foregroundColor(.primaryPurpule)
+                                Text("une image")
+                                    .buttonLabel()
                                     .foregroundColor(.primaryPurpule)
                             }
                         }
                     }
+                    .overlay( // ajouter un if pour afficher que si on a deja une image 
+                        ZStack {
+                            Circle()
+                                .fill(Color.white.opacity(0.6))
+                                .frame(width: 38, height: 38)
+                                .glassEffect(.clear.tint(.primaryPurpule.opacity(0.4)))
+                            Image(systemName: "pencil").foregroundStyle(Color.primaryPurpule)
+                        }.offset(x: 45, y:45)
+
+                    )
                     .onTapGesture { showingActionSheet = true }
                     .actionSheet(isPresented: $showingActionSheet) {
                         ActionSheet(
@@ -89,24 +83,24 @@ struct SettingsView: View {
                         ImagePicker(image: $image, sourceType: pickerSourceType)
                     }
                     .padding(.bottom, 10)
-                    
-                    // Textfield setting
+
+                    // Textfield settings – bind directly to user properties
                     Group {
-                        settingsField(title: "Nom", placeholder: session.currentUser.surname, text: $nom)
-                        settingsField(title: "Prénom", placeholder: session.currentUser.name, text: $name)
-                        settingsField(title: "Pseudo", placeholder: session.currentUser.pseudo, text: $pseudo)
-                        settingsField(title: "Email", placeholder: session.currentUser.mail, text: $mail)
+                        settingsField(title: "Nom", placeholder: "Nom", text: $user.name)
+                        settingsField(title: "Prénom", placeholder: "Prénom", text: $user.surname)
+                        settingsField(title: "Pseudo", placeholder: "Pseudo", text: $user.pseudo)
+                        settingsField(title: "Email", placeholder: "exemple@mail.com", text: $user.mail)
 
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Mot de passe")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
-                            
+
                             HStack {
                                 if isPasswordVisible {
-                                    TextField(session.currentUser.password, text: $password)
+                                    TextField("Mot de passe", text: $user.password)
                                 } else {
-                                    SecureField(session.currentUser.password, text: $password)
+                                    SecureField("Mot de passe", text: $user.password)
                                 }
                                 Button(action: {
                                     withAnimation { isPasswordVisible.toggle() }
@@ -116,114 +110,85 @@ struct SettingsView: View {
                                 }
                             }
                             .padding(12)
-                            .background(Color.white)
+                            .background(Color.almostWhite)
+                            .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.3))
                             )
                         }
+                        let locationBinding = Binding<String>(
+                            get: { user.location ?? "" },
+                            set: { user.location = $0.isEmpty ? nil : $0 }
+                        )
+                        settingsField(title: "Ville", placeholder: "Ville", text: locationBinding)
                     }
 
-
-                    VStack {
-                        Text("Nom")
-                            .padding(.trailing, 300)
-                        TextField("Nom", text: $nom)
-                            .padding(15)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            ).background(Color.white)
-                    }
-                    //Prénom Section
-                    VStack {
-                        Text("Prénom")
-                            .padding(.trailing, 280)
-                        TextField("Prénom", text: $name)
-                            .padding(15)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            ).background(Color.white)
-                    }
-                    //Pseudo Section
-                    VStack {
-                        Text("Pseudo")
-                            .padding(.trailing, 280)
-                        TextField("Pseudo", text: $pseudo)
-                            .padding(15)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            ).background(Color.white)
-                    }
-                    //Email Section
-                    VStack {
-                        Text("Email")
-                            .padding(.trailing, 300)
-                        TextField("Email", text: $mail)
-                            .padding(15)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            ).background(Color.white)
-                    }
-                    // Mot de passe
-                    Text("Mot de passe")
-                        .padding(.trailing, 230)
-                    HStack {
-                        if isPasswordVisible {
-                            TextField("Mot de passe", text: $password)
-                        } else {
-                            SecureField("Mot de passe", text: $password)
-                        }
-                        Button(action: {
-                            withAnimation { isPasswordVisible.toggle() }
-                        }) {
-                            Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    .padding(15)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.gray.opacity(0.5))
-                    ).background(Color.white)
                     Spacer()
-                    // Bouton déconnexion
-
-
-                    .padding(.bottom,30)
+                        .padding(.bottom, 30)
                 }
                 .padding(24)
-            }.toolbar(.hidden, for: .tabBar)
+            }
+            .toolbar(.hidden, for: .tabBar)
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    NavigationLink(destination: ConnexionView()){Image(systemName: "power")
-                    }.buttonStyle(.glassProminent)
+                ToolbarItemGroup(placement: .bottomBar) {
+
+                        Spacer()
+                        NavigationLink(destination: ConnexionView()) {
+                            Image(systemName: "power")
+                        }
+                        .buttonStyle(.glassProminent)
                         .tint(.red)
+                        .accessibilityLabel("Déconnexion")
+
+                }
+
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: saveAndDismiss) {
+                        Label("Valider", systemImage: "checkmark")
+                    }.tint(.primaryPurpule)
                 }
             }
         }
     }
-    
-private func settingsField(title: String, placeholder: String, text: Binding<String>) -> some View {
+
+    private func saveAndDismiss() {
+        do {
+
+            try modelContext.save()
+            dismiss()
+        } catch {
+            
+            print("Erreur lors de l'enregistrement: \(error)")
+        }
+    }
+
+    private func settingsField(title: String, placeholder: String, text: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(title)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-            
-            TextField(placeholder, text: text)
-                .padding(12)
-                .background(Color.white)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray.opacity(0.3))
-                )
+            ZStack{
+                TextField(placeholder, text: text)
+                    .padding(12)
+                    .background(Color.almostWhite)
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.gray.opacity(0.3))
+
+                    )
+                HStack(alignment:.center) {
+                    Spacer()
+                    Image(systemName: "rectangle.and.pencil.and.ellipsis").padding(.horizontal,4)
+                }
+            }
+
         }
     }
 }
 
 #Preview {
-    SettingsView().environment(Session(currentUser: users[0]))
+    SettingsView(user: users[0])
 }
+

@@ -7,12 +7,12 @@
 import SwiftUI
 
 struct ProfilView: View {
-    
+
     @Environment(Session.self) private var session
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
     let viewModel = HobbyViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -47,8 +47,8 @@ struct ProfilView: View {
                                 }
                                 .padding(.trailing, 20)
                             }
-                            .padding(.horizontal, 20)
-                            
+                            .padding(.horizontal, 24)
+
                         }
                     }
                     // Section Favoris
@@ -58,20 +58,21 @@ struct ProfilView: View {
                                 .padding(.horizontal, 15)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack {
-                                    
+
                                     ForEach(session.currentUser.favoriteEquipment) { materiel in
                                         MaterielCard(materiel: materiel)
                                         ForEach(session.currentUser.favoriteEquipmentPro) { materiel in
                                             MaterielCardPro(materiel: materiel)
                                         }
                                         .padding(.trailing, 20)
-                                        
+
                                     }
-                                    .padding(.horizontal, 20)
+                                    .padding(.horizontal, 24)
                                 }
                             }
                         }
                     }
+
                     // Section Articles de troc
                     VStack(alignment: .leading) {
                         Text("Mes Articles de Troc").mainTitle()
@@ -80,33 +81,27 @@ struct ProfilView: View {
                             HStack {
                                 MaterielCard(materiel:materielsOccasion[2])
                             }
-                            .padding(.trailing, 20)
+                            .padding(.horizontal, 24)
+
+                            // Bouton dans la Toolbar
+                            .toolbar {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    NavigationLink(destination: SettingsView(user: session.currentUser)) {
+                                        Image(systemName: "gearshape.fill")
+                                    }
+                                    .tint(.primaryPurpule)
+
+                                }
+                            }
+                            Spacer(minLength: 30)
                         }
-                        .padding(.horizontal, 20)
-                    }
-                    Spacer(minLength: 30)
-                }
-                // Bouton dans la Toolbar
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        NavigationLink(destination: SettingsView()) {
-                            Image(systemName: "gearshape.fill")
-                                .font(.system(size: 20))
-                                .foregroundColor(Color("primaryPurpule"))
-                                .padding(15)
-                                .background(
-                                    Circle()
-                                        .fill(Color(red: 0.95, green: 0.95, blue: 0.95))
-                                        .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 3)
-                                )
-                        }
-                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }
         }
     }
 }
+
 #Preview {
     ProfilView()
         .environment(Session(currentUser: users[0]))
