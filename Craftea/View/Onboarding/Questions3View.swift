@@ -78,10 +78,11 @@ struct Questions3View: View {
                         }
                         .foregroundColor(.white)
                         .frame(width: 300, height: 50)
-                        .background(Color("secondaryOrange"))
+                        .background(selectedOption != nil ? Color("secondaryOrange") : .gray)
                         .cornerRadius(10)
                         .padding(.top, 20)
                     }
+                    .disabled(selectedOption == nil)
                 }
             }
         }
