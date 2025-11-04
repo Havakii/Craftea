@@ -2,11 +2,10 @@ import SwiftUI
 import SwiftData
 
 struct SettingsView: View {
-    // SwiftData context for saving when validating
+
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
-    // Bindable user coming from caller. Ensure `User` is a @Model with these properties.
     @Bindable var user: User
 
     @State private var isPasswordVisible: Bool = false
@@ -131,7 +130,9 @@ struct SettingsView: View {
             }
             .toolbar(.hidden, for: .tabBar)
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
+                ToolbarItemGroup(placement: .bottomBar) {
+
+                        Spacer()
                         NavigationLink(destination: ConnexionView()) {
                             Image(systemName: "power")
                         }
@@ -139,7 +140,7 @@ struct SettingsView: View {
                         .tint(.red)
                         .accessibilityLabel("Déconnexion")
 
-                    }
+                }
 
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: saveAndDismiss) {
@@ -152,11 +153,11 @@ struct SettingsView: View {
 
     private func saveAndDismiss() {
         do {
-            // Persist changes to SwiftData only on confirmation
+
             try modelContext.save()
             dismiss()
         } catch {
-            // You might present an alert here in a real app
+            
             print("Erreur lors de l'enregistrement: \(error)")
         }
     }
