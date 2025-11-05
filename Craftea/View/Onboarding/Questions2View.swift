@@ -23,11 +23,11 @@ struct Questions2View: View {
             ],
             key: "intensity"
         )]
-    var body: some View {
 
+    var body: some View {
         let question = questions[currentIndex]
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .top) {
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 224/255, green: 182/255, blue: 252/255),
@@ -37,60 +37,63 @@ struct Questions2View: View {
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
-                
-                VStack(spacing: 20) {
-                    Text("Trouve un loisir qui te correspond !")
-                        .font(.custom("Manrope-Bold", size: 20))
-                        .padding(.top, 40)
-                    
-                    ProgressView(value: 2.0 / 7.0)
-                        .progressViewStyle(LinearProgressViewStyle(tint: Color("secondaryOrange")))
-                        .frame(width: 300)
-                    
-                    Text(question.text)
-                        .font(.custom("Manrope-Bold", size: 17))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    ForEach(question.options.indices, id: \.self) { index in
-                        HStack {
-                            Text(question.options[index])
-                                .font(.custom("Manrope-Regular", size: 15))
-                                .fixedSize(horizontal: false, vertical: true)
-                                .padding(.horizontal, 10)
-                            Spacer()
-                            Image(systemName: selectedOption == index ? "largecircle.fill.circle" : "circle")
-                                .foregroundColor(selectedOption == index ? Color("secondaryOrange") : .gray)
-                                .padding(.trailing, 10)
 
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("Trouve un loisir qui te correspond !")
+                        .secondaryTitle()
+                        .padding(.top, 32)
+
+                    ProgressView(value: 2.0 / 7.0)
+                        .progressViewStyle(LinearProgressViewStyle(tint: Color(Color(red: 119/255, green: 87/255, blue: 208/255))))
+
+                    Text(question.text)
+                        .mainText(bold: true)
+                        .multilineTextAlignment(.leading)
+                        .frame(height: 50)
+                    VStack(spacing:16){
+                        ForEach(question.options.indices, id: \.self) { index in
+                            HStack {
+                                Text(question.options[index])
+                                    .mainText()
+                                    .fixedSize(horizontal: false, vertical: true)
+
+                                Spacer(minLength: 16)
+                                Image(systemName: selectedOption == index ? "largecircle.fill.circle" : "circle")
+                                    .foregroundColor(selectedOption == index ? Color(Color(red: 119/255, green: 87/255, blue: 208/255)) : .gray)
+                            }
+                            .padding(16)
+                            .frame(height: 70)
+                            .background(selectedOption == index ? .almostWhite.opacity(0.7) : .clear)
+                            .cornerRadius(10)
+                            .glassEffect(in: RoundedRectangle(cornerRadius: 10))
+                            .onTapGesture { selectedOption = index }
                         }
-                        .padding()
-                        .frame(width: 350, height: 70)
-                        .background(.white)
-                        .cornerRadius(10)
-                        .onTapGesture { selectedOption = index }
-                    }
-                    
+                        Spacer()
+                    }.frame(height: 450)
                     NavigationLink(destination: Questions3View()) {
-                        HStack {
+                        HStack(spacing: 16) {
                             Text("Suivant")
-                                .font(.custom("Manrope-Bold", size: 20))
+                                .secondaryTitle()
                             Image(systemName: "arrow.right")
                                 .fontWeight(.bold)
                         }
-                        .foregroundColor(.white)
-                        .frame(width: 300, height: 50)
-                        .background(selectedOption != nil ? Color("secondaryOrange") : .gray)
+                        .foregroundColor(selectedOption != nil ? .almostWhite : .almostWhite.opacity(0.5))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .background(selectedOption != nil ? Color(Color(red: 119/255, green: 87/255, blue: 208/255).opacity(0.9)) : Color(Color(red: 119/255, green: 87/255, blue: 208/255)).opacity(0.5))
                         .cornerRadius(10)
+                        .glassEffect(in: RoundedRectangle(cornerRadius: 10))
                         .padding(.top, 20)
                     }
                     .disabled(selectedOption == nil)
                 }
+                .padding(.horizontal, 24)
             }
         }
     }
 }
 
 #Preview {
-    Questions2View()
+    Questions2View().environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }

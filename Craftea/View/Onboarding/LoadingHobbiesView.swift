@@ -38,7 +38,7 @@ struct LoadingHobbiesView: View {
 
                     Circle()
                         .trim(from: 0, to: 0.2)
-                        .stroke(Color("secondaryOrange"), lineWidth: 7)
+                        .stroke(Color(Color(red: 119/255, green: 87/255, blue: 208/255)), lineWidth: 7)
                         .frame(width: 100, height: 100)
                         .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
                         .animation(
@@ -55,12 +55,15 @@ struct LoadingHobbiesView: View {
                         navigate = true
                     }
                 }
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
 }
 
 #Preview {
     LoadingHobbiesView()
+        .environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }
 

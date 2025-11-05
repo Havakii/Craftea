@@ -26,7 +26,7 @@ struct Questions7View: View {
     var body: some View {
         let question = questions[currentIndex]
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .top) {
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 224/255, green: 182/255, blue: 252/255),
@@ -36,60 +36,63 @@ struct Questions7View: View {
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
-                
-                VStack(spacing: 20) {
+
+                VStack(alignment: .leading, spacing: 20) {
                     Text("Trouve un loisir qui te correspond !")
-                        .font(.custom("Manrope-Bold", size: 20))
-                        .padding(.top, 40)
-                    
+                        .secondaryTitle()
+                        .padding(.top, 32)
                     ProgressView(value: 7.0 / 7.0)
-                        .progressViewStyle(LinearProgressViewStyle(tint: Color("secondaryOrange")))
-                        .frame(width: 300)
-                    
+                        .progressViewStyle(LinearProgressViewStyle(tint: Color(Color(red: 119/255, green: 87/255, blue: 208/255))))
+
                     Text(question.text)
-                        .font(.custom("Manrope-Bold", size: 17))
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
+                        .mainText(bold: true)
+                        .multilineTextAlignment(.leading)
+                        .frame(height: 50)
+                    VStack(spacing:16){
                     ForEach(question.options.indices, id: \.self) { index in
                         HStack {
                             Text(question.options[index])
-                                .font(.custom("Manrope-Regular", size: 15))
+                                .mainText()
                                 .fixedSize(horizontal: false, vertical: true)
-                                .padding(.horizontal, 10)
-                            Spacer()
-                            Image(systemName: selectedOption == index ? "largecircle.fill.circle" : "circle")
-                                .foregroundColor(selectedOption == index ? Color("secondaryOrange") : .gray)
-                                .padding(.trailing, 10)
 
+                            Spacer(minLength: 16)
+                            Image(systemName: selectedOption == index ? "largecircle.fill.circle" : "circle")
+                                .foregroundColor(selectedOption == index ? Color(Color(red: 119/255, green: 87/255, blue: 208/255)) : .gray)
                         }
-                        .padding()
-                        .frame(width: 350, height: 70)
-                        .background(.white)
+                        .padding(16)
+                        .frame(height: 70)
+                        .background(selectedOption == index ? .almostWhite.opacity(0.7) : .clear)
                         .cornerRadius(10)
+                        .glassEffect(in: RoundedRectangle(cornerRadius: 10))
                         .onTapGesture { selectedOption = index }
                     }
-                    
+                        Spacer()
+                    }.frame(height: 450)
+
                     NavigationLink(destination: LoadingHobbiesView()) {
-                        HStack {
+                        HStack(spacing: 16) {
                             Text("Fin")
-                                .font(.custom("Manrope-Bold", size: 20))
+                                .secondaryTitle()
                             Image(systemName: "hand.thumbsup.fill")
                                 .fontWeight(.bold)
                         }
-                        .foregroundColor(.white)
-                        .frame(width: 300, height: 50)
-                        .background(selectedOption != nil ? Color("secondaryOrange") : .gray)
+                        .foregroundColor(selectedOption != nil ? .almostWhite : .almostWhite.opacity(0.5))
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .background(selectedOption != nil ? Color(Color(red: 119/255, green: 87/255, blue: 208/255).opacity(0.9)) : Color(Color(red: 119/255, green: 87/255, blue: 208/255)).opacity(0.5))
                         .cornerRadius(10)
+                        .glassEffect(in: RoundedRectangle(cornerRadius: 10))
                         .padding(.top, 20)
                     }
                     .disabled(selectedOption == nil)
                 }
+                .padding(.horizontal, 24)
             }
         }
     }
 }
 
 #Preview {
-    Questions7View()
+    Questions7View().environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }
