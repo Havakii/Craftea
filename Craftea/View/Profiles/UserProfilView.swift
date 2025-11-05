@@ -25,7 +25,7 @@ struct UserProfilView: View {
                         VStack {
                             Spacer(minLength: 10)
                             ProfileProgressView(
-                                progress: 1.0, // 75% rempli
+                                progress: otherUser.niveau, // 75% rempli
                                 image: Image(otherUser.imageProfil ?? "placeholder")
                             )
                             HStack{

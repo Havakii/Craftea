@@ -8,7 +8,7 @@
 import Foundation
 
 var users: [User] = [
-    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456",score: 4.9, recommandations: [Hobby(
+    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456",score: 4.9, niveau: 0.90, recommandations: [Hobby(
         name: .PeintureAcrylique,
         description: "Créer des œuvres colorées et texturées",
         image: "acrylique",
@@ -71,8 +71,8 @@ var users: [User] = [
         Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
         ], popular: true
         )], imageProfil: "user1"),
-    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",location: "Paris", score: 2.5,favoritesHobby: [], imageProfil: "user2"),
-    User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456",location: "Nice", score: 5.5,favoritesHobby: [Hobby(
+    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",location: "Paris", score: 2.5, niveau: 0.70,favoritesHobby: [], imageProfil: "user2"),
+    User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456",location: "Nice", score: 5.5, niveau: 0.65,favoritesHobby: [Hobby(
         name: .PeintureAcrylique,
         description: "Créer des œuvres colorées et texturées",
         image: "acrylique",
@@ -136,22 +136,22 @@ var users: [User] = [
         ], popular: true
         )],equipment:[], imageProfil: "user4"),
 
-    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456", location: "Paris", score: 2.5,favoritesHobby: [], imageProfil: "user3"),
-    User(name: "Pierre",surname: "Thomas",mail: "Pierre@gmail.com",pseudo: "Pierre",password: "123456",location: "Marseille", score: 3.5, favoritesHobby: [], imageProfil: "user5"),
-    User(name: "Marc",surname: "Sellier",mail: "Marc@gmail.com",pseudo: "Marc",password: "123456",location : "Toulouse", score: 4.5, favoritesHobby: [], imageProfil: "user6"),
-    User(name: "Brendon", surname: "Urie", mail: "brendon@gmail.com", pseudo: "Brendon", password: "123456",location: "Montpellier", score: 2.5, favoritesHobby: [], imageProfil: "user7")
+    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456", location: "Paris", score: 2.5, niveau: 0.50, favoritesHobby: [], imageProfil: "user3"),
+    User(name: "Pierre",surname: "Thomas",mail: "Pierre@gmail.com",pseudo: "Pierre",password: "123456",location: "Marseille", score: 3.5, niveau: 0.40, favoritesHobby: [], imageProfil: "user5"),
+    User(name: "Marc",surname: "Sellier",mail: "Marc@gmail.com",pseudo: "Marc",password: "123456",location : "Toulouse", score: 4.5, niveau: 0.70, favoritesHobby: [], imageProfil: "user6"),
+    User(name: "Brendon", surname: "Urie", mail: "brendon@gmail.com", pseudo: "Brendon", password: "123456",location: "Montpellier", score: 2.5, niveau: 0.60, favoritesHobby: [], imageProfil: "user7")
     ,
-    User(name: "Nora", surname: "Martin", mail: "nora.martin@gmail.com", pseudo: "Nora", password: "123456", location: "Grenoble", score: 3.0, favoritesHobby: [], imageProfil: "user8"),
-    User(name: "Lucas", surname: "Bernard", mail: "lucas.bernard@gmail.com", pseudo: "LucasB", password: "123456", location: "Angers", score: 3.8, favoritesHobby: [], imageProfil: "user14"),
-    User(name: "Emma", surname: "Rousseau", mail: "emma.rousseau@gmail.com", pseudo: "EmmaR", password: "123456",location: "Angoulême", score: 4.2, favoritesHobby: [], imageProfil: "user9"),
-    User(name: "Hugo", surname: "Moreau", mail: "hugo.moreau@gmail.com", pseudo: "HugoM", password: "123456", location: "Paris", score: 4.3, favoritesHobby: [], imageProfil: "user15"),
-    User(name: "Chloé", surname: "Dupont", mail: "chloe.dupont@gmail.com", pseudo: "ChloeD", password: "123456", location: "Biarritz", score: 4.4,  favoritesHobby: [], imageProfil: "user10"),
-    User(name: "Jules", surname: "Petit", mail: "jules.petit@gmail.com", pseudo: "JulesP", password: "123456", location: "Tulle", score: 4.6, favoritesHobby: [], imageProfil: "user16"),
-    User(name: "Sarah", surname: "Lemoine", mail: "sarah.lemoine@gmail.com", pseudo: "SarahL", password: "123456", location: "Bordeaux", score: 4.7, favoritesHobby: [], imageProfil: "user11"),
-    User(name: "Yanis", surname: "Garcia", mail: "yanis.garcia@gmail.com", pseudo: "YanisG", password: "123456", location: "Toulouse", score: 4.8, favoritesHobby: [], imageProfil: "user17"),
-    User(name: "Mila", surname: "Fabre", mail: "mila.fabre@gmail.com", pseudo: "MilaF", password: "123456", location: "Lille", score: 4.3, favoritesHobby: [], imageProfil: "user12"),
-    User(name: "Noah", surname: "Chevalier", mail: "noah.chevalier@gmail.com", pseudo: "NoahC", password: "123456", location: "Lyon", score: 4.0, favoritesHobby: [], imageProfil: "user17"),
-    User(name: "Isabelle", surname: "Coquoz", mail: "isa", pseudo: "IsaC", password: "123", location: "Arras", score: 4.9, favoritesHobby: [], imageProfil: "user13"),
+    User(name: "Nora", surname: "Martin", mail: "nora.martin@gmail.com", pseudo: "Nora", password: "123456", location: "Grenoble", score: 3.0, niveau: 0.25, favoritesHobby: [], imageProfil: "user8"),
+    User(name: "Lucas", surname: "Bernard", mail: "lucas.bernard@gmail.com", pseudo: "LucasB", password: "123456", location: "Angers", score: 3.8, niveau: 0.35, favoritesHobby: [], imageProfil: "user14"),
+    User(name: "Emma", surname: "Rousseau", mail: "emma.rousseau@gmail.com", pseudo: "EmmaR", password: "123456",location: "Angoulême", score: 4.2, niveau: 0.15, favoritesHobby: [], imageProfil: "user9"),
+    User(name: "Hugo", surname: "Moreau", mail: "hugo.moreau@gmail.com", pseudo: "HugoM", password: "123456", location: "Paris", score: 4.3, niveau: 0.10, favoritesHobby: [], imageProfil: "user15"),
+    User(name: "Chloé", surname: "Dupont", mail: "chloe.dupont@gmail.com", pseudo: "ChloeD", password: "123456", location: "Biarritz", score: 4.4, niveau: 0.5, favoritesHobby: [], imageProfil: "user10"),
+    User(name: "Jules", surname: "Petit", mail: "jules.petit@gmail.com", pseudo: "JulesP", password: "123456", location: "Tulle", score: 4.6, niveau: 0.55, favoritesHobby: [], imageProfil: "user16"),
+    User(name: "Sarah", surname: "Lemoine", mail: "sarah.lemoine@gmail.com", pseudo: "SarahL", password: "123456", location: "Bordeaux", score: 4.7, niveau: 0.45, favoritesHobby: [], imageProfil: "user11"),
+    User(name: "Yanis", surname: "Garcia", mail: "yanis.garcia@gmail.com", pseudo: "YanisG", password: "123456", location: "Toulouse", score: 4.8, niveau: 0.85, favoritesHobby: [], imageProfil: "user17"),
+    User(name: "Mila", surname: "Fabre", mail: "mila.fabre@gmail.com", pseudo: "MilaF", password: "123456", location: "Lille", score: 4.3, niveau: 0.95, favoritesHobby: [], imageProfil: "user12"),
+    User(name: "Noah", surname: "Chevalier", mail: "noah.chevalier@gmail.com", pseudo: "NoahC", password: "123456", location: "Lyon", score: 4.0, niveau: 0.65, favoritesHobby: [], imageProfil: "user17"),
+    User(name: "Isabelle", surname: "Coquoz", mail: "isa", pseudo: "IsaC", password: "123", location: "Arras", score: 4.9, niveau: 0.35, favoritesHobby: [], imageProfil: "user13"),
 
 ]
 

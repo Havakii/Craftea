@@ -115,10 +115,9 @@ struct MaterielNeufView: View {
                     Button(action: {
                         if session.currentUser.self.favoriteEquipmentPro.contains(where: { $0.id == materiel.id }) {
                             session.currentUser.favoriteEquipmentPro.removeAll(where: { $0.id == materiel.id })
-                            session.currentUser.score -= 5
                         } else {
                             session.currentUser.favoriteEquipmentPro.append(materiel)
-                            session.currentUser.score += 5
+                            session.currentUser.niveau += 5
                         }
                     }) {
                         Label("Favorite", systemImage: session.currentUser.favoriteEquipmentPro.contains(where: { $0.id == materiel.id }) ? "heart.fill" : "heart")

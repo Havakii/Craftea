@@ -179,10 +179,9 @@ struct MaterielOccasionView: View {
                     Button(action: {
                         if session.currentUser.self.favoriteEquipment.contains(where: { $0.id == materiel.id }) {
                             session.currentUser.favoriteEquipment.removeAll(where: { $0.id == materiel.id })
-                            session.currentUser.score -= 5
                         } else {
                             session.currentUser.favoriteEquipment.append(materiel)
-                            session.currentUser.score += 5
+                            session.currentUser.niveau += 0.05
                         }
                     }) {
                         Label("Favorite", systemImage: session.currentUser.favoriteEquipment.contains(where: { $0.id == materiel.id }) ? "heart.fill" : "heart")
