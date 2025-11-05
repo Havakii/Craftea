@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AjoutMaterielView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(Session.self) private var session
     @State private var titreAnnonce: String = ""
     @State private var descriptionAnnonce: String = ""
     @State private var lieu: String = ""
@@ -156,7 +157,29 @@ struct AjoutMaterielView: View {
                             .mainText()
                     }
                     
-                    NavigationLink(destination: MaterielView()) {
+                    // Replace NavigationLink with Button that appends to materielsOccasion and dismisses
+                    Button(action: {
+                        // Map the selectedType string to EquipmentCategory (fallback to .don)
+                        let category = EquipmentCategory(rawValue: selectedType) ?? .don
+
+                        // Create new Materiel. For image we set an empty string so loadCoverImages can fetch a picture.
+                        let newMateriel = Materiel(nom: titreAnnonce,
+                                                   image: "",
+                                                   description: descriptionAnnonce,
+                                                   vendeur: session.currentUser,
+                                                   typeMateriel: category)
+
+                        // Append to the global list
+                        materielsOccasion.insert(newMateriel, at: 0)
+
+                        // Trigger fetching a cover image for the newly added item, then dismiss the sheet
+                        Task {
+                            //await loadCoverImages()
+                            await MainActor.run {
+                                dismiss()
+                            }
+                        }
+                    }) {
                         HStack {
                             ZStack {
                                 Circle()
@@ -201,4 +224,3 @@ struct AjoutMaterielView: View {
         AjoutMaterielView()
     }
 }
-

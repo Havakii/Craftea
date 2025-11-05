@@ -32,36 +32,3 @@ struct MaterielPro: Identifiable {
     let prix: String
 }
 
-
-private let unsplash = UnsplashService(accessKey: "5bOGmrInQ06GBsAQMMD4OE8hN9S0J9QU9Y_ShBlgE6U")
-func loadCoverImages() async {
-    for i in materielsOccasion.indices {
-        
-        let materielName = materielsOccasion[i].nom
-        let materiel = materielsOccasion[i]
-        
-        if materiel.image.isEmpty {
-            if let url =  await unsplash.fetchImageURL(for: materielName) {
-                await MainActor.run {
-                    materielsOccasion[i].image = url
-                }
-            }
-        }
-    }
-}
-func loadCoverImagesPro() async {
-    for i in materielsNeuf.indices {
-        
-        let materielName = materielsNeuf[i].nom
-        let materiel = materielsNeuf[i]
-        
-        if materiel.image.isEmpty {
-            if let url =  await unsplash.fetchImageURL(for: materielName) {
-                await MainActor.run {
-                    materielsNeuf[i].image = url
-                }
-            }
-        }
-    }
-}
-     
