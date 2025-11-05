@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct InscriptionView: View {
+    // Environment & State
     @Environment(Session.self) private var session
     @State private var nom: String = ""
     @State private var name: String = ""
@@ -22,7 +23,7 @@ struct InscriptionView: View {
     @State private var acceptedTerms = false
 
     
-    
+    // Password Validation
     func isPasswordValid() -> Bool {
             return password.count >= 6 && password.count <= 15
         }
@@ -30,13 +31,16 @@ struct InscriptionView: View {
     func isPassword2Valid() -> Bool {
             return password2.count >= 6 && password2.count <= 15
         }
-    
+    // Body
     var body: some View {
         NavigationStack {
             ZStack {
+                // Couleur d’arrière-plan
                 Color("Background")
                     .ignoresSafeArea()
+                
                 VStack(spacing: 30) {
+                    // Logo + Titre
                     VStack {
                         Image("CrafteaLogo")
                             .resizable()
@@ -50,6 +54,7 @@ struct InscriptionView: View {
                             .padding(.bottom, 20)
                     }
                     
+                    // Champs d’inscription
                     VStack(spacing: 20) {
                         TextField("Nom", text: $nom)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -80,7 +85,7 @@ struct InscriptionView: View {
                                     .stroke(Color.gray.opacity(0.5))
                             )
                         
-                        // Mot de passe
+                        // Champ mot de passe
                         HStack {
                             if isPasswordVisible {
                                 TextField("Mot de passe", text: $password)
@@ -107,7 +112,7 @@ struct InscriptionView: View {
                                 .padding(.horizontal, 20)
                         }
                         
-                        // Confirmation du mot de passe
+                        // Champ confirmation mot de passe
                         HStack {
                             if isPassword2Visible {
                                 TextField("Confirmez le mot de passe", text: $password2)
@@ -134,7 +139,8 @@ struct InscriptionView: View {
                                 .padding(.horizontal, 20)
                         }
                     }
-                     //Accepte
+                   
+                    // Conditions d’utilisation
                     HStack(spacing: 10) {
                         Button(action: { acceptedTerms.toggle() }) {
                             Image(systemName: acceptedTerms ? "checkmark.square" : "square")
@@ -151,10 +157,10 @@ struct InscriptionView: View {
                         showMessage = true
                         let newUser = User(name: nom, surname: name, mail: mail, pseudo: pseudo, password: password)
                         users.append(newUser)
-                        session.currentUser = newUser // pas ça mais pas eu le temps de trouver le bon
-                        //users.last(where: $0.id == newUser.id) // Pas sur que ca soit correct
+                        session.currentUser = newUser 
                         session.welcome = session.homePhrases.randomElement() ?? ":)"
                     }) {
+                        // Bouton d’inscription
                         HStack{
                             Image(systemName: "checkmark.circle")
                                 .fontWeight(.bold)
@@ -168,7 +174,7 @@ struct InscriptionView: View {
                             .background(Color("primaryPurpule"))
                             .cornerRadius(10)
                     }
-                    
+                    // Lien vers connexion
                     HStack(spacing: 5) {
                         Text("Tu as déjà un compte?")
                             .font(.custom("Inter_24pt-Regular", size: 15))

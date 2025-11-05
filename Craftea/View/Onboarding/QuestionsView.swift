@@ -7,9 +7,11 @@
 import SwiftUI
 
 struct QuestionsView: View {
+    // States
     @State private var currentIndex = 0
     @State private var selectedOption: Int? = nil
-
+    
+    // Questions Data
     let questions: [Question] = [
         Question(
             text: "Quand tu penses loisir créatif, tu penses plutôt à...",
@@ -24,11 +26,13 @@ struct QuestionsView: View {
         )
     ]
 
+    // Body
     var body: some View {
         let question = questions[currentIndex]
 
         NavigationStack {
             ZStack {
+                // Fond en dégradé violet
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 224/255, green: 182/255, blue: 252/255),
@@ -40,19 +44,23 @@ struct QuestionsView: View {
                 .ignoresSafeArea()
 
                 VStack(spacing: 20) {
+                    // Titre principal
                     Text("Trouve un loisir qui te correspond !")
                         .font(.custom("Manrope-Bold", size: 20))
                         .padding(.top, 40)
 
+                    // Barre de progression
                     ProgressView(value: 1.0 / 7.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: Color("secondaryOrange")))
                         .frame(width: 300)
 
+                    // Question
                     Text(question.text)
                         .font(.custom("Manrope-Bold", size: 17))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
-
+                    
+                    //  Options de réponse
                     ForEach(question.options.indices, id: \.self) { index in
                         HStack {
                             Text(question.options[index])
@@ -71,6 +79,7 @@ struct QuestionsView: View {
                         .onTapGesture { selectedOption = index }
                     }
 
+                    // Bouton suivant
                     NavigationLink(destination: Questions2View()) {
                         HStack {
                             Text("Suivant")

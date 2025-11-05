@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ConnexionView: View {
+    // Environment & State
     @Environment(Session.self) private var session
     @State private var mail: String = ""
     @State private var password: String = ""
@@ -15,16 +16,17 @@ struct ConnexionView: View {
     @State private var isConnected: Bool = false
     @State private var showAlert: Bool = false
     @State private var connectedUser: User? = nil
-
+    
+    // View Body
     var body: some View {
         NavigationStack {
             ZStack {
+                // Background couleur
                 Color("Background")
                     .ignoresSafeArea()
 
                 VStack(spacing: 30) {
-
-                    // Logo + texte d'accueil
+               // Logo + Texte d'accueil
                     VStack {
                         Image("CrafteaLogo")
                             .resizable()
@@ -38,8 +40,9 @@ struct ConnexionView: View {
                             .padding(.bottom, 20)
                     }
 
-                    // Champs de connexion
+                   // Champs de connexion
                     VStack(spacing: 20) {
+                        // Champ mail
                         TextField("Mail", text: $mail)
                             .keyboardType(.emailAddress)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -47,7 +50,7 @@ struct ConnexionView: View {
                                 RoundedRectangle(cornerRadius: 8)
                                     .stroke(Color.gray.opacity(0.5))
                             )
-
+                        // Champ mot de passe
                         HStack {
                             if isPasswordVisible {
                                 TextField("Mot de passe", text: $password)
@@ -78,7 +81,8 @@ struct ConnexionView: View {
                             .underline()
                     }
 
-                    // 🔹 Bouton de connexion
+                    // Bouton de connexion
+
                     NavigationLink(
                         destination: ContentView(), isActive: $isConnected) {
                             Button(action: login) {
@@ -99,21 +103,9 @@ struct ConnexionView: View {
                     }
 
                     }
-                    // 🔹 Navigation après connexion réussie
-//                    if let user = connectedUser {
-//                        NavigationLink(
-//                            destination: DecouvrirView()
-//                                .environment(user)
-//                                .environment(HobbyViewModel()),
-//                            isActive: $isConnected
-//                        ) {
-//                            EmptyView()
-//                        }
-//                    }
 
                     Spacer()
-
-                    // Lien vers inscription
+                  // Lien vers inscription
                     HStack {
                         Text("Tu n'as pas de compte ?")
                             .font(.custom("Inter_24pt-Regular", size: 15))
@@ -129,7 +121,8 @@ struct ConnexionView: View {
         }
     }
 
-    // Fonction de login
+    // Fonctions
+    // Vérifie les identifiants et connecte l'utilisateur
     func login() {
 
         if let userFound = users.first(where: {

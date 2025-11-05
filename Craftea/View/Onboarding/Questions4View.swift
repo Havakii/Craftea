@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct Questions4View: View {
+    // States
     @State private var currentIndex = 0
     @State private var selectedOption: Int? = nil
+    
+    // Question data
     let questions: [Question] = [
         Question(
             text: "Quand il s’agit de matériel, tu es plutôt…",
@@ -21,10 +24,14 @@ struct Questions4View: View {
             ],
             key: "budget"
         )]
+    
+    // Body
     var body: some View {
         let question = questions[currentIndex]
+        
         NavigationStack {
             ZStack {
+                // Fond en dégradé violet
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 224/255, green: 182/255, blue: 252/255),
@@ -36,19 +43,23 @@ struct Questions4View: View {
                 .ignoresSafeArea()
                 
                 VStack(spacing: 20) {
+                   // Titre principal
                     Text("Trouve un loisir qui te correspond !")
                         .font(.custom("Manrope-Bold", size: 20))
                         .padding(.top, 40)
                     
+                    // Barre de progression
                     ProgressView(value: 4.0 / 7.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: Color("secondaryOrange")))
                         .frame(width: 300)
                     
+                    // Question
                     Text(question.text)
                         .font(.custom("Manrope-Bold", size: 17))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
+                    // Options
                     ForEach(question.options.indices, id: \.self) { index in
                         HStack {
                             Text(question.options[index])
@@ -68,6 +79,7 @@ struct Questions4View: View {
                         .onTapGesture { selectedOption = index }
                     }
                     
+                    // Bouton Suivant
                     NavigationLink(destination: Questions5View()) {
                         HStack {
                             Text("Suivant")
