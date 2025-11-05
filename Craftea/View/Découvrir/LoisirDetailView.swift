@@ -10,7 +10,6 @@ import Kingfisher
 
 struct LoisirDetailView: View {
     @Environment(Session.self) private var session
-    //@Environment(User.self) private var user
     var hobby: Hobby
     @Environment(HobbyViewModel.self) var viewModel
     @State private var revealDetails = true
@@ -88,26 +87,26 @@ struct LoisirDetailView: View {
                                 ForEach(hobby.equipementNeeded, id: \.id) { item in
                                     NavigationLink(destination: MaterielView(searchTextfromDetailView: item.name)){
                                         HStack(alignment: .top) {
-                                            KFImage(URL(string: item.image))
-                                                //.placeholder: { ProgressView() }
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 60, height: 60)
-                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+//                                            KFImage(URL(string: item.image))
+//                                                //.placeholder: { ProgressView() }
+//                                                .resizable()
+//                                                .scaledToFill()
+//                                                .frame(width: 60, height: 60)
+//                                                .clipShape(RoundedRectangle(cornerRadius: 8))
 
 
-//                                            AsyncImage(url: URL(string: item.image)) { image in
-//                                                image
-//                                                    .resizable()
-//                                                    .scaledToFill()
-//                                                    .frame(width: 60, height: 60)
-//                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-//
-//
-//                                            } placeholder: {
-//                                                ProgressView()
-//                                                    .frame(width: 60, height: 60)
-//                                            }
+                                            AsyncImage(url: URL(string: item.image)) { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 60, height: 60)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+
+
+                                            } placeholder: {
+                                                ProgressView()
+                                                    .frame(width: 60, height: 60)
+                                            }
                                             VStack(alignment: .leading){
                                                 Text(item.name)
                                                     .mainText(bold: true).foregroundColor(.textPrimary)
@@ -216,7 +215,7 @@ struct LoisirDetailView: View {
 
 #Preview {
     let viewModel = HobbyViewModel()
-    LoisirDetailView(hobby: viewModel.hobbies[0])
+    LoisirDetailView(hobby: viewModel.hobbies[5])
         .environment(Session(currentUser: users[0]))
         .environment(HobbyViewModel())
 }

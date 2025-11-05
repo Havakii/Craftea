@@ -423,26 +423,6 @@ class HobbyViewModel {
         ]
     }
     
-//    func loadHobbyCoverImages() async {
-//        await withTaskGroup(of: Void.self) { group in
-//            for hobbyIndex in hobbies.indices {
-//                group.addTask(priority: .medium) { [weak self] in
-//                    guard let self = self else { return }
-//                    
-//                    let hobbyName = await self.hobbies[hobbyIndex].name.rawValue
-//                    let hobby = await self.hobbies[hobbyIndex]
-//                    
-//                    if hobby.image.isEmpty {
-//                        if let url = await self.unsplash.fetchImageURL(for: hobbyName) {
-//                            await MainActor.run {
-//                                self.hobbies[hobbyIndex].image = url
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
     func loadDetailImages() async {
         /*.onAppear {  // a utiliser au dans la page ou on veut afficher les images
          Task {
