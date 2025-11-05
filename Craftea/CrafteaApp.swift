@@ -16,6 +16,7 @@ struct CrafteaApp: App {
     var body: some Scene {
         WindowGroup {
             ConnexionView().environment(session).environment(viewModel).environment(conversations)
+                .tint(.primaryPurpule)
         }
     }
 }

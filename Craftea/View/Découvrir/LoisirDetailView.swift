@@ -198,7 +198,10 @@ struct LoisirDetailView: View {
                             }) {
                                 Label("Favorite", systemImage: session.currentUser.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")
                             }
-                            .tint(Color.primaryPurpule)
+                            .toolbarBackground(.visible, for: .navigationBar)
+                                   .navigationBarTitleDisplayMode(.inline)
+                             .tint(Color.primaryPurpule)
+                             //.toolbarForegroundStyle(Color.primaryPurpule, for: .navigationBar)
                         }
                     }
                 }
