@@ -79,7 +79,9 @@ struct ProfilView: View {
                             .padding(.horizontal, 15)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
-                                MaterielCard(materiel:materielsOccasion[2])
+                                ForEach(materielsOccasion) { materiel in
+                                    materiel.vendeur.id == session.currentUser.id ? MaterielCard(materiel: materiel) : nil
+                                }
                             }
                             .padding(.horizontal, 24)
 
