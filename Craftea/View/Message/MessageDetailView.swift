@@ -17,26 +17,26 @@ public struct MessageDetailView: View {
     var materiel: Materiel? {
             conversation.materiel
         }
-    
-    
-    
+
+
+
     public var body: some View {
         let otherUser = conversation.participants.first { $0.id != session.currentUser.id } ?? conversation.participants.first!
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
-                
+
                 LinearGradient(
                     gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
                     startPoint: .topLeading,
                     endPoint: .bottom
                 )
                 .ignoresSafeArea()
-                
+
                 VStack {
                     MessageDonCardView(isReserved: $isReserved, materiel: materiel)
-                    
-                    
+
+
                     ScrollView {
                         VStack {
                             ForEach(conversation.messages) { message in
@@ -60,7 +60,7 @@ public struct MessageDetailView: View {
                             }
                         }
                     }
-                    
+
                     VStack {
                         if isReserved && !hasConfirmed {
                                ButtonComponent(
@@ -126,7 +126,7 @@ public struct MessageDetailView: View {
                             .lineLimit(...3)
                             .padding()
                             .background(Color.almostWhite)
-                        
+
                         HStack {
                             Button(action: {
                                 //TODO: addMedia button + check
@@ -148,9 +148,9 @@ public struct MessageDetailView: View {
                                     .padding(.horizontal, 8)
                             }
                         }
-                        
+
                     }
-                    .padding()
+                    .padding(.horizontal)
                 }
                 .navigationTitle(otherUser.name)
                 .toolbar {
@@ -160,26 +160,26 @@ public struct MessageDetailView: View {
                                 .font(.system(size: 20, weight: .semibold))
                                 .foregroundColor(Color("primaryPurpule"))
                         }
-                        
+
                     }
-                }.padding()
+                }//.padding()
             }.toolbar(.hidden, for: .tabBar)
         }
         }
 
-    
-    
+
+
     private func sendMessage() {
         guard !newMessage.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         guard let sender = conversation.participants.first,
               let receiver = conversation.participants.last else { return }
-        
+
         let newMsg = Message(
             sender: sender,
             receiver: receiver,
             content: newMessage,
         )
-        
+
         conversation.messages.append(newMsg)
         newMessage = ""
     }

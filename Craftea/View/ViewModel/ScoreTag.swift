@@ -16,17 +16,18 @@ struct ScoreTag: View {
                     .foregroundColor(.yellow)
                 Text(String(format: "%.1f", score))
             }
-                .foregroundStyle(.textPrimary)
+                .buttonLabel()
+                .foregroundColor(.textPrimary)
                 .font(.system(size: 16, weight: .semibold))
                 .textCase(.uppercase)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.secondaryOrange.opacity(0.03))
+                        .fill(Color.yellow.opacity(0.03))
                         .overlay(
                             RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.secondaryOrange, lineWidth: 4)
+                                .stroke(Color.yellow, lineWidth: 4)
                                 .blur(radius: 4)
                                 .offset(x: 2, y: 2)
                                 .mask(
@@ -40,9 +41,9 @@ struct ScoreTag: View {
                                         )
                                 )
                         )
-                    
+
                 )
-            
+
         }
     }
 }

@@ -52,7 +52,7 @@ struct MaterielCard: View {
                     .background(
                         RoundedRectangle(cornerRadius: 16)
                             .fill(Color.almostWhite)
-                            .shadow(radius: 2)
+                            .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
                     )
                 }
         }

@@ -14,14 +14,14 @@ struct AjoutMaterielView: View {
     @State private var descriptionAnnonce: String = ""
     @State private var lieu: String = ""
     @State private var selectedType: String = ""
-    
+
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
     @State private var pickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var showingActionSheet = false
-    
+
     let typesAnnonce = ["Don", "Échange", "Prêt"]
-    
+
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
@@ -29,15 +29,14 @@ struct AjoutMaterielView: View {
                            startPoint: .topLeading,
                            endPoint: .bottom)
             .ignoresSafeArea()
-            
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    
+
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
                             .fill(Color.primaryPurpule.opacity(0.2))
                             .frame(width: 250, height: 250)
-                        
+
                         VStack(spacing: 10) {
                             if let image = image {
                                 Image(uiImage: image)
@@ -78,37 +77,37 @@ struct AjoutMaterielView: View {
                         ImagePicker(image: $image, sourceType: pickerSourceType)
                     }
                     .frame(maxWidth: .infinity)
-                    
+
                     Text("Titre de ton annonce")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                    
+
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.white)
                             .frame(height: 50)
-                        
+
                         TextField("ex : Pinceau-plat", text: $titreAnnonce)
                             .padding(.horizontal, 12)
                             .mainText()
                     }
-                    
+
                     Text("Description")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                    
+
                     ZStack(alignment: .topLeading) {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.white)
                             .frame(height: 120)
-                        
+
                         if descriptionAnnonce.isEmpty {
                             Text("ex : Utilisé quelques fois, en très bon état")
                                 .foregroundColor(.gray.opacity(0.5))
                                 .padding(.horizontal, 12)
                                 .padding(.top, 8)
                         }
-                        
+
                         TextEditor(text: $descriptionAnnonce)
                             .padding(.horizontal, 12)
                             .padding(.top, 8)
@@ -116,11 +115,11 @@ struct AjoutMaterielView: View {
                             .scrollContentBackground(.hidden)
                             .font(.system(size: 16))
                     }
-                    
+
                     Text("Type d'annonce")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                    
+
                     HStack {
                         ForEach(typesAnnonce, id: \.self) { type in
                             Button(action: { selectedType = type }) {
@@ -132,7 +131,7 @@ struct AjoutMaterielView: View {
                                                 .fill(selectedType == type ? Color.primaryPurpule : Color.white)
                                         )
                                         .frame(width: 24, height: 24)
-                                    
+
                                     Text(type)
                                         .mainText()
                                         .foregroundColor(.black)
@@ -142,21 +141,21 @@ struct AjoutMaterielView: View {
                             .buttonStyle(PlainButtonStyle())
                         }
                     }
-                    
+
                     Text("Lieu")
                         .tertiaryTitle()
                         .foregroundColor(.black)
-                    
+
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.white)
                             .frame(height: 50)
-                        
+
                         TextField("ex : Paris", text: $lieu)
                             .padding(.horizontal, 12)
                             .mainText()
                     }
-                    
+
                     // Replace NavigationLink with Button that appends to materielsOccasion and dismisses
                     Button(action: {
                         // Map the selectedType string to EquipmentCategory (fallback to .don)
@@ -189,7 +188,7 @@ struct AjoutMaterielView: View {
                                     .foregroundColor(.white)
                                     .font(.system(size: 10, weight: .bold))
                             }
-                            
+
                             Text("Publier un article")
                                 .buttonLabel()
                                 .foregroundColor(.white)
@@ -203,12 +202,12 @@ struct AjoutMaterielView: View {
                     .padding(.top, 20)
                     .disabled(titreAnnonce.isEmpty || descriptionAnnonce.isEmpty || lieu.isEmpty || selectedType.isEmpty)
                     .opacity(titreAnnonce.isEmpty || descriptionAnnonce.isEmpty || lieu.isEmpty || selectedType.isEmpty ? 0.5 : 1)
-                    
+
                     Spacer()
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 20)
-            }
+            }.padding(.top, 24)
 
             .toolbar(.hidden, for: .tabBar)
 
@@ -221,6 +220,6 @@ struct AjoutMaterielView: View {
 
 #Preview {
     NavigationStack {
-        AjoutMaterielView()
+        AjoutMaterielView() .environment(Session(currentUser: users[0]))
     }
 }

@@ -13,7 +13,7 @@ struct MaterielOccasionView: View {
     @State private var isLiked = false
     @Environment(Session.self) private var session
     @Environment(ConversationStore.self) private var conversationStore
-    
+
     var body: some View {
         ZStack {
             Color.background.ignoresSafeArea()
@@ -23,7 +23,7 @@ struct MaterielOccasionView: View {
                 endPoint: .bottom
             )
             .ignoresSafeArea()
-            
+
             VStack(spacing: 0) {
                 ScrollView {
                     VStack(spacing: 24) {
@@ -50,32 +50,26 @@ struct MaterielOccasionView: View {
                                 EmptyView()
                             }
                         }
-                        
+
                         HStack(alignment: .center, spacing: 8) {
                             Text(materiel.nom)
                                 .secondaryTitle()
                                 .multilineTextAlignment(.leading)
                                 .padding(.horizontal, 7)
-                            
+
                             Spacer()
-                            
+
                             Text(materiel.typeMateriel.rawValue)
-                                .categoryText()
-                                .foregroundColor(.primaryPurpule)
-                                .padding(.horizontal, 14)
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color(red: 119/255, green: 87/255, blue: 208/255))
+                                .padding(.horizontal, 10)
                                 .padding(.vertical, 6)
-                                .background(
-                                    ZStack {
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .fill(.ultraThinMaterial)
-                                            .fill(Color.white.opacity(0.9))
-                                            .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
-                                    }
-                                )
-                                .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 1)
+                                .glassEffect(.clear.tint(.primaryPurpule.opacity(0.3)),
+                                             in: RoundedRectangle(cornerRadius: 8))
                         }
                         .padding(.horizontal, 7)
-                        
+
                             HStack(alignment: .center, spacing: 12) {
                                 NavigationLink(destination: UserProfilView(otherUser: materiel.vendeur)){
                                     Image(materiel.vendeur.imageProfil ?? "placeholder")
@@ -93,20 +87,7 @@ struct MaterielOccasionView: View {
                                             .mainText(bold: true)
                                             .foregroundColor(Color.textPrimary)
 
-                                        Text(String(format: "%.1f ★", materiel.vendeur.score))
-                                            .secondaryText()
-                                            .bold()
-                                            .foregroundColor(.orange.opacity(0.7))
-                                            .padding(.horizontal, 9)
-                                            .padding(.vertical, 2)
-                                            .background(
-                                                ZStack {
-                                                    RoundedRectangle(cornerRadius: 6)
-                                                        .fill(.ultraThinMaterial)
-                                                        .fill(Color.yellow.opacity(0.6))
-                                                        .stroke(Color.white.opacity(0.2), lineWidth: 0.5)
-                                                }
-                                            )
+                                        ScoreTag(score: materiel.vendeur.score)
                                     }
 
                                     Spacer()
@@ -119,7 +100,7 @@ struct MaterielOccasionView: View {
                                             theme: materiel.nom,
                                             materiel: materiel
                                         ),
-                                        
+
                                     )
                                 ){
                                     Text("Contacter")
@@ -135,13 +116,13 @@ struct MaterielOccasionView: View {
                                                     .stroke(Color.white.opacity(0.25), lineWidth: 0.5)
                                             }
                                         )
-                                        .shadow(color: .black.opacity(0.15), radius: 3, x: 0, y: 2)
+                                        
                                 }
 
                         }
                         .padding(.horizontal, 7)
                         .padding(.top, -8)
-                        
+
                         HStack(spacing: 6) {
                             Image(systemName: "mappin.and.ellipse")
                                 .foregroundColor(.primaryPurpule)
@@ -151,7 +132,7 @@ struct MaterielOccasionView: View {
                             Spacer()
                         }
                         .padding(.horizontal, 7)
-                        
+
                         HStack {
                             Text(materiel.description)
                                 .mainText()
@@ -192,7 +173,7 @@ struct MaterielOccasionView: View {
             }
         }
     }
-    
+
 }
 
 

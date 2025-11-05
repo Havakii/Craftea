@@ -27,7 +27,7 @@ public struct NotificationCardView: View {
                     .scaledToFill()
                     .frame(width: 70, height: 70)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
+                    //.shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
                     .padding(.leading)
                 VStack(alignment: .leading) {
                     HStack {

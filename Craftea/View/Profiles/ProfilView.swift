@@ -22,7 +22,7 @@ struct ProfilView: View {
                                startPoint: .topLeading, endPoint: .bottom)
                 .ignoresSafeArea()
                 // Contenue Principal
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     VStack (spacing: 24) {
                         //Profil Image
                         VStack (spacing: 8) {
@@ -38,10 +38,9 @@ struct ProfilView: View {
                         // Section Loisirs
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Mes Loisirs").mainTitle()
-                                .padding(.horizontal, 15)
+                                .padding(.horizontal, 24)
                             ScrollView(.horizontal, showsIndicators: false) {
-                                HStack (spacing: 12) {
-                                    VerticalHobbyView(hobby: viewModel.hobbies[0])
+                                HStack (spacing: 16) {
                                     ForEach(session.currentUser.favoritesHobby) { hobby in
                                         VerticalHobbyView(hobby: hobby)
                                     }
@@ -55,9 +54,9 @@ struct ProfilView: View {
                             !session.currentUser.favoriteEquipment.isEmpty || !session.currentUser.favoriteEquipmentPro.isEmpty {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Mes Favoris").mainTitle()
-                                    .padding(.horizontal, 15)
+                                    .padding(.horizontal, 24)
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack (spacing: 12) {
+                                    HStack (spacing: 16) {
                                         ForEach(session.currentUser.favoriteEquipment) { materiel in
                                             MaterielCard(materiel: materiel)
                                             ForEach(session.currentUser.favoriteEquipmentPro) { materiel in
@@ -76,7 +75,7 @@ struct ProfilView: View {
                     // Section Articles de troc
                     VStack(alignment: .leading) {
                         Text("Mes Articles de Troc").mainTitle()
-                            .padding(.horizontal, 15)
+                            .padding(.horizontal, 24)
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack {
                                 ForEach(materielsOccasion) { materiel in
@@ -84,11 +83,9 @@ struct ProfilView: View {
                                 }
                             }
                             .padding(.horizontal, 24)
-
-
                             // Bouton dans la Toolbar
                             .toolbar {
-                                ToolbarItem(placement: .topBarTrailing) {
+                                ToolbarItem(placement: .primaryAction) {
                                     NavigationLink(destination: SettingsView(user: session.currentUser)) {
                                         Image(systemName: "gearshape.fill")
                                     }
@@ -108,4 +105,5 @@ struct ProfilView: View {
     ProfilView()
         .environment(Session(currentUser: users[0]))
         .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }
