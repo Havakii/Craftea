@@ -25,7 +25,7 @@ struct NoteView: View {
             
             VStack(spacing: 20) {
                 HStack(){
-                    Image("CrafteaLogo") //userNote.image
+                    Image(userNote.imageProfil ?? "placeholder")
                         .resizable()
                         .clipShape(Circle())
                         .frame(width: 60, height: 60)
@@ -36,7 +36,7 @@ struct NoteView: View {
                             Spacer()
                         }.padding(.bottom, 1)
                         HStack{
-                            Text(materiel?.typeMateriel.rawValue ?? "Don") //materiel.typeMateriel.rawValue
+                            Text(materiel?.typeMateriel.rawValue ?? "Don")
                                 .font(.caption)
                                 .fontWeight(.semibold)
                                 .foregroundColor(Color(red: 119/255, green: 87/255, blue: 208/255))
@@ -44,7 +44,7 @@ struct NoteView: View {
                                 .padding(.vertical, 6)
                                 .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3)),
                                              in: RoundedRectangle(cornerRadius: 8))
-                            Text(materiel?.nom ?? "Don de pelotes") //materiel.name
+                            Text(materiel?.nom ?? "Don de pelotes")
                                 .mainText().foregroundColor(.textSecondary)
                             Spacer()
                         }

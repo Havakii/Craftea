@@ -25,8 +25,8 @@ public struct MessageCardView: View {
                         
                         HStack {
                             Text(otherUser.name)
-                                .font(.headline)
-                                .fontWeight(.bold)
+                                .mainText(bold: true).foregroundStyle(Color.textPrimary).multilineTextAlignment(.leading)
+                            
                             
                             HStack(spacing: 3) {
                                 Image(systemName: "star.fill")
@@ -46,9 +46,7 @@ public struct MessageCardView: View {
                         
                         
                         Text(conversation.theme)
-                            .font(.subheadline)
-                            .foregroundColor(.textSecondary)
-                            .lineLimit(1)
+                            .secondaryText().foregroundColor(.textSecondary).multilineTextAlignment(.leading)
                         
                         
                         if let lastMessage = conversation.messages.last {

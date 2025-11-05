@@ -25,6 +25,7 @@ public struct MessageDetailView: View {
         NavigationStack {
             ZStack {
                 Color.background.ignoresSafeArea()
+                
                 LinearGradient(
                     gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
                     startPoint: .topLeading,
