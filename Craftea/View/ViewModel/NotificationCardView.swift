@@ -21,40 +21,38 @@ public struct NotificationCardView: View {
                 .fill(Color.almostWhite)
                 .shadow(color:.gray.opacity(0.2), radius:4, x:0, y:2)
                 .frame(width: 370, height: 100)
-            HStack {
+            HStack(alignment: .top) {
                 Image(notification.imageName)
                     .resizable()
                     .scaledToFill()
                     .frame(width: 70, height: 70)
-                    .overlay(
-                        Rectangle().stroke(Color.gray, lineWidth: 1)
-                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                     .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
                     .padding(.leading)
                 VStack(alignment: .leading) {
                     HStack {
                         Text(notification.message)
-                            .font(.title3)
-                            .fontWeight(Font.Weight.light)
+                            .mainText(bold: true).foregroundStyle(Color.textPrimary).multilineTextAlignment(.leading)
+                            .padding(.vertical, 3)
                         
-                        Spacer()
-                        if let onDelete {
-                            Button(action: onDelete) {
-                                Image(systemName: "xmark")
-                                    .foregroundColor(.black)
-                            }
-                            .buttonStyle(.borderless)
-                        }
+                        
+                        
                         
                     }
                     
                     Text(notification.timeAgo)
-                        .font(Font.headline)
-                        .fontWeight(Font.Weight.light)
-                        .foregroundStyle(.textSecondary)
-                }.padding(8)
+                        .secondaryText().foregroundColor(.textSecondary).multilineTextAlignment(.leading)
+                }.padding(.horizontal, 5)
                 
-                
+                Spacer()
+                if let onDelete {
+                    Button(action: onDelete) {
+                        Image(systemName: "xmark")
+                            .foregroundColor(.gray)
+                    }
+                    .buttonStyle(.borderless)
+                    .padding(.horizontal, 10)
+                }
                 
             }.padding(7)
                 .frame(width: 380)

@@ -41,10 +41,6 @@ struct MessageDonCardView: View {
                             .scaledToFill()
                             .frame(width: 70, height: 70)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray, lineWidth: 1)
-                            )
                             .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
                             .padding(.leading)
                     @unknown default:
@@ -54,8 +50,9 @@ struct MessageDonCardView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text(materiel?.nom ?? "Article" )
-                            .font(.default)
-                            .fontWeight(Font.Weight.bold)
+                            .mainText(bold: true).foregroundStyle(Color.textPrimary).multilineTextAlignment(.leading)
+                            .lineLimit(1)
+                        
                       
                         Spacer()
                         
@@ -64,32 +61,13 @@ struct MessageDonCardView: View {
                     ZStack {
                         
                         Text(materiel?.typeMateriel.rawValue ?? "Tag")
-                            .foregroundStyle(.primaryPurpule)
-                            .font(.system(size: 16, weight: .semibold))
-                            .textCase(.uppercase)
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color(red: 119/255, green: 87/255, blue: 208/255))
                             .padding(.horizontal, 10)
-                            .padding(.vertical, 5)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.primaryPurpule.opacity(0.03))
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 8)
-                                            .stroke(Color.primaryPurpule, lineWidth: 4)
-                                            .blur(radius: 4)
-                                            .offset(x: 2, y: 2)
-                                            .mask(
-                                                RoundedRectangle(cornerRadius: 8)
-                                                    .fill(
-                                                        LinearGradient(
-                                                            gradient: Gradient(colors: [.gray.opacity(0.25), .gray.opacity(0.2)]),
-                                                            startPoint: .topLeading,
-                                                            endPoint: .bottomTrailing
-                                                        )
-                                                    )
-                                            )
-                                    )
-                                
-                            )
+                            .padding(.vertical, 6)
+                            .glassEffect(.regular.tint(.primaryPurpule.opacity(0.3)),
+                                         in: RoundedRectangle(cornerRadius: 8))
                         
                     }
                 }.padding(8)
