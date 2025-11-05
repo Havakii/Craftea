@@ -191,6 +191,7 @@ struct AjoutMaterielView: View {
 
         }
         .navigationBarTitleDisplayMode(.inline)
+        .tint(.primaryPurpule)
         .scrollIndicators(.hidden)
     }
 }
