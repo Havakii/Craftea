@@ -12,53 +12,59 @@ struct UserProfilView: View {
     var body: some View {
         
         NavigationStack {
-        ZStack {
-            // background
-            Color.background.ignoresSafeArea()
-            LinearGradient(gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
-                           startPoint: .topLeading, endPoint: .bottom)
+            ZStack {
+                // background
+                Color.background.ignoresSafeArea()
+                LinearGradient(gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
+                               startPoint: .topLeading, endPoint: .bottom)
                 .ignoresSafeArea()
                 ScrollView {
-                    VStack {
-                        Spacer(minLength: 10)
-                        ProfileProgressView(
-                            progress: 1.0, // 75% rempli
-                            image: Image("user2")
-                        )
-                        HStack{
-                            Text(otherUser.pseudo).mainTitle()
-                            ScoreTag(user: users[2])
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                    }
-                    Spacer()
-                    VStack(alignment: .leading) {
-                        Text("Ses Loisirs").mainTitle()
-                            .padding(15)
-                        ScrollView (.horizontal) {
-                            HStack {
-                                ForEach(otherUser.favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
-                                .padding(.trailing ,20)}
-                            .padding(20)
-                        }
-                        Spacer()
-                    }
-                    VStack(alignment: .leading) {
-                        Text("Ses Articles de Troc").mainTitle()
-                            .padding(15)
-                        ScrollView (.horizontal) {
-                            HStack {
-    MaterielCard(materiel:materielsOccasion[1])
-    MaterielCardPro(materiel:materielsNeuf[0])
+                    VStack (spacing: 24) {
+                        //Profil Image
+                        VStack {
+                            Spacer(minLength: 10)
+                            ProfileProgressView(
+                                progress: 1.0, // 75% rempli
+                                image: Image("user2")
+                            )
+                            HStack{
+                                Text(otherUser.pseudo).mainTitle()
+                                ScoreTag(user: users[2])
                             }
-                            .padding(20)
-                            
                         }
-                        Spacer()
+                        //Section Ses Loisirs
+                        if !otherUser.favoritesHobby.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Ses Loisirs").mainTitle()
+                                ScrollView (.horizontal, showsIndicators: false) {
+                                    HStack (spacing: 24) {
+                                        ForEach(otherUser.favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
+                                    }
+                                }
+                            }
+                            .padding(.horizontal, 24)
+                        }
+                        //Section Article de Troc
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Ses Articles de Troc").mainTitle()
+                            //.padding(15)
+                            ScrollView (.horizontal, showsIndicators: false) {
+                                HStack (spacing: 24) {
+                                    if !materielsOccasion.isEmpty {
+                                        MaterielCard(materiel: materielsOccasion[1])
+                                    }
+                                    if !materielsNeuf.isEmpty {
+                                        MaterielCardPro(materiel: materielsNeuf[0])
+                                    }
+                                }
+                            }
+                            Spacer(minLength: 30)
+                        }
+                        .padding(.horizontal, 24)
                     }
                 }
-               .toolbar {
+                //Button Signalement !
+                .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         ProfilSignalButton()
                     }
