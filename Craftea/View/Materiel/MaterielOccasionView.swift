@@ -78,7 +78,7 @@ struct MaterielOccasionView: View {
                         
                             HStack(alignment: .center, spacing: 12) {
                                 NavigationLink(destination: UserProfilView(otherUser: materiel.vendeur)){
-                                    Image(materiel.image.isEmpty ? "placeholder" : materiel.image)
+                                    Image(materiel.vendeur.imageProfil ?? "placeholder")
                                         .resizable()
                                         .scaledToFill()
                                         .frame(width: 50, height: 50)

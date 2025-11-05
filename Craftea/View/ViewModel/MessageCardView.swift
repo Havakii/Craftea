@@ -19,32 +19,7 @@ public struct MessageCardView: View {
                     .frame(width: 370, height: 100)
                 
                 HStack {
-                    Image("placeholder") .resizable() .scaledToFill() .frame(width: 70, height: 70) .clipShape(Circle()) .overlay( Circle().stroke(Color.gray, lineWidth: 1) ) .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2) .padding(.leading)
-                    
-//                    AsyncImage(url: URL(string: otherUser.image) ?? "placeholder") { phase in
-//                        switch phase {
-//                        case .empty:
-//                            ProgressView()
-//                                .frame(width: 70, height: 70)
-//                        case .success(let image):
-//                            image
-//                                .resizable()
-//                                .scaledToFill()
-//                                .frame(width: 70, height: 70)
-//                                .clipShape(Circle())
-//                        case .failure:
-//                            Image("placeholder")
-//                                .resizable()
-//                                .scaledToFill()
-//                                .frame(width: 70, height: 70)
-//                                .clipShape(Circle())
-//                        @unknown default:
-//                            EmptyView()
-//                        }
-//                    }
-//                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-//                    .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
-//                    .padding(.leading)
+                    Image(otherUser.imageProfil ?? "placeholder") .resizable() .scaledToFill() .frame(width: 70, height: 70) .clipShape(Circle()) .shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2) .padding(.leading)
                     
                     VStack(alignment: .leading, spacing: 6) {
                         

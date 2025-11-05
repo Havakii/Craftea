@@ -28,11 +28,12 @@ struct ProfilView: View {
                         VStack (spacing: 8) {
                             ProfileProgressView(
                                 progress: 0.75, // 75% rempli
-                                image: Image("user1")
+                                image: Image(session.currentUser.imageProfil ?? "placeholder")
                             )
                             HStack(spacing: 8) {
                                 Text("\(session.currentUser.name)").mainTitle()
-                                ScoreTag(user: users[0])                        }
+                                ScoreTag(score: session.currentUser.score)                          }
+
                         }
                         // Section Loisirs
                         VStack(alignment: .leading, spacing: 8) {
