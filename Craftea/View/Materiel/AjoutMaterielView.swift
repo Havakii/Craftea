@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AjoutMaterielView: View {
+    @Environment(\.dismiss) private var dismiss
     @State private var titreAnnonce: String = ""
     @State private var descriptionAnnonce: String = ""
     @State private var lieu: String = ""

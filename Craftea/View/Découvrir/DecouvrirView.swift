@@ -190,7 +190,7 @@ struct DecouvrirView: View {
                 }
             }
             .scrollIndicators(.hidden)
-            
+            .tint(Color.primaryPurpule)
         }
     }
 }
