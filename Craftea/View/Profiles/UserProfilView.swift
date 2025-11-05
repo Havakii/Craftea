@@ -23,11 +23,11 @@ struct UserProfilView: View {
                         Spacer(minLength: 10)
                         ProfileProgressView(
                             progress: 1.0, // 75% rempli
-                            image: Image("user2")
+                            image: Image(otherUser.imageProfil ?? "placeholder")
                         )
                         HStack{
                             Text(otherUser.pseudo).mainTitle()
-                            ScoreTag(user: users[2])
+                            ScoreTag(score: otherUser.score)
                         }
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)

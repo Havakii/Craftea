@@ -30,7 +30,7 @@ struct ProfilView: View {
                         )
                         HStack {
                             Text("\(session.currentUser.name)").mainTitle()
-                            ScoreTag(user: users[0])                        }
+                            ScoreTag(score: session.currentUser.score)                        }
                         .padding(.top)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
