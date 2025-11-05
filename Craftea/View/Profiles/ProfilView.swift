@@ -7,12 +7,12 @@
 import SwiftUI
 
 struct ProfilView: View {
-    
+
     @Environment(Session.self) private var session
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
     let viewModel = HobbyViewModel()
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -70,27 +70,31 @@ struct ProfilView: View {
                                 }
                             }
                         }
-                        
-                        // Section Articles de troc
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Mes Articles de Troc").mainTitle()
-                                .padding(.horizontal, 15)
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack (spacing: 12){
-                                    MaterielCard(materiel:materielsOccasion[2])
+
+                    }
+
+                    // Section Articles de troc
+                    VStack(alignment: .leading) {
+                        Text("Mes Articles de Troc").mainTitle()
+                            .padding(.horizontal, 15)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                ForEach(materielsOccasion) { materiel in
+                                    materiel.vendeur.id == session.currentUser.id ? MaterielCard(materiel: materiel) : nil
                                 }
-                                .padding(.horizontal, 24)
-                                .padding(.vertical, 10)
                             }
-                        }
-                        // Bouton dans la Toolbar
-                        .toolbar {
-                            ToolbarItem(placement: .topBarTrailing) {
-                                NavigationLink(destination: SettingsView(user: session.currentUser)) {
-                                    Image(systemName: "gearshape.fill")
+                            .padding(.horizontal, 24)
+
+
+                            // Bouton dans la Toolbar
+                            .toolbar {
+                                ToolbarItem(placement: .topBarTrailing) {
+                                    NavigationLink(destination: SettingsView(user: session.currentUser)) {
+                                        Image(systemName: "gearshape.fill")
+                                    }
+                                    .tint(.primaryPurpule)
+
                                 }
-                                .tint(.primaryPurpule)
-                                
                             }
                         }
                     }

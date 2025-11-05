@@ -10,7 +10,7 @@ struct UserProfilView: View {
     var otherUser: User
     @State private var showingAlert = false
     var body: some View {
-        
+
         NavigationStack {
             ZStack {
                 // background
@@ -18,7 +18,8 @@ struct UserProfilView: View {
                 LinearGradient(gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
                                startPoint: .topLeading, endPoint: .bottom)
                 .ignoresSafeArea()
-                ScrollView {
+
+                ScrollView(showsIndicators: false) {
                     VStack (spacing: 24) {
                         //Profil Image
                         VStack {
@@ -31,38 +32,37 @@ struct UserProfilView: View {
                                 Text(otherUser.pseudo).mainTitle()
                                 ScoreTag(score: otherUser.score)
                             }
+
                         }
                         //Section Ses Loisirs
                         if !otherUser.favoritesHobby.isEmpty {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Ses Loisirs").mainTitle()
+                                Text("Ses Loisirs").mainTitle().padding(.horizontal, 24)
                                 ScrollView (.horizontal, showsIndicators: false) {
-                                    HStack (spacing: 24) {
+                                    HStack (spacing: 16) {
                                         ForEach(otherUser.favoritesHobby ) { hobby in VerticalHobbyView(hobby: hobby)}
-                                    }
+                                    }.padding(.horizontal, 24)
                                 }
                             }
-                            .padding(.horizontal, 24)
+
                         }
                         //Section Article de Troc
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Ses Articles de Troc").mainTitle()
+                            Text("Ses Articles de Troc").mainTitle().padding(.horizontal, 24)
                             //.padding(15)
                             ScrollView (.horizontal, showsIndicators: false) {
-                                HStack (spacing: 24) {
-                                    if !materielsOccasion.isEmpty {
-                                        MaterielCard(materiel: materielsOccasion[1])
+                                HStack (spacing: 16) {
+                                    ForEach(materielsOccasion) { materiel in
+                                        materiel.vendeur.id == otherUser.id ? MaterielCard(materiel: materiel) : nil
                                     }
-                                    if !materielsNeuf.isEmpty {
-                                        MaterielCardPro(materiel: materielsNeuf[0])
-                                    }
-                                }
+                                }.padding(.horizontal, 24)
                             }
                             Spacer(minLength: 30)
                         }
-                        .padding(.horizontal, 24)
+                        
                     }
                 }
+
                 //Button Signalement !
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -75,5 +75,5 @@ struct UserProfilView: View {
 }
 #Preview {
     UserProfilView(otherUser: users[2]).environment(HobbyViewModel())
-        .environment(Session(currentUser: users[2]))
+        .environment(Session(currentUser: users[0])).environment(ConversationStore())
 }

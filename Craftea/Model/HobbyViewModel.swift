@@ -47,18 +47,18 @@ class HobbyViewModel {
              level: .easy,
              category: .peinture,
              equipementNeeded: [
-             BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: ""),
-             BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: ""),
-             BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: ""),
-             BaseEquipment(name: "Peinture acrylique", description: "Jeu de couleurs primaires et secondaires", image: ""),
+             BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: "https://images.pexels.com/photos/7302093/pexels-photo-7302093.jpeg"),
+             BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: "https://media.istockphoto.com/id/942992430/photo/empty-canvas-on-easel.jpg?s=612x612&w=0&k=20&c=DEjNV_QH42Fa7zvdYLDtMpNzpFx61cHofrdVtyiyX1w="),
+             BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsQFveoasupOhaohg0yipt4YMkPDnH2wMWuQ&s"),
+             BaseEquipment(name: "Peinture acrylique", description: "Jeu de couleurs primaires et secondaires", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3Il-pywHWe6lyU7dp8xbsSbkxws-UqtfYg&s"),
              BaseEquipment(name: "Eau et chiffon", description: "Nettoyage des pinceaux et corrections", image: ""),
-             BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "")
+             BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDa5-FI3II-qLRFW2ZkGk_cco_jet8bpEJWg&s")
              ],
              technicalBasis: [
-             Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: nil),
-             Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: nil),
-             Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: nil),
-             Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: nil),
+             Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyraUPwDfqu6ZkBDlPn8P3eojAauCVHwQ0xw&s"),
+             Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUu1tXlKgSmsQUaiDFTYtabDcKlWYAqA14g&s"),
+             Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: "https://www.art-totale.com/wp-content/uploads/2018/08/Avant-glacis.jpg"),
+             Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5plr2kGOAA5nehfaVNaMTwqtlJ5fl_SgE7Q&s"),
              Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
              ], popular: true
              ),
@@ -129,16 +129,15 @@ class HobbyViewModel {
              level: .medium,
              category: .textile,
              equipementNeeded: [
-             BaseEquipment(name: "Crochet", description: "Crochet adapté à la laine", image: ""),
-             BaseEquipment(name: "Laine", description: "Fil adapté (catégorie 4 recommandé)", image: ""),
-             BaseEquipment(name: "Marqueurs de maille", description: "Repérer les tours", image: ""),
-             BaseEquipment(name: "Aiguille à laine", description: "Rentrer les fils", image: ""),
-             BaseEquipment(name: "Mètre ruban", description: "Mesurer les dimensions", image: "")
+             BaseEquipment(name: "Crochet", description: "Crochet adapté à la laine", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYtlq3WTNOyfChZYhRLtHrHMF0f4NtDiYs_A&s"),
+             BaseEquipment(name: "Laine", description: "Fil adapté (catégorie 4 recommandé)", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzIbbw5IQJWP1eDZeqXqGfrzco_929gsC0Q&s"),
+             BaseEquipment(name: "Marqueurs de maille", description: "Repérer les tours", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQco2jXl0rO_e20jUkSr6ucnlWaVHu-tUypmw&s"),
+             BaseEquipment(name: "Aiguille à laine", description: "Rentrer les fils", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrN0zkil-DYpqyOA_-GOJDCy6FoZ16phNbFw&s"),
              ],
              technicalBasis: [
-             Technique(name: "Maille serrée", but: "Obtenir un tissu dense et régulier.", description: "Fais un nœud coulant, pique dans la maille, ramène le fil et termine la maille serrée en gardant une tension constante.", image: nil),
+             Technique(name: "Maille serrée", but: "Obtenir un tissu dense et régulier.", description: "Fais un nœud coulant, pique dans la maille, ramène le fil et termine la maille serrée en gardant une tension constante.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7RP60Z6srNzRgILRme3l_3HF0cQX4E9XHug&s"),
              Technique(name: "Bride", but: "Gagner en hauteur rapidement.", description: "Fais un jeté, pique, ramène le fil puis écoule les boucles par étapes pour former la bride.", image: nil),
-             Technique(name: "Anneau magique", but: "Démarrer un ouvrage circulaire sans trou central.", description: "Enroule le fil autour des doigts, crochète le nombre de mailles dans l’anneau, puis serre le cercle en tirant sur le fil libre.", image: nil),
+             Technique(name: "Anneau magique", but: "Démarrer un ouvrage circulaire sans trou central.", description: "Enroule le fil autour des doigts, crochète le nombre de mailles dans l’anneau, puis serre le cercle en tirant sur le fil libre.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPnbTXQ_MQU3VACTbOYah1vzQPyoH4OXsAw&s"),
              Technique(name: "Augmentations / diminutions", but: "Modeler la forme de l’ouvrage.", description: "Réalise deux mailles dans la même maille pour augmenter, ou saute/écoule ensemble des mailles pour diminuer selon le patron.", image: nil)
              ], popular: true
              ),
