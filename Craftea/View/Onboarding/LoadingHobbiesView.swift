@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct LoadingHobbiesView: View {
+    // States
     @State private var isLoading = false
-    @State private var navigate = false // To trigger NavigationLink programmatically
+    @State private var navigate = false
 
     var body: some View {
         NavigationStack {
             ZStack {
+                // Fond en dégradé violet
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 224 / 255, green: 182 / 255, blue: 252 / 255),
@@ -25,17 +27,19 @@ struct LoadingHobbiesView: View {
                 .ignoresSafeArea()
 
                 VStack(spacing: 40) {
+                    // Message d’attente
                     Text("Merci pour tes réponses ! Nous te préparons des loisirs adaptés !")
                         .font(.custom("Manrope-Bold", size: 20))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
 
-                    // Hidden navigation link triggered programmatically
-
+                    
+                    // Navigation automatique vers la suite
                     NavigationLink(destination: ContentView(), isActive: $navigate) {
                         EmptyView()
                     } .toolbar(.hidden, for: .tabBar)
 
+                    // Loader animé
                     Circle()
                         .trim(from: 0, to: 0.2)
                         .stroke(Color("secondaryOrange"), lineWidth: 7)
@@ -50,7 +54,7 @@ struct LoadingHobbiesView: View {
                 .onAppear {
                     isLoading = true
 
-                    // Automatically navigate after a short delay (e.g., 2.5 seconds)
+                    // Délai simulé avant redirection
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         navigate = true
                     }

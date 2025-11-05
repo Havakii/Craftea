@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct Questions2View: View {
-
+   // States
     @State private var currentIndex = 0
     @State private var selectedOption: Int? = nil
+    
+    // Questions data
     let questions: [Question] = [
         Question(
             text: "À quelle fréquence pratiques-tu des loisirs créatifs ?",
@@ -23,11 +25,14 @@ struct Questions2View: View {
             ],
             key: "intensity"
         )]
+    
+    // Body
     var body: some View {
-
         let question = questions[currentIndex]
+        
         NavigationStack {
             ZStack {
+                // Fond en dégradé violet
                 LinearGradient(
                     gradient: Gradient(colors: [
                         Color(red: 224/255, green: 182/255, blue: 252/255),
@@ -39,19 +44,23 @@ struct Questions2View: View {
                 .ignoresSafeArea()
                 
                 VStack(spacing: 20) {
+                    // Titre principal
                     Text("Trouve un loisir qui te correspond !")
                         .font(.custom("Manrope-Bold", size: 20))
                         .padding(.top, 40)
                     
+                    // Barre de progression
                     ProgressView(value: 2.0 / 7.0)
                         .progressViewStyle(LinearProgressViewStyle(tint: Color("secondaryOrange")))
                         .frame(width: 300)
                     
+                    // Question
                     Text(question.text)
                         .font(.custom("Manrope-Bold", size: 17))
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                     
+                    // Options
                     ForEach(question.options.indices, id: \.self) { index in
                         HStack {
                             Text(question.options[index])
@@ -71,6 +80,7 @@ struct Questions2View: View {
                         .onTapGesture { selectedOption = index }
                     }
                     
+                    // Bouton Suivant
                     NavigationLink(destination: Questions3View()) {
                         HStack {
                             Text("Suivant")
