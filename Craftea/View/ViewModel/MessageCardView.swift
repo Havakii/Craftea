@@ -19,9 +19,12 @@ public struct MessageCardView: View {
                     .frame(width: 370, height: 100)
 
                 HStack {
-                    Image(otherUser.imageProfil ?? "placeholder") .resizable() .scaledToFill() .frame(width: 70, height: 70) .clipShape(Circle())
-                        //.shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
-                        .padding(.leading)
+                    NavigationLink(destination: UserProfilView(otherUser: otherUser)){
+                        Image(otherUser.imageProfil ?? "placeholder") .resizable() .scaledToFill() .frame(width: 70, height: 70) .clipShape(Circle())
+                            //.shadow(color: .black.opacity(0.25), radius: 5, x: 0, y: 2)
+                            .padding(.leading)
+                    }
+                   
 
                     VStack(alignment: .leading, spacing: 6) {
 
