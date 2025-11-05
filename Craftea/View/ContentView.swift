@@ -27,6 +27,7 @@ struct ContentView: View {
             }
         }.tint(Color.primaryPurpule)
             .navigationBarBackButtonHidden(true)
+            .toolbarBackground(.visible, for: .navigationBar)
             .onAppear {
                 Task {
                     await viewModel.loadDetailImages()

@@ -11,11 +11,12 @@ struct ProfilView: View {
     @Environment(Session.self) private var session
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
+    @State private var showSettings = false
     let viewModel = HobbyViewModel()
 
     var body: some View {
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .topTrailing) {
                 // background
                 Color.background.ignoresSafeArea()
                 LinearGradient(gradient: Gradient(colors: [.clear, .primaryPurpule.opacity(0.1)]),
@@ -83,20 +84,34 @@ struct ProfilView: View {
                                 }
                             }
                             .padding(.horizontal, 24)
-                            // Bouton dans la Toolbar
-                            .toolbar {
-                                ToolbarItem(placement: .primaryAction) {
-                                    NavigationLink(destination: SettingsView(user: session.currentUser)) {
-                                        Image(systemName: "gearshape.fill")
-                                    }
-                                    .tint(.primaryPurpule)
-
-                                }
-                            }
                         }
                     }
                 }
+                Button(action: { showSettings = true }) {
+                    Image(systemName: "gearshape.fill")
+                        .foregroundColor(Color("primaryPurpule"))
+                }
+                .accessibilityLabel("Paramètres")
+                .font(.system(size: 22))
+                .padding(10)
+                .glassEffect()
+                .padding(.trailing, 20).padding(.top, 60)
+                .ignoresSafeArea(edges: .top)
+            } //final ZStack
+
+//            .toolbar {
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    Button(action: { showSettings = true }) {
+//                        Image(systemName: "gearshape.fill")
+//                            .foregroundColor(Color("primaryPurpule"))
+//                    }
+//                    .accessibilityLabel("Paramètres")
+//                }
+//            }
+            .fullScreenCover(isPresented: $showSettings) {
+                SettingsFullScreen(user: session.currentUser)
             }
+            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }
