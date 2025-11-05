@@ -17,6 +17,8 @@ struct MaterielView: View {
     @State private var selectedPriceFilter: PriceRange = .all
     @Environment(ConversationStore.self) private var conversationStore
     @Environment(Session.self) var currentUser
+    // Toggle used to force view refresh when a new materiel is added from the sheet
+    @State private var reloadToggle = false
 
     var filteredMateriels: [Materiel] {
         let list: [Materiel] = materielsOccasion
@@ -299,6 +301,8 @@ struct MaterielView: View {
                         }
                         .padding(.horizontal, 24)
                         .padding(.vertical)
+                        // force grid refresh when reloadToggle changes (sheet dismissed)
+                        .id(reloadToggle)
                     }
                 }
 
@@ -329,16 +333,22 @@ struct MaterielView: View {
                     }
                 }
             }
-            .navigationDestination(isPresented: $showAjoutMateriel) {
+            .sheet(isPresented: $showAjoutMateriel) {
                 AjoutMaterielView()
+            }
+            // When the sheet is dismissed, reload cover images and toggle the reloadToggle to force view refresh
+            .onChange(of: showAjoutMateriel) { isPresented in
+                if !isPresented {
+                    Task {
+                        await MainActor.run {
+                            reloadToggle.toggle()
+                        }
+                    }
+                }
             }
             .onAppear {
                 if !searchTextfromDetailView.isEmpty {
                     searchText = searchTextfromDetailView
-                }
-                Task {
-                    await loadCoverImages()
-                    await loadCoverImagesPro()
                 }
             }
         }
@@ -349,5 +359,3 @@ struct MaterielView: View {
     MaterielView() .environment(Session(currentUser: users[0]))
         .environment(ConversationStore())
 }
-
-

@@ -34,95 +34,123 @@ struct ConnexionView: View {
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
 
-                        Text("C'EST COOL DE TE REVOIR !")
-                            .font(.custom("Manrope-Bold", size: 36))
-                            .fontWeight(.bold)
+                        Text("C'est cool de te revoir !")
+                            .font(.custom("Manrope-ExtraBold", size: 36))
+                            .multilineTextAlignment(.center)
                             .padding(.bottom, 20)
                     }
+                    // Champs de connexion
+                    VStack(alignment: .leading) {
 
-                   // Champs de connexion
-                    VStack(spacing: 20) {
-                        // Champ mail
-                        TextField("Mail", text: $mail)
+                        Text("Adresse email")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+
+                        TextField("exemple@mail. com",text: $mail)
+
                             .keyboardType(.emailAddress)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(12)
+                            .background(Color.almostWhite)
+                            .cornerRadius(8)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            )
-                        // Champ mot de passe
-                        HStack {
+
+                                    .stroke(Color.gray.opacity(0.3))
+
+                            ).padding(.bottom)
+
+
+                        Text("Mot de passe")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        ZStack(alignment: .trailing){
+
                             if isPasswordVisible {
-                                TextField("Mot de passe", text: $password)
+                                TextField("Mot de passe",text: $password)
+                                    .keyboardType(.emailAddress)
+                                    .padding(12)
+                                    .background(Color.almostWhite)
+                                    .cornerRadius(8)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray.opacity(0.3))
+
+                                    )
                             } else {
-                                SecureField("Mot de passe", text: $password)
+                                SecureField("Mot de passe",text: $password)
+                                    .keyboardType(.emailAddress)
+                                    .padding(12)
+                                    .background(Color.almostWhite)
+                                    .cornerRadius(8)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray.opacity(0.3))
+
+                                    )
+
                             }
                             Button(action: {
                                 withAnimation { isPasswordVisible.toggle() }
                             }) {
-                                Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
+                                Image(systemName: isPasswordVisible ? "eye" : "eye.slash")
                                     .foregroundColor(.gray)
-                            }
+                            }.padding(.trailing, 12)
+
                         }
-                        .padding(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.gray.opacity(0.5))
-                        )
-                        .background(Color.white)
+                        // Mot de passe oublié
+                        HStack {
+                            Spacer()
+                            Button("Mot de passe oublié ?") { }
+                                .secondaryText()
+                                .foregroundStyle(Color.gray)
+                                .underline()
+                        }
                     }
 
-                    // Mot de passe oublié
-                    HStack {
-                        Spacer()
-                        Button("Mot de passe oublié ?") { }
-                            .font(.custom("Inter_24pt-Regular", size: 15))
-                            .foregroundColor(.black)
-                            .underline()
-                    }
 
                     // Bouton de connexion
 
                     NavigationLink(
                         destination: ContentView(), isActive: $isConnected) {
                             Button(action: login) {
-                        HStack {
-                            Text("Me connecter")
-                                .font(.custom("Manrope-Bold", size: 20))
-                                .foregroundColor(.white)
-                            Image(systemName: "arrow.up.right")
-                                .foregroundColor(.white)
-                        }
-                        .padding()
-                        .frame(width: 300, height: 50)
-                        .background(Color("primaryPurpule"))
-                        .cornerRadius(10)
-                    }
-                    .alert("Identifiants incorrects", isPresented: $showAlert) {
-                        Button("OK", role: .cancel) {}
-                    }
+                                HStack {
+                                    Text("Me connecter")
+                                        .font(.custom("Manrope-Bold", size: 20))
+                                        .foregroundColor(.almostWhite)
+                                    Image(systemName: "arrow.up.right")
+                                        .foregroundColor(.white).bold()
+                                }
+                                .padding()
+                                .frame(width: .infinity, height: 50)
+                                .background(Color("primaryPurpule"))
+                                .cornerRadius(10)
+                            }
+                            .alert("Identifiants incorrects", isPresented: $showAlert) {
+                                Button("OK", role: .cancel) {}
+                            }
 
-                    }
+
+                        }
 
                     Spacer()
                   // Lien vers inscription
                     HStack {
                         Text("Tu n'as pas de compte ?")
-                            .font(.custom("Inter_24pt-Regular", size: 15))
+                            .secondaryText()
                         NavigationLink(destination: InscriptionView()) {
                             Text("S'inscrire")
-                                .font(.custom("Manrope-Bold", size: 15))
-                                .foregroundColor(.black)
+                                .secondaryText()
+                                .underline()
                         }
                     }
                 }
-                .padding()
+                .padding(.horizontal, 24)
             }.navigationBarBackButtonHidden(true)
         }
     }
+    
+    // Fonction de login
 
-    // Fonctions
-    // Vérifie les identifiants et connecte l'utilisateur
     func login() {
 
         if let userFound = users.first(where: {
@@ -139,5 +167,7 @@ struct ConnexionView: View {
 }
 
 #Preview {
-    ConnexionView().environment(Session(currentUser: users[0])).environment(HobbyViewModel()).environment(ConversationStore())
+    ConnexionView().environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }

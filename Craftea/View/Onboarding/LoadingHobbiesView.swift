@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct LoadingHobbiesView: View {
-    // States
+
+    @Environment(Session.self) private var session
+    @Environment(HobbyViewModel.self) private var viewModel
+
     @State private var isLoading = false
     @State private var navigate = false
 
@@ -42,7 +45,7 @@ struct LoadingHobbiesView: View {
                     // Loader animé
                     Circle()
                         .trim(from: 0, to: 0.2)
-                        .stroke(Color("secondaryOrange"), lineWidth: 7)
+                        .stroke(Color(Color(red: 119/255, green: 87/255, blue: 208/255)), lineWidth: 7)
                         .frame(width: 100, height: 100)
                         .rotationEffect(Angle(degrees: isLoading ? 360 : 0))
                         .animation(
@@ -54,17 +57,22 @@ struct LoadingHobbiesView: View {
                 .onAppear {
                     isLoading = true
 
-                    // Délai simulé avant redirection
+                    // Generate recommendations from onboarding answers
+                    viewModel.generateRecommendations(session: session)
+
+                    // Automatically navigate after a short delay (e.g., 2.5 seconds)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         navigate = true
                     }
                 }
-            }
+            }.navigationBarBackButtonHidden(true)
         }
     }
 }
 
 #Preview {
     LoadingHobbiesView()
+        .environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }
-

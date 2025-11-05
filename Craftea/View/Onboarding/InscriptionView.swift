@@ -19,7 +19,7 @@ struct InscriptionView: View {
     @State private var password2: String = ""
     @State private var isPasswordVisible: Bool = false
     @State private var isPassword2Visible: Bool = false
-    @State private var showMessage: Bool = false
+    @State private var createAccount: Bool = false
     @State private var acceptedTerms = false
 
     
@@ -38,161 +38,241 @@ struct InscriptionView: View {
                 // Couleur d’arrière-plan
                 Color("Background")
                     .ignoresSafeArea()
-                
-                VStack(spacing: 30) {
-                    // Logo + Titre
-                    VStack {
+
+                VStack(spacing: 16) {
+                    VStack(spacing: 0) {
+
                         Image("CrafteaLogo")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
                         
-                        Text("BiENVENUE !")
+                        Text("Bienvenue !")
                             .font(.custom("Manrope-Bold", size: 36))
                             .fontWeight(.bold)
-                            .padding(.bottom, 20)
                     }
                     
-                    // Champs d’inscription
-                    VStack(spacing: 20) {
-                        TextField("Nom", text: $nom)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            )
-                        
-                        TextField("Prénom", text: $name)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            )
-                        
-                        TextField("Pseudo", text: $pseudo)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            )
-                        
-                        TextField("Mail", text: $mail)
-                            .keyboardType(.emailAddress)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            )
-                        
-                        // Champ mot de passe
-                        HStack {
-                            if isPasswordVisible {
-                                TextField("Mot de passe", text: $password)
-                            } else {
-                                SecureField("Mot de passe", text: $password)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            // Nom
+                            Text("Nom")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            TextField("Nom", text: $nom)
+                                .padding(12)
+                                .background(Color.almostWhite)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray.opacity(0.3))
+                                )
+                        }
+                        VStack(alignment: .leading, spacing: 4) {
+                            // Prénom
+                            Text("Prénom")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            TextField("Prénom", text: $name)
+                                .padding(12)
+                                .background(Color.almostWhite)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray.opacity(0.3))
+                                )
+                        }
+                        VStack(alignment: .leading, spacing: 4) {
+                            // Pseudo
+                            Text("Pseudo")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            TextField("Pseudo", text: $pseudo)
+                                .padding(12)
+                                .background(Color.almostWhite)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray.opacity(0.3))
+                                )
+                        }
+                        VStack(alignment: .leading, spacing: 4) {
+                            // Adresse email
+                            Text("Adresse email")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            TextField("exemple@mail. com", text: $mail)
+                                .keyboardType(.emailAddress)
+                                .padding(12)
+                                .background(Color.almostWhite)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color.gray.opacity(0.3))
+                                )
+                        }
+                        VStack(alignment: .leading, spacing: 4) {
+                            // Mot de passe
+                            Text("Mot de passe")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            ZStack(alignment: .trailing) {
+                                if isPasswordVisible {
+                                    TextField("Mot de passe", text: $password)
+                                        .padding(12)
+                                        .background(Color.almostWhite)
+                                        .cornerRadius(8)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color.gray.opacity(0.3))
+                                        )
+                                } else {
+                                    SecureField("Mot de passe", text: $password)
+                                        .padding(12)
+                                        .background(Color.almostWhite)
+                                        .cornerRadius(8)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color.gray.opacity(0.3))
+                                        )
+                                }
+                                Button(action: {
+                                    withAnimation { isPasswordVisible.toggle() }
+                                }) {
+                                    Image(systemName: isPasswordVisible ? "eye" : "eye.slash")
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.trailing, 12)
+
                             }
-                            Button(action: {
-                                withAnimation { isPasswordVisible.toggle() }
-                            }) {
-                                Image(systemName: isPasswordVisible ? "eye.slash" : "eye")
-                                    .foregroundColor(.gray)
-                            }
-                        }.padding(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            ).background(Color.white)
-                        
-                        
+                        }
+
                         if !isPasswordValid() && !password.isEmpty {
                             Text("⚠️ Le mot de passe doit contenir entre 6 et 15 caractères.")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.red)
-                                .padding(.horizontal, 20)
+                                .padding(.horizontal, 4)
                         }
-                        
-                        // Champ confirmation mot de passe
-                        HStack {
-                            if isPassword2Visible {
-                                TextField("Confirmez le mot de passe", text: $password2)
-                            } else {
-                                SecureField("Confirmez le mot de passe", text: $password2)
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            // Confirmation du mot de passe
+                            Text("Confirmez le mot de passe")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            ZStack(alignment: .trailing) {
+                                if isPassword2Visible {
+                                    TextField("Confirmez le mot de passe", text: $password2)
+                                        .padding(12)
+                                        .background(Color.almostWhite)
+                                        .cornerRadius(8)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color.gray.opacity(0.3))
+                                        )
+                                } else {
+                                    SecureField("Confirmez le mot de passe", text: $password2)
+                                        .padding(12)
+                                        .background(Color.almostWhite)
+                                        .cornerRadius(8)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 8)
+                                                .stroke(Color.gray.opacity(0.3))
+                                        )
+                                }
+                                Button(action: {
+                                    withAnimation { isPassword2Visible.toggle() }
+                                }) {
+                                    Image(systemName: isPassword2Visible ? "eye" : "eye.slash")
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.trailing, 12)
+
                             }
-                            Button(action: {
-                                withAnimation { isPassword2Visible.toggle() }
-                            }) {
-                                Image(systemName: isPassword2Visible ? "eye.slash" : "eye")
-                                    .foregroundColor(.gray)
-                            }
-                        }.padding(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color.gray.opacity(0.5))
-                            ).background(Color.white)
-                        
-                        
+                        }
+
                         if !isPassword2Valid() && !password2.isEmpty {
                             Text("⚠️ Le mot de passe doit contenir entre 6 et 15 caractères.")
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(.red)
-                                .padding(.horizontal, 20)
+                                .padding(.horizontal, 4)
                         }
+
+                        //Accepte
+                        
+                        HStack(spacing: 8) {
+                            Button(action: { acceptedTerms.toggle() }) {
+                                Image(systemName: acceptedTerms ? "checkmark.square" : "square")
+                                    .foregroundColor(.primaryPurpule)
+                                    .font(.system(size: 24))
+                            }
+                            HStack(spacing:0){
+                                Text("J'ai lu et j'accepte les")
+                                    .secondaryText()
+                                    .foregroundStyle(Color(.textPrimary))
+
+                                Text(" conditions d'utilisation")
+                                    .secondaryText()
+                                    .foregroundStyle(Color(.textPrimary))
+                                    .underline()
+                            }
+                        }.padding(.vertical, 16)
                     }
-                   
-                    // Conditions d’utilisation
-                    HStack(spacing: 10) {
-                        Button(action: { acceptedTerms.toggle() }) {
-                            Image(systemName: acceptedTerms ? "checkmark.square" : "square")
-                                .foregroundColor(.purple)
-                            Text("J'ai lu et j'accepte les conditions d'utilisation")
-                                .font(.custom("Inter_24pt-Regular", size: 15))
-                                .foregroundColor(.black)
-                                .underline()
-                        }
-                    }
-                    
-                    
+
                     Button(action: {
-                        showMessage = true
+                        // Crée le nouvel utilisateur
                         let newUser = User(name: nom, surname: name, mail: mail, pseudo: pseudo, password: password)
                         users.append(newUser)
-                        session.currentUser = newUser 
+
+                        session.currentUser = newUser
+
                         session.welcome = session.homePhrases.randomElement() ?? ":)"
+
+                        print("Nouvel utilisateur : \(session.currentUser.name)")
+
+                        // Active la navigation
+                        createAccount = true
                     }) {
-                        // Bouton d’inscription
-                        HStack{
+
+                        HStack {
+
                             Image(systemName: "checkmark.circle")
-                                .fontWeight(.bold)
-                            NavigationLink(destination:QuestionsView()){
-                                Text("Valider l'inscription")
-                                    .font(.custom("Manrope-Bold", size: 20))
-                            }   
-                            
-                        } .foregroundColor(.white)
-                            .frame(width: 300, height: 50)
-                            .background(Color("primaryPurpule"))
-                            .cornerRadius(10)
+                                .font(.system(size: 20))
+                                .bold()
+                            Text("Valider l'inscription")
+                                .secondaryTitle()
+                        }
+                        .foregroundColor(.almostWhite)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .background(Color("primaryPurpule"))
+                        .cornerRadius(10)
                     }
-                    // Lien vers connexion
+
+                    // Navigation automatique après clic
+                    .navigationDestination(isPresented: $createAccount) {
+                        QuestionsView()
+                    }
+
                     HStack(spacing: 5) {
                         Text("Tu as déjà un compte?")
-                            .font(.custom("Inter_24pt-Regular", size: 15))
-                        
+                            .secondaryText()
+
                         NavigationLink(destination: ConnexionView()) {
                             Text("Se connecter")
-                                .font(.custom("Manrope-Bold", size: 15))
-                                .foregroundColor(.black)
+                                .secondaryText().underline()
 
                         }
                     }
 
-                }.padding()
-            }
+                }.padding(.horizontal, 24)
+            }.navigationBarBackButtonHidden(true)
         }
     }
 }
 
 #Preview {
     InscriptionView().environment(Session(currentUser: users[0]))
+        .environment(HobbyViewModel())
+        .environment(ConversationStore())
 }
+
