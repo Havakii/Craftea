@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoadingHobbiesView: View {
+    @Environment(Session.self) private var session
+    @Environment(HobbyViewModel.self) private var viewModel
     @State private var isLoading = false
     @State private var navigate = false // To trigger NavigationLink programmatically
 
@@ -50,6 +52,9 @@ struct LoadingHobbiesView: View {
                 .onAppear {
                     isLoading = true
 
+                    // Generate recommendations from onboarding answers
+                    viewModel.generateRecommendations(session: session)
+
                     // Automatically navigate after a short delay (e.g., 2.5 seconds)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         navigate = true
@@ -66,4 +71,3 @@ struct LoadingHobbiesView: View {
         .environment(HobbyViewModel())
         .environment(ConversationStore())
 }
-

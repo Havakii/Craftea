@@ -12,6 +12,10 @@ import Observation
 final class Session {
     var currentUser: User
     var welcome: String
+    // Stocke temporairement les réponses du questionnaire d'onboarding
+    // clé = Question.key, valeur = index de l'option sélectionnée
+    var onboardingAnswers: [String: Int] = [:]
+
     let homePhrases: [String] = [
         "Débloque ta créativité sans limites !",
         "Crée, partage, inspire.",
@@ -26,5 +30,9 @@ final class Session {
     init(currentUser: User, welcome: String = "") {
         self.currentUser = currentUser
         self.welcome = welcome
+    }
+
+    func clearOnboardingAnswers() {
+        onboardingAnswers.removeAll()
     }
 }

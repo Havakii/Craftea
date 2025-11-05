@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Questions4View: View {
+    @Environment(Session.self) private var session
     @State private var currentIndex = 0
     @State private var selectedOption: Int? = nil
     let questions: [Question] = [
@@ -63,7 +64,7 @@ struct Questions4View: View {
                             .background(selectedOption == index ? .almostWhite.opacity(0.7) : .clear)
                             .cornerRadius(10)
                             .glassEffect(in: RoundedRectangle(cornerRadius: 10))
-                            .onTapGesture { selectedOption = index }
+                            .onTapGesture { selectedOption = index; session.onboardingAnswers[question.key] = index }
                         }
                         Spacer()
                     }.frame(height: 450)
