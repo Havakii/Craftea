@@ -27,7 +27,7 @@ struct ProfilView: View {
                         //Profil Image
                         VStack (spacing: 8) {
                             ProfileProgressView(
-                                progress: 0.75, // 75% rempli
+                                progress: session.currentUser.niveau, // 75% rempli
                                 image: Image(session.currentUser.imageProfil ?? "placeholder")
                             )
                             HStack(spacing: 8) {

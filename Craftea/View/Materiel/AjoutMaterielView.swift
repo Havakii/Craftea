@@ -220,6 +220,8 @@ struct AjoutMaterielView: View {
 
 #Preview {
     NavigationStack {
-        AjoutMaterielView() .environment(Session(currentUser: users[0]))
+        AjoutMaterielView()
+            .environment(Session(currentUser: users[0]))
+
     }
 }
