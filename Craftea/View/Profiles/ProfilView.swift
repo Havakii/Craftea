@@ -35,7 +35,7 @@ struct ProfilView: View {
                                 Text("\(session.currentUser.name)").mainTitle()
                                 ScoreTag(score: session.currentUser.score)                          }
 
-                        }
+                        }.padding(.top, 50)
                         // Section Loisirs
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Mes Loisirs").mainTitle()
@@ -111,7 +111,6 @@ struct ProfilView: View {
             .fullScreenCover(isPresented: $showSettings) {
                 SettingsFullScreen(user: session.currentUser)
             }
-            .toolbarBackground(.visible, for: .navigationBar)
         }
     }
 }
