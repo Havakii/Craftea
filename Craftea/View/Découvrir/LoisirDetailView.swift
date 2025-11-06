@@ -191,6 +191,7 @@ struct LoisirDetailView: View {
                                     session.currentUser.favoritesHobby.removeAll(where: { $0.id == hobby.id })
                                 } else {
                                     session.currentUser.favoritesHobby.append(hobby)
+                                    session.currentUser.niveau += 0.05
                                 }
                             }) {
                                 Label("Favorite", systemImage: session.currentUser.favoritesHobby.contains(where: { $0.id == hobby.id }) ? "heart.fill" : "heart")
