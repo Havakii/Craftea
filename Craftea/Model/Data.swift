@@ -8,70 +8,124 @@
 import Foundation
 
 var users: [User] = [
-    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456",score: 4.9, niveau: 0.90, recommandations: [Hobby(
-        name: .PeintureAcrylique,
-        description: "Créer des œuvres colorées et texturées",
-        image: "acrylique",
-        level: .easy,
-        category: .peinture,
-        equipementNeeded: [
-        BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: ""),
-        BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: ""),
-        BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: ""),
-        BaseEquipment(name: "Peinture acrylique", description: "Jeu de couleurs primaires et secondaires", image: ""),
-        BaseEquipment(name: "Eau et chiffon", description: "Nettoyage des pinceaux et corrections", image: ""),
-        BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "")
-        ],
-        technicalBasis: [
-        Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: ""),
-        Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: ""),
-        Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: nil),
-        Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: nil),
-        Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
-        ], popular: true
-        ),
-        Hobby(
-        name: .Aquarelle,
-        description: "Peindre avec légèreté et transparence",
-        image: "aquarelle",
-        level: .medium,
-        category: .peinture,
-        equipementNeeded: [
-        BaseEquipment(name: "Papiers aquarelle", description: "Papier 300 g/m²", image: ""),
-        BaseEquipment(name: "Pinceaux à lavis", description: "Pinceaux souples pour lavis", image: ""),
-        BaseEquipment(name: "Godets ou tubes aquarelle", description: "Peintures de base", image: ""),
-        BaseEquipment(name: "Palette", description: "Mélange et dilution", image: ""),
-        BaseEquipment(name: "Ruban adhésif", description: "Fixer le papier et éviter les gondolages", image: "")
-        ],
-        technicalBasis: [
-        Technique(name: "Lavis", but: "Poser une teinte légère et homogène.", description: "Mouille ton pinceau, dilue fortement la couleur et applique-la en aplat régulier sur papier incliné. Éponge les surplus pour éviter les auréoles.", image: nil),
-        Technique(name: "Dégradé", but: "Passer progressivement d’une couleur à une autre.", description: "Pose deux couleurs voisines sur papier humide, puis travaille la zone de jonction en allers-retours doux pour fondre les teintes.", image: nil),
-        Technique(name: "Mouillé sur mouillé", but: "Obtenir des transitions douces et des bords flous.", description: "Humidifie le papier, charge ton pinceau et dépose la couleur sur la zone humide. Laisse les pigments se diffuser naturellement.", image: nil),
-        Technique(name: "Mouillé sur sec", but: "Tracer des formes nettes et contrôlées.", description: "Attends que le papier soit complètement sec, puis peins avec peu d’eau pour garder des contours nets et précis.", image: nil),
-        Technique(name: "Réserves", but: "Préserver des zones blanches intactes.", description: "Applique du liquide de masquage sur les zones à protéger. Peins librement autour, laisse sécher, puis retire le masque délicatement.", image: nil)
-        ], popular: true
-        ),
-        Hobby(
+    User(name: "Ethan", surname: "Urie", mail: "Ethan25@gmail.com", pseudo: "Ethan", password: "123456",score: 4.9, niveau: 0.90, favoritesHobby: [Hobby(
         name: .Dessin,
         description: "Explorer le trait et les ombres",
         image: "dessin",
         level: .easy,
         category: .dessin,
         equipementNeeded: [
-        BaseEquipment(name: "Crayons graphite", description: "Différentes duretés (HB, 2B, 4B)", image: ""),
-        BaseEquipment(name: "Fusain", description: "Pour ombrages profonds", image: ""),
-        BaseEquipment(name: "Gomme mie de pain", description: "Gomme douce pour estomper", image: ""),
-        BaseEquipment(name: "Estompe", description: "Fondre les ombres", image: ""),
-        BaseEquipment(name: "Bloc dessin", description: "Papier lisse ou grain fin", image: "")
+            BaseEquipment(name: "Crayons graphite", description: "Différentes duretés (HB, 2B, 4B)", image: ""),
+            BaseEquipment(name: "Fusain", description: "Pour ombrages profonds", image: ""),
+            BaseEquipment(name: "Gomme mie de pain", description: "Gomme douce pour estomper", image: ""),
+            BaseEquipment(name: "Estompe", description: "Fondre les ombres", image: ""),
+            BaseEquipment(name: "Bloc dessin", description: "Papier lisse ou grain fin", image: "")
         ],
         technicalBasis: [
-        Technique(name: "Hachures", but: "Créer des ombres et des textures par lignes.", description: "Trace des séries de lignes parallèles régulières, puis croise-les pour foncer. Varie l’espacement et la pression pour moduler la valeur.", image: nil),
-        Technique(name: "Contour", but: "Définir la silhouette et les proportions justes.", description: "Esquisse légèrement les formes principales, vérifie les alignements et corrige avant d’appuyer sur les lignes finales.", image: nil),
-        Technique(name: "Perspective", but: "Donner une impression d’espace crédible.", description: "Place l’horizon, fixe un ou plusieurs points de fuite et trace les lignes de construction en respectant la convergence.", image: nil),
-        Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
+            Technique(name: "Hachures", but: "Créer des ombres et des textures par lignes.", description: "Trace des séries de lignes parallèles régulières, puis croise-les pour foncer. Varie l’espacement et la pression pour moduler la valeur.", image: nil),
+            Technique(name: "Contour", but: "Définir la silhouette et les proportions justes.", description: "Esquisse légèrement les formes principales, vérifie les alignements et corrige avant d’appuyer sur les lignes finales.", image: nil),
+            Technique(name: "Perspective", but: "Donner une impression d’espace crédible.", description: "Place l’horizon, fixe un ou plusieurs points de fuite et trace les lignes de construction en respectant la convergence.", image: nil),
+            Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
         ], popular: true
-        )], imageProfil: "user1"),
-    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",location: "Paris", score: 2.5, niveau: 0.70,favoritesHobby: [], imageProfil: "user2"),
+    ),Hobby(
+        name: .PeintureAcrylique,
+        description: "Créer des œuvres colorées et texturées",
+        image: "acrylique",
+        level: .easy,
+        category: .peinture,
+        equipementNeeded: [
+            BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: "https://images.pexels.com/photos/7302093/pexels-photo-7302093.jpeg"),
+            BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: "https://media.istockphoto.com/id/942992430/photo/empty-canvas-on-easel.jpg?s=612x612&w=0&k=20&c=DEjNV_QH42Fa7zvdYLDtMpNzpFx61cHofrdVtyiyX1w="),
+            BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsQFveoasupOhaohg0yipt4YMkPDnH2wMWuQ&s"),
+            BaseEquipment(name: "Peinture acrylique", description: "Jeu de couleurs primaires et secondaires", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA3Il-pywHWe6lyU7dp8xbsSbkxws-UqtfYg&s"),
+            BaseEquipment(name: "Eau et chiffon", description: "Nettoyage des pinceaux et corrections", image: ""),
+            BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDa5-FI3II-qLRFW2ZkGk_cco_jet8bpEJWg&s")
+        ],
+        technicalBasis: [
+            Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyraUPwDfqu6ZkBDlPn8P3eojAauCVHwQ0xw&s"),
+            Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjUu1tXlKgSmsQUaiDFTYtabDcKlWYAqA14g&s"),
+            Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: "https://www.art-totale.com/wp-content/uploads/2018/08/Avant-glacis.jpg"),
+            Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5plr2kGOAA5nehfaVNaMTwqtlJ5fl_SgE7Q&s"),
+            Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
+        ], popular: true
+    ),], recommandations: [Hobby(
+        name: .PeintureAcrylique,
+        description: "Créer des œuvres colorées et texturées",
+        image: "acrylique",
+        level: .easy,
+        category: .peinture,
+        equipementNeeded: [
+            BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: ""),
+            BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: ""),
+            BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: ""),
+            BaseEquipment(name: "Peinture acrylique", description: "Jeu de couleurs primaires et secondaires", image: ""),
+            BaseEquipment(name: "Eau et chiffon", description: "Nettoyage des pinceaux et corrections", image: ""),
+            BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "")
+        ],
+        technicalBasis: [
+            Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: ""),
+            Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: ""),
+            Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: nil),
+            Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: nil),
+            Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
+        ], popular: true
+    ),
+                           Hobby(
+                            name: .DessinNumerique,
+                            description: "Créer des œuvres sur tablette ou PC",
+                            image: "dessinNumerique",
+                            level: .medium,
+                            category: .numerique,
+                            equipementNeeded: [
+                                BaseEquipment(name: "Tablette graphique", description: "Tablette + stylet", image: ""),
+                                BaseEquipment(name: "Logiciel de dessin", description: "Procreate, Photoshop, etc.", image: ""),
+                                BaseEquipment(name: "Gants anti-friction", description: "Glisse sur la tablette", image: ""),
+                                BaseEquipment(name: "Brosses numériques", description: "Packs de pinceaux", image: "")
+                            ],
+                            technicalBasis: [
+                                Technique(name: "Calques", but: "Travailler non destructivement par couches.", description: "Crée des calques séparés, nomme-les et utilise des masques pour isoler les modifications.", image: nil),
+                                Technique(name: "Rendu", but: "Simuler lumière et matériaux crédibles.", description: "Pose une lumière principale, ajoute ombres et reflets en respectant les volumes et la matière.", image: nil),
+                                Technique(name: "Raccourcis clavier", but: "Accélérer le flux de travail.", description: "Assigne les outils clés aux raccourcis et pratique leur enchaînement pour limiter les interruptions.", image: nil)
+                            ], popular: false
+                           ),
+                           Hobby(
+                            name: .Dessin,
+                            description: "Explorer le trait et les ombres",
+                            image: "dessin",
+                            level: .easy,
+                            category: .dessin,
+                            equipementNeeded: [
+                                BaseEquipment(name: "Crayons graphite", description: "Différentes duretés (HB, 2B, 4B)", image: ""),
+                                BaseEquipment(name: "Fusain", description: "Pour ombrages profonds", image: ""),
+                                BaseEquipment(name: "Gomme mie de pain", description: "Gomme douce pour estomper", image: ""),
+                                BaseEquipment(name: "Estompe", description: "Fondre les ombres", image: ""),
+                                BaseEquipment(name: "Bloc dessin", description: "Papier lisse ou grain fin", image: "")
+                            ],
+                            technicalBasis: [
+                                Technique(name: "Hachures", but: "Créer des ombres et des textures par lignes.", description: "Trace des séries de lignes parallèles régulières, puis croise-les pour foncer. Varie l’espacement et la pression pour moduler la valeur.", image: nil),
+                                Technique(name: "Contour", but: "Définir la silhouette et les proportions justes.", description: "Esquisse légèrement les formes principales, vérifie les alignements et corrige avant d’appuyer sur les lignes finales.", image: nil),
+                                Technique(name: "Perspective", but: "Donner une impression d’espace crédible.", description: "Place l’horizon, fixe un ou plusieurs points de fuite et trace les lignes de construction en respectant la convergence.", image: nil),
+                                Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
+                            ], popular: true
+                           )], imageProfil: "user1"),
+    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456",location: "Paris", score: 2.5, niveau: 0.70,favoritesHobby: [Hobby(
+        name: .PeintureGalet,
+        description: "Décorer des pierres uniques et naturelles",
+        image: "peintureGalet",
+        level: .easy,
+        category: .peinture,
+        equipementNeeded: [
+        BaseEquipment(name: "Galets", description: "Pierres lisses lavées", image: ""),
+        BaseEquipment(name: "Peinture acrylique", description: "Peinture pour surfaces", image: ""),
+        BaseEquipment(name: "Vernis", description: "Protection et finition", image: ""),
+        BaseEquipment(name: "Feutres acryliques", description: "Détails fins", image: "")
+        ],
+        technicalBasis: [
+        Technique(name: "Mini motifs", but: "Décorer le galet avec des motifs nets et réguliers.", description: "Utilise un pinceau fin ou un feutre acrylique, trace les repères au crayon, puis peins les motifs par couches fines en laissant sécher entre passes.", image: nil),
+        Technique(name: "Pochoir", but: "Reproduire un motif proprement et rapidement.", description: "Fixe le pochoir sur le galet, tamponne la peinture avec peu de charge et retire-le verticalement pour éviter les bavures.", image: nil),
+        Technique(name: "Pointillisme", but: "Créer des motifs et dégradés par points.", description: "Charge un outil à embout rond et dépose des points réguliers. Resserre l’espacement pour foncer et espace pour éclaircir.", image: nil)
+        ], popular: false
+        ),], imageProfil: "user2"),
     User(name:"Pauline",surname: "Lefèvre",mail: "Pauline@gmail.com",pseudo: "Pauline",password: "123456",location: "Nice", score: 5.5, niveau: 0.65,favoritesHobby: [Hobby(
         name: .PeintureAcrylique,
         description: "Créer des œuvres colorées et texturées",
@@ -79,64 +133,82 @@ var users: [User] = [
         level: .easy,
         category: .peinture,
         equipementNeeded: [
-        BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: ""),
-        BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: ""),
-        BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: ""),
-        BaseEquipment(name: "Peinture acrylique", description: "Jeu de couleurs primaires et secondaires", image: ""),
-        BaseEquipment(name: "Eau et chiffon", description: "Nettoyage des pinceaux et corrections", image: ""),
-        BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "")
+            BaseEquipment(name: "Pinceaux", description: "Ensemble de pinceaux plats et ronds", image: ""),
+            BaseEquipment(name: "Toile", description: "Toile montée ou panneau entoilé", image: ""),
+            BaseEquipment(name: "Palette", description: "Pour mélanger les couleurs", image: ""),
+            BaseEquipment(name: "Peinture acrylique", description: "Jeu de couleurs primaires et secondaires", image: ""),
+            BaseEquipment(name: "Eau et chiffon", description: "Nettoyage des pinceaux et corrections", image: ""),
+            BaseEquipment(name: "Couteau à peindre", description: "Pour textures et mélanges", image: "")
         ],
         technicalBasis: [
-        Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: ""),
-        Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: ""),
-        Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: nil),
-        Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: nil),
-        Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
+            Technique(name: "Aplat", but: "Obtenir une surface de couleur uniforme et opaque.", description: "Prépare ta couleur sur la palette, charge un pinceau plat, puis peins des bandes parallèles en chevauchant légèrement pour éviter les traces. Lisse rapidement avant séchage.", image: ""),
+            Technique(name: "Empâtement", but: "Créer du relief et de la texture visibles.", description: "Prélève une grosse quantité d’acrylique avec un couteau à peindre et dépose-la en couches épaisses. Étale ou tapote pour former des crêtes et laisse sécher sans trop retravailler.", image: ""),
+            Technique(name: "Glacis", but: "Modifier subtilement la teinte et la lumière par transparence.", description: "Mélange la peinture avec un médium ou de l’eau pour obtenir une couche très transparente, puis passe-la uniformément sur une couche sèche. Répète pour intensifier.", image: nil),
+            Technique(name: "Brossage à sec", but: "Souligner les reliefs et créer un effet texturé.", description: "Essuie presque entièrement le pinceau, prends un peu de peinture, puis frotte légèrement la surface en effleurant les reliefs pour ne teinter que les arêtes.", image: nil),
+            Technique(name: "Sous-couche", but: "Définir rapidement les valeurs et les grandes formes.", description: "Dilue la peinture et pose une première couche colorée sur toute la surface. Indique les zones claires/sombres et les volumes avant les détails.", image: nil)
         ], popular: true
-        ),
-        Hobby(
-        name: .Aquarelle,
-        description: "Peindre avec légèreté et transparence",
-        image: "aquarelle",
-        level: .medium,
-        category: .peinture,
-        equipementNeeded: [
-        BaseEquipment(name: "Papiers aquarelle", description: "Papier 300 g/m²", image: ""),
-        BaseEquipment(name: "Pinceaux à lavis", description: "Pinceaux souples pour lavis", image: ""),
-        BaseEquipment(name: "Godets ou tubes aquarelle", description: "Peintures de base", image: ""),
-        BaseEquipment(name: "Palette", description: "Mélange et dilution", image: ""),
-        BaseEquipment(name: "Ruban adhésif", description: "Fixer le papier et éviter les gondolages", image: "")
-        ],
-        technicalBasis: [
-        Technique(name: "Lavis", but: "Poser une teinte légère et homogène.", description: "Mouille ton pinceau, dilue fortement la couleur et applique-la en aplat régulier sur papier incliné. Éponge les surplus pour éviter les auréoles.", image: nil),
-        Technique(name: "Dégradé", but: "Passer progressivement d’une couleur à une autre.", description: "Pose deux couleurs voisines sur papier humide, puis travaille la zone de jonction en allers-retours doux pour fondre les teintes.", image: nil),
-        Technique(name: "Mouillé sur mouillé", but: "Obtenir des transitions douces et des bords flous.", description: "Humidifie le papier, charge ton pinceau et dépose la couleur sur la zone humide. Laisse les pigments se diffuser naturellement.", image: nil),
-        Technique(name: "Mouillé sur sec", but: "Tracer des formes nettes et contrôlées.", description: "Attends que le papier soit complètement sec, puis peins avec peu d’eau pour garder des contours nets et précis.", image: nil),
-        Technique(name: "Réserves", but: "Préserver des zones blanches intactes.", description: "Applique du liquide de masquage sur les zones à protéger. Peins librement autour, laisse sécher, puis retire le masque délicatement.", image: nil)
-        ], popular: true
-        ),
-        Hobby(
-        name: .Dessin,
-        description: "Explorer le trait et les ombres",
-        image: "dessin",
-        level: .easy,
-        category: .dessin,
-        equipementNeeded: [
-        BaseEquipment(name: "Crayons graphite", description: "Différentes duretés (HB, 2B, 4B)", image: ""),
-        BaseEquipment(name: "Fusain", description: "Pour ombrages profonds", image: ""),
-        BaseEquipment(name: "Gomme mie de pain", description: "Gomme douce pour estomper", image: ""),
-        BaseEquipment(name: "Estompe", description: "Fondre les ombres", image: ""),
-        BaseEquipment(name: "Bloc dessin", description: "Papier lisse ou grain fin", image: "")
-        ],
-        technicalBasis: [
-        Technique(name: "Hachures", but: "Créer des ombres et des textures par lignes.", description: "Trace des séries de lignes parallèles régulières, puis croise-les pour foncer. Varie l’espacement et la pression pour moduler la valeur.", image: nil),
-        Technique(name: "Contour", but: "Définir la silhouette et les proportions justes.", description: "Esquisse légèrement les formes principales, vérifie les alignements et corrige avant d’appuyer sur les lignes finales.", image: nil),
-        Technique(name: "Perspective", but: "Donner une impression d’espace crédible.", description: "Place l’horizon, fixe un ou plusieurs points de fuite et trace les lignes de construction en respectant la convergence.", image: nil),
-        Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
-        ], popular: true
-        )],equipment:[], imageProfil: "user4"),
+    ),
+                                                                                                                                                                      Hobby(
+                                                                                                                                                                        name: .Aquarelle,
+                                                                                                                                                                        description: "Peindre avec légèreté et transparence",
+                                                                                                                                                                        image: "aquarelle",
+                                                                                                                                                                        level: .medium,
+                                                                                                                                                                        category: .peinture,
+                                                                                                                                                                        equipementNeeded: [
+                                                                                                                                                                            BaseEquipment(name: "Papiers aquarelle", description: "Papier 300 g/m²", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Pinceaux à lavis", description: "Pinceaux souples pour lavis", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Godets ou tubes aquarelle", description: "Peintures de base", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Palette", description: "Mélange et dilution", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Ruban adhésif", description: "Fixer le papier et éviter les gondolages", image: "")
+                                                                                                                                                                        ],
+                                                                                                                                                                        technicalBasis: [
+                                                                                                                                                                            Technique(name: "Lavis", but: "Poser une teinte légère et homogène.", description: "Mouille ton pinceau, dilue fortement la couleur et applique-la en aplat régulier sur papier incliné. Éponge les surplus pour éviter les auréoles.", image: nil),
+                                                                                                                                                                            Technique(name: "Dégradé", but: "Passer progressivement d’une couleur à une autre.", description: "Pose deux couleurs voisines sur papier humide, puis travaille la zone de jonction en allers-retours doux pour fondre les teintes.", image: nil),
+                                                                                                                                                                            Technique(name: "Mouillé sur mouillé", but: "Obtenir des transitions douces et des bords flous.", description: "Humidifie le papier, charge ton pinceau et dépose la couleur sur la zone humide. Laisse les pigments se diffuser naturellement.", image: nil),
+                                                                                                                                                                            Technique(name: "Mouillé sur sec", but: "Tracer des formes nettes et contrôlées.", description: "Attends que le papier soit complètement sec, puis peins avec peu d’eau pour garder des contours nets et précis.", image: nil),
+                                                                                                                                                                            Technique(name: "Réserves", but: "Préserver des zones blanches intactes.", description: "Applique du liquide de masquage sur les zones à protéger. Peins librement autour, laisse sécher, puis retire le masque délicatement.", image: nil)
+                                                                                                                                                                        ], popular: true
+                                                                                                                                                                      ),
+                                                                                                                                                                      Hobby(
+                                                                                                                                                                        name: .Dessin,
+                                                                                                                                                                        description: "Explorer le trait et les ombres",
+                                                                                                                                                                        image: "dessin",
+                                                                                                                                                                        level: .easy,
+                                                                                                                                                                        category: .dessin,
+                                                                                                                                                                        equipementNeeded: [
+                                                                                                                                                                            BaseEquipment(name: "Crayons graphite", description: "Différentes duretés (HB, 2B, 4B)", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Fusain", description: "Pour ombrages profonds", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Gomme mie de pain", description: "Gomme douce pour estomper", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Estompe", description: "Fondre les ombres", image: ""),
+                                                                                                                                                                            BaseEquipment(name: "Bloc dessin", description: "Papier lisse ou grain fin", image: "")
+                                                                                                                                                                        ],
+                                                                                                                                                                        technicalBasis: [
+                                                                                                                                                                            Technique(name: "Hachures", but: "Créer des ombres et des textures par lignes.", description: "Trace des séries de lignes parallèles régulières, puis croise-les pour foncer. Varie l’espacement et la pression pour moduler la valeur.", image: nil),
+                                                                                                                                                                            Technique(name: "Contour", but: "Définir la silhouette et les proportions justes.", description: "Esquisse légèrement les formes principales, vérifie les alignements et corrige avant d’appuyer sur les lignes finales.", image: nil),
+                                                                                                                                                                            Technique(name: "Perspective", but: "Donner une impression d’espace crédible.", description: "Place l’horizon, fixe un ou plusieurs points de fuite et trace les lignes de construction en respectant la convergence.", image: nil),
+                                                                                                                                                                            Technique(name: "Valeurs", but: "Structurer le volume par contrastes de clair-obscur.", description: "Choisis une source de lumière, établis 3–5 niveaux de gris et ombre progressivement en gardant une transition douce.", image: nil)
+                                                                                                                                                                        ], popular: true
+                                                                                                                                                                      )],equipment:[], imageProfil: "user4"),
 
-    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456", location: "Paris", score: 2.5, niveau: 0.50, favoritesHobby: [], imageProfil: "user3"),
+    User(name: "Nathan",surname: "Dufresne",mail: "Ethan@gmail.com",pseudo: "Ethan",password: "123456", location: "Paris", score: 2.5, niveau: 0.50, favoritesHobby: [Hobby(
+        name: .Crochet,
+        description: "Créer vêtements et accessoires en maille",
+           image: "crochet",
+        level: .medium,
+        category: .textile,
+        equipementNeeded: [
+        BaseEquipment(name: "Crochet", description: "Crochet adapté à la laine", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYtlq3WTNOyfChZYhRLtHrHMF0f4NtDiYs_A&s"),
+        BaseEquipment(name: "Laine", description: "Fil adapté (catégorie 4 recommandé)", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBzIbbw5IQJWP1eDZeqXqGfrzco_929gsC0Q&s"),
+        BaseEquipment(name: "Marqueurs de maille", description: "Repérer les tours", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQco2jXl0rO_e20jUkSr6ucnlWaVHu-tUypmw&s"),
+        BaseEquipment(name: "Aiguille à laine", description: "Rentrer les fils", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrN0zkil-DYpqyOA_-GOJDCy6FoZ16phNbFw&s"),
+        ],
+        technicalBasis: [
+        Technique(name: "Maille serrée", but: "Obtenir un tissu dense et régulier.", description: "Fais un nœud coulant, pique dans la maille, ramène le fil et termine la maille serrée en gardant une tension constante.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7RP60Z6srNzRgILRme3l_3HF0cQX4E9XHug&s"),
+        Technique(name: "Bride", but: "Gagner en hauteur rapidement.", description: "Fais un jeté, pique, ramène le fil puis écoule les boucles par étapes pour former la bride.", image: nil),
+        Technique(name: "Anneau magique", but: "Démarrer un ouvrage circulaire sans trou central.", description: "Enroule le fil autour des doigts, crochète le nombre de mailles dans l’anneau, puis serre le cercle en tirant sur le fil libre.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAPnbTXQ_MQU3VACTbOYah1vzQPyoH4OXsAw&s"),
+        Technique(name: "Augmentations / diminutions", but: "Modeler la forme de l’ouvrage.", description: "Réalise deux mailles dans la même maille pour augmenter, ou saute/écoule ensemble des mailles pour diminuer selon le patron.", image: nil)
+        ], popular: true
+        ),], imageProfil: "user3"),
     User(name: "Pierre",surname: "Thomas",mail: "Pierre@gmail.com",pseudo: "Pierre",password: "123456",location: "Marseille", score: 3.5, niveau: 0.40, favoritesHobby: [], imageProfil: "user5"),
     User(name: "Marc",surname: "Sellier",mail: "Marc@gmail.com",pseudo: "Marc",password: "123456",location : "Toulouse", score: 4.5, niveau: 0.70, favoritesHobby: [], imageProfil: "user6"),
     User(name: "Brendon", surname: "Urie", mail: "brendon@gmail.com", pseudo: "Brendon", password: "123456",location: "Montpellier", score: 2.5, niveau: 0.60, favoritesHobby: [], imageProfil: "user7")
@@ -180,7 +252,7 @@ var materielsOccasion: [Materiel] = [
     Materiel(nom: "Carton plume", image: "https://img.leboncoin.fr/api/v1/lbcpb1/images/66/87/0e/66870e824f15fd55eadd426aca9fb9496c061e09.jpg?rule=ad-large", description: "Plaques A3 pour maquettes", vendeur: users[8], typeMateriel: .echange),
     Materiel(nom: "Cutter", image: "https://img.leboncoin.fr/api/v1/lbcpb1/images/5c/d8/b3/5cd8b31036358cf28add1e3d932700327a8d59b0.jpg?rule=classified-1200x800-webp", description: "Cutter de précision", vendeur: users[11], typeMateriel: .don),
     Materiel(nom: "Papiers scrap", image: "https://img.leboncoin.fr/api/v1/lbcpb1/images/0b/82/ef/0b82ef92960ce7f7d5ff8365eaa7fcfbc836a47a.jpg?rule=ad-large", description: "Lot de papiers motifs", vendeur: users[4], typeMateriel: .pret)
-    
+
 ]
 // Données Neuf
 var materielsNeuf: [MaterielPro] = [
@@ -214,8 +286,5 @@ var materielsNeuf: [MaterielPro] = [
     MaterielPro(nom: "Plume et porte-plume", image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMSEhUSExIVFRUVFxYWFxcYFhcXFRgWFRUYFhcVFRcYHSogGBolGxUYITEhJSouLi4uFx8zODMtNygtLisBCgoKDg0OFxAQGi0lHR4tLS0tLS0tKy0tLS0tLS0tLS0tLS0wLS0tLS0tLS0tKy0rLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAAAwECBAUGBwj/xABOEAABBAACBAgICQoFAwUAAAABAAIDEQQhBRIxQQYTIlFhcYGRBzJCkqGxwdEUI1JTYnKT0uEVM0NEgrLC0+LwVISUosMkg/EXNKOks//EABgBAQEBAQEAAAAAAAAAAAAAAAABAgME/8QAJBEBAQACAQQDAAIDAAAAAAAAAAECERITITFRA0FhIqEyQpH/2gAMAwEAAhEDEQA/APcUREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBF5dFpqXRekpIsTI58E7tcPcSaa88l4+qba4dF8y9Qa68xmFJVs0qiIqgiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIg5LwlcGvhuFJjbc8Nvj53CuXF+0Bl9JrVzvgk4YcY0YGZ3KaLgcdrmD9GfpNzroBG5enr5y4XYhgxr8RhQ6NpkLmGxlKDZc0jY19aw5jazezeM3H0ai860R4VYXwsMsMvGUA8sEeprjbVvBF7dm9bWLwjYM7RM3rYPY4pyicMvTsEXLN8IGBP6Rw643ewKVvDvAH9PXXHJ91XlDhl6dIi0DOGmBOzEt8149bVIOFuC/xMfaa9abicb6btFqW8J8Gf1qH7Ro9ZUg4QYQ/rUH2rPem4arZItc3TuFOzEwfas96kGmMP/iIftGe9XZpmosT8qQfPxfaN96r+Uofno/Pb70RlIuXx3DzCRktBfIRlbANXznEWOkWtd/6lQ3nDJXOC0nu2elTY7lFoNEcMMJiHBjJC152MeNUnK6B8UnqK28uOib40jG9bmj1lUZCLEOk4RtmjH7bfepMNjY5LEcjH1t1XNdXXRyQToiICIiAiIgIiICIqEoNPwv0iIMJNJdHULW/WdyRXTnfYvnx8MbgRZAOXjZDp6wvTvC9pWxFhxrUSZHFpF5W1oz3Zu7gvMzA0+XJ26q5Z3u9PxY/xa2GUxk3sPJkrp8WQdazi36fpd71FjoNUB2bqBDrrNhOYy3jaFDA3MRl262Oy5TTnWw/3al79yfxuqv4x2tXGV2E/xKdrnX+dH+5a/EQlp/Oen+hSQF3zjfOH3FNOjPEkg8q+0j+FOMlO4eePurHYH7Na+1n3VIwvGRO36hU0qUGQbWjzh9xXCeTmHdfp1VE/W3E+a0+pW8sna3taPeoJRiHg5Xu8kn0qvwp+wmutnvUUpdZpzauqIzG75SgdiHDfGe0N/iSIyHuJ/SdzW+ohY2I0i6EteSXAu1SC1oyIOYoDPJbzQ+HikaHSOOd3qnIUaoDPWPvWr4cRQCOMRB16xObnOJAaRk0gAHlbrW8fLnnlNVPHpWN+QeOo20+lXvnAzLh3rQ8SC0ZbgooIbvWzo0LzrqtddPPtvosVxjtSMh7zuByA3lx3BYk5pzmEN5Li3JjhsO7oyVNF6RjwrnSOaTbdQBoBJJN7+gFb/CSDFkMIAMucdkW1xzbR6u9Zzx7N4ZarSMeTuPpb7V6D4G8Q9uKljd4r4ibJs3G9tBpJNCnknnocy4GfBlji0tNtNeKNx6F1ngtc5ukYuTk5sjTkBQ4tzgculoHauc8u+c3jXuaIi7vIIiICIiAiIgje5Y+JxGVKSYrUaUxgijfK7Yxpd3bB2mgiyPI+Hc/HYyUh2TCIxWdago7vlax7VzUUhaaLj2ge0LLfCHEuMpsmz0kmyTajmwO8OvzR/FkvNa9sx1F7TrDaCDuJbs7Vqn4cg8TeY5URsH9mwf7pSNYYzRPpZ7ypMZhzIzWYbc3lCtvVkP7pWdkyx5Rb8Jc9tjVBGRuhn2qOGR97r6HgeoFW8brAYhu/KQDn5+oqlG7ABB2Zu9NMVsZxy22gdJWY/wDkcf4EHSCOei8/whRYfWrxGV+39xZAhJyr1+2liuy0hv06+q4+tUc1vyiOuMi1ccO7mHmt96jZh6cCayPM30VmhYgkvWOrONpsajr79VRSzyNFcY0ndbR7WK6TB1nrNB6NUE+ha3ESSbOMd1azfUtRzvZtm40xlgO1wDxWQstaTuG1pYe3JQcKQyaNha+3h11YLhY3VtzpbrS+ig7C4Oa7Do443uJ2SxglutXyoyRs8joWBgtF4mJtNnbHtzaIwTZvxhGXDq9C1LPblZb9OSwQnJIbG+Q/Q1iR003b3LYxYXFUf+mmH1hqZ89uAW/n0ZLIKlxMkg5nSzPHm5NWOzg1CNrm9XFi+9zit9TFno536c7iMHM4hrzEwE562IhLh2GQZdi2jsdxdNBYQwABwnhOTRQIp5J2c1rat4PwbOUeatQejVKzYeCzfJhnd1gkdmowKdXFehmw8dpIysim1CC9gByIBLeTbSMjvWy4D4/Ux2GcW18Y1uWsDy+QTZHM71qLT+DkiZAzinxN5ZaCx9mtQWbzWBhXyNcDqkEEEciTaDY39Cxv7deN1qvptFZBJrNa7nAPeLV67vGIiICIiAiIgxp1wPhMx+phuKB5UpzzHiNzN3uJod67vEFeP8PMXxuKeOSRHyBZHk7cufWLljO6jp8WO64k4Yk7W/7PvKYQkNOe2gOUOezRBr071magG5veFUV0CvpFcbXrmLTT4Jx8r0n3rXuje07f3/YV1jGndX+5R4rAGQbG9xTkXD05rBYjipOULjkycKdv+tv3hTY3CFh4u7B5UbtxB2Z8x9avxuinAFpaBewhp7KKn0UeOjOHkykjsxn0lntH4rpvbhcbKwMOHg/1N9rVsWB+4dzmexixGijWrythoZ9e0LdQRuLQdRx7XD+JYrrh3YetJt1nd59gUkUriaL3ZXkb3DmWXxR3teP23+q1YGijm7ZWZJOfNkst1guxDiK41/Vyz6lp55TfjP7nj1rpa/sg36lj43AkiwW9ZafctSyM5Y2x2/g4ZHjMH8HlstYdVwunA6/GRyAnMGzIOodi7CLgRhBtEj/rPI/c1V4zwM07JgcTrckhwpzTbGkbczuOWR6K3r1CbwhgZNgbeW2cDbsvkq3X25az/wBW4xOjMJAWhuFjdTXyOtge/UjAui/a4uc0CzvPMsiWdkPGEQNIaTXFsaDyYhIQazJ8bMBc47hVinm2wYYGqsyCQ6p3cl4NdiuGmNIvBLGwNzskRTbdllxaW7tvQjPG/dn/AF1U00wJLGNc0CNwrIvt7xI1tmgQwNcLyJNZXYyoXOrlc5raMrOqKO+qvptee4vTGPaCX4yJnReEaO0vOt6NywNEcJ8RiIjL8MlDWu1HfFRBoNE2H2Bq0LJNbhmSAW04T3P7W+GCc/CIW0MorzbfjPI5jXirhsPiHawy35Uz+lZmksYcTK+R7pJOU5rXOc0ksa4hpN7OehkL3qFuDj26zweb4o+1TcdscbJp9F8GJi/CQOO3i2A9YFexbRc9wCkacDFq7Ggt2g7CebLeuhXeeHky80REVQREQEREGt0jOGNc87GguPUBa8Hxsjy9ziJcyT+aJ39D17npmPWikbttjx3tO9fPWOihs8qI/wDdlb6rXPN3+LskfPW6fbn8U/rPlqJmMy/WAdv5uSr7HLX1HrV8Tsd+sSk+Kdg3qkWp8uAdHw2Vc9O3JtPyk3ecR9jN71QaVYPLm+xl/FYIY35xnZjXqpoeV3Yxx9acYc62E2k4HinPkI6YpB62rn8ViGsla6N5JBFGnN2ZjaBmFnF/0ndmJ/BYeNksV8af+813oK1JpnLLcbnHNEzBiGDPZIBud+O1RYLSLGDVc8C8xnWX2ZG7nWLwf0gGO5QOoaa8Grrc7LKwpNNYF0TuS4gHNpaa283QUuO2ccrO8bOPSMQ/SxnpLs//AM0GkmF4+Niqj5dDv5+hc60ucLvEfaQ+0qRjJKFOnBs+VE451uvoWeEb6lrqPh8fzsfZL7yoTjG3+eZ9o0j98LTcTPulm82IqrcNiNvHTfYsKcZ7a530zsdhWS7ZY7rbrNP/ACrIZpDEtZFHFioouKBAcxkeu4H5etI4EgCgaBpad0OI+dkPXhx7laIpvnT/AKb8FZufbGWr5jcOfin+NjpXf5jUHdG9oWNNosvoyASkbNeZz/XKVgFsu93/ANRx9QVCCNusf8kfar39pJjPptYsAAK+Cw9mr71LHgNU22GNp6A33LUCYAZxk/5R3uVXSt+QwfWwUt9VhyzqtzKNzg2Ot3J3m+baforJMThsa7sAPraFzF5imQnLfDK3echTvXmp2MdzYUdsrfWU4rze9+DSa8KWmwWvOR25gbty6wrhPBYS3DkFpb4hqqYbbtjzNg8+8Uu7tdsfDx5/5VVERaZEREBERBg4javnXT0RZNI3W8Vzh3Ej2L6LxQXhXDbR7Ti52uZdyF3ilw5fKvxD8rnWcuzp8c25vBy08EnIbduw5H0FQyxlpIzyJB7MrU7tBM+bA62OH/ErJNDRuPitsVz7mjKtT++YbFjc268Kx6P9hK6u78Fkt0MweSO9w9TVR+i2DbQ/beFeUThWPqk7h3K1zBvA7gsj8lM5z2Pf95QTaOaNjneef5ibhwrEiaGOsNHMekbwuo0cRNGcO7NwGtEflN2lvWNq5l2FHy3ed73rYaNBaAGvOu06zCXNu97cnE57e/nS9ySxptJ4MxvPJF9V5qN5cGN1oxtNZVdjsJK7DTEAxMQnYKd5QG0OGf4hSw6ThlwnFuw7RIDquLXGjdZuY4naBur0LGXyXGTts4bvlynEAVnGb3NN19bmPQc/Qr2/3mR7VNjMFVavI27BkRtzoHNWR4Fx2SnzT91bl3Ns8atB6T5zveqhx+U/z3/eV/5Mk+c/2u+4rvyZN8pvc7+WruLxqgd9OT7ST7yq2Zw/SS/aye9UGjpxvZ3n2sVfgMvPH539KnY1kvGJf85L9o/3q5srifzsvnuUZwEu8x9/4BHYWVovWj7233Fydl1kzZJXt1SJZBYBoOIuxmTzmwpoMbL87J5wPratbIyY1nEBQAHJ9PxlrL0XhZHSsYXRnWe1tCrNkDL4w558x6lOx/J7J4LS4wSPc4m5AM68lo5h9Jd/GtDofR0WGZxcTdVll1WTma3k3uC3EUq6SacLd1kqgKiMiqxyqJUQIgIiIIZ47C814ccFMTLNx0AjdrAAtOqDbRV27blS9OeFhTNUs2uOVnh4m7gnpEfq0Z7Yv5gULuDOkBX/AEWtYzzbkR1S0Bs517UWqlLPCOnVyeJP4OY3fo+TskcPVIVjycHsYP1HEjqmxHsBXutJScIdXJ4MdCYobcJjex+Kd62rGxGjZxtw+PH7Mh/eYvoKlRzLThDq184P0dKPIxo64W+1qikhkAyOJadvKijAy2HYvoLFwFuYVMLi9zleJ1K8Q0djdQh58R/JlGynfKA9I7RuWDwiwToX68b3NBrNpIvfuIsVmveuEmgY8Zh3R0A6rY7meBl2HYeteNRtJD8JMCHxkht7cjm3rBWbNLjltoBIHZuka4neYiSebMu9ayMM6IH9H24cn1uXaeDTHRNkOj8TFG6yXQOexhN7XRWRdHNw/aHMF6O7QOFv/wBrB9kz3Jx2X5NXw8OE0PPF/pf6lcJoflR/6Uj+Ne7M0BhP8LB9kz3IeD2EP6rB9kz3K8DrfjxBnF88Z/y7x/yK/jGDe3shk/mr2k8GMEf1SD7NvuVh4KYH/CQ+YFOn+tdb8eMCSPnJ6mSfzVa+WMigXWdnIl37M+MK9oPBLAn9Ui81Y0/BXRoc1roIWvceQNbVc4j5I1rPYp0/06348hgkYGinP6a43b2O9i2mgJA/F4dtvNyxmiZKycD5XVzr0mTgDo4mzhhZ38ZLf76l0fwIwUMrZY4acw206zjRqrzKdM6003bcyslrSqtaBsVkmIa0gOcATsBOZ3esjvXV50oCkaVYqhBkNcrwVjgqRpQS2ittEFSsaZqylFI1BguCtpTvao6QR0ivpKQWKoCrSqgsey1qMfgyMwt0qOZaDRYLGlporkPChoDWAx8A5Ta4yu5r/UD2dK7XH4CswseF+RY8azXAhwOwg5EHsUajxfGDj42zx22RhByyLXNzy6QRYXrPAnhIMdhw80JmUyZoyp1ZOA+S4ZjtG5ea6d0cdHYstzMEubT9EnI/Wacj+Ks0fj3aOxTcS3OGTkytG9pzJA3keM3tG8rM7V0s5R7lA7cp1gYeYODXtIc1wDmkbCCLBHRS2DM1txUVaV1LD0ppKLDs4yVwaLDRZALnO8VrdYgWek1kScggxuEenIsFA6eY5DJrR4z3nxWNHOfQLO5ea8HNHz6TxhxM9ii1xIHJia02yKO/L/dzPjHKZs02kcdEJnh8YfIBFCQ6KOKqJfJXLcSwZ5bDVZ16lo/AMgYI4201v92Vny14c74S9KPw2AkfE8skcWMa4eMNZ2dHcdUHNbXgqHiAB73PLTqazjbuQA11uOZOsHGzzrm/Crqubgoi4W7FMcI/Kfqg5VtDbcATRrWC67QUJbAy9rre7OxrSOLzR3i3bVfs+nMYfhBPFpKbDTu5BqWDIAcUBTm9Y8brDtxAWz4W8HTiQ2WJxbNGCGkEAlpzIBOXYeSd/OMbh7oJ0zYsTDTZ8M8Pa4jLUvltdXk1d/8AlbPglpduJga9tZ3qjWBOqDW7bR5PZnRyU/D9aXg7wne08RiRTm8nW2ZgZijmDXknPmsUuzikDgC0gg7CMwVr9K6DhnIc9o1wKDqBsURTgcnAWaB5zzlc1h8ZLo5/FyAmElxadrRnkAc3Cmjf081h3h5dyFe1a/RWlIsQzXidY3jY4dYOYWe1aZSKiIglVrgrkQYz2qItWW5qjLEGNSUpzGqcWggpKUpYrS1BZSUrqVKQUc21qcdgqzGxbdCEHD8JtCtxkBiNa45UbjudzHoOw9h3LyzAS1rYTE8kZss7WkHI/sn0WveMbgq5Te5cVwl4HRYuRktljgeXWWuBsz8k7rzy6lmx0wy15Y/gv0k9vG6PlNvw51o87uNxzAO8AkEdDxzL0fDHcuGhg+BluIjjbqMY+PEtbQyY/kyMG0kAnrFCy7NdrhHh1OabBAII3g5gpjWcvO4zaXH8J+DEuNxDS4tEMbQGA8oaxNucWbL2C+YdK7FVpaZlabgzwejwUXFsou8p2qG32DZu7luFdSUg8x4b4jWx1the+SBkfFGhqNBOvI+zkchR5qFG16DoSEMw8LRujaPQqy6NY6USnxgNXoq79g7lmgKa7rajmiD2uadjgQeoil5hoF7sA9+HYxz3RYgEDlZQzOIobiAHNu65TXc4XqlLGxmAbJtFH5Q21zdKWbJU0UgcA4bCAR2qDSGBZOwxvFg9hB3Fp3ELJijoAcyvpVHJR8GZMO/Xw8ljbquy6/Fy7KzXU4OYvbZaWnYQefoO8dKmDVe0KSaXZSor6RVFyIiAlIiCmqmqqogsLFY5imVCEGMWKhasktVNRBilqpSySxWFiCBYmLwYcLaKKzyxWlqDhNOaPbrte+tRxEcrXl2pTi0Mfq7NYEAa24PJzKrwM0i+J5wM9tki/N2fGYCbAOw1nVbhW7PqdMaNEzC0jaKPSOjpG0Ln8Noxz2lkn52MasUuWsRtZtza4EAc2Tdus5ZvatOxCqtTwa0oMRDrbHtJY8Z5PaaNXuO0dBC2y0yJSuDVeGIIwFcGqUMVwagiDVXVUuqlIIw1V1VJSILQ1VpVRAREQEREBERAREQEREBERAVKVUQWFisMamRBjmNY+IwbX7RnuI2hbBKQc5gtFPhxT5W0WTN+MAyqRux9btYWDW8Ds3jWKalVBY1ivpEQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERB//Z", description: "Set calligraphie débutant", vendeur: "InkMaster", prix: "9,90 €"),
     MaterielPro(nom: "Chevalet de table", image: "data:image/jpeg;base64,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", description: "Chevalet pliable en bois", vendeur: "StudioGear", prix: "18,90 €"),
     MaterielPro(nom: "Nettoyant pinceaux", image: "data:image/jpeg;base64,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", description: "Savon spécial pinceaux 85g", vendeur: "BrushWorks", prix: "3,90 €")
-    
+
 ]
-
-
-

@@ -121,7 +121,7 @@ struct ConnexionView: View {
                                         .foregroundColor(.white).bold()
                                 }
                                 .padding()
-                                .frame(width: .infinity, height: 50)
+                                .frame(width: 220, height: 50)
                                 .background(Color("primaryPurpule"))
                                 .cornerRadius(10)
                             }
