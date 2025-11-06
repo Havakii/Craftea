@@ -97,8 +97,8 @@ struct SettingsView: View {
 
                     // Textfield settings – bind directly to user properties
                     Group {
-                        settingsField(title: "Nom", placeholder: "Nom", text: $user.name)
-                        settingsField(title: "Prénom", placeholder: "Prénom", text: $user.surname)
+                        settingsField(title: "Nom", placeholder: "Nom", text: $user.surname)
+                        settingsField(title: "Prénom", placeholder: "Prénom", text: $user.name)
                         settingsField(title: "Pseudo", placeholder: "Pseudo", text: $user.pseudo)
                         settingsField(title: "Email", placeholder: "exemple@mail.com", text: $user.mail)
 
